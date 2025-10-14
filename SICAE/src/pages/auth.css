@@ -29,8 +29,8 @@ body{
 
 /* Container principal */
 .main{
-  width: min(90vw, 1200px);
-  min-height: 70vh;
+  width: min(90vw, 1700px);
+  min-height: 80vh;
   background: var(--secundaria);
   border-radius: 15px;
   display: grid;
@@ -58,14 +58,14 @@ body{
 .auth form > input,
 .auth form > button,
 .auth form > .form-link{
-  width: 100%;
+  width: 80%;
   max-width: var(--field-maxw);
 }
 
 /* Avatar do login (ignorado no register) */
 .auth .avatar{
-  width: 88px;
-  height: 88px;
+  width: 128px;
+  height: 157px;
   object-fit: contain;
   display: block;
   filter: drop-shadow(0 0 0 transparent);

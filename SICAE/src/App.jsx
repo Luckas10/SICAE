@@ -10,8 +10,6 @@ function App() {
     <>
       <Router>
         <Routes>
-          {/* <Route path="/login" element={<Login />} /> */}
-          {/* <Route path="/register" element={<Register />} /> */}
           <Route path="/events" element={<Events />} />
           <Route path="/login" element={<LoginRegister />} />
         </Routes>

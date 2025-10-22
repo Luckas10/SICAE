@@ -1,23 +1,36 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-// import Login from './pages/Login.jsx';
-// import Register from './pages/Register.jsx';
-import Events from './pages/Events.jsx';
+import Events from "./pages/Events.jsx";
 import { LoginRegister } from "./pages/LoginRegister.jsx";
+import ProtectedRoute from "./routes/ProtectedRoute.jsx";
+import PublicRoute from "./routes/PublicRoute.jsx";
 
 function App() {
-
   return (
-    <>
-      <Router>
-        <Routes>
-          {/* <Route path="/login" element={<Login />} /> */}
-          {/* <Route path="/register" element={<Register />} /> */}
-          <Route path="/events" element={<Events />} />
-          <Route path="/login" element={<LoginRegister />} />
-        </Routes>
-      </Router>
-    </>
-  )
+    <Router>
+      <Routes>
+        <Route
+          path="/events"
+          element={
+            <ProtectedRoute>
+              <Events />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/login"
+          element={
+            <PublicRoute>
+              <LoginRegister />
+            </PublicRoute>
+          }
+        />
+
+        {/* opcional: redirecionar raiz */}
+        {/* <Route path="/" element={<Navigate to="/login" replace />} /> */}
+      </Routes>
+    </Router>
+  );
 }
 
-export default App
+export default App;

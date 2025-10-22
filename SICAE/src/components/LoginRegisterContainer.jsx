@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import "./LoginRegisterContainer.css";
 import ButtonDarkMode from "./ButtonDarkMode";
 
-export default function LoginRegisterContainer({ isNight, onToggleTheme }) {
+export default function LoginRegisterContainer({ isNight, onToggleTheme, onLogin, onRegister }) {
     const mainRef = useRef(null);        // <main>
     const scopeRef = useRef(null);       // wrapper para escopar querySelector
 
@@ -10,14 +10,12 @@ export default function LoginRegisterContainer({ isNight, onToggleTheme }) {
         const root = scopeRef.current;
         const main = mainRef.current;
 
-        // Seletores escopados ao componente
         const inputs = root.querySelectorAll(".input-field");
         const toggles = root.querySelectorAll(".toggle");
         const bullets = root.querySelectorAll(".bullets span");
         const images = root.querySelectorAll(".image");
         const textGrp = root.querySelector(".text-group");
 
-        // --- handlers ---
         const onFocus = (e) => e.currentTarget.classList.add("active");
         const onBlur = (e) => {
             if (e.currentTarget.value !== "") return;
@@ -25,27 +23,23 @@ export default function LoginRegisterContainer({ isNight, onToggleTheme }) {
         };
 
         const onToggle = (e) => {
-            e.preventDefault();            // <— impede a navegação do <a>
+            e.preventDefault();
             main.classList.toggle("sign-up-mode");
         };
 
         const moveSlider = (e) => {
             const index = Number(e.currentTarget.dataset.value); // 1..3
 
-            // imagens
             images.forEach((img) => img.classList.remove("show"));
             const currentImage = root.querySelector(`.img-${index}`);
             if (currentImage) currentImage.classList.add("show");
 
-            // textos
             if (textGrp) textGrp.style.transform = `translateY(${-(index - 1) * 2.2}rem)`;
 
-            // bullets
             bullets.forEach((b) => b.classList.remove("active"));
             e.currentTarget.classList.add("active");
         };
 
-        // --- bind ---
         inputs.forEach((i) => {
             i.addEventListener("focus", onFocus);
             i.addEventListener("blur", onBlur);
@@ -53,7 +47,6 @@ export default function LoginRegisterContainer({ isNight, onToggleTheme }) {
         toggles.forEach((t) => t.addEventListener("click", onToggle));
         bullets.forEach((b) => b.addEventListener("click", moveSlider));
 
-        // --- cleanup ---
         return () => {
             inputs.forEach((i) => {
                 i.removeEventListener("focus", onFocus);
@@ -64,19 +57,37 @@ export default function LoginRegisterContainer({ isNight, onToggleTheme }) {
         };
     }, []);
 
+    // Handlers de submit (não mexem em estilos)
+    const handleSignIn = async (e) => {
+        e.preventDefault();
+        const fd = new FormData(e.currentTarget);
+        const email = fd.get("email")?.toString().trim();
+        const password = fd.get("password")?.toString();
+        if (onLogin) await onLogin({ email, password });
+    };
+
+    const handleSignUp = async (e) => {
+        e.preventDefault();
+        const fd = new FormData(e.currentTarget);
+        const full_name = fd.get("full_name")?.toString().trim();
+        const email = fd.get("email")?.toString().trim();
+        const password = fd.get("password")?.toString();
+        if (onRegister) await onRegister({ full_name, email, password });
+    };
+
     return (
         <main ref={mainRef}>
-            {/* escopo para os querySelectors */}
             <div ref={scopeRef} className="box">
                 <div className="inner-box">
                     <div className="forms-wrap">
-                        <form action="index.html" autoComplete="off" className="sign-in-form">
+
+                        {/* LOGIN */}
+                        <form autoComplete="off" className="sign-in-form" onSubmit={handleSignIn}>
                             <div className="logo">
                                 <div className="brand">
                                     <img src="/img/LogoSVG.svg" alt="SICAE" />
                                     <h4>SICAE</h4>
                                 </div>
-
                                 <ButtonDarkMode checked={isNight} onChange={onToggleTheme} />
                             </div>
 
@@ -89,6 +100,7 @@ export default function LoginRegisterContainer({ isNight, onToggleTheme }) {
                             <div className="actual-form">
                                 <div className="input-wrap">
                                     <input
+                                        name="email"              // 👈 importante para FormData
                                         type="email"
                                         minLength={4}
                                         className="input-field"
@@ -100,6 +112,7 @@ export default function LoginRegisterContainer({ isNight, onToggleTheme }) {
 
                                 <div className="input-wrap">
                                     <input
+                                        name="password"           // 👈 importante para FormData
                                         type="password"
                                         minLength={4}
                                         className="input-field"
@@ -118,7 +131,8 @@ export default function LoginRegisterContainer({ isNight, onToggleTheme }) {
                             </div>
                         </form>
 
-                        <form action="index.html" autoComplete="off" className="sign-up-form">
+                        {/* REGISTER */}
+                        <form autoComplete="off" className="sign-up-form" onSubmit={handleSignUp}>
                             <div className="logo">
                                 <div className="brand">
                                     <img src="/img/LogoSVG.svg" alt="SICAE" />
@@ -137,6 +151,7 @@ export default function LoginRegisterContainer({ isNight, onToggleTheme }) {
                             <div className="actual-form">
                                 <div className="input-wrap">
                                     <input
+                                        name="full_name"          // 👈 importante para FormData
                                         type="text"
                                         minLength={4}
                                         className="input-field"
@@ -148,6 +163,7 @@ export default function LoginRegisterContainer({ isNight, onToggleTheme }) {
 
                                 <div className="input-wrap">
                                     <input
+                                        name="email"              // 👈 importante para FormData
                                         type="email"
                                         className="input-field"
                                         autoComplete="off"
@@ -158,6 +174,7 @@ export default function LoginRegisterContainer({ isNight, onToggleTheme }) {
 
                                 <div className="input-wrap">
                                     <input
+                                        name="password"           // 👈 importante para FormData
                                         type="password"
                                         minLength={4}
                                         className="input-field"

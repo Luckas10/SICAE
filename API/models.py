@@ -1,8 +1,10 @@
 # models.py
 from sqlmodel import SQLModel, Field, Relationship
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from enum import Enum
 from typing import Optional, List
+
+BRASILIA_TZ = timezone(timedelta(hours=-3))
 
 
 # ============================================================
@@ -28,8 +30,12 @@ class User(SQLModel, table=True):
     full_name: str = Field(max_length=150, nullable=False)
     email: str = Field(unique=True, nullable=False, index=True)
     password_hash: str = Field(nullable=False)
-    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc), nullable=False)
-    updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc), nullable=False)
+
+    created_at = datetime.now(BRASILIA_TZ)
+    updated_at = datetime.now(BRASILIA_TZ)
+
+    created_at: datetime = Field(default_factory=lambda: datetime.now(BRASILIA_TZ), nullable=False)
+    updated_at: datetime = Field(default_factory=lambda: datetime.now(BRASILIA_TZ), nullable=False)
 
     # relacionamentos
     events: List["Event"] = Relationship(back_populates="creator")
@@ -53,7 +59,7 @@ class Local(SQLModel, table=True):
     name: str = Field(max_length=120, nullable=False)
     description: Optional[str] = Field(default=None)
     capacity: int = Field(default=0)
-    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc), nullable=False)
+    created_at: datetime = Field(default_factory=lambda: datetime.now(BRASILIA_TZ), nullable=False)
 
     events: List["Event"] = Relationship(back_populates="local")
     reservations: List["LocalReservation"] = Relationship(back_populates="local")
@@ -73,7 +79,7 @@ class Event(SQLModel, table=True):
     description: Optional[str] = Field(default=None)
     start_date: datetime = Field(nullable=False)
     end_date: datetime = Field(nullable=False)
-    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc), nullable=False)
+    created_at: datetime = Field(default_factory=lambda: datetime.now(BRASILIA_TZ), nullable=False)
 
     creator: Optional[User] = Relationship(back_populates="events")
     local: Optional[Local] = Relationship(back_populates="events")
@@ -93,7 +99,7 @@ class Initiative(SQLModel, table=True):
     creator_id: int = Field(foreign_key="users.id", nullable=False)
     title: str = Field(max_length=120, nullable=False)
     description: Optional[str] = Field(default=None)
-    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc), nullable=False)
+    created_at: datetime = Field(default_factory=lambda: datetime.now(BRASILIA_TZ), nullable=False)
 
     creator: Optional[User] = Relationship(back_populates="initiatives")
     comments: List["InitiativeComment"] = Relationship(back_populates="initiative")
@@ -115,7 +121,7 @@ class LocalReservation(SQLModel, table=True):
     purpose: str = Field(max_length=120)
     start_time: datetime = Field(nullable=False)
     end_time: datetime = Field(nullable=False)
-    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc), nullable=False)
+    created_at: datetime = Field(default_factory=lambda: datetime.now(BRASILIA_TZ), nullable=False)
 
     local: Optional[Local] = Relationship(back_populates="reservations")
     user: Optional[User] = Relationship()
@@ -132,7 +138,7 @@ class EventComment(SQLModel, table=True):
     event_id: int = Field(foreign_key="events.id", nullable=False)
     author_id: int = Field(foreign_key="users.id", nullable=False)
     content: str = Field(nullable=False)
-    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc), nullable=False)
+    created_at: datetime = Field(default_factory=lambda: datetime.now(BRASILIA_TZ), nullable=False)
 
     event: Optional[Event] = Relationship(back_populates="comments")
     author: Optional[User] = Relationship(back_populates="comments")
@@ -145,7 +151,7 @@ class EventRating(SQLModel, table=True):
     event_id: int = Field(foreign_key="events.id", nullable=False)
     user_id: int = Field(foreign_key="users.id", nullable=False)
     score: int = Field(nullable=False)
-    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc), nullable=False)
+    created_at: datetime = Field(default_factory=lambda: datetime.now(BRASILIA_TZ), nullable=False)
 
     event: Optional[Event] = Relationship(back_populates="ratings")
 
@@ -156,7 +162,7 @@ class EventRegistration(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
     event_id: int = Field(foreign_key="events.id", nullable=False)
     user_id: int = Field(foreign_key="users.id", nullable=False)
-    registered_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc), nullable=False)
+    registered_at: datetime = Field(default_factory=lambda: datetime.now(BRASILIA_TZ), nullable=False)
 
     event: Optional[Event] = Relationship(back_populates="registrations")
 
@@ -168,7 +174,7 @@ class InitiativeComment(SQLModel, table=True):
     initiative_id: int = Field(foreign_key="initiatives.id", nullable=False)
     author_id: int = Field(foreign_key="users.id", nullable=False)
     content: str = Field(nullable=False)
-    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc), nullable=False)
+    created_at: datetime = Field(default_factory=lambda: datetime.now(BRASILIA_TZ), nullable=False)
 
     initiative: Optional[Initiative] = Relationship(back_populates="comments")
 
@@ -179,7 +185,7 @@ class InitiativeEnrollment(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
     initiative_id: int = Field(foreign_key="initiatives.id", nullable=False)
     user_id: int = Field(foreign_key="users.id", nullable=False)
-    joined_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc), nullable=False)
+    joined_at: datetime = Field(default_factory=lambda: datetime.now(BRASILIA_TZ), nullable=False)
 
     initiative: Optional[Initiative] = Relationship(back_populates="enrollments")
 
@@ -191,7 +197,7 @@ class InitiativeRating(SQLModel, table=True):
     initiative_id: int = Field(foreign_key="initiatives.id", nullable=False)
     user_id: int = Field(foreign_key="users.id", nullable=False)
     score: int = Field(nullable=False)
-    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc), nullable=False)
+    created_at: datetime = Field(default_factory=lambda: datetime.now(BRASILIA_TZ), nullable=False)
 
     initiative: Optional[Initiative] = Relationship(back_populates="ratings")
 
@@ -204,7 +210,7 @@ class InitiativeSchedule(SQLModel, table=True):
     weekday: str = Field(max_length=20)
     start_time: str = Field(max_length=10)
     end_time: str = Field(max_length=10)
-    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc), nullable=False)
+    created_at: datetime = Field(default_factory=lambda: datetime.now(BRASILIA_TZ), nullable=False)
 
     initiative: Optional[Initiative] = Relationship(back_populates="schedules")
 
@@ -220,7 +226,7 @@ class Notification(SQLModel, table=True):
     user_id: int = Field(foreign_key="users.id", nullable=False)
     message: str = Field(nullable=False)
     is_read: bool = Field(default=False)
-    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc), nullable=False)
+    created_at: datetime = Field(default_factory=lambda: datetime.now(BRASILIA_TZ), nullable=False)
 
     user: Optional[User] = Relationship(back_populates="notifications")
 
@@ -236,7 +242,7 @@ class Article(SQLModel, table=True):
     author_id: int = Field(foreign_key="users.id", nullable=False)
     title: str = Field(max_length=200, nullable=False)
     content: str = Field(nullable=False)
-    published_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc), nullable=False)
+    published_at: datetime = Field(default_factory=lambda: datetime.now(BRASILIA_TZ), nullable=False)
 
     author: Optional[User] = Relationship(back_populates="articles")
 
@@ -251,7 +257,7 @@ class ForumCategory(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
     name: str = Field(max_length=100, nullable=False)
     description: Optional[str] = Field(default=None)
-    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc), nullable=False)
+    created_at: datetime = Field(default_factory=lambda: datetime.now(BRASILIA_TZ), nullable=False)
 
     threads: List["ForumThread"] = Relationship(back_populates="category")
 
@@ -263,7 +269,7 @@ class ForumThread(SQLModel, table=True):
     category_id: int = Field(foreign_key="forum_categories.id", nullable=False)
     author_id: int = Field(foreign_key="users.id", nullable=False)
     title: str = Field(max_length=200, nullable=False)
-    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc), nullable=False)
+    created_at: datetime = Field(default_factory=lambda: datetime.now(BRASILIA_TZ), nullable=False)
 
     category: Optional[ForumCategory] = Relationship(back_populates="threads")
     author: Optional[User] = Relationship(back_populates="forum_threads")
@@ -277,7 +283,7 @@ class ForumPost(SQLModel, table=True):
     thread_id: int = Field(foreign_key="forum_threads.id", nullable=False)
     author_id: int = Field(foreign_key="users.id", nullable=False)
     content: str = Field(nullable=False)
-    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc), nullable=False)
+    created_at: datetime = Field(default_factory=lambda: datetime.now(BRASILIA_TZ), nullable=False)
 
     thread: Optional[ForumThread] = Relationship(back_populates="posts")
     author: Optional[User] = Relationship(back_populates="forum_posts")
@@ -295,6 +301,6 @@ class AuditLog(SQLModel, table=True):
     action: str = Field(max_length=120, nullable=False)
     table_name: str = Field(max_length=100, nullable=False)
     record_id: Optional[int] = Field(default=None)
-    timestamp: datetime = Field(default_factory=lambda: datetime.now(timezone.utc), nullable=False)
+    timestamp: datetime = Field(default_factory=lambda: datetime.now(BRASILIA_TZ), nullable=False)
 
     user: Optional[User] = Relationship(back_populates="audit_logs")

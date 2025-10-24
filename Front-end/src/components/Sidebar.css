@@ -1,61 +1,122 @@
 .sidebar {
-    background-color: #369949;
-    color: white;
-    font-family: 'Inter', sans-serif;
-    font-size: large;
-    width: 13%;
-    height: 91vh;
+  background-color: #0C3617;
+  color: white;
+  font-family: 'Inter', sans-serif;
+  font-size: large;
+  width: 13%;
+  height: calc(100vh - 9vh); /* ajusta pra ficar abaixo da navbar */
+  position: fixed;
+  top: 9vh; /* fica logo abaixo da navbar */
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 900;
 }
 
 .links {
-    width: 100%;
-    height: 80%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+  width: 100%;
+  height: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .logout {
-    width: 100%;
-    height: 20%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-
+  width: 100%;
+  height: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .img {
-    width: 35px;
-    height: auto;
-    margin-right: 10px;
-    margin-left: 10px;
+  width: 35px;
+  height: auto;
+  margin-right: 10px;
+  margin-left: 10px;
 }
 
 .side-link {
-    width: 100%;
-    height: 43px;
-    background-color: #369949;
-    cursor: pointer;
-    border: none;
-    border-radius: 0.8rem;
-    font-size: 1rem;
-    margin-bottom: 2rem;
-    margin-top: 0.5rem;
-    transition: 0.3s;
+  height: 43px;
+  background: none;
+  cursor: pointer;
+  border: none;
+  border-radius: 0.8rem;
+  font-size: 1rem;
+  margin-bottom: 2rem;
+  margin-top: 0.5rem;
+  transition: 0.3s;
+  width: 85%;
 }
 
-
 .side-link a {
-    display: flex;
-    align-items: center;
-    color: #fff;
-    text-decoration: none;
-
+  display: flex;
+  align-items: center;
+  color: #fff;
+  text-decoration: none;
 }
 
 .side-link a:hover {
-    color: #E3B52E;
-    transition: 1s;
+  color: #E3B52E;
+  transition: 0.5s;
+}
+
+/* esconde o texto em telas intermediárias */
+@media (max-width: 850px) {
+  .side-link a span {
+    display: none;
+  }
+}
+
+/* 👇 comportamento para telas pequenas (<= 530px) */
+@media (max-width: 530px) {
+  .sidebar {
+    position: fixed;
+    bottom: 0; /* vai pra parte inferior da tela */
+    top: auto; /* remove o top */
+    left: 0;
+    width: 100%;
+    height: 65px;
+    background-color: #0C3617;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    border-top: 2px solid #E3B52E;
+    z-index: 999;
+  }
+
+  .links,
+  .logout {
+    flex-direction: row;
+    width: auto;
+    height: auto;
+    margin: 0;
+  }
+
+  .side-link {
+    margin: 0;
+    width: auto;
+  }
+
+  .side-link a {
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .side-link a span {
+    display: none; /* oculta o texto */
+  }
+
+  .img {
+    width: 28px;
+    margin: 0;
+  }
+
+  /* opcional: adiciona espaçamento no conteúdo para não ficar escondido atrás da barra */
+  main, .content {
+    padding-bottom: 70px;
+  }
 }

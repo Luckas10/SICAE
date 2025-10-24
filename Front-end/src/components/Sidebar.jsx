@@ -11,15 +11,15 @@ export default function Sidebar() {
   return (
     <aside className="sidebar">
       <div className="links">
-        <button className="side-link"><a href="#"><img className="img" src={Home} alt="" />Página Inicial</a></button>
-        <button className="side-link"><a href="#"><img className="img" src={Events} alt="" />Eventos</a></button>
-        <button className="side-link"><a href="#"><img className="img" src={Noticias} alt="" />Notícias</a></button>
-        <button className="side-link"><a href="#"><img className="img" src={Usuarios} alt="" />Usuários</a></button>
-        <button className="side-link"><a href="#"><img className="img" src={Configuracoes} alt="" />Configurações</a></button>
+        <button className="side-link"><a href="#"><img className="img" src={Home} alt="" /><span>Página Inicial</span></a></button>
+        <button className="side-link"><a href="#"><img className="img" src={Events} alt="" /><span>Eventos</span></a></button>
+        <button className="side-link"><a href="#"><img className="img" src={Noticias} alt="" /><span>Notícias</span></a></button>
+        <button className="side-link"><a href="#"><img className="img" src={Usuarios} alt="" /><span>Usuários</span></a></button>
+        <button className="side-link"><a href="#"><img className="img" src={Configuracoes} alt="" /><span>Configurações</span></a></button>
       </div>
 
       <div className="logout">
-        <button className="side-link"><a href="#"><img className="img" src={Logout} alt="" />Sair</a></button>
+        <button className="side-link"><a href="#"><img className="img" src={Logout} alt="" /><span>Sair</span></a></button>
       </div>
     </aside>
   )

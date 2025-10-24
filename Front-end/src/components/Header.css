@@ -1,20 +1,21 @@
 .header {
     width: 100%;
     height: 9vh;
-    /* 120px em uma tela de 1080px */
     min-height: 80px;
-    /* evita ficar muito pequeno */
     max-height: 140px;
     display: flex;
-    background-color: #0D4F1D;
+    background-color: #03330F;
     font-family: 'Inter', sans-serif;
-    /* responsivo à largura da tela */
     font-weight: bold;
     color: white;
     justify-content: space-between;
     align-items: center;
     padding: 0 2vw;
     box-sizing: border-box;
+
+    /* 👇 NÃO fixa mais no topo */
+    position: relative; /* ou static (padrão), mas relative permite z-index */
+    z-index: 1100; /* garante que fique acima da sidebar */
 }
 
 .header .header-logo {

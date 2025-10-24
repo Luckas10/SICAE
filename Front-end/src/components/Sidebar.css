@@ -3,7 +3,7 @@
     color: white;
     font-family: 'Inter', sans-serif;
     font-size: large;
-    width: 15.7vw;
+    width: 13%;
     height: 91vh;
 }
 
@@ -14,7 +14,6 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-
 }
 
 .logout {
@@ -28,7 +27,7 @@
 }
 
 .img {
-    width: 44px;
+    width: 35px;
     height: auto;
     margin-right: 10px;
     margin-left: 10px;
@@ -60,4 +59,3 @@
     color: #E3B52E;
     transition: 1s;
 }
-

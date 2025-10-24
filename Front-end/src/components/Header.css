@@ -8,7 +8,6 @@
     display: flex;
     background-color: #0D4F1D;
     font-family: 'Inter', sans-serif;
-    font-size: 2.3vw;
     /* responsivo à largura da tela */
     font-weight: bold;
     color: white;
@@ -25,9 +24,8 @@
 }
 
 .header .header-logo img {
-    height: 85%;
-    /* 85% da altura da header */
-    max-height: calc(0.85 * 9vh);
+    height:75%;
+    max-height: calc(0.75 * 9vh);
     aspect-ratio: auto;
 }
 
@@ -39,14 +37,12 @@
 
 .header .user-info p {
     margin: 0;
-    font-size: 1.3vw;
     white-space: nowrap;
 }
 
 .header .user-info img {
-    height: 85%;
-    /* 85% da header */
-    max-height: calc(0.85 * 9vh);
+    height: 60%;
+    max-height: calc(0.60 * 9vh);
     border-radius: 50%;
     aspect-ratio: 1/1;
 }

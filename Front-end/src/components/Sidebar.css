@@ -85,7 +85,7 @@
 
 /* esconde o texto em telas intermediárias */
 @media (max-width: 850px) {
-  .side-link a span {
+  .side-link span {
     display: none;
   }
 

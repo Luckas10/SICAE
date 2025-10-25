@@ -15,12 +15,12 @@ from models import User
 router = APIRouter(prefix="/auth", tags=["Login"])
 
 bcrypt_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-oauth2_bearer = OAuth2PasswordBearer(tokenUrl="/auth/token")  # tokenUrl consistente
+oauth2_bearer = OAuth2PasswordBearer(tokenUrl="/auth/token")
 
 # ==============================
 # Configurações JWT
 # ==============================
-SECRET_KEY = "minha_chave_secreta_super_segura"  # troque para produção
+SECRET_KEY = "minha_chave_secreta_super_segura"
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 60
 
@@ -29,7 +29,7 @@ def create_access_token(email: str, user_id: int, expires_delta: Optional[timede
     payload = {
         "sub": email,
         "id": user_id,
-        "exp": expire  # datetime direto funciona com jose.jwt
+        "exp": expire
     }
     token = jwt.encode(payload, SECRET_KEY, algorithm=ALGORITHM)
     return token
@@ -51,7 +51,6 @@ def login(
     password: Annotated[str, Form()],
     grant_type: Annotated[str, Form()] = "password"
 ):
-    # busca usuário pelo email
     user = session.exec(select(User).where(User.email == username)).first()
     if not user or not bcrypt_context.verify(password, user.password_hash):
         raise HTTPException(

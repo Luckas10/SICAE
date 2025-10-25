@@ -14,6 +14,13 @@ class EventCreate(BaseModel):
     start_date: datetime
     end_date: datetime
 
+class EventUpdate(BaseModel):
+    local_id: Optional[int] = None
+    title: Optional[str] = None
+    description: Optional[str] = None
+    start_date: Optional[datetime] = None
+    end_date: Optional[datetime] = None
+
 router = APIRouter(prefix="/events", tags=["Eventos"])
 
 @router.get("")
@@ -23,23 +30,22 @@ def listar_events(session: SessionDep, current_user: User = Depends(get_current_
 @router.post("", status_code=status.HTTP_201_CREATED)
 def cadastrar_event(event: EventCreate, session: SessionDep, current_user: User = Depends(get_current_user)) -> Event:
     new_event = Event(
-        creator_id = current_user.id,
-        local_id = event.local_id,
-        title = event.title,
-        description = event.description,
-        start_date = event.start_date,
-        end_date = event.end_date
+        creator_id=current_user.id,
+        local_id=event.local_id,
+        title=event.title,
+        description=event.description,
+        start_date=event.start_date,
+        end_date=event.end_date
     )
-    
     session.add(new_event)
     session.commit()
     session.refresh(new_event)
     return new_event
 
 @router.put("/{id}")
-def atualizar_event(id: int, event_data: Event, session: SessionDep, current_user: User = Depends(get_current_user)) -> Event:
+def atualizar_event(id: int, event_data: EventUpdate, session: SessionDep, current_user: User = Depends(get_current_user)) -> Event:
     event = session.exec(select(Event).where(Event.id == id)).one()
-    for key, value in event_data.dict(exclude_unset=True).items():
+    for key, value in event_data.model_dump(exclude_unset=True).items():
         setattr(event, key, value)
     session.add(event)
     session.commit()

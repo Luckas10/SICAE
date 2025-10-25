@@ -18,7 +18,7 @@ function App() {
         />
 
         <Route
-          path="/auth"
+          path="/login"
           element={
             <PublicRoute>
               <LoginRegister />

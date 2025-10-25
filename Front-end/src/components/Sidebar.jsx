@@ -2,6 +2,15 @@ import "./Sidebar.css";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
+import SidebarLink from "./SidebarLink";
+
+import Home from '../assets/icons/home-icon.svg?react'
+import Events from '../assets/icons/events-icon.svg?react'
+import Noticias from '../assets/icons/news-icon.svg?react'
+import Usuarios from '../assets/icons/users-icon.svg?react'
+import Configuracoes from '../assets/icons/config-icon.svg?react'
+import Logout from '../assets/icons/logout-icon.svg?react'
+
 export default function Sidebar() {
     const navigate = useNavigate();
 
@@ -26,15 +35,23 @@ export default function Sidebar() {
                 timer: 1800,
                 showConfirmButton: false,
             });
-            navigate("/login");
+            navigate("/auth");
         }
     };
 
     return (
         <aside className="sidebar">
-            <button className="logout-btn" onClick={handleLogout}>
-                Sair
-            </button>
+            <div className="links">
+                <SidebarLink icon={Home}          label="Página Inicial" to="/home" />
+                <SidebarLink icon={Events}        label="Eventos"        to="/events" />
+                <SidebarLink icon={Noticias}      label="Notícias"       to="/news" />
+                <SidebarLink icon={Usuarios}      label="Usuários"       to="/users" />
+                <SidebarLink icon={Configuracoes} label="Configurações"  to="/config" />
+            </div>
+
+            <div className="logout">
+                <SidebarLink icon={Logout} label="Sair" onClick={handleLogout} />
+            </div>
         </aside>
     );
 }

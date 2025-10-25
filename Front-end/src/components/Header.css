@@ -1,18 +1,21 @@
 .header {
     width: 100%;
-    height: 9vh; /* 120px em uma tela de 1080px */
-    min-height: 80px; /* evita ficar muito pequeno */
+    height: 9vh;
+    min-height: 80px;
     max-height: 140px;
     display: flex;
-    background-color: #369949;
+    background-color: #03330F;
     font-family: 'Inter', sans-serif;
-    font-size: 2.3vw; /* responsivo à largura da tela */
     font-weight: bold;
     color: white;
     justify-content: space-between;
     align-items: center;
     padding: 0 2vw;
     box-sizing: border-box;
+
+    /* 👇 NÃO fixa mais no topo */
+    position: relative; /* ou static (padrão), mas relative permite z-index */
+    z-index: 1100; /* garante que fique acima da sidebar */
 }
 
 .header .header-logo {
@@ -22,8 +25,8 @@
 }
 
 .header .header-logo img {
-    height: 85%; /* 85% da altura da header */
-    max-height: calc(0.85 * 9vh);
+    height:75%;
+    max-height: calc(0.75 * 9vh);
     aspect-ratio: auto;
 }
 
@@ -35,13 +38,12 @@
 
 .header .user-info p {
     margin: 0;
-    font-size: 1.3vw;
     white-space: nowrap;
 }
 
 .header .user-info img {
-    height: 85%; /* 85% da header */
-    max-height: calc(0.85 * 9vh);
+    height: 60%;
+    max-height: calc(0.60 * 9vh);
     border-radius: 50%;
     aspect-ratio: 1/1;
 }
@@ -87,6 +89,7 @@
     .header .user-info p {
         display: none;
     }
+
     .header .user-info img {
         display: none;
     }

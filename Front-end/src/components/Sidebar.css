@@ -4,8 +4,10 @@
   font-family: 'Inter', sans-serif;
   font-size: large;
   width: 13%;
-  height: calc(100vh - 9vh); /* ajusta pra ficar abaixo da navbar */
-  top: 9vh; /* fica logo abaixo da navbar */
+  height: calc(100vh - 9vh);
+  /* ajusta pra ficar abaixo da navbar */
+  top: 9vh;
+  /* fica logo abaixo da navbar */
   left: 0;
   display: flex;
   flex-direction: column;
@@ -129,13 +131,15 @@
   .side-link {
     margin: 0;
     width: auto;
-    flex-direction: column;      /* <- agora aqui */
+    flex-direction: column;
+    /* <- agora aqui */
     justify-content: center;
     text-decoration: none;
   }
 
   .side-link span {
-    display: none; /* some o texto no mobile */
+    display: none;
+    /* some o texto no mobile */
   }
 
   .img {
@@ -143,7 +147,8 @@
     margin: 0;
   }
 
-  main, .content {
+  main,
+  .content {
     padding-bottom: 70px;
   }
 }

@@ -42,11 +42,11 @@ export default function Sidebar() {
     return (
         <aside className="sidebar">
             <div className="links">
-                <SidebarLink icon={Home}          label="Página Inicial" to="/home" />
-                <SidebarLink icon={Events}        label="Eventos"        to="/events" />
-                <SidebarLink icon={Noticias}      label="Notícias"       to="/news" />
-                <SidebarLink icon={Usuarios}      label="Usuários"       to="/users" />
-                <SidebarLink icon={Configuracoes} label="Configurações"  to="/config" />
+                <SidebarLink icon={Home} label="Página Inicial" to="/home" />
+                <SidebarLink icon={Events} label="Eventos" to="/events" />
+                <SidebarLink icon={Noticias} label="Notícias" to="/news" />
+                <SidebarLink icon={Usuarios} label="Usuários" to="/users" />
+                <SidebarLink icon={Configuracoes} label="Configurações" to="/config" />
             </div>
 
             <div className="logout">

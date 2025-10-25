@@ -5,13 +5,13 @@
   font-size: large;
   width: 13%;
   height: calc(100vh - 9vh); /* ajusta pra ficar abaixo da navbar */
-  position: fixed;
   top: 9vh; /* fica logo abaixo da navbar */
   left: 0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   z-index: 900;
+  transition: width .2s;
 }
 
 .links {
@@ -59,9 +59,21 @@
   text-decoration: none;
 }
 
+.side-link a span {
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; 
+}
+
 .side-link a:hover {
   color: #E3B52E;
   transition: 0.5s;
+}
+
+.side-link:hover a svg path {
+  fill: #E3B52E;
 }
 
 /* esconde o texto em telas intermediárias */
@@ -69,7 +81,17 @@
   .side-link a span {
     display: none;
   }
+
+  .sidebar {
+    width: 70px;
+    top: 9vh;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
 }
+
 
 /* 👇 comportamento para telas pequenas (<= 530px) */
 @media (max-width: 530px) {
@@ -88,12 +110,16 @@
     z-index: 999;
   }
 
-  .links,
-  .logout {
+  .links {
     flex-direction: row;
     width: auto;
     height: auto;
     margin: 0;
+    gap: 45px;
+  }
+
+  .logout {
+    display: none;
   }
 
   .side-link {
@@ -111,7 +137,7 @@
   }
 
   .img {
-    width: 28px;
+    width: 40px;
     margin: 0;
   }
 

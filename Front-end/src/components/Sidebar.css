@@ -67,13 +67,14 @@
   white-space: nowrap; 
 }
 
-.side-link a:hover {
+.side-link:hover span {
   color: #E3B52E;
-  transition: 0.5s;
+  transition: .2s;
 }
 
-.side-link:hover a svg path {
+.side-link:hover a svg path{
   fill: #E3B52E;
+  transition: .2s;
 }
 
 /* esconde o texto em telas intermediárias */

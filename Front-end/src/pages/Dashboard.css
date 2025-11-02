@@ -1,0 +1,16 @@
+* {
+    margin: none;
+    padding: none;
+    box-sizing: border-box;
+}
+
+.dashboard-page {
+    display: flex;
+    flex-direction: row;
+}
+
+.dashboard-content {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+}

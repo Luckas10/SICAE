@@ -1,0 +1,137 @@
+/* Container geral do carrossel */
+.carousel {
+    position: relative;
+    width: 600px;
+    /* << ajuste o tamanho aqui */
+    height: 350px;
+    /* << ajuste o tamanho aqui */
+    border-radius: 16px;
+    /* cantos arredondados */
+    overflow: hidden;
+    background-color: #000;
+    /* cor de fundo atrás da imagem */
+    box-shadow: 0 30px 60px -10px rgba(0, 0, 0, 0.7);
+    user-select: none;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
+}
+
+/* Quando não tem imagem */
+.carousel-empty {
+    width: 600px;
+    height: 350px;
+    background-color: #e5e7eb;
+    color: #6b7280;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
+    box-shadow: 0 30px 60px -10px rgba(0, 0, 0, 0.15);
+}
+
+/* Faixa que carrega todos os slides lado a lado */
+.carousel-track {
+    display: flex;
+    flex-wrap: nowrap;
+    height: 100%;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Cada slide individual ocupa 100% da largura do container */
+.carousel-slide {
+    min-width: 100%;
+    height: 100%;
+    background-color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Imagem dentro do slide */
+.carousel-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* mude pra contain se quiser mostrar a imagem inteira */
+    pointer-events: none;
+}
+
+/* Botões (setinhas esquerda/direita) */
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 38px;
+    height: 38px;
+    border: none;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.45);
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    transition: background 0.15s ease;
+    line-height: 0;
+    font-size: 0;
+    /* zera pra não dar espaço de texto */
+}
+
+.carousel-btn:hover {
+    background: rgba(0, 0, 0, 0.7);
+}
+
+/* Posição das setas */
+.carousel-btn-prev {
+    left: 10px;
+}
+
+.carousel-btn-next {
+    right: 10px;
+}
+
+/* O icone em si (‹ ›) */
+.carousel-btn-icon {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 1;
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont;
+    /* Se quiser trocar por SVG depois, troca aqui */
+}
+
+/* Bolinhas de indicador */
+.carousel-indicators {
+    position: absolute;
+    left: 50%;
+    bottom: 10px;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+}
+
+/* Cada bolinha */
+.carousel-indicator-dot {
+    width: 10px;
+    height: 10px;
+    background-color: rgba(255, 255, 255, 0.4);
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    padding: 0;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+    transition: all 0.15s ease;
+}
+
+.carousel-indicator-dot:hover {
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+/* Bolinha ativa */
+.carousel-indicator-dot.active {
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.9);
+    transform: scale(1.15);
+}

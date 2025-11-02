@@ -10,7 +10,7 @@ export default function Dashboard() {
 
     return (
         <>
-            <Header />
+        <Header />
             <div className='dashboard-page'>
                 <Sidebar />
                 <div className='dashboard-content'>

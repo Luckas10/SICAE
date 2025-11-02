@@ -1,16 +1,48 @@
 * {
-    margin: none;
-    padding: none;
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
 
+/* Área principal com compensação do header fixo + espaçamento de 20px */
 .dashboard-page {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    min-height: 100vh;
+    padding-left: 15%;
+    /* espaço lateral da sidebar */
+    padding-top: calc(9.5vh + 20px); /* ✅ header + 20px de margem fixa */
 }
 
+/* Conteúdo interno (pode conter colunas, cards, etc.) */
 .dashboard-content {
     display: flex;
     flex-direction: row;
-    margin-top: 20px;
+    flex: 1;
+}
+
+/* ====== RESPONSIVIDADE ====== */
+
+/* Sidebar compacta (<=850px) */
+@media (max-width: 850px) {
+    .dashboard-page {
+        padding-left: 70px; /* sidebar menor */
+        padding-top: calc(9.5vh + 20px); /* mantém espaço abaixo da header */
+    }
+}
+
+/* Header mais alta no mobile (<=900px) */
+@media (max-width: 900px) {
+    .dashboard-page {
+        padding-top: calc(15vh + 20px); /* ✅ header mobile + espaço de 20px */
+    }
+}
+
+/* Barra inferior no mobile (<=530px) */
+@media (max-width: 530px) {
+    .dashboard-page {
+        padding-left: 0;          /* sem sidebar lateral */
+        padding-bottom: 70px;     /* reserva espaço pra bottom bar */
+        padding-top: calc(15vh + 20px); /* mantém o espaçamento */
+    }
 }

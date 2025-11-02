@@ -1,158 +1,203 @@
 .sidebar {
-  background-color: #0C3617;
-  color: white;
-  font-family: 'Inter', sans-serif;
-  font-size: large;
-  width: 13%;
-  height: calc(100vh - 9vh); /* ajusta pra ficar abaixo da navbar */
-  top: 9vh; /* fica logo abaixo da navbar */
+  position: fixed;
   left: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  z-index: 900;
-  transition: width .2s;
-  border-top: #0D4F1D 3px solid;
-}
-
-.links {
-  width: 100%;
-  height: 80%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  border-bottom: #0D4F1D 3px solid;
-}
-
-.logout {
-  width: 100%;
-  height: 20%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-}
-
-.img {
-  width: 35px;
-  height: auto;
-  margin-right: 10px;
-  margin-left: 10px;
-}
-
-.side-link {
-  height: 43px;
-  background: none;
-  cursor: pointer;
-  border: none;
-  border-radius: 0.8rem;
-  font-size: 1rem;
-  margin-bottom: 2rem;
-  margin-top: 0.5rem;
-  transition: 0.3s;
-  width: 85%;
-  
-}
-
-.side-link a {
-  display: flex;
-  align-items: center;
+  top: 9.5vh; /* abaixo da header */
+  height: calc(100vh - 9.5vh);
+  width: 15%;
+  background-color: #0C3617;
   color: #fff;
-  text-decoration: none;
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-top: 3px solid #0D4F1D;
+  box-sizing: border-box;
+  z-index: 999; /* abaixo da header, acima do conteúdo */
 }
 
-.side-link a span {
-  display: inline-block;
+/* Logo/topo */
+.sidebarLogo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 1rem 1rem 0.5rem;
+}
+
+.sidebarLogo img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.sidebarLogo span {
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+/* Links principais e logout */
+.sidebarLinks,
+.logout {
+  list-style: none;
+  margin: 0;
+  padding: 0.75rem 0.5rem;
+}
+
+.sidebarLinks li,
+.logout li {
+  margin: 0.35rem 0;
+}
+
+/* ===== LINKS ===== */
+.sidebar a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: #fff;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.08s ease-in;
+  white-space: nowrap;          /* impede quebra */
+  overflow: hidden;             /* corta o excesso */
+  text-overflow: ellipsis;      /* mostra "..." */
   max-width: 100%;
+  margin-bottom: 30px;
+}
+
+/* Aplica corte também ao texto dentro do link */
+.sidebar a span {
+  display: inline-block;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap; 
+  white-space: nowrap;
+  max-width: 100%;
 }
 
-.side-link:hover span {
+.sidebar a:hover {
   color: #E3B52E;
-  transition: .2s;
+  background: rgba(255, 255, 255, 0.06);
+  transform: translateY(-1px);
 }
 
-.side-link:hover a svg path{
-  fill: #E3B52E;
-  transition: .2s;
+/* Ícones */
+.sidebar a svg {
+  min-width: 22px;
+  flex-shrink: 0; /* evita deformar o ícone quando o texto é cortado */
 }
 
-/* esconde o texto em telas intermediárias */
+/* Link ativo */
+.sidebar a.active {
+  color: #E3B52E;
+  font-weight: 600;
+}
+
+/* ===== LOGOUT ===== */
+.logout {
+  border-top: 3px solid #0D4F1D;
+  padding: 0.75rem 0.5rem;   /* mesmo padding dos outros blocos */
+  position: fixed;
+  bottom: 0;
+  width: 15%;                /* ocupa 100% da largura da sidebar */
+  background-color: #0C3617;
+  display: flex;
+  justify-content: center;   /* centraliza o botão dentro do rodapé */
+}
+
+.logout li {
+  margin: 0;
+  width: auto;               /* evita ocupar 100% */
+}
+
+.logout a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 10px 14px;        /* igual aos outros links */
+  border-radius: 10px;       /* mesma borda arredondada */
+  text-decoration: none;
+  color: #fff;
+  transition: background 0.2s ease, color 0.2s ease;
+  width: fit-content;        /* ✅ evita hover cobrindo toda a barra */
+  margin: 0px;
+}
+
+.logout a:hover {
+  color: #E3B52E;
+  background: rgba(255, 255, 255, 0.06); /* mesmo hover dos outros */
+}
+
+/* ====== RESPONSIVO ====== */
+
+/* Compacta e esconde textos (<=850px) */
 @media (max-width: 850px) {
-  .side-link a span {
+  .sidebar {
+    width: 70px;
+    top: 15vh;
+    height: calc(100vh - 15vh);
+  }
+
+  .sidebarLogo span {
+    display: none;
+  }
+
+  .sidebar a span {
     display: none;
   }
 
   .sidebar {
-    width: 70px;
-    top: 9vh;
-    left: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    border: none;
-  }
-
-  .links {
-    border: none;
-  }
-}
-
-
-/* 👇 comportamento para telas pequenas (<= 530px) */
-@media (max-width: 530px) {
-  .sidebar {
-    position: fixed;
-    bottom: 0; /* vai pra parte inferior da tela */
-    top: auto; /* remove o top */
-    left: 0;
-    width: 100%;
-    height: 65px;
-    background-color: #0C3617;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    border-top: 2px solid #E3B52E;
-    z-index: 999;
-  }
-
-  .links {
-    flex-direction: row;
-    width: auto;
-    height: auto;
-    margin: 0;
-    gap: 45px;
-    border: none;
+    border-top: none;
   }
 
   .logout {
-    display: none;
+    width: 70px; /* mantém a largura proporcional */
   }
+}
 
-  .side-link {
-    margin: 0;
-    width: auto;
+/* Header mais alta no mobile (<=900px) */
+@media (max-width: 900px) {
+  .sidebar {
+    top: 15vh;
+    height: calc(100vh - 15vh);
   }
+}
 
-  .side-link a {
-    flex-direction: column;
+/* Barra inferior no mobile (<=530px) */
+@media (max-width: 530px) {
+  .sidebar {
+    top: auto;
+    bottom: 0;
+    height: 65px;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    border-top: 2px solid #E3B52E;
+    border-bottom: none;
     justify-content: center;
   }
 
-  .side-link a span {
-    display: none; /* oculta o texto */
+  .sidebarLogo {
+    display: none;
   }
 
-  .img {
-    width: 40px;
-    margin: 0;
+  .sidebarLinks {
+    border: none;
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+    padding: 0 12px;
   }
 
-  /* opcional: adiciona espaçamento no conteúdo para não ficar escondido atrás da barra */
-  main, .content {
-    padding-bottom: 70px;
+  .logout {
+    display: none; /* sem logout na barra inferior */
+  }
+
+  .sidebar a {
+    padding: 6px 8px;
+    border-radius: 8px;
+  }
+
+  .sidebar a span {
+    display: none;
   }
 }

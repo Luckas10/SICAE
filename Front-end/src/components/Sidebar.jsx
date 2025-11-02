@@ -1,26 +1,58 @@
-import './Sidebar.css'
-import Home from '../assets/icons/home-icon.svg?react'
-import Events from '../assets/icons/events-icon.svg?react'
-import Noticias from '../assets/icons/news-icon.svg?react'
-import Usuarios from '../assets/icons/users-icon.svg?react'
-import Configuracoes from '../assets/icons/config-icon.svg?react'
-import Logout from '../assets/icons/logout-icon.svg?react'
-
+// Sidebar.jsx
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { fas } from "@fortawesome/free-solid-svg-icons";
+import { NavLink } from "react-router-dom";
+import "./Sidebar.css";
 
 export default function Sidebar() {
   return (
-    <aside className="sidebar">
-      <div className="links">
-        <button className="side-link"><a href="#"><Home className="img"/><span>Página Inicial</span></a></button>
-        <button className="side-link"><a href="#"><Events className="img"/><span>Eventos</span></a></button>
-        <button className="side-link"><a href="#"><Noticias className="img"/><span>Notícias</span></a></button>
-        <button className="side-link"><a href="#"><Usuarios className="img"/><span>Usuários</span></a></button>
-        <button className="side-link"><a href="#"><Configuracoes className="img"/><span>Configurações</span></a></button>
-      </div>
+    <nav className="sidebar">
 
-      <div className="logout">
-        <button className="side-link"><a href="#"><Logout className="img"/><span>Sair</span></a></button>
-      </div>
-    </aside>
-  )
+      <ul className="sidebarLinks">
+        <li>
+          <NavLink to="/" end>
+            <FontAwesomeIcon size="lg" icon={fas.faHouse} />
+            <span>PÁGINA INICIAL</span>
+          </NavLink>
+        </li>
+
+        <li>
+          <NavLink to="/events">
+            <FontAwesomeIcon size="lg" icon={fas.faCalendarDays} />
+            <span>EVENTOS</span>
+          </NavLink>
+        </li>
+
+        <li>
+          <NavLink to="/news">
+            <FontAwesomeIcon size="lg" icon={fas.faNewspaper} />
+            <span>NOTÍCIAS</span>
+          </NavLink>
+        </li>
+
+        <li>
+          <NavLink to="/users">
+            <FontAwesomeIcon size="lg" icon={fas.faUserGroup} />
+            <span>USUÁRIOS</span>
+          </NavLink>
+        </li>
+
+        <li>
+          <NavLink to="/settings">
+            <FontAwesomeIcon size="lg" icon={fas.faGear} />
+            <span>CONFIGURAÇÕES</span>
+          </NavLink>
+        </li>
+      </ul>
+
+      <ul className="logout">
+        <li>
+          <NavLink to="/logout">
+            <FontAwesomeIcon size="lg" icon={fas.faRightFromBracket} />
+            <span>SAIR</span>
+          </NavLink>
+        </li>
+      </ul>
+    </nav>
+  );
 }

@@ -4,45 +4,38 @@
     box-sizing: border-box;
 }
 
-/* Área principal com compensação do header fixo + espaçamento de 20px */
 .dashboard-page {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
     padding-left: 15%;
-    /* espaço lateral da sidebar */
-    padding-top: calc(9.5vh + 20px); /* ✅ header + 20px de margem fixa */
+    padding-top: calc(9.5vh + 20px);
 }
 
-/* Conteúdo interno (pode conter colunas, cards, etc.) */
 .dashboard-content {
     display: flex;
     flex-direction: row;
     flex: 1;
 }
 
-/* ====== RESPONSIVIDADE ====== */
 
-/* Sidebar compacta (<=850px) */
 @media (max-width: 850px) {
     .dashboard-page {
-        padding-left: 70px; /* sidebar menor */
-        padding-top: calc(9.5vh + 20px); /* mantém espaço abaixo da header */
+        padding-left: 70px;
+        padding-top: calc(9.5vh + 20px);
     }
 }
 
-/* Header mais alta no mobile (<=900px) */
 @media (max-width: 900px) {
     .dashboard-page {
-        padding-top: calc(15vh + 20px); /* ✅ header mobile + espaço de 20px */
+        padding-top: calc(15vh + 20px);
     }
 }
 
-/* Barra inferior no mobile (<=530px) */
 @media (max-width: 530px) {
     .dashboard-page {
-        padding-left: 0;          /* sem sidebar lateral */
-        padding-bottom: 70px;     /* reserva espaço pra bottom bar */
-        padding-top: calc(15vh + 20px); /* mantém o espaçamento */
+        padding-left: 0;
+        padding-bottom: 70px;
+        padding-top: calc(15vh + 20px);
     }
 }

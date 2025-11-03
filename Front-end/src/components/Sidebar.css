@@ -1,7 +1,7 @@
 .sidebar {
   position: fixed;
   left: 0;
-  top: 9.5vh; /* abaixo da header */
+  top: 9.5vh;
   height: calc(100vh - 9.5vh);
   width: 15%;
   background-color: #0C3617;
@@ -12,10 +12,9 @@
   justify-content: center;
   border-top: 3px solid #0D4F1D;
   box-sizing: border-box;
-  z-index: 999; /* abaixo da header, acima do conteúdo */
+  z-index: 999;
 }
 
-/* Logo/topo */
 .sidebarLogo {
   display: flex;
   align-items: center;
@@ -34,7 +33,6 @@
   letter-spacing: 0.5px;
 }
 
-/* Links principais e logout */
 .sidebarLinks,
 .logout {
   list-style: none;
@@ -47,7 +45,6 @@
   margin: 0.35rem 0;
 }
 
-/* ===== LINKS ===== */
 .sidebar a {
   display: flex;
   align-items: center;
@@ -57,14 +54,13 @@
   text-decoration: none;
   color: #fff;
   transition: background 0.2s ease, color 0.2s ease, transform 0.08s ease-in;
-  white-space: nowrap;          /* impede quebra */
-  overflow: hidden;             /* corta o excesso */
-  text-overflow: ellipsis;      /* mostra "..." */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   max-width: 100%;
   margin-bottom: 30px;
 }
 
-/* Aplica corte também ao texto dentro do link */
 .sidebar a span {
   display: inline-block;
   overflow: hidden;
@@ -79,33 +75,30 @@
   transform: translateY(-1px);
 }
 
-/* Ícones */
 .sidebar a svg {
   min-width: 22px;
-  flex-shrink: 0; /* evita deformar o ícone quando o texto é cortado */
+  flex-shrink: 0;
 }
 
-/* Link ativo */
 .sidebar a.active {
   color: #E3B52E;
   font-weight: 600;
 }
 
-/* ===== LOGOUT ===== */
 .logout {
   border-top: 3px solid #0D4F1D;
-  padding: 0.75rem 0.5rem;   /* mesmo padding dos outros blocos */
+  padding: 0.75rem 0.5rem;
   position: fixed;
   bottom: 0;
-  width: 15%;                /* ocupa 100% da largura da sidebar */
+  width: 15%;
   background-color: #0C3617;
   display: flex;
-  justify-content: center;   /* centraliza o botão dentro do rodapé */
+  justify-content: center;
 }
 
 .logout li {
   margin: 0;
-  width: auto;               /* evita ocupar 100% */
+  width: auto;
 }
 
 .logout a {
@@ -113,23 +106,21 @@
   align-items: center;
   justify-content: center;
   gap: 12px;
-  padding: 10px 14px;        /* igual aos outros links */
-  border-radius: 10px;       /* mesma borda arredondada */
+  padding: 10px 14px;
+  border-radius: 10px;
   text-decoration: none;
   color: #fff;
   transition: background 0.2s ease, color 0.2s ease;
-  width: fit-content;        /* ✅ evita hover cobrindo toda a barra */
+  width: fit-content;
   margin: 0px;
 }
 
 .logout a:hover {
   color: #E3B52E;
-  background: rgba(255, 255, 255, 0.06); /* mesmo hover dos outros */
+  background: rgba(255, 255, 255, 0.06);
 }
 
-/* ====== RESPONSIVO ====== */
 
-/* Compacta e esconde textos (<=850px) */
 @media (max-width: 850px) {
   .sidebar {
     width: 70px;
@@ -150,11 +141,10 @@
   }
 
   .logout {
-    width: 70px; /* mantém a largura proporcional */
+    width: 70px;
   }
 }
 
-/* Header mais alta no mobile (<=900px) */
 @media (max-width: 900px) {
   .sidebar {
     top: 15vh;
@@ -162,7 +152,6 @@
   }
 }
 
-/* Barra inferior no mobile (<=530px) */
 @media (max-width: 530px) {
   .sidebar {
     top: auto;
@@ -189,7 +178,7 @@
   }
 
   .logout {
-    display: none; /* sem logout na barra inferior */
+    display: none;
   }
 
   .sidebar a {

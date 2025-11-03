@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import Background from "../components/Background";
-import LoginRegisterContainer from "../components/LoginRegisterContainer";
+import Background from "../components/Background.jsx";
+import LoginRegisterContainer from "../components/LoginRegisterContainer.jsx";
 import "../style.css";
 
 export function LoginRegister() {

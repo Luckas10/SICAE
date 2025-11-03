@@ -38,7 +38,7 @@ export default function ImageCarousel({
     }
 
     return (
-        <div className="carousel">
+        <div className="newsCarousel">
             {/* Área de slides */}
             <div
                 className="carousel-track"

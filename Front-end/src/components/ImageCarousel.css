@@ -1,5 +1,5 @@
 /* Container geral do carrossel */
-.carousel {
+.newsCarousel {
     position: relative;
     width: 600px;
     /* << ajuste o tamanho aqui */
@@ -8,7 +8,7 @@
     border-radius: 16px;
     /* cantos arredondados */
     overflow: hidden;
-    background-color: #000;
+    background-color: #00d552;
     /* cor de fundo atrás da imagem */
     box-shadow: 0 30px 60px -10px rgba(0, 0, 0, 0.7);
     user-select: none;

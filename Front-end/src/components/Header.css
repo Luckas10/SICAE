@@ -12,7 +12,7 @@
     padding: 0 2vw;
     top: 0;
     box-sizing: border-box;
-    position: fixed; 
+    position: fixed;
     z-index: 1000;
 }
 
@@ -24,7 +24,7 @@
 }
 
 .header .header-logo img {
-    height:75%;
+    height: 75%;
     max-height: calc(0.75 * 9vh);
     aspect-ratio: auto;
 }

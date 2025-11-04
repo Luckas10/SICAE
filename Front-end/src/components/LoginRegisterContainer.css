@@ -28,7 +28,7 @@ main {
     position: relative;
     width: 100%;
     max-width: 1150px;
-    height:750px;
+    height: 750px;
     background: var(--glass-bg);
     /* cor clara e transparente */
     backdrop-filter: blur(15px);

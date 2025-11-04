@@ -6,12 +6,12 @@ export default function Events() {
 
     return (
         <>
-        <div className='events-page'>
-            <Header/>
-            <div className='events-sidebar'>
-                <Sidebar/>
+            <div className='events-page'>
+                <Header />
+                <div className='events-sidebar'>
+                    <Sidebar />
+                </div>
             </div>
-        </div>
         </>
     );
 }

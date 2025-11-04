@@ -18,6 +18,9 @@
     flex: 1;
 }
 
+.carousel-item {
+  height: 400px;
+}
 
 @media (max-width: 850px) {
     .dashboard-page {

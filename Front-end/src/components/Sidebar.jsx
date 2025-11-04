@@ -30,9 +30,9 @@ export default function Sidebar() {
         </li>
 
         <li>
-          <NavLink to="/users">
-            <FontAwesomeIcon size="lg" icon={fas.faUserGroup} />
-            <span>USUÁRIOS</span>
+          <NavLink to="/user">
+            <FontAwesomeIcon size="lg" icon={fas.faUser} />
+            <span>USUÁRIO</span>
           </NavLink>
         </li>
 

@@ -18,8 +18,34 @@
     flex: 1;
 }
 
-.carousel-item {
-  height: 400px;
+.main-content {
+    display: flex;
+    justify-content: space-between;
+    height: auto;
+    width: 100%;
+    padding: 0px 30px;
+    max-height: 60vh;
+    border-bottom: 1px solid #0D4F1D;
+}
+
+img.d-block {
+    max-height: 460px;
+    width: 1000px;
+}
+
+.carousel.slide {
+    max-width: 1000px;
+    height: 460px;
+    left: 0;
+    top: 0;
+}
+
+.notifications {
+    background-color: #E4FFE7;
+    border: 3px solid #0D4F1D;
+    width: 415px;
+    height: 450px;
+    border-radius: 20px;
 }
 
 @media (max-width: 850px) {

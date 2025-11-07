@@ -45,9 +45,20 @@ img.d-block {
 
 .carousel.slide {
     max-width: 1000px;
-    height: 460px;
+    height: auto; /* deixa o carrossel acompanhar a imagem */
     left: 0;
     top: 0;
+}
+
+.carousel-item img.d-block {
+    width: 100%;
+    height: 460px; /* controla a altura final */
+    object-fit: cover; /* garante que a imagem preencha tudo */
+    border-radius: 20px; /* opcional, igual na imagem que você mandou */
+}
+
+.carousel-indicators {
+    background: none;
 }
 
 .notifications {

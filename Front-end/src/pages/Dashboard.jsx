@@ -5,6 +5,8 @@ import Carousel from 'react-bootstrap/Carousel';
 
 import img1 from '../assets/carousel/imagem1.jpeg';
 import img2 from '../assets/carousel/imagem2.jpeg';
+import cardimg from '../assets/card.jpg';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function Dashboard() {
@@ -57,6 +59,23 @@ export default function Dashboard() {
                             <p>oiii</p>
                         </div>
                     </div>
+                <div className="cards">
+                    <div className="card">
+                        <img src={cardimg} />
+                        <p id='cardType'>Notícia</p>
+                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Esse natus eligendi inventore eaque exercitationem repellat asperiores? Quibusdam laudantium suscipit nemo enim. Repellat fugit debitis ad. Quod facere rerum commodi fugiat.</p>
+                    </div>
+                    <div className="card">
+                        <img src={cardimg} />
+                        <p id='cardType'>Notícia</p>
+                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Esse natus eligendi inventore eaque exercitationem repellat asperiores? Quibusdam laudantium suscipit nemo enim. Repellat fugit debitis ad. Quod facere rerum commodi fugiat.</p>
+                    </div>
+                    <div className="card">
+                        <img src={cardimg} />
+                        <p id='cardType'>Notícia</p>
+                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Esse natus eligendi inventore eaque exercitationem repellat asperiores? Quibusdam laudantium suscipit nemo enim. Repellat fugit debitis ad. Quod facere rerum commodi fugiat.</p>
+                    </div>
+                </div>
                 </div>
             </div>
         </>

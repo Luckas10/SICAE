@@ -1,3 +1,7 @@
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { far as regular } from "@fortawesome/free-regular-svg-icons";
+
+
 import './Dashboard.css';
 import Header from '../components/Header.jsx';
 import Sidebar from '../components/Sidebar.jsx';
@@ -56,26 +60,34 @@ export default function Dashboard() {
                             </Carousel.Item>
                         </Carousel>
                         <div className="notifications">
-                            <p>oiii</p>
+                            <div className='notifications-upper'>
+                                {/* <FontAwesomeIcon size="lg" icon={regular.faBell} /> */}
+                            </div>
                         </div>
                     </div>
+                </div>
                 <div className="cards">
                     <div className="card">
                         <img src={cardimg} />
-                        <p id='cardType'>Notícia</p>
-                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Esse natus eligendi inventore eaque exercitationem repellat asperiores? Quibusdam laudantium suscipit nemo enim. Repellat fugit debitis ad. Quod facere rerum commodi fugiat.</p>
+                        <div className='cardText'>
+                            <p id='cardType'>Notícia</p>
+                            <p>repellat asperiores? Quibusdam laudantium suscipit nemo enim. Repellat fugit debitis ad. Quod facere rerum commodi fugiat.</p>
+                        </div>
                     </div>
                     <div className="card">
                         <img src={cardimg} />
-                        <p id='cardType'>Notícia</p>
-                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Esse natus eligendi inventore eaque exercitationem repellat asperiores? Quibusdam laudantium suscipit nemo enim. Repellat fugit debitis ad. Quod facere rerum commodi fugiat.</p>
+                        <div className='cardText'>
+                            <p id='cardType'>Notícia</p>
+                            <p>repellat asperiores? Quibusdam laudantium suscipit nemo enim. Repellat fugit debitis ad. Quod facere rerum commodi fugiat.</p>
+                        </div>
                     </div>
                     <div className="card">
                         <img src={cardimg} />
-                        <p id='cardType'>Notícia</p>
-                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Esse natus eligendi inventore eaque exercitationem repellat asperiores? Quibusdam laudantium suscipit nemo enim. Repellat fugit debitis ad. Quod facere rerum commodi fugiat.</p>
+                        <div className='cardText'>
+                            <p id='cardType'>Notícia</p>
+                            <p>repellat asperiores? Quibusdam laudantium suscipit nemo enim. Repellat fugit debitis ad. Quod facere rerum commodi fugiat.</p>
+                        </div>
                     </div>
-                </div>
                 </div>
             </div>
         </>

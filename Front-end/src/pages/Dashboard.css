@@ -9,10 +9,11 @@
     display: block;
     padding-left: 15%;
     padding-top: calc(9.5vh + 20px);
-    min-height: 100vh;  /* força a área a crescer */
-    overflow-y: auto;   /* habilita scroll no conteúdo */
-  }
-  
+    min-height: 100vh;
+    /* força a área a crescer */
+    overflow-y: auto;
+    /* habilita scroll no conteúdo */
+}
 
 .dashboard-content {
     display: flex;
@@ -58,6 +59,11 @@ img.d-block {
     border-radius: 20px;
 }
 
+.notifications-upper {
+    height: 16%;
+    border-bottom: #0D4F1D solid 3px;
+}
+
 .cards {
     display: flex;
     justify-content: space-between;
@@ -66,8 +72,6 @@ img.d-block {
 
 .cards .card {
     width: 30%;
-    font-weight: bold;
-    font-size: 26px;
 }
 
 .cards .card img {
@@ -76,7 +80,12 @@ img.d-block {
 
 #cardType {
     color: #369949;
-    font-size: 14px;
+    font-size: 16px;
+}
+
+.cardText {
+    font-weight: bold;
+    font-size: 26px;
 }
 
 @media (max-width: 850px) {

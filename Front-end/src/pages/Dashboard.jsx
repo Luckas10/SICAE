@@ -1,11 +1,10 @@
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { far as regular } from "@fortawesome/free-regular-svg-icons";
-
-
 import './Dashboard.css';
 import Header from '../components/Header.jsx';
 import Sidebar from '../components/Sidebar.jsx';
 import Carousel from 'react-bootstrap/Carousel';
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { fas } from "@fortawesome/free-solid-svg-icons";
 
 import img1 from '../assets/carousel/imagem1.jpeg';
 import img2 from '../assets/carousel/imagem2.jpeg';
@@ -61,7 +60,7 @@ export default function Dashboard() {
                         </Carousel>
                         <div className="notifications">
                             <div className='notifications-upper'>
-                                {/* <FontAwesomeIcon size="lg" icon={regular.faBell} /> */}
+                                <h2>Notificações</h2>
                             </div>
                         </div>
                     </div>
@@ -70,21 +69,21 @@ export default function Dashboard() {
                     <div className="card">
                         <img src={cardimg} />
                         <div className='cardText'>
-                            <p id='cardType'>Notícia</p>
+                            <p id='cardType'><FontAwesomeIcon icon={fas.faCalendarDays} />EVENTO</p>
                             <p>repellat asperiores? Quibusdam laudantium suscipit nemo enim. Repellat fugit debitis ad. Quod facere rerum commodi fugiat.</p>
                         </div>
                     </div>
                     <div className="card">
                         <img src={cardimg} />
                         <div className='cardText'>
-                            <p id='cardType'>Notícia</p>
+                            <p id='cardType'><FontAwesomeIcon icon={fas.faNewspaper} />NOTÍCIA</p>
                             <p>repellat asperiores? Quibusdam laudantium suscipit nemo enim. Repellat fugit debitis ad. Quod facere rerum commodi fugiat.</p>
                         </div>
                     </div>
                     <div className="card">
                         <img src={cardimg} />
                         <div className='cardText'>
-                            <p id='cardType'>Notícia</p>
+                            <p id='cardType'><FontAwesomeIcon icon={fas.faCalendarDays} />EVENTO</p>
                             <p>repellat asperiores? Quibusdam laudantium suscipit nemo enim. Repellat fugit debitis ad. Quod facere rerum commodi fugiat.</p>
                         </div>
                     </div>

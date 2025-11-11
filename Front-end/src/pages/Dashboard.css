@@ -40,23 +40,43 @@
 
 
 img.d-block {
-    max-height: 460px;
-    width: 1000px;
+    height: 460px;
+    filter: brightness(0.65);
 }
 
 .carousel.slide {
-    max-width: 1000px;
     height: 460px;
     left: 0;
     top: 0;
+    background: none;
+    padding: 0;
+    border-radius: 15px;
+}
+
+.carousel {
+    width: 60%;
+}
+
+div.carousel-indicators {
+    bottom: 0;
+    margin: 0;
+}
+
+div.carousel-caption {
+    font-size: 34px;
+}
+
+div.carousel-caption h3 {
+    font-size: 34px;
+    font-weight: bold;
 }
 
 .notifications {
     background-color: #E4FFE7;
     border: 3px solid #0D4F1D;
-    width: 40%;
-    height: 450px;
-    border-radius: 20px;
+    width: 35%;
+    height: auto;
+    border-radius: 15px;
 }
 
 .notifications-upper {
@@ -72,15 +92,19 @@ img.d-block {
 
 .cards .card {
     width: 30%;
+    border-radius: 20px 20px 15px 15px;
 }
 
 .cards .card img {
     max-height: 180px;
+    border-radius: 15px 15px 0px 0px;
 }
 
 #cardType {
     color: #369949;
-    font-size: 16px;
+    font-size: 15px;
+    font-weight: 6000;
+    margin: 6px 0px 0px 0px
 }
 
 .cardText {

@@ -16,7 +16,6 @@ input {
 main {
     width: 100%;
     min-height: 100vh;
-    overflow: hidden;
     background: transparent;
     padding: 2rem;
     display: flex;
@@ -29,14 +28,16 @@ main {
     width: 100%;
     max-width: 1150px;
     height: 750px;
-    background: var(--glass-bg);
-    /* cor clara e transparente */
+    background: rgba(10, 54, 36, 0.58);
     backdrop-filter: blur(15px);
-    /* aplica blur no que está ATRÁS */
     -webkit-backdrop-filter: blur(10px);
     border-radius: 3.3rem;
     box-shadow: 0 60px 40px -30px rgba(0, 0, 0, 0.27);
     margin-top: -30px;
+}
+
+:root[data-theme="light"] .box {
+    background: rgba(255, 255, 255, 0.70);
 }
 
 .inner-box {
@@ -61,7 +62,6 @@ main {
     will-change: left;
 }
 
-
 form {
     max-width: 360px;
     width: 100%;
@@ -84,9 +84,7 @@ form.sign-up-form {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    /* empurra o switch para a direita */
     gap: 0.75rem;
-    /* espaço básico */
     width: 100%;
 }
 
@@ -96,15 +94,10 @@ form.sign-up-form {
     gap: 0.5rem;
 }
 
-/* garante que o switch não “invada” o restante do layout */
 .logo .theme-switch {
     margin-left: auto;
-    /* alternativa a justify-content: space-between */
     flex-shrink: 0;
-    /* não encolher */
-    /* opcional: escalar o tamanho do controle */
     --toggle-size: 18px;
-    /* ajuste fino do tamanho */
 }
 
 .logo img {
@@ -115,20 +108,63 @@ form.sign-up-form {
 .logo h4 {
     font-size: 1.6rem;
     letter-spacing: -0.5px;
-    color: var(--text);
+    color: #ffffff;
 }
 
 .heading h2 {
     font-size: 2.1rem;
     font-weight: 600;
-    color: var(--text);
+    color: #ffffff;
+}
+
+:root[data-theme="light"] .logo h4,
+:root[data-theme="light"] .heading h2 {
+    color: #0D4F1D;
 }
 
 .heading h6 {
-    color: var(--text-muted);
+    color: #C8D7CF;
     font-weight: 400;
     font-size: 0.75rem;
     display: inline;
+    margin-right: 4px;
+}
+
+.labelLoginContainer {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.95rem;
+    color: #C8D7CF;
+    pointer-events: none;
+    transition: 0.4s;
+}
+
+.text {
+    color: #C8D7CF;
+    font-size: 0.7rem;
+}
+
+.text a {
+    margin-left: 4px;
+    color: #C8D7CF;
+    transition: 0.3s;
+}
+
+:root[data-theme="dark"] .text a:hover {
+    color: #E3B52E;
+}
+
+:root[data-theme="light"] .text a:hover {
+    color: #5d5e5d;
+}
+
+:root[data-theme="light"] .heading h6,
+:root[data-theme="light"] .labelLoginContainer,
+:root[data-theme="light"] .text,
+:root[data-theme="light"] .text a {
+    color: #0D4F1D;
 }
 
 .toggle {
@@ -139,8 +175,16 @@ form.sign-up-form {
     transition: 0.3s;
 }
 
-.toggle:hover {
-    color: #8371fd;
+:root[data-theme="light"] .toggle {
+    color: #0D4F1D;
+}
+
+:root[data-theme="dark"] .toggle:hover {
+    color: #E3B52E;
+}
+
+:root[data-theme="light"] .toggle:hover {
+    color: #5d5e5d;
 }
 
 .input-wrap {
@@ -156,35 +200,59 @@ form.sign-up-form {
     background: none;
     border: none;
     outline: none;
-    border-bottom: 1px solid #bbb;
     padding: 0;
     font-size: 0.95rem;
     color: #ffffff;
     transition: 0.4s;
 }
 
-.heading h6 {
-    margin-right: 8px;
+:root[data-theme="dark"] .input-field {
+    border-bottom: 1px solid #ffffff;
+    color: #E3B52E;
 }
 
-.labelLoginContainer {
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 0.95rem;
-    color: var(--text-muted);
-    pointer-events: none;
-    transition: 0.4s;
+:root[data-theme="light"] .input-field {
+    border-bottom: 1px solid #5d5e5d;
+    color: #0D4F1D;
 }
 
-.input-field.active {
-    border-bottom-color: #ffffff;
+:root[data-theme="dark"] .input-field.active {
+    border-bottom-color: #E3B52E !important;
 }
 
-.input-field.active+.labelLoginContainer {
+:root[data-theme="light"] .input-field.active {
+    border-bottom-color: #0D4F1D !important;
+}
+
+:root[data-theme="light"] .input-field.active+.labelLoginContainer {
     font-size: 0.75rem;
     top: -2px;
+    color: #0D4F1D;
+}
+
+:root[data-theme="dark"] .input-field.active+.labelLoginContainer {
+    font-size: 0.75rem;
+    top: -2px;
+    color: #E3B52E;
+}
+
+
+:root[data-theme="light"] .labelLoginContainer {
+    color: #5d5e5d;
+}
+
+
+:root[data-theme="dark"] .labelLoginContainer {
+    color: #ffffff;
+}
+
+
+:root[data-theme="light"] .input-field.active+.labelLoginContainer {
+    color: #0D4F1D;
+}
+
+:root[data-theme="dark"] .input-field.active+.labelLoginContainer {
+    color: #E3B52E;
 }
 
 .sign-btn {
@@ -201,23 +269,14 @@ form.sign-up-form {
     transition: 0.3s;
 }
 
-.sign-btn:hover {
-    background-color: #8371fd;
+:root[data-theme="light"] .sign-btn:hover {
+    background-color: #0D4F1D;
+    color: #ffffff;
 }
 
-.text {
-    color: var(--text-muted);
-    font-size: 0.7rem;
-}
-
-.text a {
-    margin-left: 4px;
-    color: var(--text-muted);
-    transition: 0.3s;
-}
-
-.text a:hover {
-    color: #8371fd;
+:root[data-theme="dark"] .sign-btn:hover {
+    background-color: #E3B52E;
+    color: #ffffff;
 }
 
 main.sign-up-mode form.sign-in-form {
@@ -246,14 +305,12 @@ main.sign-up-mode .carousel {
     top: 0;
     background-color: #15173734;
     backdrop-filter: blur(15px);
-    /* aplica blur no que está ATRÁS */
     -webkit-backdrop-filter: blur(10px);
     color: #ffffff;
     border-radius: 2rem;
     display: grid;
     grid-template-rows: auto 1fr;
     padding-bottom: 2rem;
-    overflow: hidden;
     transition: left 0.8s ease-in-out !important;
 }
 

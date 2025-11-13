@@ -9,10 +9,11 @@
     display: block;
     padding-left: 15%;
     padding-top: calc(9.5vh + 20px);
-    min-height: 100vh;  /* força a área a crescer */
-    overflow-y: auto;   /* habilita scroll no conteúdo */
-  }
-  
+    min-height: 100vh;
+    /* força a área a crescer */
+    overflow-y: auto;
+    /* habilita scroll no conteúdo */
+}
 
 .dashboard-content {
     display: flex;
@@ -39,15 +40,36 @@
 
 
 img.d-block {
-    max-height: 460px;
-    width: 1000px;
+    height: 460px;
+    filter: brightness(0.65);
 }
 
 .carousel.slide {
     max-width: 1000px;
-    height: auto; /* deixa o carrossel acompanhar a imagem */
+    height: 460px;
     left: 0;
     top: 0;
+    background: none;
+    padding: 0;
+    border-radius: 15px;
+}
+
+.carousel {
+    width: 60%;
+}
+
+div.carousel-indicators {
+    bottom: 0;
+    margin: 0;
+}
+
+div.carousel-caption {
+    font-size: 34px;
+}
+
+div.carousel-caption h3 {
+    font-size: 34px;
+    font-weight: bold;
 }
 
 .carousel-item img.d-block {
@@ -64,9 +86,14 @@ img.d-block {
 .notifications {
     background-color: #E4FFE7;
     border: 3px solid #0D4F1D;
-    width: 40%;
-    height: 450px;
-    border-radius: 20px;
+    width: 35%;
+    height: auto;
+    border-radius: 15px;
+}
+
+.notifications-upper {
+    height: 16%;
+    border-bottom: #0D4F1D solid 3px;
 }
 
 .cards {
@@ -77,17 +104,24 @@ img.d-block {
 
 .cards .card {
     width: 30%;
-    font-weight: bold;
-    font-size: 26px;
+    border-radius: 20px 20px 15px 15px;
 }
 
 .cards .card img {
     max-height: 180px;
+    border-radius: 15px 15px 0px 0px;
 }
 
 #cardType {
     color: #369949;
-    font-size: 14px;
+    font-size: 15px;
+    font-weight: 6000;
+    margin: 6px 0px 0px 0px
+}
+
+.cardText {
+    font-weight: bold;
+    font-size: 26px;
 }
 
 @media (max-width: 850px) {

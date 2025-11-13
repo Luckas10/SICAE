@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Background from "../components/Background.jsx";
 import LoginRegisterContainer from "../components/LoginRegisterContainer.jsx";
-import "../style.css";
+import "./LoginRegister.css";
 
 export function LoginRegister() {
     const [isNight, setIsNight] = useState(false);

@@ -10,28 +10,28 @@ export default function Sidebar() {
       <ul className="sidebarLinks">
         <li>
           <NavLink to="/" end>
-            <FontAwesomeIcon size="lg" icon={fas.faHouse} />
+            <FontAwesomeIcon size="lg" icon={fas.faHouse} style={{ marginBottom: "2px"}} />
             <span>PÁGINA INICIAL</span>
           </NavLink>
         </li>
 
         <li>
           <NavLink to="/events">
-            <FontAwesomeIcon size="lg" icon={fas.faCalendarDays} />
+            <FontAwesomeIcon size="lg" icon={fas.faCalendarWeek} style={{ marginBottom: "1px"}} />
             <span>EVENTOS</span>
           </NavLink>
         </li>
 
         <li>
           <NavLink to="/news">
-            <FontAwesomeIcon size="lg" icon={fas.faNewspaper} />
+            <FontAwesomeIcon size="lg" icon={fas.faNewspaper} style={{ marginBottom: "1px"}} />
             <span>NOTÍCIAS</span>
           </NavLink>
         </li>
 
         <li>
           <NavLink to="/user">
-            <FontAwesomeIcon size="lg" icon={fas.faUser} />
+            <FontAwesomeIcon size="lg" icon={fas.faUser} style={{ marginBottom: "1px"}} />
             <span>USUÁRIO</span>
           </NavLink>
         </li>
@@ -47,7 +47,7 @@ export default function Sidebar() {
       <ul className="logout">
         <li>
           <NavLink to="/logout">
-            <FontAwesomeIcon size="lg" icon={fas.faRightFromBracket} />
+            <FontAwesomeIcon size="lg" icon={fas.faRightFromBracket}  />
             <span>SAIR</span>
           </NavLink>
         </li>

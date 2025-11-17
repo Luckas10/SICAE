@@ -38,32 +38,10 @@ export default function Dashboard() {
                                 <Carousel.Caption>
                                     <h3>IF BRILHA NO INTERCAMPI</h3>
                                     <p>ATLETAS DO SICAE BRILHARAM ESTA NOITE, FAZENDO UM ESPETÁCULO EM SEUS RESPECTIVOS ESPORTES</p>
+                                    <span className="carousel-date">17 de Novembro de 2025</span>
                                 </Carousel.Caption>
                             </Carousel.Item>
 
-                            <Carousel.Item>
-                                <img
-                                    className="d-block"
-                                    src={img2}
-                                    alt="Segundo slide"
-                                />
-                                <Carousel.Caption>
-                                    <h3>Segundo slide label</h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                </Carousel.Caption>
-                            </Carousel.Item>
-
-                            <Carousel.Item>
-                                <img
-                                    className="d-block"
-                                    src={img3}
-                                    alt="Terceiro slide"
-                                />
-                                <Carousel.Caption>
-                                    <h3>Terceiro slide label</h3>
-                                    <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-                                </Carousel.Caption>
-                            </Carousel.Item>
                         </Carousel>
 
                         <div className="notifications">
@@ -78,28 +56,28 @@ export default function Dashboard() {
                             <img src={card1} />
                             <div className='cardText'>
                                 <p id='cardType'><FontAwesomeIcon icon={fas.faCalendarDays} />EVENTO</p>
-                                <p>repellat asperiores? Quibusasdasfausfuasgifkasukfkvhasufhgjhkhlskfgvhjasfhvj asbhklfbvasg jfagsvgh fgajsv fvjagsvfgvjhasfassdam laudantium suscipit nemo enim. Repellat fugit debitis ad. Quod facere rerum commodi fugiat.</p>
+                                <p>Equipe de Vôlei do Campus Garante Vitória em Jogo Acirrado</p>
                             </div>
                         </div>
                         <div className="card">
                             <img src={card2} />
                             <div className='cardText'>
                                 <p id='cardType'><FontAwesomeIcon icon={fas.faNewspaper} />NOTÍCIA</p>
-                                <p>repellat asperiores? Quibusdam laudantium suscipit nemo enim. Repellat fugit debitis ad. Quod facere rerum commodi fugiat.</p>
+                                <p>Atletas do Badminton do IFRN se Destacam em Competição Regional</p>
                             </div>
                         </div>
                         <div className="card">
                             <img src={card3} />
                             <div className='cardText'>
                                 <p id='cardType'><FontAwesomeIcon icon={fas.faCalendarDays} />EVENTO</p>
-                                <p>repellat asperiores? Quibusdam laudantium suscipit nemo enim. Repellat fugit debitis ad. Quod facere rerum commodi fugiat.</p>
+                                <p>Treinador Ricardo Anuncia Novo Cursinho de Futsal para Iniciantes e Atletas em Formação</p>
                             </div>
                         </div>
                         <div className="card">
                             <img src={card1} />
                             <div className='cardText'>
                                 <p id='cardType'><FontAwesomeIcon icon={fas.faCalendarDays} />EVENTO</p>
-                                <p>repellat asperiores? Quibusdam laudantium suscipit nemo enim. Repellat fugit debitis ad. Quod facere rerum commodi fugiat.</p>
+                                <p>Equipe de Vôlei do Campus Garante Vitória em Jogo Acirrado</p>
                             </div>
                         </div>
                     </div>

@@ -75,7 +75,7 @@ div.carousel-caption {
     position: absolute;
     left: 40px;
     right: auto;
-    bottom: 60px;
+    bottom: 40px;
     transform: none;
 
     display: flex;
@@ -112,6 +112,16 @@ div.carousel-caption p {
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.carousel-date {
+    font-size: 14px;
+    font-weight: 300;
+    opacity: 0.8;
+    margin-top: 6px;
+
+    /* opcional: deixa a data mais suave */
+    color: #f1f1f1;
 }
 
 

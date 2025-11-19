@@ -4,7 +4,6 @@ import Sidebar from '../components/Sidebar.jsx';
 import Carousel from 'react-bootstrap/Carousel';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { library } from '@fortawesome/fontawesome-svg-core'
 
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import { far } from '@fortawesome/free-regular-svg-icons'
@@ -25,7 +24,6 @@ export default function Dashboard() {
             <Header />
             <div className='dashboard-page'>
                 <Sidebar />
-
                 <div className='dashboard-content'>
                     <div className="main-content">
                         <Carousel>
@@ -38,10 +36,33 @@ export default function Dashboard() {
                                 <Carousel.Caption>
                                     <h3>IF BRILHA NO INTERCAMPI</h3>
                                     <p>ATLETAS DO SICAE BRILHARAM ESTA NOITE, FAZENDO UM ESPETÁCULO EM SEUS RESPECTIVOS ESPORTES</p>
-                                    <span className="carousel-date">17 de Novembro de 2025</span>
+                                    <span className="carousel-date">17 DE NOVEMBRO DE 2025</span>
                                 </Carousel.Caption>
                             </Carousel.Item>
-
+                            <Carousel.Item>
+                                <img
+                                    className="d-block"
+                                    src={img2}
+                                    alt="Segundo slide"
+                                />
+                                <Carousel.Caption>
+                                    <h3>CIRILO</h3>
+                                    <p>MENINO DO CARROSSEL</p>
+                                    <span className="carousel-date">18 DE NOVEMBRO DE 2025</span>
+                                </Carousel.Caption>
+                            </Carousel.Item>
+                            <Carousel.Item>
+                                <img
+                                    className="d-block"
+                                    src={img3}
+                                    alt="Terceiro slide"
+                                />
+                                <Carousel.Caption>
+                                    <h3>ESPORTES</h3>
+                                    <p>OLHA AQUI OS ESPORTES</p>
+                                    <span className="carousel-date">17 DE NOVEMBRO DE 2025</span>
+                                </Carousel.Caption>
+                            </Carousel.Item>
                         </Carousel>
 
                         <div className="notifications">
@@ -81,7 +102,6 @@ export default function Dashboard() {
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </>

@@ -12,21 +12,21 @@
     min-height: 100vh;
 }
 
-.dashboard-content {
+.dashboard-page .dashboard-content {
     display: flex;
     flex-direction: column;
     width: 100%;
     padding: 0% 2%;
 }
 
-.main-content {
+.dashboard-page .main-content {
     position: relative;
     display: flex;
     justify-content: space-between;
     width: 100%;
 }
 
-.main-content::after {
+.dashboard-page .main-content::after {
     content: '';
     position: absolute;
     bottom: -25px;
@@ -35,12 +35,12 @@
     border-top: 10px;
 }
 
-img.d-block {
+.dashboard-page img.d-block {
     height: 460px;
     filter: brightness(0.5);
 }
 
-.carousel.slide {
+.dashboard-page .carousel.slide {
     max-width: 65%;
     height: 460px;
     left: 0;
@@ -50,28 +50,28 @@ img.d-block {
     border-radius: 10px;
 }
 
-.carousel {
+.dashboard-page .carousel {
     width: 65%;
 }
 
-.carousel-item img.d-block {
+.dashboard-page .carousel-item img.d-block {
     width: 100%;
     height: 460px;
     object-fit: cover;
     border-radius: 10px;
 }
 
-.carousel-indicators {
+.dashboard-page .carousel-indicators {
     background: none;
 }
 
-div.carousel-indicators {
+.dashboard-page div.carousel-indicators {
     bottom: 0;
     margin: 0;
 }
 
 
-div.carousel-caption {
+.dashboard-page div.carousel-caption {
     position: absolute;
     left: 40px;
     right: auto;
@@ -88,7 +88,7 @@ div.carousel-caption {
     padding: 0;
 }
 
-div.carousel-caption h3 {
+.dashboard-page div.carousel-caption h3 {
     font-size: 30px;
     font-weight: 700;
     margin: 0 0 8px 0;
@@ -101,7 +101,7 @@ div.carousel-caption h3 {
     text-overflow: ellipsis;
 }
 
-div.carousel-caption p {
+.dashboard-page div.carousel-caption p {
     font-size: 20px;
     font-weight: 400;
     margin: 0;
@@ -114,7 +114,7 @@ div.carousel-caption p {
     text-overflow: ellipsis;
 }
 
-.carousel-date {
+.dashboard-page .carousel-date {
     font-size: 14px;
     font-weight: 300;
     opacity: 0.8;
@@ -125,7 +125,7 @@ div.carousel-caption p {
 }
 
 
-.notifications {
+.dashboard-page .notifications {
     background-color: #E4FFE7;
     border: 3px solid #0D4F1D;
     width: 33%;
@@ -133,13 +133,13 @@ div.carousel-caption p {
     border-radius: 10px;
 }
 
-.notifications .bell-icon {
+.dashboard-page .notifications .bell-icon {
     font-size: 30px;
     color: #0D4F1D;
     margin-left: 15px;
 }
 
-.notifications-upper {
+.dashboard-page .notifications-upper {
     height: 12%;
     border-bottom: #0D4F1D solid 3px;
     display: flex;
@@ -147,32 +147,32 @@ div.carousel-caption p {
 }
 
 
-.cards {
+.dashboard-page .cards {
     display: flex;
     justify-content: space-between;
     padding-top: 50px;
     flex-wrap: wrap;
 }
 
-.cards .card {
+.dashboard-page .cards .card {
     width: 32%;
     border-radius: 15px 15px 10px 10px;
     margin-bottom: 25px;
 }
 
-.cards .card img {
+.dashboard-page .cards .card img {
     height: 180px;
     border-radius: 10px 10px 0px 0px;
 }
 
-#cardType {
+.dashboard-page #cardType {
     color: #369949;
     font-size: 15px;
     font-weight: 600;
     margin: 6px 0px 0px 0px;
 }
 
-.cardText p:last-child {
+.dashboard-page .cardText p:last-child {
     display: -webkit-box;
     line-clamp: 4;
     -webkit-line-clamp: 4;
@@ -181,7 +181,7 @@ div.carousel-caption p {
     text-overflow: ellipsis;
 }
 
-.cardText {
+.dashboard-page .cardText {
     font-weight: bold;
     font-size: 26px;
     padding: 0px 8px;

@@ -25,7 +25,6 @@ export default function Dashboard() {
             <Header />
             <div className='dashboard-page'>
                 <Sidebar />
-
                 <div className='dashboard-content'>
                     <div className="main-content">
                         <Carousel>
@@ -41,7 +40,6 @@ export default function Dashboard() {
                                     <span className="carousel-date">17 de Novembro de 2025</span>
                                 </Carousel.Caption>
                             </Carousel.Item>
-
                         </Carousel>
 
                         <div className="notifications">

@@ -31,7 +31,7 @@ export default function Sidebar() {
 
         <li>
           <NavLink to="/user">
-            <FontAwesomeIcon size="lg" icon={fas.faUser} style={{ marginBottom: "1px"}} />
+            <FontAwesomeIcon size="lg" icon={fas.faAddressCard} style={{ marginBottom: "1px"}} />
             <span>USUÁRIO</span>
           </NavLink>
         </li>

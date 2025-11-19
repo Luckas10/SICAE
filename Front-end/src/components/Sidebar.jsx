@@ -1,38 +1,83 @@
+import { NavLink, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { fas } from "@fortawesome/free-solid-svg-icons";
-import { NavLink } from "react-router-dom";
+import Swal from "sweetalert2";
 import "./Sidebar.css";
 
 export default function Sidebar() {
+  const navigate = useNavigate();
+
+  const handleLogout = async (event) => {
+    event.preventDefault();
+
+    const confirm = await Swal.fire({
+      title: "Deseja sair?",
+      text: "Você será desconectado da sua conta.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sim, sair",
+      cancelButtonText: "Cancelar",
+    });
+
+    if (confirm.isConfirmed) {
+      localStorage.removeItem("token");
+      await Swal.fire({
+        icon: "success",
+        title: "Sessão encerrada",
+        text: "Você saiu da conta com sucesso.",
+        timer: 1800,
+        showConfirmButton: false,
+      });
+      navigate("/auth");
+    }
+  };
+
   return (
     <nav className="sidebar">
-
       <ul className="sidebarLinks">
         <li>
           <NavLink to="/" end>
-            <FontAwesomeIcon size="lg" icon={fas.faHouse} style={{ marginBottom: "2px"}} />
+            <FontAwesomeIcon
+              size="lg"
+              icon={fas.faHouse}
+              style={{ marginBottom: "2px" }}
+            />
             <span>PÁGINA INICIAL</span>
           </NavLink>
         </li>
 
         <li>
           <NavLink to="/events">
-            <FontAwesomeIcon size="lg" icon={fas.faCalendarWeek} style={{ marginBottom: "1px"}} />
+            <FontAwesomeIcon
+              size="lg"
+              icon={fas.faCalendarWeek}
+              style={{ marginBottom: "1px" }}
+            />
             <span>EVENTOS</span>
           </NavLink>
         </li>
 
         <li>
           <NavLink to="/news">
-            <FontAwesomeIcon size="lg" icon={fas.faNewspaper} style={{ marginBottom: "1px"}} />
+            <FontAwesomeIcon
+              size="lg"
+              icon={fas.faNewspaper}
+              style={{ marginBottom: "1px" }}
+            />
             <span>NOTÍCIAS</span>
           </NavLink>
         </li>
 
         <li>
           <NavLink to="/user">
-            <FontAwesomeIcon size="lg" icon={fas.faUser} style={{ marginBottom: "1px"}} />
-            <span>USUÁRIO</span>
+            <FontAwesomeIcon
+              size="lg"
+              icon={fas.faUser}
+              style={{ marginBottom: "1px" }}
+            />
+            <span>USUÁRIOS</span>
           </NavLink>
         </li>
 
@@ -46,8 +91,8 @@ export default function Sidebar() {
 
       <ul className="logout">
         <li>
-          <NavLink to="/logout">
-            <FontAwesomeIcon size="lg" icon={fas.faRightFromBracket}  />
+          <NavLink to="/auth" onClick={handleLogout}>
+            <FontAwesomeIcon size="lg" icon={fas.faRightFromBracket} />
             <span>SAIR</span>
           </NavLink>
         </li>

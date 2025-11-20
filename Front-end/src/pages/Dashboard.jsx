@@ -27,6 +27,7 @@ export default function Dashboard() {
                 <Sidebar />
                 <div className='dashboard-content'>
                     <div className="main-content">
+                        
                         <Carousel>
                             <Carousel.Item>
                                 <img
@@ -77,9 +78,9 @@ export default function Dashboard() {
                                 <p id='cardType'><FontAwesomeIcon icon={fas.faCalendarDays} />EVENTO</p>
                                 <p>Equipe de Vôlei do Campus Garante Vitória em Jogo Acirrado</p>
                             </div>
+
                         </div>
                     </div>
-
                 </div>
             </div>
         </>

@@ -16,6 +16,7 @@ export default function News() {
             <div className='news-page'>
                 <Sidebar />
                 <div className="news-content">
+
                     <div className="buscar-content">
                         <label htmlFor="buscar"><FontAwesomeIcon
                             icon={fas.faMagnifyingGlass}
@@ -23,6 +24,7 @@ export default function News() {
                         /></label>
                         <input id='buscar' type="text" placeholder="Buscar..." />
                     </div>
+
                     <div className="main-content">
                         <div className="news-card">
                             <img src={news2} alt="" />
@@ -33,7 +35,8 @@ export default function News() {
                             <div className="text"><h4>IFRN Campus Caicó </h4><p>Caicó chega ao 1° lugar em campeonato de futebol estadual</p></div>
                         </div>
                     </div>
-                    <div className="cards">
+
+                    <div className="sliding-cards">
                         <div className="news-card">
                             <img src={news1} alt="" />
                             <div className="text"><h4>Negão</h4><p>Jogando bola</p></div>
@@ -49,6 +52,17 @@ export default function News() {
                         <div className="news-card">
                             <img src={news1} alt="" />
                             <div className="text"><h4>Negão</h4><p>Jogando bola</p></div>
+                        </div>
+                    </div>
+
+                    <div className="bottom-content">
+                        <div className="news-card">
+                            <img src={news2} alt="" />
+                            <div className="text"><h4>IFRN Campus Caicó </h4><p>Caicó chega ao 1° lugar em campeonato de futebol estadual</p></div>
+                        </div>
+                        <div className="news-card">
+                            <img src={news2} alt="" />
+                            <div className="text"><h4>IFRN Campus Caicó </h4><p>Caicó chega ao 1° lugar em campeonato de futebol estadual</p></div>
                         </div>
                     </div>
                 </div>

@@ -17,12 +17,15 @@ export default function News() {
                 <Sidebar />
                 <div className="news-content">
 
-                    <div className="buscar-content">
+                    <div className="news-nav">
+                        <div className="buscar-content">
                         <label htmlFor="buscar"><FontAwesomeIcon
                             icon={fas.faMagnifyingGlass}
                             className="input-icon"
                         /></label>
                         <input id='buscar' type="text" placeholder="Buscar..." />
+                    </div>
+                    <button>+ Adicionar notícia</button>
                     </div>
 
                     <div className="main-content">

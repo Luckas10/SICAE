@@ -19,6 +19,21 @@
     padding: 0% 2%;
 }
 
+.news-nav{
+    display: flex;
+}
+.news-nav button{
+    width: 15%;
+    background-color: white;
+    color: #0D4F1D;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+}
+.news-nav button:hover{
+    padding: 0.5%;
+}
+
 .news-page .buscar-content {
     width: 100%;
     display: flex;

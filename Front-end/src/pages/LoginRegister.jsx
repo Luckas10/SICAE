@@ -5,6 +5,7 @@ import Background from "../components/Background";
 import LoginRegisterContainer from "../components/LoginRegisterContainer";
 import { loginWithPassword, registerUser } from "../services/auth";
 import "../style.css";
+import "./LoginRegister.css";
 
 export function LoginRegister() {
     const [isNight, setIsNight] = useState(false);
@@ -17,18 +18,32 @@ export function LoginRegister() {
 
     const imageSrc = isNight ? "/img/Background.jpg" : "/img/Background.jpg";
 
-    // ---- handlers que chamam a API + SweetAlert ----
     const handleLogin = async ({ email, password }) => {
         try {
             const { access_token } = await loginWithPassword({ email, password });
             localStorage.setItem("token", access_token);
-            await Swal.fire({
+
+            navigate("/");  // primeiro redireciona pro dashboard
+
+            Swal.fire({
                 icon: "success",
-                title: "Login realizado!",
-                text: "Bem-vindo de volta 👋",
-                confirmButtonText: "Continuar",
+                title: "Bem-vindo 👋",
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 3200,              // ⏳ um pouco mais demorado
+                timerProgressBar: true,
+                showClass: {
+                    popup: "swal2-animate-toast-in",   // animação de entrada
+                },
+                hideClass: {
+                    popup: "swal2-animate-toast-out",  // animação de saída
+                },
+                didOpen: (toast) => {
+                    toast.addEventListener("mouseenter", Swal.stopTimer);
+                    toast.addEventListener("mouseleave", Swal.resumeTimer);
+                },
             });
-            navigate("/events");
         } catch (err) {
             const msg =
                 err?.response?.data?.detail ||
@@ -41,9 +56,12 @@ export function LoginRegister() {
         }
     };
 
-    const handleRegister = async ({ full_name, email, password }) => {
+
+
+
+    const handleRegister = async ({ username, email, password }) => {
         try {
-            await registerUser({ full_name, email, password });
+            await registerUser({ username, email, password });
             await Swal.fire({
                 icon: "success",
                 title: "Conta criada!",
@@ -52,6 +70,7 @@ export function LoginRegister() {
             });
             // opcional: automaticamente alternar para o formulário de login
             // ou navegar de volta para /login
+            navigate('/login')
         } catch (err) {
             const msg =
                 err?.response?.data?.detail ||

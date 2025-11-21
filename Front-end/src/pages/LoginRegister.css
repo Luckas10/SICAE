@@ -1,165 +1,161 @@
-/* === Tema ESCURO (base verde profunda + destaque vinho) === */
-:root {
-    /* vidros / overlays (caixa grande e cartões) */
-    --glass-bg: rgba(10, 54, 36, 0.58);
-    /* verde escuro translúcido */
-    --glass-card: rgba(8, 46, 31, 0.30);
-    /* variante um pouco mais escura */
-
-    /* textos */
-    --text: #F2F7F4;
-    /* quase branco, levemente esverdeado */
-    --text-muted: #C8D7CF;
-    /* cinza/verde suave para textos secundários */
-
-    /* cor de destaque (botões/links/hover) */
-    --primary: #A21D22;
-    /* vermelho vinho (combina com a medalha/faixa) */
-
-    /* inputs e bordas */
-    --input-border: #AFC6BA;
-    /* cinza-esverdeado claro para contraste no dark */
-
-    /* botões genéricos (se usar variáveis em outros pontos) */
-    --btn-bg: #A21D22;
-    /* botão primário vinho */
-    --btn-fg: #FFFFFF;
-    --btn-hover: #7F171B;
-    /* vinho mais fechado no hover */
+/* ===========================
+   SWEETALERT2 – BASE POPUP
+   =========================== */
+.swal2-popup {
+    background: linear-gradient(to bottom, #053407 0, #031205 50%);
+    border-radius: 18px;
+    border: 1px solid #0D4F1D;
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.75);
+    padding: 1.8rem 2.4rem;
+    font-family: "Inter", sans-serif;
 }
 
-/* === Tema CLARO (fundos claros com leve tom de verde) === */
-:root[data-theme="light"] {
-    --glass-bg: rgba(255, 255, 255, 0.70);
-    /* vidro claro, mantém o blur ao fundo */
-    --glass-card: rgba(255, 255, 255, 0.40);
+/* TÍTULO */
+.swal2-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #ffffff;
+}
 
-    --text: #143D2A;
-    /* verde bem escuro para textos */
-    --text-muted: #5E796C;
-    /* verde acinzentado para secundários */
+/* TEXTO */
+.swal2-html-container {
+    font-size: 0.95rem;
+    color: #d9d67b;
+}
 
-    --primary: #9B1C20;
-    /* vinho consistente com o dark */
-
-    --input-border: #3D5B4C;
-    /* borda mais escura no claro */
-
-    --btn-bg: #143D2A;
-    /* botão escuro no tema claro */
-    --btn-fg: #FFFFFF;
-    --btn-hover: #0F2E20;
-    /* hover um tom mais fechado */
+/* BACKDROP (FUNDO ESCURECIDO) */
+.swal2-backdrop-show {
+    background: rgba(4, 6, 15, 0.78);
 }
 
 
-/* transições suaves ao trocar de tema */
-.box,
-.carousel,
-.heading h2,
-.logo h4,
-.toggle,
-.input-field,
-.labelLoginContainer,
-.sign-btn,
-.bullets span.active {
-    transition: color .25s ease, background-color .25s ease, border-color .25s ease, filter .25s ease;
+/* ===========================
+   AÇÕES E BOTÕES
+   =========================== */
+
+/* CONTAINER DOS BOTÕES */
+.swal2-actions {
+    gap: 0.75rem;
+    margin-top: 1.6rem;
 }
 
-
-body,
-html {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    width: 100vw;
-    height: 100vh;
-    overflow: auto;
-}
-
-.app-background {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    overflow: hidden;
-}
-
-.bg-video {
-    position: absolute;
-    inset: 0;
-    /* cobre toda a tela */
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    /* mantém proporção */
-    z-index: -1;
-    /* fica atrás */
-    filter: blur(2px);
-    /* opcional */
-}
-
-.app-content {
-    position: relative;
-    z-index: 1;
-    /* garante que o conteúdo fique por cima */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-}
-
-.ib-shell {
-    position: relative;
-    width: 100%;
-    min-height: 100vh;
-    overflow: hidden;
-}
-
-.ib-media {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    /* evita “bordas” quando blur > 0 */
-    transform: scale(1.02);
-    filter: blur(var(--ib-blur)) brightness(calc(1 - var(--ib-dark)));
-    z-index: 0;
-    pointer-events: none;
-    background: #000;
-    /* fallback */
-}
-
-.ib-content {
-    position: relative;
-    z-index: 1;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    /* opcional: centraliza por padrão */
+/* ESTILO BASE DOS BOTÕES */
+.swal2-confirm,
+.swal2-cancel {
+    display: inline-flex;
     align-items: center;
     justify-content: center;
+    min-width: 130px;
+    font-size: 0.9rem;
+    border-radius: 999px;
+    padding: 0.65rem 1.9rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    transition:
+        transform 0.14s ease,
+        box-shadow 0.18s ease,
+        background-color 0.18s ease,
+        border-color 0.18s ease,
+        color 0.18s ease;
+}
+
+/* BOTÃO PRINCIPAL (CONFIRMAR) */
+.swal2-confirm {
+    background: linear-gradient(135deg, #E3B52E, #eee958);
+    border: none;
+    color: #ffffff;
+    box-shadow: 0 0px 40px rgba(140, 158, 52, 0.55);
+}
+
+.swal2-confirm:hover {
+    filter: brightness(1.06);
+    transform: translateY(-1px) scale(1.01);
+}
+
+/* BOTÃO CANCELAR */
+.swal2-cancel {
+    background: #18192f;
+    color: #d3d6ff;
+    border: 1px solid #343866;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45);
+}
+
+.swal2-cancel:hover {
+    background: #202342;
+    border-color: #4a4dff;
+    transform: translateY(-1px);
+}
+
+/* FOCUS BONITO / ACESSIBILIDADE */
+.swal2-confirm:focus-visible,
+.swal2-cancel:focus-visible {
+    outline: 2px solid #6b6eff;
+    outline-offset: 2px;
 }
 
 
-@media (max-width: 850px) {
+/* ===========================
+   TOAST / LOGIN “BEM-VINDO”
+   =========================== */
 
-    html,
-    body {
-        overflow: auto;
-        /* ou 'visible' */
-        height: auto;
-        /* deixa crescer com o conteúdo */
+.swal2-toast {
+    border-radius: 999px;
+    background: #111632;
+    border: 1px solid #273568;
+    color: #e4e7ff;
+}
+
+/* BARRA DE TEMPO DO TOAST */
+.swal2-timer-progress-bar {
+    background: linear-gradient(90deg, #4A4DFF, #6A7CFF);
+    height: 4px !important;
+    border-radius: 10px;
+}
+
+/* ANIMAÇÕES DE ENTRADA/SAÍDA DO TOAST */
+@keyframes toast-in {
+    from {
+        opacity: 0;
+        transform: translateY(-12px) translateX(8px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) translateX(0) scale(1);
     }
 }
 
-@media (max-width: 530px) {
-
-    html,
-    body {
-        overflow: auto;
-        /* ou 'visible' */
-        height: auto;
-        /* deixa crescer com o conteúdo */
+@keyframes toast-out {
+    from {
+        opacity: 1;
+        transform: translateY(0) translateX(0) scale(1);
     }
+
+    to {
+        opacity: 0;
+        transform: translateY(-8px) translateX(6px) scale(0.97);
+    }
+}
+
+.swal2-animate-toast-in {
+    animation: toast-in 0.35s ease-out both;
+}
+
+.swal2-animate-toast-out {
+    animation: toast-out 0.28s ease-in both;
+}
+
+
+/* ===========================
+VARIAÇÃO POR TEMA (LIGHT/DARK)
+=========================== */
+
+:root[data-theme="light"] .swal2-popup {
+    background: #ffffff;
+    color: #101225;
+}
+
+:root[data-theme="dark"] .swal2-popup {
+    background: linear-gradient(to bottom, #032504 0, #031205 50%); /*0D4F1D E3B52E */
+    color: #e4e7ff;
 }

@@ -5,6 +5,7 @@ import Dashboard from './pages/Dashboard.jsx';
 import News from './pages/News.jsx';
 import Profile from './pages/Profile.jsx';
 import Settings from './pages/Settings.jsx';
+import AddNews from "./pages/addNews.jsx";
 
 function App() {
 
@@ -18,6 +19,8 @@ function App() {
           <Route path="/news" element={<News />} />
           <Route path="/user" element={<Profile />} />
           <Route path="/settings" element={<Settings />} />
+          <Route path="/news/add" element={<AddNews />} />
+
         </Routes>
       </Router>
     </>

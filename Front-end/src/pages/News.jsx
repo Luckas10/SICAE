@@ -1,5 +1,6 @@
 
 import './News.css';
+import { NavLink } from "react-router-dom";
 import Header from '../components/Header.jsx'
 import Sidebar from '../components/Sidebar.jsx';
 import news1 from '../assets/news1.jpg';
@@ -24,8 +25,9 @@ export default function News() {
                             className="input-icon"
                         /></label>
                         <input id='buscar' type="text" placeholder="Buscar..." />
+                        
                     </div>
-                    <button>+ Adicionar notícia</button>
+                    <NavLink to="./add" id='buttonAdd'><button>+ Adicionar notícia</button></NavLink>
                     </div>
 
                     <div className="main-content">

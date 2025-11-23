@@ -1,27 +1,32 @@
 import axios from "axios";
 
 const api = axios.create({
-    baseURL: import.meta.env.VITE_API_URL || "http://localhost:5000",
-    headers: { "Content-Type": "application/json" },
+    baseURL: "http://127.0.0.1:8000",
 });
 
-api.interceptors.request.use((config) => {
-    const token = localStorage.getItem("token");
-    if (token) config.headers.Authorization = `Bearer ${token}`;
-    return config;
-});
+api.interceptors.request.use(
+    (config) => {
+        const token = localStorage.getItem("token");
 
-// derruba no 401/403
-api.interceptors.response.use(
-    (res) => res,
-    (error) => {
-        if (error?.response?.status === 401 || error?.response?.status === 403) {
-            localStorage.removeItem("token");
-            // não temos navigate aqui; redireciono "bruto"
-            if (window.location.pathname !== "/auth") {
-                window.location.replace("/auth");
-            }
+        if (token) {
+            config.headers.Authorization = `Bearer ${token}`;
         }
+
+        return config;
+    },
+    (error) => Promise.reject(error)
+);
+
+api.interceptors.response.use(
+    (response) => response,
+    (error) => {
+        if (error.response?.status === 401) {
+            console.warn("Token expirou ou não foi enviado — deslogando...");
+
+            localStorage.removeItem("token");
+            window.location.href = "/auth";
+        }
+
         return Promise.reject(error);
     }
 );

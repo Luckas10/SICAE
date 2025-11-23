@@ -154,7 +154,7 @@ div:where(.swal2-icon).swal2-success [class^=swal2-success-line] {
 
 /* BOTÃO CONFIRMAR – padrão (vermelho, tema claro) */
 .swal2-confirm {
-    background: linear-gradient(135deg, #df1411, #550606);
+    background: linear-gradient(135deg, #df1411, #ff3e3e);
     border: none;
     color: #ffffff;
     box-shadow: 0 0px 450px rgba(166, 10, 10, 0.55);
@@ -176,24 +176,42 @@ div:where(.swal2-icon).swal2-success [class^=swal2-success-line] {
 }
 
 .error-alert .swal2-confirm {
-    background: linear-gradient(135deg, #df1411, #550606) !important;
+    background: linear-gradient(135deg, #df1411, #aa0e1a) !important;
     border: none;
     color: #ffffff;
     box-shadow: 0 0 30px rgba(166, 10, 10, 0.55);
 }
 
-/* 🌿 SUCESSO – predominante verde (igual nos dois temas, a não ser que você mude depois) */
+/* 🌿 SUCESSO – TEMA CLARO
+   Fundo branco, texto/ícone/botão em #0D4F1D
+*/
 .success-alert {
-    background: linear-gradient(to bottom, #033d0d 0%, #022707 60%);
+    background: #ffffff;
     border: 1px solid #0D4F1D !important;
-    box-shadow: 0 2px 45px rgba(13, 79, 29, 0.4);
+    box-shadow: 0 2px 45px rgba(13, 79, 29, 0.25);
 }
 
+/* Título e texto (tema claro) */
 .success-alert .swal2-title,
 .success-alert .swal2-html-container {
-    color: #aee8ad !important;
+    color: #0D4F1D !important;
 }
 
+/* Ícone de sucesso (tema claro) dentro do popup success-alert */
+.success-alert div:where(.swal2-icon).swal2-success {
+    border-color: #0D4F1D;
+    color: #0D4F1D;
+}
+
+.success-alert div:where(.swal2-icon).swal2-success .swal2-success-ring {
+    border: .25em solid #0D4F1D;
+}
+
+.success-alert div:where(.swal2-icon).swal2-success [class^=swal2-success-line] {
+    background-color: #0D4F1D;
+}
+
+/* Botão confirmar (tema claro) */
 .success-alert .swal2-confirm {
     background: linear-gradient(135deg, #0D4F1D, #1f8a2b) !important;
     border: none;
@@ -269,7 +287,7 @@ div:where(.swal2-icon).swal2-success [class^=swal2-success-line] {
     background-color: #E3B52E;
 }
 
-/* ÍCONE DE SUCESSO – tema escuro (dourado) */
+/* ÍCONE DE SUCESSO – tema escuro (dourado) genérico */
 :root[data-theme="dark"] div:where(.swal2-icon).swal2-success .swal2-success-ring {
     border: .25em solid #E3B52E;
 }
@@ -294,7 +312,7 @@ div:where(.swal2-icon).swal2-success [class^=swal2-success-line] {
 }
 
 :root[data-theme="dark"] .logout-alert .swal2-confirm {
-    background: linear-gradient(135deg, #E3B52E, #b79525) !important;
+    background: linear-gradient(135deg, #E3B52E, #eee958 90%) !important;
     border: none;
     color: #ffffff;
     box-shadow: 0 0 25px rgba(227, 181, 46, 0.4);
@@ -321,7 +339,47 @@ div:where(.swal2-icon).swal2-success [class^=swal2-success-line] {
 }
 
 :root[data-theme="dark"] .error-alert .swal2-confirm {
-    background: linear-gradient(135deg, #E3B52E, #c6a234) !important;
+    background: linear-gradient(135deg, #E3B52E, #eee958 90%) !important;
+    border: none !important;
+    color: #ffffff !important;
+    box-shadow: 0 0 25px rgba(227, 181, 46, 0.35) !important;
+}
+
+/* ===========================
+   SUCCESS ALERT – TEMA ESCURO
+   =========================== */
+
+/* Fundo escuro mantendo o estilo do tema dark,
+   com ícone, texto e botão em #E3B52E */
+:root[data-theme="dark"] .success-alert {
+    background: linear-gradient(to top, #032504 0, #023404 50%);
+    border: 1px solid #E3B52E !important;
+    box-shadow: 0 2px 80px rgba(227, 181, 46, 0.25) !important;
+}
+
+/* Título e texto (tema escuro) */
+:root[data-theme="dark"] .success-alert .swal2-title,
+:root[data-theme="dark"] .success-alert .swal2-html-container {
+    color: #E3B52E !important;
+}
+
+/* Ícone de sucesso (tema escuro) dentro do popup success-alert */
+:root[data-theme="dark"] .success-alert div:where(.swal2-icon).swal2-success {
+    border-color: #E3B52E;
+    color: #E3B52E;
+}
+
+:root[data-theme="dark"] .success-alert div:where(.swal2-icon).swal2-success .swal2-success-ring {
+    border: .25em solid #E3B52E;
+}
+
+:root[data-theme="dark"] .success-alert div:where(.swal2-icon).swal2-success [class^=swal2-success-line] {
+    background-color: #E3B52E;
+}
+
+/* Botão confirmar (tema escuro) */
+:root[data-theme="dark"] .success-alert .swal2-confirm {
+    background: linear-gradient(135deg, #E3B52E, #eee958 90%) !important;
     border: none !important;
     color: #ffffff !important;
     box-shadow: 0 0 25px rgba(227, 181, 46, 0.35) !important;

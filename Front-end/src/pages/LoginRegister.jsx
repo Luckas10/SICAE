@@ -9,8 +9,9 @@ import "./Swal.css";
 
 export function LoginRegister() {
     const [isNight, setIsNight] = useState(false);
-    const toggleTheme = () => setIsNight((v) => !v);
     const navigate = useNavigate();
+
+    const toggleTheme = () => setIsNight((v) => !v);
 
     useEffect(() => {
         document.documentElement.setAttribute(
@@ -19,18 +20,17 @@ export function LoginRegister() {
         );
     }, [isNight]);
 
-    const imageSrc = isNight ? "/img/Background.jpg" : "/img/Background.jpg";
+    const imageSrc = "/img/Background.jpg";
 
     const handleLogin = async ({ email, password }) => {
         try {
             const { access_token } = await loginWithPassword({ email, password });
+
             localStorage.setItem("token", access_token);
 
-            navigate("/");
-
-            Swal.fire({
+            await Swal.fire({
                 icon: "success",
-                title: "Bem-vindo 👋",
+                title: "Bem-vindo!",
                 toast: true,
                 position: "top-end",
                 showConfirmButton: false,
@@ -39,25 +39,17 @@ export function LoginRegister() {
                 customClass: {
                     popup: "success-alert",
                 },
-                showClass: {
-                    popup: "swal2-animate-toast-in",
-                },
-                hideClass: {
-                    popup: "swal2-animate-toast-out",
-                },
-                didOpen: (toast) => {
-                    toast.addEventListener("mouseenter", Swal.stopTimer);
-                    toast.addEventListener("mouseleave", Swal.resumeTimer);
-                },
             });
+
+            navigate("/");
         } catch (err) {
             const msg =
                 err?.response?.data?.detail ||
-                "Não foi possível fazer login. Verifique suas credenciais.";
+                "Não foi possível entrar. Verifique suas credenciais.";
 
             await Swal.fire({
                 icon: "error",
-                title: "Falha no login",
+                title: "Erro ao entrar",
                 text: Array.isArray(msg) ? msg.join("\n") : msg,
                 customClass: {
                     popup: "error-alert",
@@ -68,7 +60,7 @@ export function LoginRegister() {
 
     const handleRegister = async ({ full_name, email, password }) => {
         try {
-            await registerUser({ username: full_name, email, password });
+            await registerUser({ full_name, email, password });
 
             await Swal.fire({
                 icon: "success",

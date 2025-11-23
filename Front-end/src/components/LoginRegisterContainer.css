@@ -236,16 +236,13 @@ form.sign-up-form {
     color: #E3B52E;
 }
 
-
 :root[data-theme="light"] .labelLoginContainer {
     color: #5d5e5d;
 }
 
-
 :root[data-theme="dark"] .labelLoginContainer {
     color: #ffffff;
 }
-
 
 :root[data-theme="light"] .input-field.active+.labelLoginContainer {
     color: #0D4F1D;

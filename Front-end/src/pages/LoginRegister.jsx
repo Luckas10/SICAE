@@ -5,7 +5,7 @@ import Background from "../components/Background";
 import LoginRegisterContainer from "../components/LoginRegisterContainer";
 import { loginWithPassword, registerUser } from "../services/auth";
 import "../style.css";
-import "./LoginRegister.css";
+import "./Swal.css";
 
 export function LoginRegister() {
     const [isNight, setIsNight] = useState(false);
@@ -13,7 +13,10 @@ export function LoginRegister() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        document.documentElement.setAttribute("data-theme", isNight ? "dark" : "light");
+        document.documentElement.setAttribute(
+            "data-theme",
+            isNight ? "dark" : "light"
+        );
     }, [isNight]);
 
     const imageSrc = isNight ? "/img/Background.jpg" : "/img/Background.jpg";
@@ -23,7 +26,7 @@ export function LoginRegister() {
             const { access_token } = await loginWithPassword({ email, password });
             localStorage.setItem("token", access_token);
 
-            navigate("/");  // primeiro redireciona pro dashboard
+            navigate("/");
 
             Swal.fire({
                 icon: "success",
@@ -31,13 +34,16 @@ export function LoginRegister() {
                 toast: true,
                 position: "top-end",
                 showConfirmButton: false,
-                timer: 3200,              // ⏳ um pouco mais demorado
+                timer: 3200,
                 timerProgressBar: true,
+                customClass: {
+                    popup: "success-alert",
+                },
                 showClass: {
-                    popup: "swal2-animate-toast-in",   // animação de entrada
+                    popup: "swal2-animate-toast-in",
                 },
                 hideClass: {
-                    popup: "swal2-animate-toast-out",  // animação de saída
+                    popup: "swal2-animate-toast-out",
                 },
                 didOpen: (toast) => {
                     toast.addEventListener("mouseenter", Swal.stopTimer);
@@ -48,37 +54,45 @@ export function LoginRegister() {
             const msg =
                 err?.response?.data?.detail ||
                 "Não foi possível fazer login. Verifique suas credenciais.";
+
             await Swal.fire({
                 icon: "error",
                 title: "Falha no login",
                 text: Array.isArray(msg) ? msg.join("\n") : msg,
+                customClass: {
+                    popup: "error-alert",
+                },
             });
         }
     };
 
-
-
-
-    const handleRegister = async ({ username, email, password }) => {
+    const handleRegister = async ({ full_name, email, password }) => {
         try {
-            await registerUser({ username, email, password });
+            await registerUser({ username: full_name, email, password });
+
             await Swal.fire({
                 icon: "success",
                 title: "Conta criada!",
                 text: "Você já pode entrar com seu e-mail e senha.",
                 confirmButtonText: "Beleza",
+                customClass: {
+                    popup: "success-alert",
+                },
             });
-            // opcional: automaticamente alternar para o formulário de login
-            // ou navegar de volta para /login
-            navigate('/login')
+
+            navigate("/auth");
         } catch (err) {
             const msg =
                 err?.response?.data?.detail ||
                 "Não foi possível criar a conta. Tente novamente.";
+
             await Swal.fire({
                 icon: "error",
                 title: "Erro ao registrar",
                 text: Array.isArray(msg) ? msg.join("\n") : msg,
+                customClass: {
+                    popup: "error-alert",
+                },
             });
         }
     };

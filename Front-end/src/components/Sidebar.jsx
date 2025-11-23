@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 import Swal from "sweetalert2";
 import "./Sidebar.css";
+import "../pages/Swal.css"
 
 export default function Sidebar() {
   const navigate = useNavigate();
@@ -15,10 +16,11 @@ export default function Sidebar() {
       text: "Você será desconectado da sua conta.",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
       confirmButtonText: "Sim, sair",
       cancelButtonText: "Cancelar",
+      customClass: {
+        popup: "logout-alert",
+      },
     });
 
     if (confirm.isConfirmed) {
@@ -29,6 +31,9 @@ export default function Sidebar() {
         text: "Você saiu da conta com sucesso.",
         timer: 1800,
         showConfirmButton: false,
+        customClass: {
+          popup: "success-alert",
+        },
       });
       navigate("/auth");
     }

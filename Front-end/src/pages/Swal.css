@@ -1,0 +1,328 @@
+/* ===========================
+   BASE (PADRÃO = TEMA CLARO)
+   =========================== */
+
+.swal2-popup {
+    background: #ffffff;
+    border-radius: 18px;
+    border: 1px solid #aa0e1a;
+    box-shadow: 0 2px 45px rgba(116, 10, 10, 0.5);
+    padding: 1.8rem 2.4rem;
+    font-family: "Inter", sans-serif;
+    opacity: 0.98;
+}
+
+div:where(.swal2-icon).swal2-warning {
+    border-color: #E3B52E;
+    color: #E3B52E;
+}
+
+/* ÍCONE DE ERRO – padrão vermelho */
+div:where(.swal2-icon).swal2-error {
+    border-color: #aa0e1a;
+    color: #aa0e1a;
+}
+
+div:where(.swal2-icon).swal2-error [class^=swal2-x-mark-line] {
+    background-color: #aa0e1a;
+}
+
+/* ÍCONE DE SUCESSO – borda/linhas padrão (verde escuro) */
+div:where(.swal2-icon).swal2-success .swal2-success-ring {
+    border: .25em solid #0D4F1D;
+}
+
+div:where(.swal2-icon).swal2-success [class^=swal2-success-line] {
+    background-color: #0D4F1D;
+}
+
+/* TEXTO / CONTEÚDO */
+.swal2-html-container {
+    font-size: 0.95rem;
+    color: #aa0e1a;
+}
+
+/* TÍTULO */
+.swal2-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #aa0e1a;
+}
+
+/* BACKDROP (fundo escurecido) */
+.swal2-backdrop-show {
+    background: rgba(4, 6, 15, 0.78);
+}
+
+/* BOTÕES E AÇÕES */
+.swal2-confirm:hover {
+    filter: brightness(1.06);
+    transform: translateY(-1px) scale(1.01);
+}
+
+.swal2-actions {
+    gap: 0.75rem;
+    margin-top: 1.6rem;
+}
+
+.swal2-confirm,
+.swal2-cancel {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 130px;
+    font-size: 0.9rem;
+    border-radius: 999px;
+    padding: 0.65rem 1.9rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    transition:
+        transform 0.14s ease,
+        box-shadow 0.18s ease,
+        background-color 0.18s ease,
+        border-color 0.18s ease,
+        color 0.18s ease;
+}
+
+/* BOTÃO CANCELAR – padrão */
+.swal2-cancel {
+    background: #18192f;
+    color: #ffffff;
+    border: 1px solid #343866;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45);
+}
+
+.swal2-cancel:hover {
+    background: #202342;
+    border-color: #5cff4a;
+    transform: translateY(-1px);
+}
+
+/* FOCUS VISUAL */
+.swal2-confirm:focus-visible,
+.swal2-cancel:focus-visible {
+    outline: 2px solid #6b6eff;
+    outline-offset: 2px;
+}
+
+/* TOAST */
+.swal2-toast {
+    border-radius: 999px;
+    background: #111632;
+    border: 1px solid #273568;
+    color: #e4e7ff;
+}
+
+.swal2-timer-progress-bar {
+    background: linear-gradient(90deg, #4A4DFF, #6A7CFF);
+    height: 4px !important;
+    border-radius: 10px;
+}
+
+/* ANIMAÇÕES DOS TOASTS */
+@keyframes toast-in {
+    from {
+        opacity: 0;
+        transform: translateY(-12px) translateX(8px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) translateX(0) scale(1);
+    }
+}
+
+@keyframes toast-out {
+    from {
+        opacity: 1;
+        transform: translateY(0) translateX(0) scale(1);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(-8px) translateX(6px) scale(0.97);
+    }
+}
+
+.swal2-animate-toast-in {
+    animation: toast-in 0.35s ease-out both;
+}
+
+.swal2-animate-toast-out {
+    animation: toast-out 0.28s ease-in both;
+}
+
+/* BOTÃO CONFIRMAR – padrão (vermelho, tema claro) */
+.swal2-confirm {
+    background: linear-gradient(135deg, #df1411, #550606);
+    border: none;
+    color: #ffffff;
+    box-shadow: 0 0px 450px rgba(166, 10, 10, 0.55);
+}
+
+/* =======================================================
+   ESTILOS POR TIPO DE ALERTA (PADRÃO = TEMA CLARO)
+   ======================================================= */
+
+/* 🔴 ERRO – predominante vermelho (tema claro) */
+.error-alert {
+    border: 1px solid #aa0e1a !important;
+    box-shadow: 0 2px 450px rgba(170, 14, 26, 0.3);
+}
+
+.error-alert .swal2-title,
+.error-alert .swal2-html-container {
+    color: #aa0e1a !important;
+}
+
+.error-alert .swal2-confirm {
+    background: linear-gradient(135deg, #df1411, #550606) !important;
+    border: none;
+    color: #ffffff;
+    box-shadow: 0 0 30px rgba(166, 10, 10, 0.55);
+}
+
+/* 🌿 SUCESSO – predominante verde (igual nos dois temas, a não ser que você mude depois) */
+.success-alert {
+    background: linear-gradient(to bottom, #033d0d 0%, #022707 60%);
+    border: 1px solid #0D4F1D !important;
+    box-shadow: 0 2px 45px rgba(13, 79, 29, 0.4);
+}
+
+.success-alert .swal2-title,
+.success-alert .swal2-html-container {
+    color: #aee8ad !important;
+}
+
+.success-alert .swal2-confirm {
+    background: linear-gradient(135deg, #0D4F1D, #1f8a2b) !important;
+    border: none;
+    color: #ffffff;
+    box-shadow: 0 0 35px rgba(50, 170, 80, 0.5);
+}
+
+/* =======================================================
+   POPUP DE CONFIRMAÇÃO DE LOGOUT (logout-alert) – padrão
+   ======================================================= */
+
+/* 🌞 Padrão (= tema claro) — tom alaranjado */
+.logout-alert {
+    background: linear-gradient(to bottom, #fff7f2 0%, #ffece0 60%);
+    border: 1px solid #E36E1E !important;
+    box-shadow: 0 2px 45px rgba(227, 110, 30, 0.35);
+}
+
+.logout-alert .swal2-title {
+    color: #E36E1E !important;
+}
+
+.logout-alert .swal2-html-container {
+    color: #E36E1E !important;
+}
+
+.logout-alert .swal2-confirm {
+    background: linear-gradient(135deg, #E36E1E, #b04811) !important;
+    border: none;
+    color: #ffffff;
+    box-shadow: 0 0 25px rgba(227, 110, 30, 0.45);
+}
+
+.logout-alert .swal2-cancel {
+    background: #f1f1f1 !important;
+    color: #444 !important;
+    border: 1px solid #ccc !important;
+}
+
+/* ===========================
+   OVERRIDES – TEMA ESCURO
+   =========================== */
+
+:root[data-theme="dark"] .swal2-popup {
+    background: linear-gradient(to top, #032504 0, #023404 50%);
+    border: 1px solid rgba(227, 181, 46, 0.3);
+    box-shadow: 0 2px 450px rgba(227, 181, 46, 0.3);
+}
+
+:root[data-theme="dark"] .swal2-title {
+    color: #E3B52E;
+}
+
+:root[data-theme="dark"] .swal2-html-container {
+    color: #E3B52E;
+}
+
+/* BOTÃO CONFIRMAR – tema escuro (dourado) */
+:root[data-theme="dark"] .swal2-confirm {
+    background: linear-gradient(135deg, #E3B52E, #eee958 90%);
+    border: none;
+    color: #ffffff;
+    box-shadow: 0 0px 40px rgba(140, 158, 52, 0.55);
+}
+
+/* ÍCONE DE ERRO – tema escuro (dourado) */
+:root[data-theme="dark"] div:where(.swal2-icon).swal2-error {
+    border-color: #E3B52E;
+    color: #E3B52E;
+}
+
+:root[data-theme="dark"] div:where(.swal2-icon).swal2-error [class^=swal2-x-mark-line] {
+    background-color: #E3B52E;
+}
+
+/* ÍCONE DE SUCESSO – tema escuro (dourado) */
+:root[data-theme="dark"] div:where(.swal2-icon).swal2-success .swal2-success-ring {
+    border: .25em solid #E3B52E;
+}
+
+:root[data-theme="dark"] div:where(.swal2-icon).swal2-success [class^=swal2-success-line] {
+    background-color: #E3B52E;
+}
+
+/* LOGOUT-ALERT – tema escuro */
+:root[data-theme="dark"] .logout-alert {
+    background: linear-gradient(to bottom, #241a03 0%, #1a1202 60%);
+    border: 1px solid #E3B52E !important;
+    box-shadow: 0 2px 45px rgba(227, 181, 46, 0.35);
+}
+
+:root[data-theme="dark"] .logout-alert .swal2-title {
+    color: #E3B52E !important;
+}
+
+:root[data-theme="dark"] .logout-alert .swal2-html-container {
+    color: #E3B52E !important;
+}
+
+:root[data-theme="dark"] .logout-alert .swal2-confirm {
+    background: linear-gradient(135deg, #E3B52E, #b79525) !important;
+    border: none;
+    color: #ffffff;
+    box-shadow: 0 0 25px rgba(227, 181, 46, 0.4);
+}
+
+:root[data-theme="dark"] .logout-alert .swal2-cancel {
+    background: #ffffff !important;
+    color: #E3B52E !important;
+    border: 1px solid #E3B52E !important;
+}
+
+/* ===========================
+   ERROR ALERT – TEMA ESCURO
+   =========================== */
+
+:root[data-theme="dark"] .error-alert {
+    border: 1px solid #E3B52E !important;
+    box-shadow: 0 2px 80px rgba(227, 181, 46, 0.25) !important;
+}
+
+:root[data-theme="dark"] .error-alert .swal2-title,
+:root[data-theme="dark"] .error-alert .swal2-html-container {
+    color: #E3B52E !important;
+}
+
+:root[data-theme="dark"] .error-alert .swal2-confirm {
+    background: linear-gradient(135deg, #E3B52E, #c6a234) !important;
+    border: none !important;
+    color: #ffffff !important;
+    box-shadow: 0 0 25px rgba(227, 181, 46, 0.35) !important;
+}

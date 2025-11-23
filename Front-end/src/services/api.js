@@ -20,15 +20,26 @@ api.interceptors.request.use(
 api.interceptors.response.use(
     (response) => response,
     (error) => {
-        if (error.response?.status === 401) {
+        const status = error.response?.status;
+        const originalRequest = error.config;
+
+        // Só redireciona se NÃO for o endpoint de login
+        if (
+            status === 401 &&
+            !originalRequest?.url?.includes("/auth/token")
+        ) {
             console.warn("Token expirou ou não foi enviado — deslogando...");
 
             localStorage.removeItem("token");
-            window.location.href = "/auth";
+
+            if (window.location.pathname !== "/auth") {
+                window.location.href = "/auth";
+            }
         }
 
         return Promise.reject(error);
     }
 );
+
 
 export default api;

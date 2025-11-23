@@ -6,6 +6,7 @@ import News from './pages/News.jsx';
 import Profile from './pages/Profile.jsx';
 import Settings from './pages/Settings.jsx';
 import AddNews from "./pages/addNews.jsx";
+import AddEvent from "./pages/addEvent.jsx";
 
 function App() {
 
@@ -20,6 +21,8 @@ function App() {
           <Route path="/user" element={<Profile />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/news/add" element={<AddNews />} />
+          <Route path="/events/add" element={<AddEvent />} />
+
 
         </Routes>
       </Router>

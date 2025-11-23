@@ -193,7 +193,7 @@
     
     
 }
-.addNews-content form select,input,textarea{
+.addNews-content form select,.addNews-content input,.addNews-content textarea{
     width: 120%;
     border-radius: 8px;
     border: 1px solid grey;

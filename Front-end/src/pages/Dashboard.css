@@ -149,7 +149,7 @@
 
 .dashboard-page .cards {
     display: flex;
-    justify-content: space-between;
+    gap: 2%;
     padding-top: 50px;
     flex-wrap: wrap;
 }

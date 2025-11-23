@@ -4,7 +4,6 @@ import Sidebar from '../components/Sidebar.jsx';
 import Carousel from 'react-bootstrap/Carousel';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { library } from '@fortawesome/fontawesome-svg-core'
 
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import { far } from '@fortawesome/free-regular-svg-icons'
@@ -54,7 +53,7 @@ export default function Dashboard() {
                         <div className="card">
                             <img src={card1} />
                             <div className='cardText'>
-                                <p id='cardType'><FontAwesomeIcon icon={fas.faCalendarDays} />EVENTO</p>
+                                <p id='cardType'><FontAwesomeIcon icon={fas.faCalendarWeek} />EVENTO</p>
                                 <p>Equipe de Vôlei do Campus Garante Vitória em Jogo Acirrado</p>
                             </div>
                         </div>
@@ -68,14 +67,14 @@ export default function Dashboard() {
                         <div className="card">
                             <img src={card3} />
                             <div className='cardText'>
-                                <p id='cardType'><FontAwesomeIcon icon={fas.faCalendarDays} />EVENTO</p>
+                                <p id='cardType'><FontAwesomeIcon icon={fas.faCalendarWeek} />EVENTO</p>
                                 <p>Treinador Ricardo Anuncia Novo Cursinho de Futsal para Iniciantes e Atletas em Formação</p>
                             </div>
                         </div>
                         <div className="card">
                             <img src={card1} />
                             <div className='cardText'>
-                                <p id='cardType'><FontAwesomeIcon icon={fas.faCalendarDays} />EVENTO</p>
+                                <p id='cardType'><FontAwesomeIcon icon={fas.faCalendarWeek} />EVENTO</p>
                                 <p>Equipe de Vôlei do Campus Garante Vitória em Jogo Acirrado</p>
                             </div>
 

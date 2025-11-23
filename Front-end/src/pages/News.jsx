@@ -48,15 +48,15 @@ export default function News() {
                         </div>
                         <div className="news-card">
                             <img src={news1} alt="" />
-                            <div className="text"><h4>IFRN Campus Caicó consegue </h4><p>1° lugar em campeonato de futebol estadual</p></div>
+                            <div className="text"><h4>Pelézinho </h4><p>Soccer</p></div>
                         </div>
                         <div className="news-card">
                             <img src={news1} alt="" />
-                            <div className="text"><h4>IFRN Campus Caicó consegue </h4><p>1° lugar em campeonato de futebol estadual</p></div>
+                            <div className="text"><h4>E aí negão </h4><p>Veio se entregar?</p></div>
                         </div>
                         <div className="news-card">
                             <img src={news1} alt="" />
-                            <div className="text"><h4>Negão</h4><p>Jogando bola</p></div>
+                            <div className="text"><h4>Jô Soares</h4><p>The noite</p></div>
                         </div>
                     </div>
 

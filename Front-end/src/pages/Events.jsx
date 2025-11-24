@@ -3,6 +3,7 @@ import Header from '../components/Header.jsx'
 import Sidebar from '../components/Sidebar.jsx';
 import event1 from '../assets/event1.png'
 import news1 from '../assets/news1.jpg'
+import { NavLink } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { fas } from "@fortawesome/free-solid-svg-icons";
@@ -23,6 +24,7 @@ export default function Events() {
                         <img src={event1} alt="" />
                         <img src={event1} alt="" />
                     </div>
+                    <NavLink to="./add" id='buttonAdd'><button>+ Adicionar evento</button></NavLink>
                     <div className="cards">
                         <div className="event-card">
                             <img src={news1} alt="" />

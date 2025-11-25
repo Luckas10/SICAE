@@ -10,8 +10,8 @@ import Settings from "./pages/Settings.jsx";
 import AddNews from "./pages/addNews.jsx";
 import AddEvent from "./pages/addEvent.jsx";
 import EventDetails from "./pages/EventDetails.jsx";
-import Athletes from "./pages/Athletes.jsx";
 import EventGame from "./pages/EventGame.jsx";
+import Athletes from "./pages/Athletes.jsx";
 
 import ProtectedRoute from "./routes/ProtectedRoute.jsx";
 import PublicRoute from "./routes/PublicRoute.jsx";
@@ -24,7 +24,7 @@ export default function App() {
           <Route path="/auth" element={<LoginRegister />} />
         </Route>
 
-        <Route element={<ProtectedRoute />}/>
+        <Route element={<ProtectedRoute />}>
           <Route path="/" element={<Dashboard />} />
           <Route path="/events" element={<Events />} />
           <Route path="/events/add" element={<AddEvent />} />
@@ -33,10 +33,8 @@ export default function App() {
           <Route path="/news/add" element={<AddNews />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/settings" element={<Settings />} />
-          <Route path="/athletes" element={<Athletes/>}> 
-          <Route path="/events/games" element={<EventGame/>} />
-          
-
+          <Route path="events/games" element={<EventGame/>}> </Route>
+          <Route path="/athletes" element={<Athletes/>}> </Route>
         </Route>
       </Routes>
     </Router>

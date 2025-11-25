@@ -1,0 +1,97 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+.atletas-page {
+    display: block;
+    padding-left: 15%;
+    padding-top: calc(9.5vh + 20px);
+    min-height: 100vh;
+}
+
+.atletas-page a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.atletas-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 2% 0%;
+}
+
+.atletas-content .atletas-nav{
+    width: 80%;
+    
+}
+
+.atletas-page .buscar-content {
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.atletas-page .buscar-content #buscar {
+    width: 100%;
+    margin-left: 5%;
+    position: relative;
+    height: 40px;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    padding: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.atletas-page .buscar-content label {
+    position: relative;
+    left: 4%;
+}
+.atletas-page  h1{
+    font-size: 26px;
+    font-weight: 800;
+    color: #0D4F1D;
+    line-height: 1.2;
+    margin-left: 48%;
+    margin-top: 3%;
+    margin-bottom: 3%;
+}
+
+.atletas-page .main-content{
+    display: flex;
+  
+    width: 80%;
+    margin-left: 10%;
+    
+    justify-content: center;
+   
+   
+    flex-wrap: wrap;
+    gap: 15px;
+   
+
+}
+.atletas-page .main-content div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+    width: 10%;
+    
+}
+
+.atletas-page .main-content div img{
+    display: flex;
+    border-radius: 50%;
+    
+    width: 100px;
+    height:100px;
+    
+    
+}

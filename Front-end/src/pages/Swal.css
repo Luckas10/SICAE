@@ -12,7 +12,12 @@
     opacity: 0.98;
 }
 
-div:where(.swal2-icon).swal2-warning {
+:root[data-theme="light"] div:where(.swal2-icon).swal2-warning {
+    border-color: #E36E1E;
+    color: #E36E1E;
+}
+
+:root[data-theme="dark"] div:where(.swal2-icon).swal2-warning {
     border-color: #E3B52E;
     color: #E3B52E;
 }
@@ -247,7 +252,7 @@ div:where(.swal2-icon).swal2-success [class^=swal2-success-line] {
 
 .logout-alert .swal2-cancel {
     background: #f1f1f1 !important;
-    color: #444 !important;
+    color: #E36E1E !important;
     border: 1px solid #ccc !important;
 }
 

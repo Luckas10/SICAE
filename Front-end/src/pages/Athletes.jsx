@@ -1,4 +1,4 @@
-import "./Atletas.css";
+import "./Athletes.css";
 import Header from "../components/general/Header.jsx";
 import Sidebar from "../components/general/Sidebar.jsx";
 
@@ -6,14 +6,14 @@ import test from "../assets/eventsIcons/event1.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 
-export default function Atletas() {
+export default function Athletes() {
 
     return (
         <>
             <Header />
-            <div className="atletas-page">
+            <div className="athletes-page">
                 <Sidebar />
-                <div className="atletas-content">
+                <div className="athletes-content">
                     <div className="search-bar">
                         <FontAwesomeIcon icon={fas.faMagnifyingGlass} className="search-icon" />
                         <input
@@ -23,7 +23,7 @@ export default function Atletas() {
                         />
                     </div>
                     <h1 className="title">Atletas</h1>
-                    <div className="atletas-grid">
+                    <div className="athletes-grid">
                         {Array.from({ length: 22 }).map((_, i) => (
                             <div className="atleta-card" key={i}>
                                 <img src={test} alt="atleta" />

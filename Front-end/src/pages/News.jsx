@@ -13,8 +13,6 @@ import BottomCard from '../components/news/BottomCard.jsx';
 
 export default function News() {
 
-    
-
     return (
         <>
             <Header />
@@ -24,17 +22,16 @@ export default function News() {
 
                     <div className="news-nav">
                         <div className="buscar-content">
-                        <label htmlFor="buscar"><FontAwesomeIcon
-                            icon={fas.faMagnifyingGlass}
-                            className="input-icon"
-                        /></label>
-                        <input id='buscar' type="text" placeholder="Buscar..." />
-                        
-                    </div>
-                    <NavLink to="./add" id='buttonAdd'><button>+ Adicionar notícia</button></NavLink>
+                            <label htmlFor="buscar"><FontAwesomeIcon
+                                icon={fas.faMagnifyingGlass}
+                                className="input-icon"
+                            /></label>
+                            <input id='buscar' type="text" placeholder="Buscar..." />
+
+                        </div>
+                        <NavLink to="./add" id='buttonAdd'><button>+ Adicionar notícia</button></NavLink>
                     </div>
 
-                    {/* Notícias mais relevantes */}
                     <div className="main-content">
                         <div className="news-card">
                             <img src={news2} alt="" />
@@ -46,22 +43,20 @@ export default function News() {
                         </div>
                     </div>
 
-                    {/* Notícias do centro da página */}
                     <div className="sliding-cards">
-                        <CenterCard/>
-                        <CenterCard/>
-                        <CenterCard/>
-                        <CenterCard/>
+                        <CenterCard />
+                        <CenterCard />
+                        <CenterCard />
+                        <CenterCard />
                     </div>
- 
-                    {/* Notícias mais recentes */}
+
                     <div className="bottom-content">
-                        <BottomCard/>
-                        <BottomCard/>
-                        <BottomCard/>
-                        <BottomCard/>
-                        <BottomCard/>
-                        <BottomCard/>
+                        <BottomCard />
+                        <BottomCard />
+                        <BottomCard />
+                        <BottomCard />
+                        <BottomCard />
+                        <BottomCard />
                     </div>
                 </div>
             </div>

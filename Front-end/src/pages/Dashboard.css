@@ -146,11 +146,10 @@ div.carousel-caption p {
     align-items: center;
 }
 
-
 .cards {
     display: flex;
-    justify-content: space-between;
     padding-top: 50px;
+    gap: 2%;
     flex-wrap: wrap;
 }
 

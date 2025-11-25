@@ -238,6 +238,13 @@ const handleDelete = async () => {
                                 >
                                     Voltar para lista
                                 </button>
+                                <button
+                                    type="button"
+                                    className="event-button-secondary"
+                                    onClick={() => navigate("/events/games")}
+                                >
+                                    Adicionar jogo
+                                </button>
 
                                 <button
                                     type="button"

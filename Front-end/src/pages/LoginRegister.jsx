@@ -28,7 +28,11 @@ export function LoginRegister() {
 
             localStorage.setItem("token", access_token);
 
-            await Swal.fire({
+            // 1) Navega primeiro
+            navigate("/");
+
+            // 2) Dispara o toast sem "await"
+            Swal.fire({
                 icon: "success",
                 title: "Bem-vindo!",
                 toast: true,
@@ -40,8 +44,6 @@ export function LoginRegister() {
                     popup: "success-alert",
                 },
             });
-
-            navigate("/");
         } catch (err) {
             const msg =
                 err?.response?.data?.detail ||
@@ -57,6 +59,7 @@ export function LoginRegister() {
             });
         }
     };
+
 
     const handleRegister = async ({ full_name, email, password }) => {
         try {

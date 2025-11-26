@@ -8,11 +8,13 @@ from models import Event, User
 from routers.auth import get_current_user
 
 class EventCreate(BaseModel):
-    local_id: int
+    local_id: Optional[int] = None
     title: str
-    description: Optional[str]
+    description: Optional[str] = None
     start_date: datetime
     end_date: datetime
+    category: Optional[str] = None
+    cover_image: Optional[str] = None
 
 router = APIRouter(prefix="/events", tags=["Eventos"])
 
@@ -21,16 +23,22 @@ def listar_events(session: SessionDep, current_user: User = Depends(get_current_
     return session.exec(select(Event)).all()
 
 @router.post("", status_code=status.HTTP_201_CREATED)
-def cadastrar_event(event: EventCreate, session: SessionDep, current_user: User = Depends(get_current_user)) -> Event:
+def cadastrar_event(
+    event: EventCreate,
+    session: SessionDep,
+    current_user: User = Depends(get_current_user),
+) -> Event:
     new_event = Event(
-        creator_id = current_user.id,
-        local_id = event.local_id,
-        title = event.title,
-        description = event.description,
-        start_date = event.start_date,
-        end_date = event.end_date
+        creator_id=current_user.id,
+        local_id=event.local_id,
+        title=event.title,
+        description=event.description,
+        start_date=event.start_date,
+        end_date=event.end_date,
+        category=event.category,
+        cover_image=event.cover_image,
     )
-    
+
     session.add(new_event)
     session.commit()
     session.refresh(new_event)

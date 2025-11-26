@@ -33,7 +33,6 @@ class User(SQLModel, table=True):
 
     # relacionamentos
     events: List["Event"] = Relationship(back_populates="creator")
-    initiatives: List["Initiative"] = Relationship(back_populates="creator")
     comments: List["EventComment"] = Relationship(back_populates="author")
     notifications: List["Notification"] = Relationship(back_populates="user")
     forum_threads: List["ForumThread"] = Relationship(back_populates="author")
@@ -73,6 +72,8 @@ class Event(SQLModel, table=True):
     description: Optional[str] = Field(default=None)
     start_date: datetime = Field(nullable=False)
     end_date: datetime = Field(nullable=False)
+    category: Optional[str] = Field(default=None, max_length=50)        # 👈 NOVO
+    cover_image: Optional[str] = Field(default=None)                     # 👈 NOVO (base64 ou URL)
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc), nullable=False)
 
     creator: Optional[User] = Relationship(back_populates="events")
@@ -80,27 +81,6 @@ class Event(SQLModel, table=True):
     comments: List["EventComment"] = Relationship(back_populates="event")
     ratings: List["EventRating"] = Relationship(back_populates="event")
     registrations: List["EventRegistration"] = Relationship(back_populates="event")
-
-
-# ============================================================
-# INICIATIVAS
-# ============================================================
-
-class Initiative(SQLModel, table=True):
-    __tablename__ = "initiatives"
-
-    id: Optional[int] = Field(default=None, primary_key=True)
-    creator_id: int = Field(foreign_key="users.id", nullable=False)
-    title: str = Field(max_length=120, nullable=False)
-    description: Optional[str] = Field(default=None)
-    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc), nullable=False)
-
-    creator: Optional[User] = Relationship(back_populates="initiatives")
-    comments: List["InitiativeComment"] = Relationship(back_populates="initiative")
-    enrollments: List["InitiativeEnrollment"] = Relationship(back_populates="initiative")
-    ratings: List["InitiativeRating"] = Relationship(back_populates="initiative")
-    schedules: List["InitiativeSchedule"] = Relationship(back_populates="initiative")
-
 
 # ============================================================
 # RESERVAS DE LOCAIS
@@ -159,54 +139,6 @@ class EventRegistration(SQLModel, table=True):
     registered_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc), nullable=False)
 
     event: Optional[Event] = Relationship(back_populates="registrations")
-
-
-class InitiativeComment(SQLModel, table=True):
-    __tablename__ = "initiative_comments"
-
-    id: Optional[int] = Field(default=None, primary_key=True)
-    initiative_id: int = Field(foreign_key="initiatives.id", nullable=False)
-    author_id: int = Field(foreign_key="users.id", nullable=False)
-    content: str = Field(nullable=False)
-    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc), nullable=False)
-
-    initiative: Optional[Initiative] = Relationship(back_populates="comments")
-
-
-class InitiativeEnrollment(SQLModel, table=True):
-    __tablename__ = "initiative_enrollments"
-
-    id: Optional[int] = Field(default=None, primary_key=True)
-    initiative_id: int = Field(foreign_key="initiatives.id", nullable=False)
-    user_id: int = Field(foreign_key="users.id", nullable=False)
-    joined_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc), nullable=False)
-
-    initiative: Optional[Initiative] = Relationship(back_populates="enrollments")
-
-
-class InitiativeRating(SQLModel, table=True):
-    __tablename__ = "initiative_ratings"
-
-    id: Optional[int] = Field(default=None, primary_key=True)
-    initiative_id: int = Field(foreign_key="initiatives.id", nullable=False)
-    user_id: int = Field(foreign_key="users.id", nullable=False)
-    score: int = Field(nullable=False)
-    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc), nullable=False)
-
-    initiative: Optional[Initiative] = Relationship(back_populates="ratings")
-
-
-class InitiativeSchedule(SQLModel, table=True):
-    __tablename__ = "initiative_schedule"
-
-    id: Optional[int] = Field(default=None, primary_key=True)
-    initiative_id: int = Field(foreign_key="initiatives.id", nullable=False)
-    weekday: str = Field(max_length=20)
-    start_time: str = Field(max_length=10)
-    end_time: str = Field(max_length=10)
-    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc), nullable=False)
-
-    initiative: Optional[Initiative] = Relationship(back_populates="schedules")
 
 
 # ============================================================

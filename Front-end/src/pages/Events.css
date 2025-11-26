@@ -235,8 +235,6 @@ input[type="file"] {
     cursor: pointer;
 }
 
-
-
 .events-page .cards {
     display: flex;
     flex-wrap: wrap;
@@ -327,10 +325,16 @@ input[type="file"] {
     color: #3E8EFF;
 }
 
+.sportsNewsId:has(.chessIcon),
+.chessIcon {
+    color: #000000;
+}
+
 .sportsNewsId:has(.esportsIcon),
 .esportsIcon {
     color: #4AF956;
 }
+
 
 
 @media (max-width: 900px) {

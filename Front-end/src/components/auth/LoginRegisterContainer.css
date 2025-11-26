@@ -141,29 +141,29 @@ form.sign-up-form {
     transition: 0.4s;
 }
 
-.text {
+.box .text {
     color: #C8D7CF;
     font-size: 0.7rem;
 }
 
-.text a {
+.box .text a {
     margin-left: 4px;
     color: #C8D7CF;
     transition: 0.3s;
 }
 
-:root[data-theme="dark"] .text a:hover {
+:root[data-theme="dark"] .box .text a:hover {
     color: #E3B52E;
 }
 
-:root[data-theme="light"] .text a:hover {
+:root[data-theme="light"] .box .text a:hover {
     color: #5d5e5d;
 }
 
 :root[data-theme="light"] .heading h6,
 :root[data-theme="light"] .labelLoginContainer,
-:root[data-theme="light"] .text,
-:root[data-theme="light"] .text a {
+:root[data-theme="light"] .box .text,
+:root[data-theme="light"] .box .text a {
     color: #0D4F1D;
 }
 

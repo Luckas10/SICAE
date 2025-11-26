@@ -165,7 +165,6 @@
     transition: var(--transition);
 }
 
-/* actions */
 
 .theme-switch__checkbox:checked+.theme-switch__container {
     background-color: var(--container-night-bg);
@@ -200,10 +199,8 @@
     transform: translateY(-50%);
 }
 
-/* só o switch da logo */
 .logo .theme-switch {
     --toggle-size: 14px !important;
-    /* 18px/20px se preferir */
     height: var(--circle-container-diameter);
 }
 
@@ -213,10 +210,8 @@
 
 @media (max-width: 850px) {
 
-    /* só o switch da logo */
     .logo .theme-switch {
         --toggle-size: 10px !important;
-        /* 18px/20px se preferir */
         height: var(--circle-container-diameter);
     }
 

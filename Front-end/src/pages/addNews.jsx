@@ -1,6 +1,6 @@
 import './News.css';
-import Header from '../components/Header.jsx';
-import Sidebar from '../components/Sidebar.jsx';
+import Header from '../components/general/Header.jsx';
+import Sidebar from '../components/general/Sidebar.jsx';
 
 import { useState, useRef } from 'react';
 
@@ -12,13 +12,12 @@ import { faFont, faImage, faIndent, faInfo } from '@fortawesome/free-solid-svg-i
 
 export default function AddNews() {
     const [fileName, setFileName] = useState("");
-    const [imageSrc, setImageSrc] = useState(null); // imagem original
-    const [crop, setCrop] = useState(); // dados do corte
-    const [croppedImageUrl, setCroppedImageUrl] = useState(null); // preview final
+    const [imageSrc, setImageSrc] = useState(null);
+    const [crop, setCrop] = useState();
+    const [croppedImageUrl, setCroppedImageUrl] = useState(null);
 
     const imgRef = useRef(null);
 
-    // Quando o usuário seleciona uma imagem
     const handleFileChange = (e) => {
         const file = e.target.files[0];
         if (!file) return;
@@ -40,9 +39,8 @@ export default function AddNews() {
             };
         };
         reader.readAsDataURL(file);
-    }
+    };
 
-    // gera o preview recortado
     const generateCroppedImg = () => {
         if (!imgRef.current || !crop?.width || !crop?.height) return;
 
@@ -69,7 +67,7 @@ export default function AddNews() {
 
         const base64 = canvas.toDataURL("image/png");
         setCroppedImageUrl(base64);
-    }
+    };
 
     return (
         <>
@@ -82,29 +80,32 @@ export default function AddNews() {
                     <h2>Criar Notícia</h2>
 
                     <form onSubmit={(e) => e.preventDefault()}>
-                        
-                        {/* Título */}
+
                         <label htmlFor="titulo">Título</label>
                         <div className="input-icon">
                             <FontAwesomeIcon icon={faFont} className="icon" />
                             <input type="text" id="titulo" placeholder="Título da notícia" />
                         </div>
 
-                        {/* Upload da capa */}
                         <label>Adicionar capa da notícia</label>
                         <div className="input-icon image-selector-button">
-                            
+
                             <label htmlFor="capa_selector" className="input-label">
-                                <FontAwesomeIcon icon={faImage} className="icon" style={{ color: 'white' }}/>
+                                <FontAwesomeIcon icon={faImage} className="icon" style={{ color: 'white' }} />
                                 Escolher imagem
                             </label>
 
-                            <input type="file" accept="image/*" onChange={handleFileChange} style={{ display: "none" }}/>
+                            <input
+                                id="capa_selector"
+                                type="file"
+                                accept="image/*"
+                                onChange={handleFileChange}
+                                style={{ display: "none" }}
+                            />
                         </div>
 
                         {fileName && <span className="image_name">{fileName}</span>}
 
-                        {/* CROP */}
                         {imageSrc && (
                             <div className="crop-wrapper">
                                 <ReactCrop
@@ -118,7 +119,6 @@ export default function AddNews() {
                             </div>
                         )}
 
-                        {/* preview final recortado */}
                         {croppedImageUrl && (
                             <img
                                 src={croppedImageUrl}
@@ -127,21 +127,18 @@ export default function AddNews() {
                             />
                         )}
 
-                        {/* Conteúdo */}
                         <label htmlFor="conteudo">Conteúdo da notícia</label>
                         <div className="textarea-icon">
-                            <FontAwesomeIcon icon={faIndent} className="icon" style={{marginTop: '0.5rem'}}/>
+                            <FontAwesomeIcon icon={faIndent} className="icon" style={{ marginTop: '0.5rem' }} />
                             <textarea id="conteudo" placeholder="Digite o conteúdo..."></textarea>
                         </div>
 
-                        {/* Informações */}
                         <label htmlFor="info">Informações adicionais</label>
                         <div className="input-icon">
                             <FontAwesomeIcon icon={faInfo} className="icon" />
                             <input type="text" id="info" placeholder="Informações extras" />
                         </div>
 
-                        {/* Esporte */}
                         <label htmlFor="esporte">Esporte</label>
                         <div className="input-icon">
                             <select id="esporte">
@@ -153,7 +150,6 @@ export default function AddNews() {
 
                         <button type="submit">Salvar</button>
                     </form>
-
                 </div>
             </div>
         </>

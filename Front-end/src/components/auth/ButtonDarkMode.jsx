@@ -11,7 +11,7 @@ export default function ButtonDarkMode({ checked, onChange, size = 16 }) {
             />
             <div className="theme-switch__container">
                 <div className="theme-switch__clouds"></div>
-                <div className="theme-switch__stars-container"> {/* svg aqui */} </div>
+                <div className="theme-switch__stars-container"> </div>
                 <div className="theme-switch__circle-container">
                     <div className="theme-switch__sun-moon-container">
                         <div className="theme-switch__moon">

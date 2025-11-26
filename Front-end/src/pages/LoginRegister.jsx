@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import Background from "../components/Background";
-import LoginRegisterContainer from "../components/LoginRegisterContainer";
+import Background from "../components/auth/Background";
+import LoginRegisterContainer from "../components/auth/LoginRegisterContainer";
 import { loginWithPassword, registerUser } from "../services/auth";
 import "../style.css";
-import "./Swal.css";
+import "../components/general/Swal.css";
 
 export function LoginRegister() {
     const [isNight, setIsNight] = useState(false);

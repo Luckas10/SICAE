@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-    baseURL: "http://127.0.0.1:5000",
+    baseURL: "http://127.0.0.1:8000",
 });
 
 api.interceptors.request.use(
@@ -23,7 +23,6 @@ api.interceptors.response.use(
         const status = error.response?.status;
         const originalRequest = error.config;
 
-        // Só redireciona se NÃO for o endpoint de login
         if (
             status === 401 &&
             !originalRequest?.url?.includes("/auth/token")

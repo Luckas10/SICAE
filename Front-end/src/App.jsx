@@ -6,6 +6,8 @@ import Dashboard from "./pages/Dashboard.jsx";
 import News from "./pages/News.jsx";
 import Profile from "./pages/Profile.jsx";
 import Settings from "./pages/Settings.jsx";
+import AddNews from "./pages/addNews.jsx";
+import AddEvent from "./pages/addEvent.jsx";
 
 import ProtectedRoute from "./routes/ProtectedRoute.jsx";
 import PublicRoute from "./routes/PublicRoute.jsx";
@@ -43,10 +45,29 @@ function App() {
         />
 
         <Route
+          path="/events/add"
+          element={
+            <ProtectedRoute>
+              <AddEvent />
+            </ProtectedRoute>
+          }
+        />
+
+
+        <Route
           path="/news"
           element={
             <ProtectedRoute>
               <News />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/news/add"
+          element={
+            <ProtectedRoute>
+              <AddNews />
             </ProtectedRoute>
           }
         />

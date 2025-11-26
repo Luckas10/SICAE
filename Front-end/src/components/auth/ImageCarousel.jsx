@@ -22,7 +22,6 @@ export default function ImageCarousel({
         setCurrent(index);
     };
 
-    // autoplay
     useEffect(() => {
         if (!autoPlay || images.length <= 1) return;
         const id = setInterval(goNext, interval);
@@ -39,7 +38,6 @@ export default function ImageCarousel({
 
     return (
         <div className="newsCarousel">
-            {/* Área de slides */}
             <div
                 className="carousel-track"
                 style={{
@@ -58,21 +56,18 @@ export default function ImageCarousel({
                 ))}
             </div>
 
-            {/* Botão anterior */}
             {showArrows && images.length > 1 && (
                 <button className="carousel-btn carousel-btn-prev" onClick={goPrev} aria-label="Anterior">
                     <span className="carousel-btn-icon">‹</span>
                 </button>
             )}
 
-            {/* Botão próximo */}
             {showArrows && images.length > 1 && (
                 <button className="carousel-btn carousel-btn-next" onClick={goNext} aria-label="Próximo">
                     <span className="carousel-btn-icon">›</span>
                 </button>
             )}
 
-            {/* Indicadores (bolinhas) */}
             {showIndicators && images.length > 1 && (
                 <div className="carousel-indicators">
                     {images.map((_, index) => (

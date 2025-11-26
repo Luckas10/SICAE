@@ -1,6 +1,6 @@
 import './Profile.css';
-import Header from '../components/Header.jsx'
-import Sidebar from '../components/Sidebar.jsx';
+import Header from '../components/general/Header.jsx'
+import Sidebar from '../components/general/Sidebar.jsx';
 
 export default function Profile() {
 

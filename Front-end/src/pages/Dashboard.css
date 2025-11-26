@@ -120,7 +120,6 @@ div.carousel-caption p {
     opacity: 0.8;
     margin-top: 6px;
 
-    /* opcional: deixa a data mais suave */
     color: #f1f1f1;
 }
 
@@ -157,6 +156,13 @@ div.carousel-caption p {
     width: 32%;
     border-radius: 15px 15px 10px 10px;
     margin-bottom: 25px;
+    border: none;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.18);
+    cursor: pointer;
+}
+
+.cards .card:hover {
+    transform: translateY(-3px);
 }
 
 .cards .card img {

@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 import Swal from "sweetalert2";
 import "./Sidebar.css";
-import "../pages/Swal.css"
+import "../general/Swal.css";
 
 export default function Sidebar() {
   const navigate = useNavigate();

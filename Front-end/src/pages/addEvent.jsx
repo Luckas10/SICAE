@@ -1,13 +1,13 @@
 import './Events.css';
-import Header from '../components/Header.jsx';
-import Sidebar from '../components/Sidebar.jsx';
+import Header from '../components/general/Header.jsx';
+import Sidebar from '../components/general/Sidebar.jsx';
 
 import { useState, useRef } from 'react';
 import ReactCrop, { centerCrop, makeAspectCrop } from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFont, faImage, faIndent } from '@fortawesome/free-solid-svg-icons';
+import { faFont, faImage } from '@fortawesome/free-solid-svg-icons';
 
 export default function AddEvent() {
 
@@ -18,7 +18,6 @@ export default function AddEvent() {
 
     const imgRef = useRef(null);
 
-    // Quando o usuário seleciona a imagem
     const handleFileChange = (e) => {
         const file = e.target.files[0];
         if (!file) return;
@@ -43,7 +42,6 @@ export default function AddEvent() {
         reader.readAsDataURL(file);
     };
 
-    // Gera a imagem recortada
     const generateCroppedImg = () => {
         if (!imgRef.current || !crop?.width || !crop?.height) return;
 
@@ -86,32 +84,27 @@ export default function AddEvent() {
 
                         <div className='event-colum'>
 
-                            {/* Título */}
                             <label htmlFor="titulo">Título</label>
                             <div className="input-icon">
                                 <FontAwesomeIcon icon={faFont} className="icon" />
                                 <input type="text" id="titulo" placeholder="Título do evento" />
                             </div>
 
-                            {/* Data */}
                             <label htmlFor="data">Data</label>
                             <div className="input-icon">
                                 <input type="date" id="data" />
                             </div>
 
-                            {/* Horário */}
                             <label htmlFor="hora">Horário</label>
                             <div className="input-icon">
                                 <input type="time" id="hora" />
                             </div>
 
-                            {/* Local */}
                             <label htmlFor="local">Localização</label>
                             <div className="input-icon">
                                 <input type="text" id="local" placeholder="Local do evento" />
                             </div>
 
-                            {/* Upload da capa */}
                             <label>Adicionar capa do evento</label>
                             <div className="input-icon image-selector-button">
 
@@ -131,7 +124,6 @@ export default function AddEvent() {
 
                             {fileName && <span className="image_name">{fileName}</span>}
 
-                            {/* Crop */}
                             {imageSrc && (
                                 <div className="crop-wrapper">
                                     <ReactCrop
@@ -145,7 +137,6 @@ export default function AddEvent() {
                                 </div>
                             )}
 
-                            {/* Preview final */}
                             {croppedImageUrl && (
                                 <img
                                     src={croppedImageUrl}
@@ -154,7 +145,6 @@ export default function AddEvent() {
                                 />
                             )}
 
-                            {/* Categorias */}
                             <label htmlFor="categorias">Categorias</label>
                             <div className="input-icon">
                                 <select name="categorias" id="categorias">
@@ -166,11 +156,7 @@ export default function AddEvent() {
 
                         </div>
 
-                        {/* Coluna 2 */}
                         <div className='event-colum'>
-
-                            {/* Descrição */}
-
                             <div className="textarea-icon">
                                 <label htmlFor="conteudo">Descrição</label>
 
@@ -179,9 +165,8 @@ export default function AddEvent() {
 
                             <div className='event-button'>
                                 <button type="submit">Salvar</button>
-                                <button style={{ backgroundColor: "white", color: "green" }}>Cancelar</button>
+                                <button type="button" style={{ backgroundColor: "white", color: "green" }}>Cancelar</button>
                             </div>
-
                         </div>
 
                     </form>

@@ -1,4 +1,4 @@
-import headerLogo from '../assets/Logotipo-SICAE.png';
+import headerLogo from '../../assets/Logotipo-SICAE.png';
 import './Header.css';
 
 export default function Header() {

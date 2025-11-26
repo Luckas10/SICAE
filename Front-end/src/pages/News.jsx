@@ -1,8 +1,8 @@
 
 import './News.css';
 import { NavLink } from "react-router-dom";
-import Header from '../components/Header.jsx'
-import Sidebar from '../components/Sidebar.jsx';
+import Header from '../components/general/Header.jsx'
+import Sidebar from '../components/general/Sidebar.jsx';
 import news1 from '../assets/news1.jpg';
 import news2 from '../assets/news2.jpeg';
 

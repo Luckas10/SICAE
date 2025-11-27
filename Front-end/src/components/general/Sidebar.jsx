@@ -79,10 +79,10 @@ export default function Sidebar() {
           <NavLink to="/profile">
             <FontAwesomeIcon
               size="lg"
-              icon={fas.faUser}
+              icon={fas.faAddressCard}
               style={{ marginBottom: "1px" }}
             />
-            <span>USUÁRIOS</span>
+            <span>SEU PERFIL</span>
           </NavLink>
         </li>
 

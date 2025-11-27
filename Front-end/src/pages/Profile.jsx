@@ -2,7 +2,8 @@ import './Profile.css';
 import Header from '../components/general/Header.jsx'
 import Sidebar from '../components/general/Sidebar.jsx';
 
-export default function Profile() {
+
+export default function Profile({news2}) {
 
     return (
         <>

@@ -289,7 +289,6 @@ input[type="file"] {
     text-overflow: ellipsis;
 }
 
-
 .sportsNewsId:has(.futsalIcon),
 .futsalIcon {
     color: #369949;
@@ -334,7 +333,6 @@ input[type="file"] {
 .esportsIcon {
     color: #4AF956;
 }
-
 
 
 @media (max-width: 900px) {

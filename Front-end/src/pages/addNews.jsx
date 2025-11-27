@@ -80,7 +80,6 @@ export default function AddNews() {
                     <h2>Criar Notícia</h2>
 
                     <form onSubmit={(e) => e.preventDefault()}>
-
                         <label htmlFor="titulo">Título</label>
                         <div className="input-icon">
                             <FontAwesomeIcon icon={faFont} className="icon" />

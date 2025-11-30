@@ -1,4 +1,3 @@
-// src/pages/EventDetails.jsx
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Header from "../components/general/Header.jsx";
@@ -148,7 +147,6 @@ const handleDelete = async () => {
 
     const cfg = CATEGORY_CONFIG[event.category] || DEFAULT_CATEGORY;
 
-    // formatar data/hora a partir de start_date
     let formattedDate = "";
     let formattedTime = "";
 
@@ -208,7 +206,6 @@ const handleDelete = async () => {
                                     </div>
                                 )}
 
-                                {/* Quando você salvar local no backend, pode trocar isso aqui */}
                                 {event.local_id && (
                                     <div className="event-meta-item">
                                         <span className="event-meta-label">Local</span>

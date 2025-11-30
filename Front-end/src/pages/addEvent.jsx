@@ -2,7 +2,7 @@ import "./Events.css";
 import Header from "../components/general/Header.jsx";
 import Sidebar from "../components/general/Sidebar.jsx";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import ReactCrop, { centerCrop, makeAspectCrop } from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
 
@@ -17,6 +17,7 @@ export default function AddEvent() {
     const [fileName, setFileName] = useState("");
     const [imageSrc, setImageSrc] = useState(null);
     const [crop, setCrop] = useState();
+    const [completedCrop, setCompletedCrop] = useState(null);
     const [croppedImageUrl, setCroppedImageUrl] = useState(null);
 
     const [title, setTitle] = useState("");
@@ -29,6 +30,7 @@ export default function AddEvent() {
     const imgRef = useRef(null);
     const navigate = useNavigate();
 
+    // Quando escolhe o arquivo
     const handleFileChange = (e) => {
         const file = e.target.files[0];
         if (!file) return;
@@ -38,44 +40,68 @@ export default function AddEvent() {
         const reader = new FileReader();
         reader.onload = () => {
             setImageSrc(reader.result);
-
-            const img = new Image();
-            img.src = reader.result;
-            img.onload = () => {
-                const initial = centerCrop(
-                    makeAspectCrop(
-                        { unit: "%", width: 80 },
-                        16 / 9,
-                        img.width,
-                        img.height
-                    ),
-                    img.width,
-                    img.height
-                );
-                setCrop(initial);
-            };
+            // resetar estados de crop
+            setCrop(undefined);
+            setCompletedCrop(null);
+            setCroppedImageUrl(null);
         };
         reader.readAsDataURL(file);
     };
 
-    const generateCroppedImg = () => {
-        if (!imgRef.current || !crop?.width || !crop?.height) return;
+    // Define o crop inicial assim que a imagem realmente carrega no DOM
+    const onImageLoad = (e) => {
+        const { width, height } = e.currentTarget;
+
+        const initial = centerCrop(
+            makeAspectCrop(
+                { unit: "%", width: 90 }, // ocupa 90% da largura
+                16 / 9,
+                width,
+                height
+            ),
+            width,
+            height
+        );
+
+        setCrop(initial);
+        setCompletedCrop(initial);
+    };
+
+    // Gera a imagem cortada com base em um crop específico
+    const generateCroppedImg = (cropToUse) => {
+        if (!imgRef.current || !cropToUse?.width || !cropToUse?.height) return;
+
+        const image = imgRef.current;
+
+        // Escala de naturalWidth / width renderizado
+        const scaleX = image.naturalWidth / image.width;
+        const scaleY = image.naturalHeight / image.height;
+
+        let cropX = cropToUse.x;
+        let cropY = cropToUse.y;
+        let cropWidth = cropToUse.width;
+        let cropHeight = cropToUse.height;
+
+        // Se o crop veio em %, converte para pixels
+        if (cropToUse.unit === "%") {
+            cropX = (cropToUse.x / 100) * image.width;
+            cropY = (cropToUse.y / 100) * image.height;
+            cropWidth = (cropToUse.width / 100) * image.width;
+            cropHeight = (cropToUse.height / 100) * image.height;
+        }
 
         const canvas = document.createElement("canvas");
-        const scaleX = imgRef.current.naturalWidth / imgRef.current.width;
-        const scaleY = imgRef.current.naturalHeight / imgRef.current.height;
-
-        canvas.width = crop.width * scaleX;
-        canvas.height = crop.height * scaleY;
+        canvas.width = cropWidth * scaleX;
+        canvas.height = cropHeight * scaleY;
 
         const ctx = canvas.getContext("2d");
 
         ctx.drawImage(
-            imgRef.current,
-            crop.x * scaleX,
-            crop.y * scaleY,
-            crop.width * scaleX,
-            crop.height * scaleY,
+            image,
+            cropX * scaleX,
+            cropY * scaleY,
+            cropWidth * scaleX,
+            cropHeight * scaleY,
             0,
             0,
             canvas.width,
@@ -86,58 +112,64 @@ export default function AddEvent() {
         setCroppedImageUrl(base64);
     };
 
-const handleSubmit = async (e) => {
-    e.preventDefault();
+    // Sempre que o usuário termina um crop (ou o inicial é setado),
+    // gera a imagem cortada automaticamente — mesmo que ele não mexa no retângulo.
+    useEffect(() => {
+        if (completedCrop?.width && completedCrop?.height) {
+            generateCroppedImg(completedCrop);
+        }
+    }, [completedCrop]);
 
-    try {
-        const safeTime = time || "00:00";
-        const startDateTime = new Date(`${date}T${safeTime}:00`);
-        const endDateTime = startDateTime;
+    const handleSubmit = async (e) => {
+        e.preventDefault();
 
-        const payload = {
-            local_id: null,
-            title,
-            description,
-            start_date: startDateTime.toISOString(),
-            end_date: endDateTime.toISOString(),
-            category,
-            cover_image: croppedImageUrl || null,
-        };
+        try {
+            const safeTime = time || "00:00";
+            const startDateTime = new Date(`${date}T${safeTime}:00`);
+            const endDateTime = startDateTime;
 
-        await api.post("/events", payload);
+            const payload = {
+                local_id: null,
+                title,
+                description,
+                start_date: startDateTime.toISOString(),
+                end_date: endDateTime.toISOString(),
+                category,
+                cover_image: croppedImageUrl || null,
+            };
 
-        navigate("/events");
+            await api.post("/events", payload);
 
-        Swal.fire({
-            icon: "success",
-            title: "Evento criado com sucesso!",
-            toast: true,
-            position: "top-end",
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            customClass: {
-                popup: "success-alert",
-            },
-        });
+            navigate("/events");
 
-    } catch (error) {
-        console.error("Erro ao criar evento:", error);
-        const msg =
-            error?.response?.data?.detail ||
-            "Não foi possível criar o evento. Tente novamente.";
+            Swal.fire({
+                icon: "success",
+                title: "Evento criado com sucesso!",
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                customClass: {
+                    popup: "success-alert",
+                },
+            });
+        } catch (error) {
+            console.error("Erro ao criar evento:", error);
+            const msg =
+                error?.response?.data?.detail ||
+                "Não foi possível criar o evento. Tente novamente.";
 
-        Swal.fire({
-            icon: "error",
-            title: "Erro ao criar evento",
-            text: Array.isArray(msg) ? msg.join("\n") : msg,
-            customClass: {
-                popup: "error-alert",
-            },
-        });
-    }
-};
-
+            Swal.fire({
+                icon: "error",
+                title: "Erro ao criar evento",
+                text: Array.isArray(msg) ? msg.join("\n") : msg,
+                customClass: {
+                    popup: "error-alert",
+                },
+            });
+        }
+    };
 
     const handleCancel = () => {
         navigate("/events");
@@ -225,10 +257,15 @@ const handleSubmit = async (e) => {
                                     <ReactCrop
                                         crop={crop}
                                         onChange={(c) => setCrop(c)}
-                                        onComplete={generateCroppedImg}
+                                        onComplete={(c) => setCompletedCrop(c)}
                                         aspect={16 / 9}
                                     >
-                                        <img ref={imgRef} src={imageSrc} alt="crop-area" />
+                                        <img
+                                            ref={imgRef}
+                                            src={imageSrc}
+                                            alt="crop-area"
+                                            onLoad={onImageLoad}
+                                        />
                                     </ReactCrop>
                                 </div>
                             )}

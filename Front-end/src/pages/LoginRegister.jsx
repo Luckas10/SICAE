@@ -13,13 +13,11 @@ export function LoginRegister() {
     const { theme, toggleTheme, refreshUser } = useUser();
 
     const isNight = theme === "dark";
-
     const imageSrc = "/img/Background.jpg";
 
     const handleLogin = async ({ email, password }) => {
         try {
             const { access_token } = await loginWithPassword({ email, password });
-
             localStorage.setItem("token", access_token);
 
             await refreshUser();
@@ -68,7 +66,6 @@ export function LoginRegister() {
                 },
             });
 
-            navigate("/auth");
         } catch (err) {
             const msg =
                 err?.response?.data?.detail ||

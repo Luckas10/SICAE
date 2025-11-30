@@ -14,6 +14,7 @@ export function UserProvider({ children }) {
 
     useEffect(() => {
         document.documentElement.setAttribute("data-theme", theme);
+        localStorage.setItem("theme", theme);
     }, [theme]);
 
     const fetchCurrentUser = async () => {
@@ -31,13 +32,7 @@ export function UserProvider({ children }) {
             const { data } = await api.get("/users/me");
             setUser(data);
 
-            if (data.theme) {
-                setTheme(data.theme);
-                localStorage.setItem("theme", data.theme);
-            } else {
-                setTheme("light");
-                localStorage.setItem("theme", "light");
-            }
+
         } catch (err) {
             console.error("Erro ao carregar usuário atual:", err);
             setErrorUser(err);
@@ -69,31 +64,21 @@ export function UserProvider({ children }) {
         );
     };
 
-    const updateTheme = async (newTheme) => {
+    const updateTheme = (newTheme) => {
         setTheme(newTheme);
-        localStorage.setItem("theme", newTheme);
-
-        try {
-            await api.put("/users/me/theme", { theme: newTheme });
-            setUser((prev) =>
-                prev ? { ...prev, theme: newTheme } : prev
-            );
-        } catch (err) {
-            console.error("Erro ao atualizar tema do usuário:", err);
-        }
     };
 
     const toggleTheme = () => {
-        const next = theme === "light" ? "dark" : "light";
-        updateTheme(next);
+        setTheme((prev) => (prev === "light" ? "dark" : "light"));
     };
 
     const logout = () => {
         localStorage.removeItem("token");
-        localStorage.removeItem("theme");
         setUser(null);
-        setTheme("light");
-        document.documentElement.setAttribute("data-theme", "light");
+
+        if (window.location.pathname !== "/auth") {
+            window.location.href = "/auth";
+        }
     };
 
     return (

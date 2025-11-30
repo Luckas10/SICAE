@@ -1,29 +1,12 @@
-import { useState, useEffect } from "react";
 import "./Settings.css";
-
 import Header from "../components/general/Header.jsx";
 import Sidebar from "../components/general/Sidebar.jsx";
 import ButtonDarkMode from "../components/auth/ButtonDarkMode.jsx";
+import { useUser } from "../context/UserContext";
 
 export default function Settings() {
-    const [isNight, setIsNight] = useState(false);
-
-    useEffect(() => {
-        const currentTheme =
-            document.documentElement.getAttribute("data-theme") || "light";
-        setIsNight(currentTheme === "dark");
-    }, []);
-
-    const handleToggleTheme = () => {
-        setIsNight((prev) => {
-            const next = !prev;
-            document.documentElement.setAttribute(
-                "data-theme",
-                next ? "dark" : "light"
-            );
-            return next;
-        });
-    };
+    const { theme, toggleTheme } = useUser();
+    const isNight = theme === "dark";
 
     return (
         <>
@@ -56,7 +39,7 @@ export default function Settings() {
                         <div className="theme-switch-wrapper">
                             <ButtonDarkMode
                                 checked={isNight}
-                                onChange={handleToggleTheme}
+                                onChange={toggleTheme}
                                 size={20}
                             />
                         </div>

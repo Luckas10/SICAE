@@ -86,50 +86,58 @@ export default function AddEvent() {
         setCroppedImageUrl(base64);
     };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+const handleSubmit = async (e) => {
+    e.preventDefault();
 
-        try {
-            const safeTime = time || "00:00";
-            const startDateTime = new Date(`${date}T${safeTime}:00`);
-            const endDateTime = startDateTime;
+    try {
+        const safeTime = time || "00:00";
+        const startDateTime = new Date(`${date}T${safeTime}:00`);
+        const endDateTime = startDateTime;
 
-            const payload = {
-                local_id: null,
-                title,
-                description,
-                start_date: startDateTime.toISOString(),
-                end_date: endDateTime.toISOString(),
-                category,
-                cover_image: croppedImageUrl || null,
-                // location ainda não está no modelo; se quiser salvar, adicionamos no backend depois
-            };
+        const payload = {
+            local_id: null,
+            title,
+            description,
+            start_date: startDateTime.toISOString(),
+            end_date: endDateTime.toISOString(),
+            category,
+            cover_image: croppedImageUrl || null,
+        };
 
-            await api.post("/events", payload);
+        await api.post("/events", payload);
 
-            await Swal.fire({
-                icon: "success",
-                title: "Evento criado com sucesso!",
-                toast: true,
-                position: "top-end",
-                showConfirmButton: false,
-                timer: 2500,
-                timerProgressBar: true,
-            });
+        navigate("/events");
 
-            navigate("/events");
-        } catch (error) {
-            console.error("Erro ao criar evento:", error);
-            const msg =
-                error?.response?.data?.detail ||
-                "Não foi possível criar o evento. Tente novamente.";
-            Swal.fire({
-                icon: "error",
-                title: "Erro",
-                text: Array.isArray(msg) ? msg.join("\n") : msg,
-            });
-        }
-    };
+        Swal.fire({
+            icon: "success",
+            title: "Evento criado com sucesso!",
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            customClass: {
+                popup: "success-alert",
+            },
+        });
+
+    } catch (error) {
+        console.error("Erro ao criar evento:", error);
+        const msg =
+            error?.response?.data?.detail ||
+            "Não foi possível criar o evento. Tente novamente.";
+
+        Swal.fire({
+            icon: "error",
+            title: "Erro ao criar evento",
+            text: Array.isArray(msg) ? msg.join("\n") : msg,
+            customClass: {
+                popup: "error-alert",
+            },
+        });
+    }
+};
+
 
     const handleCancel = () => {
         navigate("/events");

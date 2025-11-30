@@ -7,6 +7,7 @@ from database import SessionDep
 from models import Event, User
 from routers.auth import get_current_user
 
+
 class EventCreate(BaseModel):
     local_id: Optional[int] = None
     title: str
@@ -16,18 +17,62 @@ class EventCreate(BaseModel):
     category: Optional[str] = None
     cover_image: Optional[str] = None
 
+
+class EventRead(BaseModel):
+    id: int
+    title: str
+    description: Optional[str] = None
+    start_date: datetime
+    end_date: datetime
+    category: Optional[str] = None
+    cover_image: Optional[str] = None
+    creator_id: int
+    creator_name: str
+
+    class Config:
+        orm_mode = True
+
+
 router = APIRouter(prefix="/events", tags=["Eventos"])
 
-@router.get("")
-def listar_events(session: SessionDep, current_user: User = Depends(get_current_user)) -> List[Event]:
+
+@router.get("", response_model=List[Event])
+def listar_events(
+    session: SessionDep,
+    current_user: User = Depends(get_current_user),
+):
     return session.exec(select(Event)).all()
 
-@router.post("", status_code=status.HTTP_201_CREATED)
+
+@router.get("/{id}", response_model=EventRead)
+def obter_evento(
+    id: int,
+    session: SessionDep,
+    current_user: User = Depends(get_current_user),
+):
+    event = session.get(Event, id)
+    if not event:
+        raise HTTPException(status_code=404, detail="Evento não encontrado.")
+
+    return EventRead(
+        id=event.id,
+        title=event.title,
+        description=event.description,
+        start_date=event.start_date,
+        end_date=event.end_date,
+        category=event.category,
+        cover_image=event.cover_image,
+        creator_id=event.creator_id,
+        creator_name=event.creator.full_name,
+    )
+
+
+@router.post("", status_code=status.HTTP_201_CREATED, response_model=Event)
 def cadastrar_event(
     event: EventCreate,
     session: SessionDep,
     current_user: User = Depends(get_current_user),
-) -> Event:
+):
     new_event = Event(
         creator_id=current_user.id,
         local_id=event.local_id,
@@ -44,8 +89,14 @@ def cadastrar_event(
     session.refresh(new_event)
     return new_event
 
-@router.put("/{id}")
-def atualizar_event(id: int, event_data: Event, session: SessionDep, current_user: User = Depends(get_current_user)) -> Event:
+
+@router.put("/{id}", response_model=Event)
+def atualizar_event(
+    id: int,
+    event_data: Event,
+    session: SessionDep,
+    current_user: User = Depends(get_current_user),
+):
     event = session.exec(select(Event).where(Event.id == id)).one()
     for key, value in event_data.dict(exclude_unset=True).items():
         setattr(event, key, value)
@@ -54,8 +105,13 @@ def atualizar_event(id: int, event_data: Event, session: SessionDep, current_use
     session.refresh(event)
     return event
 
+
 @router.delete("/{id}")
-def deletar_event(id: int, session: SessionDep, current_user: User = Depends(get_current_user)) -> str:
+def deletar_event(
+    id: int,
+    session: SessionDep,
+    current_user: User = Depends(get_current_user),
+):
     event = session.exec(select(Event).where(Event.id == id)).one()
     session.delete(event)
     session.commit()

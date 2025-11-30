@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import Background from "../components/auth/Background";
@@ -7,18 +6,13 @@ import { loginWithPassword, registerUser } from "../services/auth";
 import "../style.css";
 import "../components/general/Swal.css";
 
+import { useUser } from "../context/UserContext";
+
 export function LoginRegister() {
-    const [isNight, setIsNight] = useState(false);
     const navigate = useNavigate();
+    const { theme, toggleTheme, refreshUser } = useUser();
 
-    const toggleTheme = () => setIsNight((v) => !v);
-
-    useEffect(() => {
-        document.documentElement.setAttribute(
-            "data-theme",
-            isNight ? "dark" : "light"
-        );
-    }, [isNight]);
+    const isNight = theme === "dark";
 
     const imageSrc = "/img/Background.jpg";
 
@@ -28,10 +22,10 @@ export function LoginRegister() {
 
             localStorage.setItem("token", access_token);
 
-            // 1) Navega primeiro
+            await refreshUser();
+
             navigate("/");
 
-            // 2) Dispara o toast sem "await"
             Swal.fire({
                 icon: "success",
                 title: "Bem-vindo!",
@@ -59,7 +53,6 @@ export function LoginRegister() {
             });
         }
     };
-
 
     const handleRegister = async ({ full_name, email, password }) => {
         try {

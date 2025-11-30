@@ -5,8 +5,11 @@ import Swal from "sweetalert2";
 import "./Sidebar.css";
 import "./Swal.css";
 
+import { useUser } from "../../context/UserContext";
+
 export default function Sidebar() {
   const navigate = useNavigate();
+  const { logout } = useUser();
 
   const handleLogout = async (event) => {
     event.preventDefault();
@@ -24,7 +27,8 @@ export default function Sidebar() {
     });
 
     if (confirm.isConfirmed) {
-      localStorage.removeItem("token");
+      logout();
+
       await Swal.fire({
         icon: "success",
         title: "Sessão encerrada",
@@ -35,6 +39,7 @@ export default function Sidebar() {
           popup: "success-alert",
         },
       });
+
       navigate("/auth");
     }
   };

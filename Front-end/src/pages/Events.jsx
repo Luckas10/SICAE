@@ -104,7 +104,11 @@ export default function Events() {
                             const cfg = CATEGORY_CONFIG[ev.category] || DEFAULT_CATEGORY;
 
                             return (
-                                <div className="event-card" key={ev.id}>
+                                <NavLink
+                                    to={`/events/${ev.id}`}
+                                    key={ev.id}
+                                    className="event-card"
+                                >
                                     <img
                                         src={ev.cover_image || news1}
                                         alt={ev.title}
@@ -117,10 +121,11 @@ export default function Events() {
                                         {cfg.label}
                                     </p>
                                     <h5>{ev.title}</h5>
-                                </div>
+                                </NavLink>
                             );
                         })}
                     </div>
+
                 </div>
             </div>
 

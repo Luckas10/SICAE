@@ -17,7 +17,7 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    padding: 0% 2%;
+    padding: 0% 8%;
 }
 
 .news-nav {
@@ -78,7 +78,7 @@
     position: absolute;
     bottom: -25px;
     width: 100%;
-    border-bottom: 1px solid #0D4F1D;
+    border-bottom: 1px solid #909090;
     border-top: 10px;
 }
 
@@ -117,7 +117,7 @@
     position: absolute;
     bottom: -25px;
     width: 100%;
-    border-bottom: 1px solid #0D4F1D;
+    border-bottom: 1px solid #909090;
     border-top: 10px;
 }
 
@@ -148,7 +148,7 @@
     position: absolute;
     bottom: -25px;
     width: 100%;
-    border-bottom: 1px solid #0D4F1D;
+    border-bottom: 1px solid #909090;
     border-top: 10px;
 }
 

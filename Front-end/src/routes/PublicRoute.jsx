@@ -1,6 +1,7 @@
-import { Navigate } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 
-export default function PublicRoute({ children, redirectTo = "/" }) {
+export default function PublicRoute({ redirectTo = "/" }) {
     const token = localStorage.getItem("token");
-    return token ? <Navigate to={redirectTo} replace /> : children;
+
+    return token ? <Navigate to={redirectTo} replace /> : <Outlet />;
 }

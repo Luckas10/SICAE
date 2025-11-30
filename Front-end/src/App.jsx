@@ -1,4 +1,6 @@
+// App.jsx
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 import { LoginRegister } from "./pages/LoginRegister.jsx";
 
 import Events from "./pages/Events.jsx";
@@ -12,86 +14,26 @@ import AddEvent from "./pages/addEvent.jsx";
 import ProtectedRoute from "./routes/ProtectedRoute.jsx";
 import PublicRoute from "./routes/PublicRoute.jsx";
 
-function App() {
+export default function App() {
   return (
     <Router>
       <Routes>
+        {/* públicas */}
+        <Route element={<PublicRoute />}>
+          <Route path="/auth" element={<LoginRegister />} />
+        </Route>
 
-        <Route
-          path="/auth"
-          element={
-            <PublicRoute>
-              <LoginRegister />
-            </PublicRoute>
-          }
-        />
-
-        <Route
-          path="/"
-          element={
-            <ProtectedRoute>
-              <Dashboard />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/events"
-          element={
-            <ProtectedRoute>
-              <Events />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/events/add"
-          element={
-            <ProtectedRoute>
-              <AddEvent />
-            </ProtectedRoute>
-          }
-        />
-
-
-        <Route
-          path="/news"
-          element={
-            <ProtectedRoute>
-              <News />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/news/add"
-          element={
-            <ProtectedRoute>
-              <AddNews />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/profile"
-          element={
-            <ProtectedRoute>
-              <Profile />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/settings"
-          element={
-            <ProtectedRoute>
-              <Settings />
-            </ProtectedRoute>
-          }
-        />
+        {/* protegidas */}
+        <Route element={<ProtectedRoute />}>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/events" element={<Events />} />
+          <Route path="/news" element={<News />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/settings" element={<Settings />} />
+          <Route path="/news/add" element={<AddNews />} />
+          <Route path="/events/add" element={<AddEvent />} />
+        </Route>
       </Routes>
     </Router>
   );
 }
-
-export default App;

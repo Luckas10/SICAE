@@ -63,7 +63,7 @@ export function LoginRegister() {
             await Swal.fire({
                 icon: "success",
                 title: "Conta criada!",
-                text: "Já preenchemos o login pra você, é só entrar!",
+                text: "Seus dados já estão preenchidos, é só entrar!",
                 confirmButtonText: "Ir para o login",
                 customClass: {
                     popup: "success-alert",

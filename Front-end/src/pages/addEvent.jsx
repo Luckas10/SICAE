@@ -27,10 +27,11 @@ export default function AddEvent() {
     const [category, setCategory] = useState("futsal");
     const [description, setDescription] = useState("");
 
+    const [isInitiation, setIsInitiation] = useState(false);
+
     const imgRef = useRef(null);
     const navigate = useNavigate();
 
-    // Quando escolhe o arquivo
     const handleFileChange = (e) => {
         const file = e.target.files[0];
         if (!file) return;
@@ -40,7 +41,6 @@ export default function AddEvent() {
         const reader = new FileReader();
         reader.onload = () => {
             setImageSrc(reader.result);
-            // resetar estados de crop
             setCrop(undefined);
             setCompletedCrop(null);
             setCroppedImageUrl(null);
@@ -48,13 +48,12 @@ export default function AddEvent() {
         reader.readAsDataURL(file);
     };
 
-    // Define o crop inicial assim que a imagem realmente carrega no DOM
     const onImageLoad = (e) => {
         const { width, height } = e.currentTarget;
 
         const initial = centerCrop(
             makeAspectCrop(
-                { unit: "%", width: 90 }, // ocupa 90% da largura
+                { unit: "%", width: 90 },
                 16 / 9,
                 width,
                 height
@@ -67,13 +66,11 @@ export default function AddEvent() {
         setCompletedCrop(initial);
     };
 
-    // Gera a imagem cortada com base em um crop específico
     const generateCroppedImg = (cropToUse) => {
         if (!imgRef.current || !cropToUse?.width || !cropToUse?.height) return;
 
         const image = imgRef.current;
 
-        // Escala de naturalWidth / width renderizado
         const scaleX = image.naturalWidth / image.width;
         const scaleY = image.naturalHeight / image.height;
 
@@ -82,7 +79,6 @@ export default function AddEvent() {
         let cropWidth = cropToUse.width;
         let cropHeight = cropToUse.height;
 
-        // Se o crop veio em %, converte para pixels
         if (cropToUse.unit === "%") {
             cropX = (cropToUse.x / 100) * image.width;
             cropY = (cropToUse.y / 100) * image.height;
@@ -112,8 +108,6 @@ export default function AddEvent() {
         setCroppedImageUrl(base64);
     };
 
-    // Sempre que o usuário termina um crop (ou o inicial é setado),
-    // gera a imagem cortada automaticamente — mesmo que ele não mexa no retângulo.
     useEffect(() => {
         if (completedCrop?.width && completedCrop?.height) {
             generateCroppedImg(completedCrop);
@@ -126,16 +120,16 @@ export default function AddEvent() {
         try {
             const safeTime = time || "00:00";
             const startDateTime = new Date(`${date}T${safeTime}:00`);
-            const endDateTime = startDateTime;
 
             const payload = {
                 local_id: null,
                 title,
                 description,
-                start_date: startDateTime.toISOString(),
-                end_date: endDateTime.toISOString(),
+                start_date: `${date}T${safeTime}`,
+                end_date: `${date}T${safeTime}`,
                 category,
                 cover_image: croppedImageUrl || null,
+                is_initiation: isInitiation,
             };
 
             await api.post("/events", payload);
@@ -170,6 +164,7 @@ export default function AddEvent() {
             });
         }
     };
+
 
     const handleCancel = () => {
         navigate("/events");
@@ -297,6 +292,7 @@ export default function AddEvent() {
                                     <option value="esports">E-sports</option>
                                 </select>
                             </div>
+
                         </div>
 
                         <div className="event-colum">
@@ -309,6 +305,18 @@ export default function AddEvent() {
                                     value={description}
                                     onChange={(e) => setDescription(e.target.value)}
                                 ></textarea>
+                            </div>
+
+                            <div className="initiation-flag">
+                                <input
+                                    type="checkbox"
+                                    id="isInitiation"
+                                    checked={isInitiation}
+                                    onChange={(e) => setIsInitiation(e.target.checked)}
+                                />
+                                <label htmlFor="isInitiation">
+                                    Evento de iniciação esportiva
+                                </label>
                             </div>
 
                             <div className="event-button">

@@ -16,6 +16,7 @@ class EventCreate(BaseModel):
     end_date: datetime
     category: Optional[str] = None
     cover_image: Optional[str] = None
+    is_initiation: bool = False
 
 
 class EventRead(BaseModel):
@@ -26,6 +27,7 @@ class EventRead(BaseModel):
     end_date: datetime
     category: Optional[str] = None
     cover_image: Optional[str] = None
+    is_initiation: bool = False
     creator_id: int
     creator_name: str
 
@@ -62,6 +64,7 @@ def obter_evento(
         end_date=event.end_date,
         category=event.category,
         cover_image=event.cover_image,
+        is_initiation=event.is_initiation,
         creator_id=event.creator_id,
         creator_name=event.creator.full_name,
     )
@@ -82,6 +85,7 @@ def cadastrar_event(
         end_date=event.end_date,
         category=event.category,
         cover_image=event.cover_image,
+        is_initiation=event.is_initiation,
     )
 
     session.add(new_event)

@@ -71,6 +71,7 @@ class Event(SQLModel, table=True):
         default_factory=lambda: datetime.now(timezone.utc),
         nullable=False,
     )
+    is_initiation: bool = Field(default=False, nullable=False)
 
     creator: Optional[User] = Relationship(back_populates="events")
     local: Optional[Local] = Relationship(back_populates="events")

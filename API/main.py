@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from database import lifespan
-from routers import users, auth, event_comment, events, places
+from routers import users, auth, event_comment, events, places, news
 
 tags_metadata = [
     {"name": "Usuários", "description": "Gerenciamento de contas de atletas, alunos e professores."},
@@ -29,6 +29,7 @@ app.add_middleware(
 # Registra os routers
 app.include_router(auth.router, tags=["Login"])
 app.include_router(users.router, tags=["Usuários"])
+app.include_router(news.router, tags=["Notícias"])
 app.include_router(events.router, tags=["Eventos"])
 app.include_router(event_comment.router, tags=["Eventos"])
 app.include_router(places.router, tags=["Locais"])

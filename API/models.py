@@ -10,7 +10,6 @@ class Role(str, Enum):
     gestor = "Gestor"
     admin = "Admin"
 
-
 class User(SQLModel, table=True):
     __tablename__ = "users"
 
@@ -21,23 +20,15 @@ class User(SQLModel, table=True):
     password_hash: str = Field(nullable=False)
     profile_image: Optional[str] = Field(default=None)
     theme: str = Field(default="light", max_length=20, nullable=False)
-    created_at: datetime = Field(
-        default_factory=lambda: datetime.now(timezone.utc),
-        nullable=False,
-    )
-    updated_at: datetime = Field(
-        default_factory=lambda: datetime.now(timezone.utc),
-        nullable=False,
-    )
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
     events: List["Event"] = Relationship(back_populates="creator")
     comments: List["EventComment"] = Relationship(back_populates="author")
     notifications: List["Notification"] = Relationship(back_populates="user")
-    forum_threads: List["ForumThread"] = Relationship(back_populates="author")
-    forum_posts: List["ForumPost"] = Relationship(back_populates="author")
-    articles: List["Article"] = Relationship(back_populates="author")
     audit_logs: List["AuditLog"] = Relationship(back_populates="user")
 
+    news_articles: List["NewsArticle"] = Relationship(back_populates="creator")
 
 class Local(SQLModel, table=True):
     __tablename__ = "locals"
@@ -46,31 +37,24 @@ class Local(SQLModel, table=True):
     name: str = Field(max_length=120, nullable=False)
     description: Optional[str] = Field(default=None)
     capacity: int = Field(default=0)
-    created_at: datetime = Field(
-        default_factory=lambda: datetime.now(timezone.utc),
-        nullable=False,
-    )
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
     events: List["Event"] = Relationship(back_populates="local")
     reservations: List["LocalReservation"] = Relationship(back_populates="local")
-
 
 class Event(SQLModel, table=True):
     __tablename__ = "events"
 
     id: Optional[int] = Field(default=None, primary_key=True)
-    creator_id: int = Field(foreign_key="users.id", nullable=False)
+    creator_id: int = Field(foreign_key="users.id")
     local_id: Optional[int] = Field(default=None, foreign_key="locals.id")
-    title: str = Field(max_length=120, nullable=False)
+    title: str = Field(max_length=120)
     description: Optional[str] = Field(default=None)
-    start_date: datetime = Field(nullable=False)
-    end_date: datetime = Field(nullable=False)
+    start_date: datetime = Field()
+    end_date: datetime = Field()
     category: Optional[str] = Field(default=None, max_length=50)
     cover_image: Optional[str] = Field(default=None)
-    created_at: datetime = Field(
-        default_factory=lambda: datetime.now(timezone.utc),
-        nullable=False,
-    )
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
     creator: Optional[User] = Relationship(back_populates="events")
     local: Optional[Local] = Relationship(back_populates="events")
@@ -78,158 +62,124 @@ class Event(SQLModel, table=True):
     ratings: List["EventRating"] = Relationship(back_populates="event")
     registrations: List["EventRegistration"] = Relationship(back_populates="event")
 
-
 class LocalReservation(SQLModel, table=True):
     __tablename__ = "local_reservations"
 
     id: Optional[int] = Field(default=None, primary_key=True)
-    local_id: int = Field(foreign_key="locals.id", nullable=False)
-    user_id: int = Field(foreign_key="users.id", nullable=False)
+    local_id: int = Field(foreign_key="locals.id")
+    user_id: int = Field(foreign_key="users.id")
     purpose: str = Field(max_length=120)
-    start_time: datetime = Field(nullable=False)
-    end_time: datetime = Field(nullable=False)
-    created_at: datetime = Field(
-        default_factory=lambda: datetime.now(timezone.utc),
-        nullable=False,
-    )
+    start_time: datetime
+    end_time: datetime
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
     local: Optional[Local] = Relationship(back_populates="reservations")
     user: Optional[User] = Relationship()
-
 
 class EventComment(SQLModel, table=True):
     __tablename__ = "event_comments"
 
     id: Optional[int] = Field(default=None, primary_key=True)
-    event_id: int = Field(foreign_key="events.id", nullable=False)
-    author_id: int = Field(foreign_key="users.id", nullable=False)
-    content: str = Field(nullable=False)
-    created_at: datetime = Field(
-        default_factory=lambda: datetime.now(timezone.utc),
-        nullable=False,
-    )
+    event_id: int = Field(foreign_key="events.id")
+    author_id: int = Field(foreign_key="users.id")
+    content: str
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
     event: Optional[Event] = Relationship(back_populates="comments")
     author: Optional[User] = Relationship(back_populates="comments")
-
 
 class EventRating(SQLModel, table=True):
     __tablename__ = "event_ratings"
 
     id: Optional[int] = Field(default=None, primary_key=True)
-    event_id: int = Field(foreign_key="events.id", nullable=False)
-    user_id: int = Field(foreign_key="users.id", nullable=False)
-    score: int = Field(nullable=False)
-    created_at: datetime = Field(
-        default_factory=lambda: datetime.now(timezone.utc),
-        nullable=False,
-    )
+    event_id: int = Field(foreign_key="events.id")
+    user_id: int = Field(foreign_key="users.id")
+    score: int
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
     event: Optional[Event] = Relationship(back_populates="ratings")
-
 
 class EventRegistration(SQLModel, table=True):
     __tablename__ = "event_registrations"
 
     id: Optional[int] = Field(default=None, primary_key=True)
-    event_id: int = Field(foreign_key="events.id", nullable=False)
-    user_id: int = Field(foreign_key="users.id", nullable=False)
-    registered_at: datetime = Field(
-        default_factory=lambda: datetime.now(timezone.utc),
-        nullable=False,
-    )
+    event_id: int = Field(foreign_key="events.id")
+    user_id: int = Field(foreign_key="users.id")
+    registered_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
     event: Optional[Event] = Relationship(back_populates="registrations")
-
 
 class Notification(SQLModel, table=True):
     __tablename__ = "notifications"
 
     id: Optional[int] = Field(default=None, primary_key=True)
-    user_id: int = Field(foreign_key="users.id", nullable=False)
-    message: str = Field(nullable=False)
+    user_id: int = Field(foreign_key="users.id")
+    message: str
     is_read: bool = Field(default=False)
-    created_at: datetime = Field(
-        default_factory=lambda: datetime.now(timezone.utc),
-        nullable=False,
-    )
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
     user: Optional[User] = Relationship(back_populates="notifications")
 
-
-class Article(SQLModel, table=True):
-    __tablename__ = "articles"
-
-    id: Optional[int] = Field(default=None, primary_key=True)
-    author_id: int = Field(foreign_key="users.id", nullable=False)
-    title: str = Field(max_length=200, nullable=False)
-    content: str = Field(nullable=False)
-    published_at: datetime = Field(
-        default_factory=lambda: datetime.now(timezone.utc),
-        nullable=False,
-    )
-
-    author: Optional[User] = Relationship(back_populates="articles")
-
-
-class ForumCategory(SQLModel, table=True):
-    __tablename__ = "forum_categories"
+class NewsArticle(SQLModel, table=True):
+    __tablename__ = "news_articles"
 
     id: Optional[int] = Field(default=None, primary_key=True)
-    name: str = Field(max_length=100, nullable=False)
-    description: Optional[str] = Field(default=None)
-    created_at: datetime = Field(
-        default_factory=lambda: datetime.now(timezone.utc),
-        nullable=False,
-    )
+    creator_id: int = Field(foreign_key="users.id")
+    title: str = Field(max_length=120)
+    content: Optional[str] = Field(default=None)
+    add_info: Optional[str] = Field(default=None)
+    category: Optional[str] = Field(default=None, max_length=50)
+    cover_image: Optional[str] = Field(default=None)
+    priority: str = Field(default=None, nullable=False)
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
-    threads: List["ForumThread"] = Relationship(back_populates="category")
+    creator: Optional[User] = Relationship(back_populates="news_articles")
 
+    comments: List["NewsComment"] = Relationship(back_populates="article")
+    ratings: List["NewsRating"] = Relationship(back_populates="article")
+    registrations: List["NewsRegistration"] = Relationship(back_populates="article")
 
-class ForumThread(SQLModel, table=True):
-    __tablename__ = "forum_threads"
-
-    id: Optional[int] = Field(default=None, primary_key=True)
-    category_id: int = Field(foreign_key="forum_categories.id", nullable=False)
-    author_id: int = Field(foreign_key="users.id", nullable=False)
-    title: str = Field(max_length=200, nullable=False)
-    created_at: datetime = Field(
-        default_factory=lambda: datetime.now(timezone.utc),
-        nullable=False,
-    )
-
-    category: Optional[ForumCategory] = Relationship(back_populates="threads")
-    author: Optional[User] = Relationship(back_populates="forum_threads")
-    posts: List["ForumPost"] = Relationship(back_populates="thread")
-
-
-class ForumPost(SQLModel, table=True):
-    __tablename__ = "forum_posts"
+class NewsComment(SQLModel, table=True):
+    __tablename__ = "news_comments"
 
     id: Optional[int] = Field(default=None, primary_key=True)
-    thread_id: int = Field(foreign_key="forum_threads.id", nullable=False)
-    author_id: int = Field(foreign_key="users.id", nullable=False)
-    content: str = Field(nullable=False)
-    created_at: datetime = Field(
-        default_factory=lambda: datetime.now(timezone.utc),
-        nullable=False,
-    )
+    article_id: int = Field(foreign_key="news_articles.id")
+    author_id: int = Field(foreign_key="users.id")
+    content: str
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
-    thread: Optional[ForumThread] = Relationship(back_populates="posts")
-    author: Optional[User] = Relationship(back_populates="forum_posts")
+    article: Optional[NewsArticle] = Relationship(back_populates="comments")
+    author: Optional[User] = Relationship()
 
+class NewsRating(SQLModel, table=True):
+    __tablename__ = "news_ratings"
+
+    id: Optional[int] = Field(default=None, primary_key=True)
+    article_id: int = Field(foreign_key="news_articles.id")
+    user_id: int = Field(foreign_key="users.id")
+    score: int
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+    article: Optional[NewsArticle] = Relationship(back_populates="ratings")
+
+class NewsRegistration(SQLModel, table=True):
+    __tablename__ = "news_registrations"
+
+    id: Optional[int] = Field(default=None, primary_key=True)
+    article_id: int = Field(foreign_key="news_articles.id")
+    user_id: int = Field(foreign_key="users.id")
+    registered_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+    article: Optional[NewsArticle] = Relationship(back_populates="registrations")
 
 class AuditLog(SQLModel, table=True):
     __tablename__ = "audit_log"
 
     id: Optional[int] = Field(default=None, primary_key=True)
-    user_id: int = Field(foreign_key="users.id", nullable=False)
-    action: str = Field(max_length=120, nullable=False)
-    table_name: str = Field(max_length=100, nullable=False)
+    user_id: int = Field(foreign_key="users.id")
+    action: str = Field(max_length=120)
+    table_name: str = Field(max_length=100)
     record_id: Optional[int] = Field(default=None)
-    timestamp: datetime = Field(
-        default_factory=lambda: datetime.now(timezone.utc),
-        nullable=False,
-    )
+    timestamp: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
     user: Optional[User] = Relationship(back_populates="audit_logs")

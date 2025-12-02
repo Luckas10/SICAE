@@ -212,8 +212,6 @@
     width: 15rem;
     height: 40px;
     background-color: #0D4F1D;
-    margin-inline: auto;
-    margin-block: 0.5rem;
     border-radius: 10px;
     color: white;
     border: 1px solid grey;
@@ -315,6 +313,11 @@ input[type="file"] {
     cursor: pointer;
 }
 
+.news-form-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
 
 @media (max-width: 850px) {
     .news-page {

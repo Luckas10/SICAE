@@ -2,7 +2,14 @@ import { useEffect, useRef } from "react";
 import "./LoginRegisterContainer.css";
 import ButtonDarkMode from "./ButtonDarkMode";
 
-export default function LoginRegisterContainer({ isNight, onToggleTheme, onLogin, onRegister }) {
+export default function LoginRegisterContainer({
+    isNight,
+    onToggleTheme,
+    onLogin,
+    onRegister,
+    loginPrefill,
+    forceLoginModeKey,
+}) {
     const mainRef = useRef(null);
     const scopeRef = useRef(null);
 
@@ -57,6 +64,35 @@ export default function LoginRegisterContainer({ isNight, onToggleTheme, onLogin
         };
     }, []);
 
+    useEffect(() => {
+        if (!mainRef.current || !scopeRef.current || !loginPrefill) return;
+
+        const main = mainRef.current;
+        const root = scopeRef.current;
+
+        main.classList.remove("sign-up-mode");
+
+        const loginForm = root.querySelector("form.sign-in-form");
+        if (!loginForm) return;
+
+        const emailInput = loginForm.querySelector('input[name="email"]');
+        const passInput = loginForm.querySelector('input[name="password"]');
+
+        if (emailInput) {
+            emailInput.value = loginPrefill.email || "";
+            if (loginPrefill.email) {
+                emailInput.classList.add("active");
+            }
+        }
+
+        if (passInput) {
+            passInput.value = loginPrefill.password || "";
+            if (loginPrefill.password) {
+                passInput.classList.add("active");
+            }
+        }
+    }, [loginPrefill, forceLoginModeKey]);
+
     const handleSignIn = async (e) => {
         e.preventDefault();
         const fd = new FormData(e.currentTarget);
@@ -72,23 +108,15 @@ export default function LoginRegisterContainer({ isNight, onToggleTheme, onLogin
         const full_name = fd.get("full_name")?.toString().trim();
         const email = fd.get("email")?.toString().trim();
         const password = fd.get("password")?.toString();
-        // const confirm_password = fd.get("confirm_password")?.toString();
-
-        // if (password !== confirm_password) {
-        //     alert("As senhas não coincidem.");
-        //     return;
-        // }
 
         if (onRegister) await onRegister({ full_name, email, password });
     };
-
 
     return (
         <main ref={mainRef}>
             <div ref={scopeRef} className="box">
                 <div className="inner-box">
                     <div className="forms-wrap">
-
                         <form autoComplete="off" className="sign-in-form" onSubmit={handleSignIn}>
                             <div className="logo">
                                 <div className="brand">
@@ -189,18 +217,6 @@ export default function LoginRegisterContainer({ isNight, onToggleTheme, onLogin
                                     />
                                     <label className="labelLoginContainer">Senha</label>
                                 </div>
-
-                                {/* <div className="input-wrap">
-                                    <input
-                                        name="confirm_password"
-                                        type="password"
-                                        minLength={4}
-                                        className="input-field"
-                                        autoComplete="off"
-                                        required
-                                    />
-                                    <label className="labelLoginContainer">Confirmar senha</label>
-                                </div> */}
 
                                 <input type="submit" value="Criar conta" className="sign-btn" />
 

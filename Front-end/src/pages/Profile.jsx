@@ -271,6 +271,12 @@ export default function Profile() {
                                 <span className="profile-info-label">Eventos participados</span>
                                 <span className="profile-info-value">777</span>
                             </div>
+                            <div className="profile-info-card">
+                                <span className='profile-info-label'>Status</span>
+                                <span className='profile-info-value'>Aluno</span>
+                            </div>
+                            
+                           
                         </div>
 
                     </div>

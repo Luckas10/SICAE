@@ -92,6 +92,12 @@ export default function Sidebar() {
         </li>
 
         <li>
+          <NavLink to="/atletas">
+            <FontAwesomeIcon size="lg" icon={fas.faMedal} />
+            <span>ATLETAS</span>
+          </NavLink>
+        </li>
+        <li>
           <NavLink to="/settings">
             <FontAwesomeIcon size="lg" icon={fas.faGear} />
             <span>CONFIGURAÇÕES</span>

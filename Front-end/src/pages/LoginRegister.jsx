@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import Background from "../components/auth/Background";
@@ -14,6 +15,9 @@ export function LoginRegister() {
 
     const isNight = theme === "dark";
     const imageSrc = "/img/Background.jpg";
+
+    const [loginPrefill, setLoginPrefill] = useState({ email: "", password: "" });
+    const [forceLoginModeKey, setForceLoginModeKey] = useState(0);
 
     const handleLogin = async ({ email, password }) => {
         try {
@@ -59,13 +63,15 @@ export function LoginRegister() {
             await Swal.fire({
                 icon: "success",
                 title: "Conta criada!",
-                text: "Você já pode entrar com seu e-mail e senha.",
-                confirmButtonText: "Beleza",
+                text: "Seus dados já estão preenchidos, é só entrar!",
+                confirmButtonText: "Ir para o login",
                 customClass: {
                     popup: "success-alert",
                 },
             });
 
+            setLoginPrefill({ email, password });
+            setForceLoginModeKey((k) => k + 1);
         } catch (err) {
             const msg =
                 err?.response?.data?.detail ||
@@ -89,6 +95,8 @@ export function LoginRegister() {
                 onToggleTheme={toggleTheme}
                 onLogin={handleLogin}
                 onRegister={handleRegister}
+                loginPrefill={loginPrefill}
+                forceLoginModeKey={forceLoginModeKey}
             />
         </Background>
     );

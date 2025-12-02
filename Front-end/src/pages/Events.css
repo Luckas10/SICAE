@@ -22,9 +22,8 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
-    padding: 0% 2%;
+    padding: 0 2%;
 }
-
 
 .sports-content {
     display: flex;
@@ -37,7 +36,7 @@
 .sports-content img {
     width: 90px;
     height: 90px;
-    margin: 0px 6px;
+    margin: 0 6px;
     object-fit: cover;
     border-radius: 50%;
     transition: padding 0.15s ease, filter 0.15s ease;
@@ -70,18 +69,16 @@
     color: #0D4F1D;
     font-weight: bold;
     padding: 3%;
-
-
 }
 
 .addEvents-content h2 {
     font-family: "Poppins", sans-serif;
     font-weight: bolder;
     margin-bottom: 5%;
-
 }
 
 .addEvents-content form {
+    max-width: 1000px !important;
     width: 100%;
     height: 100%;
     display: flex;
@@ -99,39 +96,24 @@
 .addEvents-content form .event-colum .event-button {
     display: flex;
     justify-content: space-between;
-
 }
 
-
 .addEvents-content form select,
-.addEvents-content form input,
+.addEvents-content form input:not([type="checkbox"]),
 .addEvents-content form textarea,
 .capa {
     border-radius: 8px;
     border: 1px solid grey;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
-    display: "inline-block";
+    display: inline-block;
     height: 50px;
     margin: 5px 0;
     padding: 10px;
     width: 100%;
-
 }
 
 .addEvents-content #conteudo {
     height: 250px;
-}
-
-.events-content #buttonAdd {
-    margin-top: 50px;
-    align-self: flex-end;
-    width: 15%;
-    height: 40px;
-}
-
-#buttonAdd button {
-    width: 100%;
-    height: 100%;
 }
 
 .addEvents-content form button {
@@ -146,46 +128,20 @@
     box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
 }
 
-.addEvents-content form {
-    max-width: 1000px !important;
-    width: 100%;
-}
-
 .addEvents-content form button:hover {
     filter: brightness(60%);
 }
 
-input[type="file"] {
-    display: none;
-}
-
-.crop-wrapper {
-    align-self: center;
-    margin: 10px 0;
-    max-width: 500px;
-}
-
-.image-selector-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 12rem !important;
+.events-content #buttonAdd {
+    margin-top: 50px;
+    align-self: flex-end;
+    width: 15%;
     height: 40px;
-    background-color: #0D4F1D;
-    margin-inline: auto;
-    margin-block: 0.5rem;
-    border-radius: 10px;
-    color: white;
-    border: 1px solid grey;
-    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
 }
 
-.image-preview {
-    align-self: center;
+#buttonAdd button {
     width: 100%;
-    max-width: 500px;
-    border-radius: 10px;
-    margin-top: 10px;
+    height: 100%;
 }
 
 .input-icon {
@@ -229,14 +185,70 @@ input[type="file"] {
     resize: vertical;
 }
 
+input[type="file"] {
+    display: none;
+}
+
+.image-selector-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 12rem !important;
+    height: 40px;
+    background-color: #0D4F1D;
+    margin-inline: auto;
+    margin-block: 0.5rem;
+    border-radius: 10px;
+    color: white;
+    border: 1px solid grey;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+}
+
+.input-label {
+    margin-left: 35px;
+    cursor: pointer;
+}
+
 .image_name {
     margin-left: 5px;
     font-size: 14px;
     color: #555;
 }
 
-.input-label {
-    margin-left: 35px;
+.crop-wrapper {
+    align-self: center;
+    margin: 10px 0;
+    max-width: 500px;
+}
+
+.image-preview {
+    align-self: center;
+    width: 100%;
+    max-width: 500px;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+.initiation-flag {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: bold;
+    color: #0D4F1D;
+    position: relative;
+    bottom: 10%;
+}
+
+.initiation-flag input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin: 0;
+    box-shadow: none;
+    border-radius: 4px;
+}
+
+.initiation-flag label {
     cursor: pointer;
 }
 
@@ -285,7 +297,6 @@ input[type="file"] {
     font-weight: bold;
     font-size: 18px;
     margin-top: 4px;
-
     display: -webkit-box;
     line-clamp: 4;
     -webkit-line-clamp: 4;
@@ -339,29 +350,6 @@ input[type="file"] {
 .esportsIcon {
     color: #4AF956;
 }
-
-
-@media (max-width: 900px) {
-    .event-card {
-        width: 48%;
-    }
-}
-
-@media (max-width: 600px) {
-    .events-page {
-        padding-left: 0;
-        padding-bottom: 70px;
-    }
-
-    .event-card {
-        width: 100%;
-    }
-}
-
-
-/* ===============================
-   PÁGINA DE DETALHES DO EVENTO
-   =============================== */
 
 .event-details {
     width: 100%;
@@ -519,4 +507,21 @@ input[type="file"] {
     text-align: center;
     color: #0D4F1D;
     font-weight: 600;
+}
+
+@media (max-width: 900px) {
+    .event-card {
+        width: 48%;
+    }
+}
+
+@media (max-width: 600px) {
+    .events-page {
+        padding-left: 0;
+        padding-bottom: 70px;
+    }
+
+    .event-card {
+        width: 100%;
+    }
 }

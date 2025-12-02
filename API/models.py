@@ -54,7 +54,11 @@ class Event(SQLModel, table=True):
     end_date: datetime = Field()
     category: Optional[str] = Field(default=None, max_length=50)
     cover_image: Optional[str] = Field(default=None)
-    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    created_at: datetime = Field(
+        default_factory=lambda: datetime.now(timezone.utc),
+        nullable=False,
+    )
+    is_initiation: bool = Field(default=False, nullable=False)
 
     creator: Optional[User] = Relationship(back_populates="events")
     local: Optional[Local] = Relationship(back_populates="events")

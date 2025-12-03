@@ -275,10 +275,7 @@ export default function Profile() {
                                 <span className='profile-info-label'>Status</span>
                                 <span className='profile-info-value'>Aluno</span>
                             </div>
-                            
-                           
                         </div>
-
                     </div>
                 </div>
             </div>

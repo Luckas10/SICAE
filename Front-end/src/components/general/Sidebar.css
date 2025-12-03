@@ -2,7 +2,7 @@
   position: fixed;
   left: 0;
   top: 9.5vh;
-  height: calc(100vh - 9.5vh);
+  height: calc(100vh - 19vh);
   width: 15%;
   background-color: #0C3617;
   color: #fff;
@@ -31,7 +31,7 @@
 .sidebar a {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   padding: 10px 14px;
   border-radius: 10px;
   text-decoration: none;
@@ -41,7 +41,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 100%;
-  margin-bottom: 30px;
+  margin: 30px 0px;
 }
 
 .sidebar a span {
@@ -107,8 +107,7 @@
   .sidebar {
     width: 70px;
     top: 15vh;
-    height: calc(100vh - 15vh);
-    border-top: none;
+    height: calc(100vh - 24.5vh);
   }
 
   .sidebar a span {
@@ -123,7 +122,7 @@
 @media (max-width: 900px) {
   .sidebar {
     top: 15vh;
-    height: calc(100vh - 15vh);
+    height: calc(100vh - 24.5vh);
   }
 }
 

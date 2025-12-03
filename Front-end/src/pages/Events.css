@@ -123,7 +123,7 @@
 }
 
 .addEvents-content form select,
-.addEvents-content form input:not([type="checkbox"]),
+.addEvents-content form input,
 .addEvents-content form textarea,
 .capa {
     border-radius: 8px;
@@ -136,6 +136,10 @@
     width: 100%;
 }
 
+input#titulo {
+    padding-left: 35px;
+}
+
 .addEvents-content #conteudo {
     height: 250px;
 }
@@ -145,7 +149,7 @@
     height: 40px;
     background-color: #0D4F1D;
     margin-inline: auto;
-    margin-block: 0.5rem;
+    margin-block: 0.1rem;
     border-radius: 10px;
     color: white;
     border: 1px solid grey;
@@ -261,7 +265,6 @@ input[type="file"] {
     font-weight: bold;
     color: #0D4F1D;
     position: relative;
-    bottom: 10%;
 }
 
 .initiation-flag input[type="checkbox"] {

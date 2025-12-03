@@ -2,24 +2,20 @@ import "./Events.css";
 import Header from "../components/general/Header.jsx";
 import Sidebar from "../components/general/Sidebar.jsx";
 
-import { useState, useRef, useEffect } from "react";
-import ReactCrop, { centerCrop, makeAspectCrop } from "react-image-crop";
-import "react-image-crop/dist/ReactCrop.css";
+import { useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFont, faImage } from "@fortawesome/free-solid-svg-icons";
+import { faFont } from "@fortawesome/free-solid-svg-icons";
 
 import { useNavigate } from "react-router-dom";
 import api from "../services/api";
 import Swal from "sweetalert2";
 
-export default function AddEvent() {
-    const [fileName, setFileName] = useState("");
-    const [imageSrc, setImageSrc] = useState(null);
-    const [crop, setCrop] = useState();
-    const [completedCrop, setCompletedCrop] = useState(null);
-    const [croppedImageUrl, setCroppedImageUrl] = useState(null);
+import EventCoverField from "../components/events/addevent/EventCoverField.jsx";
+import EventCategorySelect from "../components/events/addevent/EventCategorySelect.jsx";
+import EventInitiationToggle from "../components/events/addevent/EventInitiationToggle.jsx";
 
+export default function AddEvent() {
     const [title, setTitle] = useState("");
     const [date, setDate] = useState("");
     const [time, setTime] = useState("");
@@ -28,98 +24,15 @@ export default function AddEvent() {
     const [description, setDescription] = useState("");
 
     const [isInitiation, setIsInitiation] = useState(false);
+    const [coverImage, setCoverImage] = useState(null);
 
-    const imgRef = useRef(null);
     const navigate = useNavigate();
-
-    const handleFileChange = (e) => {
-        const file = e.target.files[0];
-        if (!file) return;
-
-        setFileName(file.name);
-
-        const reader = new FileReader();
-        reader.onload = () => {
-            setImageSrc(reader.result);
-            setCrop(undefined);
-            setCompletedCrop(null);
-            setCroppedImageUrl(null);
-        };
-        reader.readAsDataURL(file);
-    };
-
-    const onImageLoad = (e) => {
-        const { width, height } = e.currentTarget;
-
-        const initial = centerCrop(
-            makeAspectCrop(
-                { unit: "%", width: 90 },
-                16 / 9,
-                width,
-                height
-            ),
-            width,
-            height
-        );
-
-        setCrop(initial);
-        setCompletedCrop(initial);
-    };
-
-    const generateCroppedImg = (cropToUse) => {
-        if (!imgRef.current || !cropToUse?.width || !cropToUse?.height) return;
-
-        const image = imgRef.current;
-
-        const scaleX = image.naturalWidth / image.width;
-        const scaleY = image.naturalHeight / image.height;
-
-        let cropX = cropToUse.x;
-        let cropY = cropToUse.y;
-        let cropWidth = cropToUse.width;
-        let cropHeight = cropToUse.height;
-
-        if (cropToUse.unit === "%") {
-            cropX = (cropToUse.x / 100) * image.width;
-            cropY = (cropToUse.y / 100) * image.height;
-            cropWidth = (cropToUse.width / 100) * image.width;
-            cropHeight = (cropToUse.height / 100) * image.height;
-        }
-
-        const canvas = document.createElement("canvas");
-        canvas.width = cropWidth * scaleX;
-        canvas.height = cropHeight * scaleY;
-
-        const ctx = canvas.getContext("2d");
-
-        ctx.drawImage(
-            image,
-            cropX * scaleX,
-            cropY * scaleY,
-            cropWidth * scaleX,
-            cropHeight * scaleY,
-            0,
-            0,
-            canvas.width,
-            canvas.height
-        );
-
-        const base64 = canvas.toDataURL("image/png");
-        setCroppedImageUrl(base64);
-    };
-
-    useEffect(() => {
-        if (completedCrop?.width && completedCrop?.height) {
-            generateCroppedImg(completedCrop);
-        }
-    }, [completedCrop]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         try {
             const safeTime = time || "00:00";
-            const startDateTime = new Date(`${date}T${safeTime}:00`);
 
             const payload = {
                 local_id: null,
@@ -128,7 +41,7 @@ export default function AddEvent() {
                 start_date: `${date}T${safeTime}`,
                 end_date: `${date}T${safeTime}`,
                 category,
-                cover_image: croppedImageUrl || null,
+                cover_image: coverImage || null,
                 is_initiation: isInitiation,
             };
 
@@ -164,7 +77,6 @@ export default function AddEvent() {
             });
         }
     };
-
 
     const handleCancel = () => {
         navigate("/events");
@@ -225,73 +137,20 @@ export default function AddEvent() {
                                 />
                             </div>
 
-                            <label>Adicionar capa do evento</label>
-                            <div className="input-icon image-selector-button">
-                                <label htmlFor="capa_selector" className="input-label">
-                                    <FontAwesomeIcon
-                                        icon={faImage}
-                                        className="icon"
-                                        style={{ color: "white" }}
-                                    />
-                                    Escolher imagem
-                                </label>
+                            <EventCoverField
+                                value={coverImage}
+                                onChange={setCoverImage}
+                            />
 
-                                <input
-                                    id="capa_selector"
-                                    type="file"
-                                    accept="image/*"
-                                    onChange={handleFileChange}
-                                    style={{ display: "none" }}
-                                />
-                            </div>
-
-                            {fileName && <span className="image_name">{fileName}</span>}
-
-                            {imageSrc && (
-                                <div className="crop-wrapper">
-                                    <ReactCrop
-                                        crop={crop}
-                                        onChange={(c) => setCrop(c)}
-                                        onComplete={(c) => setCompletedCrop(c)}
-                                        aspect={16 / 9}
-                                    >
-                                        <img
-                                            ref={imgRef}
-                                            src={imageSrc}
-                                            alt="crop-area"
-                                            onLoad={onImageLoad}
-                                        />
-                                    </ReactCrop>
-                                </div>
-                            )}
-
-                            {croppedImageUrl && (
-                                <img
-                                    src={croppedImageUrl}
-                                    alt="capa do evento cortada"
-                                    className="image-preview"
-                                />
-                            )}
-
-                            <label htmlFor="categorias">Category</label>
-                            <div className="input-icon">
-                                <select
-                                    name="categorias"
-                                    id="categorias"
-                                    value={category}
-                                    onChange={(e) => setCategory(e.target.value)}
-                                >
-                                    <option value="futsal">Futsal</option>
-                                    <option value="basketball">Basquete</option>
-                                    <option value="tabletennis">Tênis de Mesa</option>
-                                    <option value="fighting">Lutas</option>
-                                    <option value="athletics">Atletismo</option>
-                                    <option value="volleyball">Voleibol</option>
-                                    <option value="swimming">Natação</option>
-                                    <option value="chess">Xadrez</option>
-                                    <option value="esports">E-sports</option>
-                                </select>
-                            </div>
+                            <EventCategorySelect
+                                value={category}
+                                onChange={setCategory}
+                            />
+                            
+                            <EventInitiationToggle
+                                checked={isInitiation}
+                                onChange={setIsInitiation}
+                            />
 
                         </div>
 
@@ -307,23 +166,14 @@ export default function AddEvent() {
                                 ></textarea>
                             </div>
 
-                            <div className="initiation-flag">
-                                <input
-                                    type="checkbox"
-                                    id="isInitiation"
-                                    checked={isInitiation}
-                                    onChange={(e) => setIsInitiation(e.target.checked)}
-                                />
-                                <label htmlFor="isInitiation">
-                                    Evento de iniciação esportiva
-                                </label>
-                            </div>
-
                             <div className="event-button">
                                 <button type="submit">Salvar</button>
                                 <button
                                     type="button"
-                                    style={{ backgroundColor: "white", color: "green" }}
+                                    style={{
+                                        backgroundColor: "white",
+                                        color: "green",
+                                    }}
                                     onClick={handleCancel}
                                 >
                                     Cancelar

@@ -6,6 +6,7 @@ from typing import Optional, List
 
 class Role(str, Enum):
     aluno = "Aluno"
+    atleta = "Atleta"
     servidor = "Servidor"
     gestor = "Gestor"
     admin = "Admin"

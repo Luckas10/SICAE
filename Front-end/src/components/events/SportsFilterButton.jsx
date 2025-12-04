@@ -1,11 +1,10 @@
-import eventVolei from "../../assets/eventsIcons/eventVolei.png";
-import eventAtletismo from "../../assets/eventsIcons/eventAtletismo.png";
-import eventBadminton from "../../assets/eventsIcons/eventBadminton.png";
-import eventTenis from "../../assets/eventsIcons/eventTenis.png";
-import eventXadrez from "../../assets/eventsIcons/eventXadrez.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function SportsFilterButton({
     label,
+    image,
+    icon,
+    className,
     isActive,
     onClick,
     alt = "Esporte",
@@ -16,7 +15,15 @@ export default function SportsFilterButton({
             className={`sport-filter-btn ${isActive ? "active" : ""}`}
             onClick={onClick}
         >
-            <img src={eventVolei} alt={alt} />
+            <img src={image} alt={alt} />
+
+            {icon && (
+                <FontAwesomeIcon
+                    icon={icon}
+                    className={className}
+                />
+            )}
+
             <span className="sport-filter-label">{label}</span>
         </button>
     );

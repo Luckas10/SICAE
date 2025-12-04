@@ -1,4 +1,3 @@
-// src/pages/Events.jsx (ou o caminho onde já estava o Events)
 import "./Events.css";
 import Header from "../components/general/Header.jsx";
 import Sidebar from "../components/general/Sidebar.jsx";
@@ -9,6 +8,7 @@ import SportsFilterBar from "../components/events/SportsFilterBar.jsx";
 import AddEventButton from "../components/events/AddEventButton.jsx";
 import EventCard from "../components/events/EventCard.jsx";
 
+
 export default function Events() {
     const [events, setEvents] = useState([]);
     const [activeCategory, setActiveCategory] = useState("all");
@@ -16,20 +16,35 @@ export default function Events() {
     useEffect(() => {
         async function fetchEvents() {
             try {
-                const { data } = await api.get("/events");
-                setEvents(data);
+                const response = await api.get("/events");
+                console.log("Resposta /events:", response.data);
+
+                const raw = response.data;
+
+                const list =
+                    Array.isArray(raw)
+                        ? raw
+                        : Array.isArray(raw.data)
+                            ? raw.data
+                            : Array.isArray(raw.events)
+                                ? raw.events
+                                : [];
+
+                setEvents(list);
             } catch (err) {
                 console.error("Erro ao buscar eventos da API:", err);
+                setEvents([]);
             }
         }
 
         fetchEvents();
     }, []);
 
-    const filteredEvents =
-        activeCategory === "all"
+    const filteredEvents = Array.isArray(events)
+        ? activeCategory === "all"
             ? events
-            : events.filter((ev) => ev.category === activeCategory);
+            : events.filter((ev) => ev.category === activeCategory)
+        : [];
 
     return (
         <>
@@ -55,3 +70,4 @@ export default function Events() {
         </>
     );
 }
+

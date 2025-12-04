@@ -18,10 +18,13 @@ export default function SportsFilterBar({
                 <SportsFilterButton
                     key={key}
                     label={cfg.label}
+                    image={cfg.image}
+                    className={cfg.className}
                     alt={cfg.label}
                     isActive={activeCategory === key}
                     onClick={() => handleFilterClick(key)}
                 />
+
             ))}
         </div>
     );

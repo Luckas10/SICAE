@@ -3,13 +3,17 @@ import './News.css';
 import { NavLink } from "react-router-dom";
 import Header from '../components/general/Header.jsx'
 import Sidebar from '../components/general/Sidebar.jsx';
-import news1 from '../assets/news1.jpg';
 import news2 from '../assets/news2.jpeg';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 
+import CenterCard from '../components/news/CenterCard.jsx';
+import BottomCard from '../components/news/BottomCard.jsx';
+
 export default function News() {
+
+    
 
     return (
         <>
@@ -30,6 +34,7 @@ export default function News() {
                     <NavLink to="./add" id='buttonAdd'><button>+ Adicionar notícia</button></NavLink>
                     </div>
 
+                    {/* Notícias mais relevantes */}
                     <div className="main-content">
                         <div className="news-card">
                             <img src={news2} alt="" />
@@ -41,34 +46,22 @@ export default function News() {
                         </div>
                     </div>
 
+                    {/* Notícias do centro da página */}
                     <div className="sliding-cards">
-                        <div className="news-card">
-                            <img src={news1} alt="" />
-                            <div className="text"><h4>Negão</h4><p>Jogando bola</p></div>
-                        </div>
-                        <div className="news-card">
-                            <img src={news1} alt="" />
-                            <div className="text"><h4>Pelézinho </h4><p>Soccer</p></div>
-                        </div>
-                        <div className="news-card">
-                            <img src={news1} alt="" />
-                            <div className="text"><h4>E aí negão </h4><p>Veio se entregar?</p></div>
-                        </div>
-                        <div className="news-card">
-                            <img src={news1} alt="" />
-                            <div className="text"><h4>Jô Soares</h4><p>The noite</p></div>
-                        </div>
+                        <CenterCard/>
+                        <CenterCard/>
+                        <CenterCard/>
+                        <CenterCard/>
                     </div>
-
+ 
+                    {/* Notícias mais recentes */}
                     <div className="bottom-content">
-                        <div className="news-card">
-                            <img src={news2} alt="" />
-                            <div className="text"><h4>IFRN Campus Caicó </h4><p>Caicó chega ao 1° lugar em campeonato de futebol estadual</p></div>
-                        </div>
-                        <div className="news-card">
-                            <img src={news2} alt="" />
-                            <div className="text"><h4>IFRN Campus Caicó </h4><p>Caicó chega ao 1° lugar em campeonato de futebol estadual</p></div>
-                        </div>
+                        <BottomCard/>
+                        <BottomCard/>
+                        <BottomCard/>
+                        <BottomCard/>
+                        <BottomCard/>
+                        <BottomCard/>
                     </div>
                 </div>
             </div>

@@ -10,7 +10,7 @@ import Settings from "./pages/Settings.jsx";
 import AddNews from "./pages/addNews.jsx";
 import AddEvent from "./pages/addEvent.jsx";
 import EventDetails from "./pages/EventDetails.jsx";
-import Atletas from "./pages/Atletas.jsx";
+import Athletes from "./pages/Athletes.jsx";
 
 import ProtectedRoute from "./routes/ProtectedRoute.jsx";
 import PublicRoute from "./routes/PublicRoute.jsx";
@@ -32,7 +32,7 @@ export default function App() {
           <Route path="/news/add" element={<AddNews />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/settings" element={<Settings />} />
-          <Route path="atletas" element={<Atletas/>}> </Route>
+          <Route path="/athletes" element={<Athletes/>}> </Route>
         </Route>
       </Routes>
     </Router>

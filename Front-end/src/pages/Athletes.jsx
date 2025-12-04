@@ -22,7 +22,7 @@ export default function Athletes() {
                             placeholder="Buscar atleta..."
                         />
                     </div>
-                    <h1 className="title">Athletes</h1>
+                    <h1 className="title">Atletas</h1>
                     <div className="athletes-grid">
                         {Array.from({ length: 22 }).map((_, i) => (
                             <div className="atleta-card" key={i}>

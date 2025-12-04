@@ -26,7 +26,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Registra os routers
 app.include_router(auth.router, tags=["Login"])
 app.include_router(users.router, tags=["Usuários"])
 app.include_router(news.router, tags=["Notícias"])

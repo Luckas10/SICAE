@@ -31,6 +31,17 @@ class EventRead(BaseModel):
     creator_id: int
     creator_name: str
 
+
+class EventUpdate(BaseModel):
+    local_id: Optional[int] = None
+    title: Optional[str] = None
+    description: Optional[str] = None
+    start_date: Optional[datetime] = None
+    end_date: Optional[datetime] = None
+    category: Optional[str] = None
+    cover_image: Optional[str] = None
+    is_initiation: Optional[bool] = None
+
     class Config:
         orm_mode = True
 
@@ -97,13 +108,17 @@ def cadastrar_event(
 @router.put("/{id}", response_model=Event)
 def atualizar_event(
     id: int,
-    event_data: Event,
+    event_data: EventUpdate,
     session: SessionDep,
     current_user: User = Depends(get_current_user),
 ):
     event = session.exec(select(Event).where(Event.id == id)).one()
-    for key, value in event_data.dict(exclude_unset=True).items():
+
+    update_data = event_data.dict(exclude_unset=True)
+
+    for key, value in update_data.items():
         setattr(event, key, value)
+
     session.add(event)
     session.commit()
     session.refresh(event)

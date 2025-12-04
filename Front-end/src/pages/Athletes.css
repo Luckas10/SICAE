@@ -5,19 +5,19 @@
     font-family: 'Inter', sans-serif;
 }
 
-.atletas-page {
+.athletes-page {
     display: block;
     padding-left: 15%;
     padding-top: calc(9.5vh + 20px);
     min-height: 100vh;
 }
 
-.atletas-page a {
+.athletes-page a {
     text-decoration: none;
     color: inherit;
 }
 
-.atletas-content {
+.athletes-content {
     width: 100%;
     padding: 0 2%;
     display: flex;
@@ -55,7 +55,7 @@
     text-align: center;
 }
 
-.atletas-grid {
+.athletes-grid {
     display: flex;
     flex-wrap: wrap;
     width: 90%;
@@ -97,7 +97,7 @@
 }
 
 @media (max-width: 600px) {
-    .atletas-page {
+    .athletes-page {
         padding-left: 0;
         padding-bottom: 70px;
     }
@@ -106,7 +106,7 @@
         width: 90%;
     }
 
-    .atletas-grid {
+    .athletes-grid {
         width: 95%;
     }
 }

@@ -33,8 +33,8 @@ export default function App() {
           <Route path="/news/add" element={<AddNews />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/settings" element={<Settings />} />
-          <Route path="events/games" element={<EventGame/>}> </Route>
-          <Route path="/athletes" element={<Athletes/>}> </Route>
+          <Route path="events/games" element={<EventGame />}> </Route>
+          <Route path="/athletes" element={<Athletes />}> </Route>
         </Route>
       </Routes>
     </Router>

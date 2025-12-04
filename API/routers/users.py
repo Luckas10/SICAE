@@ -82,11 +82,13 @@ def cadastrar_user(session: SessionDep, data: UserCreate) -> User:
 def atualizar_user(
     session: SessionDep,
     id: int,
-    username: str,
+    full_name: str,
+    role: str,
     current_user: User = Depends(get_current_user),
 ) -> User:
     user = session.exec(select(User).where(User.id == id)).one()
-    user.full_name = username
+    user.full_name = full_name
+    user.role = role
     session.add(user)
     session.commit()
     session.refresh(user)

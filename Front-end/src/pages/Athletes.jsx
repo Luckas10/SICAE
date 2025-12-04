@@ -2,7 +2,7 @@ import "./Athletes.css";
 import Header from "../components/general/Header.jsx";
 import Sidebar from "../components/general/Sidebar.jsx";
 
-import test from "../assets/eventsIcons/event1.png";
+import test from "../assets/event1.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 

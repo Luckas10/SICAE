@@ -1,16 +1,15 @@
 import { CATEGORY_CONFIG, DEFAULT_CATEGORY } from "../../constants/eventCategories";
-import news3 from '../../assets/news3.webp';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { timeAgo } from "../../constants/timeAgo";
 
-export default function BottomCard({ newArticle }) {
-    newArticle = { category: "futsal" };
-    const cfg = CATEGORY_CONFIG[newArticle.category] || DEFAULT_CATEGORY;
+export default function BottomCard({ data }) {
+    const cfg = CATEGORY_CONFIG[data.category] || DEFAULT_CATEGORY;
 
     return (
         <div className="bottom-news-card">
             <div className="bottom-news-image">
-                <img src={news3} alt="" />
+                <img src={data.cover_image} alt="" />
             </div>
 
             <div className="bottom-news-content">
@@ -22,9 +21,9 @@ export default function BottomCard({ newArticle }) {
                     {cfg.label}
                 </p>
 
-                <h4>Pelézinho Soccer - Há 5 minutos.</h4>
+                <h4>{data.title} — {timeAgo(data.created_at)}</h4>
                 <p className="bottom-news-desc">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint incidunt architecto sequi doloremque?
+                    {data.content}
                 </p>
             </div>
         </div>

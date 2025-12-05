@@ -1,67 +1,111 @@
-
 import './News.css';
 import { NavLink } from "react-router-dom";
 import Header from '../components/general/Header.jsx'
 import Sidebar from '../components/general/Sidebar.jsx';
-import news2 from '../assets/news2.jpeg';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 
+import TopCard from '../components/news/TopCard.jsx';
 import CenterCard from '../components/news/CenterCard.jsx';
 import BottomCard from '../components/news/BottomCard.jsx';
 
+import { useEffect, useState } from 'react';
+import api from '../services/api';
+
 export default function News() {
+
+    const [news, setNews] = useState([]);
+
+    useEffect(() => {
+        async function fetchNews() {
+            try {
+                const response = await api.get("/news");
+                const raw = response.data;
+
+                const list =
+                    Array.isArray(raw)
+                        ? raw
+                        : Array.isArray(raw.data)
+                            ? raw.data
+                            : Array.isArray(raw.news)
+                                ? raw.news
+                                : [];
+
+                setNews(list);
+            } catch (err) {
+                console.error("Erro ao buscar notícias:", err);
+                setNews([]);
+            }
+        }
+
+        fetchNews();
+    }, []);
+
+    const topNews = news
+        .filter(n => n.priority === "top")
+        .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+        .slice(0, 2);
+
+    const centerNews = news.filter(n => n.priority === "center");
+
+    const bottomNews = news
+        .filter(n => !n.priority || n.priority === "none")
+        .sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 
     return (
         <>
             <Header />
+
             <div className='news-page'>
                 <Sidebar />
+
                 <div className="news-content">
 
                     <div className="news-nav">
                         <div className="buscar-content">
-                            <label htmlFor="buscar"><FontAwesomeIcon
-                                icon={fas.faMagnifyingGlass}
-                                className="input-icon"
-                            /></label>
-                            <input id='buscar' type="text" placeholder="Buscar..." />
+                            <label htmlFor="buscar">
+                                <FontAwesomeIcon
+                                    icon={fas.faMagnifyingGlass}
+                                    className="input-icon"
+                                />
+                            </label>
 
+                            <input
+                                id='buscar'
+                                type="text"
+                                placeholder="Buscar..."
+                            />
                         </div>
-                        <NavLink to="./add" id='buttonAdd'><button>+ Adicionar notícia</button></NavLink>
+
+                        <NavLink to="./add" id='buttonAdd'>
+                            <button>+ Adicionar notícia</button>
+                        </NavLink>
                     </div>
 
+                    {/* Topo */}
                     <div className="main-content">
-                        <div className="news-card">
-                            <img src={news2} alt="" />
-                            <div className="text"><h4>IFRN Campus Caicó </h4><p>Caicó chega ao 1° lugar em campeonato de futebol estadual</p></div>
-                        </div>
-                        <div className="news-card">
-                            <img src={news2} alt="" />
-                            <div className="text"><h4>IFRN Campus Caicó </h4><p>Caicó chega ao 1° lugar em campeonato de futebol estadual</p></div>
-                        </div>
+                        {topNews.map(item => (
+                            <TopCard key={item.id} data={item} />
+                        ))}
                     </div>
 
+                    {/* Centro */}
                     <div className="sliding-cards">
-                        <CenterCard />
-                        <CenterCard />
-                        <CenterCard />
-                        <CenterCard />
+                        {centerNews.map(item => (
+                            <CenterCard key={item.id} data={item} />
+                        ))}
                     </div>
 
+                    {/* Sem prioridade (mais recentes) */}
                     <div className="bottom-content">
-                        <BottomCard />
-                        <BottomCard />
-                        <BottomCard />
-                        <BottomCard />
-                        <BottomCard />
-                        <BottomCard />
+                        {bottomNews.map(item => (
+                            <BottomCard key={item.id} data={item} />
+                        ))}
                     </div>
+
                 </div>
             </div>
-            <nav>
-            </nav>
         </>
     );
 }

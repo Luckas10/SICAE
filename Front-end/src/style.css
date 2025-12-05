@@ -77,6 +77,27 @@ html {
   overflow: auto;
 }
 
+body::-webkit-scrollbar {
+  width: 10px;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 9999;
+}
+
+::-webkit-scrollbar-track {
+  background-color: rgb(39, 39, 39)
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(29, 160, 29, 0.5);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(15, 90, 8, 0.8);
+}
+
 .app-background {
   position: relative;
   width: 100%;

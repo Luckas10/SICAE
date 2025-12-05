@@ -8,8 +8,7 @@
 .athletes-page {
     display: block;
     padding-left: 15%;
-    padding-top: calc(9.5vh + 20px);
-    min-height: 100vh;
+    min-height: 100%;
 }
 
 .athletes-page a {

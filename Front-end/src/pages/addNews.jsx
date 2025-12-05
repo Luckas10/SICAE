@@ -25,7 +25,7 @@ export default function AddNews() {
     const [content, setContent] = useState("");
     const [add_info, setAddInfo] = useState("");
     const [category, setCategory] = useState("futsal");
-    const [priority, setPriority] = useState("topo");
+    const [priority, setPriority] = useState("none");
     
     const imgRef = useRef(null);
     const navigate = useNavigate();
@@ -175,7 +175,7 @@ export default function AddNews() {
         <>
             <Header />
 
-            <div className="news-page">
+            <div className="addnews-page">
                 <Sidebar />
 
                 <div className="addNews-content">
@@ -271,9 +271,9 @@ export default function AddNews() {
                                 value={priority}
                                 onChange={(e) => setPriority(e.target.value)}
                             >
-                                <option value="topo">Topo</option>
-                                <option value="centro">Centro</option>
-                                <option value="inferior">Inferior</option>
+                                <option value="none">Sem prioridade</option>
+                                <option value="top">Topo</option>
+                                <option value="center">Centro</option>           
                             </select>
                         </div>
                         

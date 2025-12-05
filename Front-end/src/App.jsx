@@ -31,6 +31,7 @@ export default function App() {
           <Route path="/events/:id" element={<EventDetails />} />
           <Route path="/news" element={<News />} />
           <Route path="/news/add" element={<AddNews />} />
+          <Route path="/news/:id" element={<EventDetails />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="events/games" element={<EventGame />}> </Route>

@@ -50,7 +50,6 @@
 
 :root[data-theme='dark'] .header {
     background-color: #06200d;
-    transition: 1s;
 }
 
 /* ====== RESPONSIVIDADE ====== */

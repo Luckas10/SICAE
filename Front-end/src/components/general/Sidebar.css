@@ -105,7 +105,6 @@
 :root[data-theme='dark'] .sidebar, :root[data-theme='dark'] .logout {
   background-color: #06200d;
   border-color: #0C3617;
-  transition: 1s;
 }
 
 @media (max-width: 850px) {

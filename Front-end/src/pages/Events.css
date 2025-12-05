@@ -557,7 +557,6 @@ input[type="file"] {
 :root[data-theme="dark"] body {
     background-color: #031001;
     color: #e5e7eb;
-    transition: 1s;
 }
 
 :root[data-theme="dark"] .sports-content::after {

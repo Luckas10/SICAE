@@ -24,7 +24,7 @@
 }
 
 .header .header-logo img {
-    height: 75%;
+    height: 75%; 
     max-height: calc(0.75 * 9vh);
     aspect-ratio: auto;
 }
@@ -46,6 +46,11 @@
     border-radius: 50%;
     aspect-ratio: 1/1;
     background-color: white;
+}
+
+:root[data-theme='dark'] .header {
+    background-color: #06200d;
+    transition: 1s;
 }
 
 /* ====== RESPONSIVIDADE ====== */

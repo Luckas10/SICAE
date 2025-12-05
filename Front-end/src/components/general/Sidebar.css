@@ -44,21 +44,20 @@
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 100%;
-  margin: 35px 0px;
-}
-
-.sidebar a span {
-  display: inline-block;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  max-width: 100%;
+  margin: 15px 0px;
 }
 
 .sidebar a:hover {
   color: #E3B52E;
   background: rgba(255, 255, 255, 0.06);
   transform: translateY(-1px);
+}
+
+.sidebar a span {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .sidebar a svg {
@@ -103,6 +102,11 @@
   background: rgba(255, 255, 255, 0.06);
 }
 
+:root[data-theme='dark'] .sidebar, :root[data-theme='dark'] .logout {
+  background-color: #06200d;
+  border-color: #0C3617;
+  transition: 1s;
+}
 
 @media (max-width: 850px) {
   .sidebar {
@@ -162,3 +166,4 @@
     display: none;
   }
 }
+

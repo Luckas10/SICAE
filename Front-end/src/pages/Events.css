@@ -552,3 +552,114 @@ input[type="file"] {
         width: 100%;
     }
 }
+
+
+:root[data-theme="dark"] body {
+    background-color: #031001;
+    color: #e5e7eb;
+    transition: 1s;
+}
+
+:root[data-theme="dark"] .sports-content::after {
+    border-bottom-color: #e5e7eb;
+}
+
+:root[data-theme="dark"] .sport-filter-label {
+    color: #e5e7eb;
+}
+
+:root[data-theme="dark"] .addEvents-content {
+    background-color: #031001;
+    color: #e5e7eb;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+}
+
+:root[data-theme="dark"] .addEvents-content h2 {
+    color: #e5e7eb;
+}
+
+:root[data-theme="dark"] .addEvents-content form select,
+:root[data-theme="dark"] .addEvents-content form input,
+:root[data-theme="dark"] .addEvents-content form textarea,
+:root[data-theme="dark"] .capa {
+    background-color: #020617;
+    color: #e5e7eb;
+    border-color: #374151;
+}
+
+:root[data-theme="dark"] .initiation-flag {
+    color: #e5e7eb;
+}
+
+:root[data-theme="dark"] .event-card {
+    background-color: #333333;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.7);
+}
+
+:root[data-theme="dark"] .event-card h5 {
+    color: #e5e7eb;
+}
+
+:root[data-theme="dark"] #buttonAdd button {
+    color: #ffffff;
+    background-color: #333333;
+}
+
+:root[data-theme="dark"] .event-details {
+    background-color: #333333;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7);
+}
+
+:root[data-theme="dark"] .event-category-chip {
+    background-color: #202020;
+    color: #e5e7eb;
+}
+
+:root[data-theme="dark"] .event-details-header h1 {
+    color: #e5e7eb;
+}
+
+:root[data-theme="dark"] .event-details-subtitle {
+    color: #9ca3af;
+}
+
+:root[data-theme="dark"] .event-details-info h2 {
+    color: #e5e7eb;
+}
+
+:root[data-theme="dark"] .event-details-info p {
+    color: #e5e7eb;
+}
+
+:root[data-theme="dark"] .event-meta-item {
+    background-color: #202020;
+    border: 1px solid #1f2937;
+}
+
+:root[data-theme="dark"] .event-meta-label {
+    color: #9ca3af;
+}
+
+:root[data-theme="dark"] .event-meta-value {
+    color: #e5e7eb;
+}
+
+:root[data-theme="dark"] .event-button-secondary {
+    background-color: transparent;
+    color: #e5e7eb;
+    border-color: #e5e7eb;
+}
+
+:root[data-theme="dark"] .event-button-danger {
+    background-color: #b91c1c;
+}
+
+:root[data-theme="dark"] .addEvents-content form button,
+:root[data-theme="dark"] .image-selector-button {
+    background-color: #0D4F1D;
+    border-color: #0D4F1D;
+}
+
+:root[data-theme="dark"] .event-details-loading {
+    color: #e5e7eb;
+}

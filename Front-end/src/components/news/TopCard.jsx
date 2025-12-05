@@ -2,16 +2,18 @@ import { CATEGORY_CONFIG, DEFAULT_CATEGORY } from "../../constants/eventCategori
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+import { NavLink } from "react-router-dom";
+
 export default function TopCard({ data }) {
     const cfg = CATEGORY_CONFIG[data.category] || DEFAULT_CATEGORY;
 
     return (
-        <div className="top-news-card">
+        <NavLink className="top-news-card" to={`/news/${data.id}`}>
             <img src={data.cover_image} alt="" />
             <div className="top-news-content">
                 <h4>{data.title}</h4>
-                <p>{data.content}</p>
+                <p>{data.add_info}</p>
             </div>
-        </div>
+        </NavLink>
     );
 }

@@ -15,6 +15,7 @@ import Athletes from "./pages/Athletes.jsx";
 
 import ProtectedRoute from "./routes/ProtectedRoute.jsx";
 import PublicRoute from "./routes/PublicRoute.jsx";
+import NewsDetails from "./pages/NewsDetails.jsx";
 
 export default function App() {
   return (
@@ -31,7 +32,7 @@ export default function App() {
           <Route path="/events/:id" element={<EventDetails />} />
           <Route path="/news" element={<News />} />
           <Route path="/news/add" element={<AddNews />} />
-          <Route path="/news/:id" element={<EventDetails />} />
+          <Route path="/news/:id" element={<NewsDetails />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="events/games" element={<EventGame />}> </Route>

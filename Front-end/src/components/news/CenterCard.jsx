@@ -2,11 +2,13 @@ import { CATEGORY_CONFIG, DEFAULT_CATEGORY } from "../../constants/eventCategori
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+import { NavLink } from "react-router-dom";
+
 export default function CenterCard({ data }) {
     const cfg = CATEGORY_CONFIG[data.category] || DEFAULT_CATEGORY;
 
     return(
-        <div className="center-news-card">
+        <NavLink className="center-news-card" to={`/news/${data.id}`}>
             <img src={data.cover_image} alt="" />
             <p className="sportsNewsId">
                 <FontAwesomeIcon
@@ -17,8 +19,8 @@ export default function CenterCard({ data }) {
             </p>
             <div className="center-news-info">
                 <h4>{data.title}</h4> 
-                <p>{data.content}</p>
+                <p>{data.add_info}</p>
             </div>
-        </div>
+        </NavLink>
     )
 }

@@ -185,8 +185,15 @@ export default function AddNews() {
                         <label htmlFor="titulo">Título</label>
                         <div className="input-icon">
                             <FontAwesomeIcon icon={faFont} className="icon" />
-                            <input type="text" id="titulo" placeholder="Título da notícia" value={title}
+                            <input type="text" id="titulo" placeholder="Título da notícia" value={title} required
                             onChange={(e) => setTitle(e.target.value)}/>
+                        </div>
+
+                        <label htmlFor="info">Sub-título</label>
+                        <div className="input-icon">
+                            <FontAwesomeIcon icon={faInfo} className="icon" />
+                            <input type="text" id="info" placeholder="Sub-título da notícia" value={add_info} required maxLength="150"
+                            onChange={(e) => setAddInfo(e.target.value)}/>
                         </div>
 
                         <label>Adicionar capa da notícia</label>
@@ -202,7 +209,7 @@ export default function AddNews() {
                                 type="file"
                                 accept="image/*"
                                 onChange={handleFileChange}
-                                style={{ display: "none" }}
+                                style={{ display: "none" }} required
                             />
                         </div>
 
@@ -236,20 +243,13 @@ export default function AddNews() {
                             onChange={(e) => setContent(e.target.value)}></textarea>
                         </div>
 
-                        <label htmlFor="info">Informações adicionais</label>
-                        <div className="input-icon">
-                            <FontAwesomeIcon icon={faInfo} className="icon" />
-                            <input type="text" id="info" placeholder="Informações extras" value={add_info}
-                            onChange={(e) => setAddInfo(e.target.value)}/>
-                        </div>
-
                         <label htmlFor="esporte">Esporte</label>
                         <div className="input-icon">
                             <select
                                 name="categorias"
                                 id="categorias"
                                 value={category}
-                                onChange={(e) => setCategory(e.target.value)}
+                                onChange={(e) => setCategory(e.target.value)} required
                             >
                                 <option value="futsal">Futsal</option>
                                 <option value="basketball">Basquete</option>
@@ -269,7 +269,7 @@ export default function AddNews() {
                                 name="prioridades"
                                 id="prioridades"
                                 value={priority}
-                                onChange={(e) => setPriority(e.target.value)}
+                                onChange={(e) => setPriority(e.target.value)} required
                             >
                                 <option value="none">Sem prioridade</option>
                                 <option value="top">Topo</option>

@@ -403,6 +403,10 @@ input[type="file"] {
 
 /* Estilo dos cards da seção inferior */
 
+.top-news-card, .center-news-card,.bottom-news-card {
+    text-decoration: none;
+}
+
 .bottom-news-card {
     width: 100%;   /* IMPORTANTE */
     height: 8em;
@@ -472,4 +476,137 @@ input[type="file"] {
 
 .bottom-news-content:hover h4 {
     text-decoration: underline;
+}
+
+/* Dentro da notícia */
+
+.news-details {
+    width: 50rem;
+    margin: 0 auto;
+    padding: 2.5rem 0 4rem;
+}
+
+.news-details-header h1 {
+    font-size: 2.4rem;
+    font-weight: 800;
+    line-height: 1.15;
+    color: #111;
+    margin-bottom: 1rem;
+}
+
+.news-details-subtitle {
+    font-size: 0.95rem;
+    color: #666;
+    margin-bottom: 1.8rem;
+}
+
+.news-details-cover {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-radius: 10px;
+    margin-bottom: 0.6rem;
+}
+
+.news-details-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Legenda da imagem */
+.news-details-caption {
+    font-size: 0.8rem;
+    color: #666;
+    text-align: center;
+    margin-top: 6px;
+    margin-bottom: 2rem;
+}
+
+/* Corpo do texto (leitura premium) */
+.news-details-info p {
+    margin-top: 3rem;
+    font-size: 1.08rem;
+    line-height: 1.85;
+    color: #1a1a1a;
+    margin-bottom: 1.6rem;
+    text-align: justify;
+    white-space: pre-line;
+    line-height: 1.7;
+}
+
+/* Destaques no meio do texto */
+.news-details-info strong {
+    color: #0D4F1D;
+    font-weight: 700;
+}
+
+/* Bloco de separação editorial */
+.news-details-divider {
+    width: 100%;
+    height: 1px;
+    background: #ddd;
+    margin: 2.5rem 0;
+}
+
+/* Barra de ações */
+.news-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 3rem;
+    border-top: 1px solid #ddd;
+    padding-top: 2rem;
+}
+
+.news-button-secondary {
+    padding: 0.75rem 1.6rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background: #fff;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.news-button-secondary:hover {
+    background: #f0f0f0;
+}
+
+.news-button-danger {
+    padding: 0.75rem 1.6rem;
+    border-radius: 8px;
+    border: none;
+    background: #c62828;
+    color: #fff;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.news-button-danger:hover {
+    background: #a61f1f;
+}
+
+/* ===============================
+   RESPONSIVO DA NOTÍCIA
+================================ */
+
+@media (max-width: 768px) {
+    .news-details {
+        padding: 1.5rem 0 3rem;
+    }
+
+    .news-details-header h1 {
+        font-size: 1.7rem;
+    }
+
+    .news-details-info p {
+        font-size: 0.98rem;
+        line-height: 1.7;
+    }
+
+    .news-details-cover {
+        max-height: 280px;
+    }
 }

@@ -3,11 +3,13 @@ import { CATEGORY_CONFIG, DEFAULT_CATEGORY } from "../../constants/eventCategori
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { timeAgo } from "../../constants/timeAgo";
 
+import { NavLink } from "react-router-dom";
+
 export default function BottomCard({ data }) {
     const cfg = CATEGORY_CONFIG[data.category] || DEFAULT_CATEGORY;
 
     return (
-        <div className="bottom-news-card">
+        <NavLink className="bottom-news-card" to={`/news/${data.id}`}>
             <div className="bottom-news-image">
                 <img src={data.cover_image} alt="" />
             </div>
@@ -23,9 +25,9 @@ export default function BottomCard({ data }) {
 
                 <h4>{data.title} — {timeAgo(data.created_at)}</h4>
                 <p className="bottom-news-desc">
-                    {data.content}
+                    {data.add_info}
                 </p>
             </div>
-        </div>
+        </NavLink>
     );
 }

@@ -10,7 +10,13 @@ import NewsActions from "../components/news/newsDetails/NewsActions.jsx";
 import useNewsDetails from "../components/news/newsDetails/useNewsDetails.js"; 
 import "./News.css";
 
+import { useUser } from "../context/UserContext.jsx";
+import NewsComments from "../components/news/NewsComments.jsx";
+
 export default function NewsDetails() {
+
+    const { user, loadingUser } = useUser();
+
     const { id } = useParams();
     const {
         news,
@@ -51,8 +57,9 @@ export default function NewsDetails() {
                             onBack={navigateBack}
                         />
 
-                    </div>
-                </div>
+                        <NewsComments articleId={news.id} currentUser={user}/>
+                    </div>                 
+                </div>          
             </div>
         </>
     );

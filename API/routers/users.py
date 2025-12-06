@@ -141,3 +141,19 @@ def update_my_avatar(
         "email": user.email,
         "profile_image": user.profile_image,
     }
+
+@router.get("/{id}")
+def buscar_user_por_id(
+    session: SessionDep,
+    id: int,
+    current_user: User = Depends(get_current_user),
+) -> User:
+    user = session.get(User, id)
+
+    if not user:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Usuário não encontrado.",
+        )
+
+    return user

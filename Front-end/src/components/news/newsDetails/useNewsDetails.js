@@ -34,6 +34,9 @@ export default function useNewsDetails(id) {
             icon: "warning",
             showCancelButton: true,
             confirmButtonText: "Sim, excluir",
+            customClass: {
+                popup: "comment-alert",
+            },
         });
 
         if (!confirm.isConfirmed) return;
@@ -56,10 +59,10 @@ export default function useNewsDetails(id) {
     const formattedDate =
         news?.created_at
             ? new Date(news.created_at).toLocaleDateString("pt-BR", {
-                  day: "2-digit",
-                  month: "long",
-                  year: "numeric",
-              })
+                day: "2-digit",
+                month: "long",
+                year: "numeric",
+            })
             : "";
 
     function navigateBack() {

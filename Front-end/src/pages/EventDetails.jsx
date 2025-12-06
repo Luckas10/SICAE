@@ -18,7 +18,7 @@ import EventMeta from "../components/events/eventdetails/EventMeta.jsx";
 import EventDescription from "../components/events/eventdetails/EventDescription.jsx";
 import EventActions from "../components/events/eventdetails/EventActions.jsx";
 
-import EventsComments from "../components/news/EventComments.jsx";
+import EventsComments from "../components/events/eventdetails/EventComments.jsx";
 import { useUser } from "../context/UserContext.jsx";
 
 export default function EventDetails() {

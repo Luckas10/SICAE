@@ -19,7 +19,7 @@
 
 
 :root[data-theme="dark"] body {
-    background-color: #031001;
+    background-color: #071204;
     color: #e5e7eb;
 }
 
@@ -32,7 +32,7 @@
 }
 
 :root[data-theme="dark"] .addEvents-content {
-    background-color: #031001;
+    background-color: #071204;
     color: #e5e7eb;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
 }
@@ -138,7 +138,7 @@
 
 
 :root[data-theme="dark"] .profile-page {
-    background-color: #0a0a0a;
+    background-color: #071204;
     color: #e5e7eb;
 }
 
@@ -202,7 +202,7 @@
 }
 
 :root[data-theme='dark'] .settings-page {
-    background-color: #031001;
+    background-color: #071204;
 }
 
 :root[data-theme='dark'] .settings-card {
@@ -237,4 +237,21 @@
 
 :root[data-theme='dark'] .header {
     background-color: #06200d;
+}
+
+
+:root[data-theme='dark'] .news-page .news-details-header h1 {
+    color: #e5e7eb;
+}
+
+:root[data-theme='dark'] .news-page .news-details-header h3 {
+    color: #737373;
+}
+
+:root[data-theme='dark'] .news-page .news-details-subtitle {
+    color: #9ca3af;
+}
+
+:root[data-theme='dark'] .news-page .news-details-info p{
+    color: #e5e7eb;
 }

@@ -23,7 +23,7 @@ export default function EventDetailsHeader({
                 Publicado por {creatorName}
                 {publishedDate && (
                     <>
-                        {" "}em {publishedDate}
+                        {" "}• {publishedDate}
                         {publishedTime && <> às {publishedTime}</>}
                     </>
                 )}

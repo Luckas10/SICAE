@@ -83,21 +83,18 @@ export default function News() {
                         </NavLink>
                     </div>
 
-                    {/* Topo */}
                     <div className="main-content">
                         {topNews.map(item => (
                             <TopCard key={item.id} data={item} />
                         ))}
                     </div>
 
-                    {/* Centro */}
                     <div className="sliding-cards">
                         {centerNews.map(item => (
                             <CenterCard key={item.id} data={item} />
                         ))}
                     </div>
 
-                    {/* Sem prioridade (mais recentes) */}
                     <div className="bottom-content">
                         {bottomNews.map(item => (
                             <BottomCard key={item.id} data={item} />

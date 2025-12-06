@@ -1,5 +1,5 @@
 export function timeAgo(dateString) {
-    const created = new Date(dateString); // data REAL, sem correção manual
+    const created = new Date(dateString);
     const now = new Date();
 
     const diffMs = now - created;

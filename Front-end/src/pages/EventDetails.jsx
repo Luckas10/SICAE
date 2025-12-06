@@ -7,60 +7,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 import Swal from "sweetalert2";
 import "./Events.css";
-
-const CATEGORY_CONFIG = {
-    futsal: {
-        label: "FUTSAL",
-        icon: fas.faFutbol,
-        className: "futsalIcon",
-    },
-    basketball: {
-        label: "BASQUETE",
-        icon: fas.faBasketball,
-        className: "basketballIcon",
-    },
-    tabletennis: {
-        label: "TÊNIS DE MESA",
-        icon: fas.faTableTennis,
-        className: "tabletennisIcon",
-    },
-    fighting: {
-        label: "LUTAS",
-        icon: fas.faHandBackFist,
-        className: "fightingIcon",
-    },
-    athletics: {
-        label: "ATLETISMO",
-        icon: fas.faPersonRunning,
-        className: "athleticsIcon",
-    },
-    volleyball: {
-        label: "VOLEIBOL",
-        icon: fas.faVolleyball,
-        className: "volleyballIcon",
-    },
-    swimming: {
-        label: "NATAÇÃO",
-        icon: fas.faWater,
-        className: "swimmingIcon",
-    },
-    chess: {
-        label: "XADREZ",
-        icon: fas.faChess,
-        className: "chessIcon",
-    },
-    esports: {
-        label: "E-SPORTS",
-        icon: fas.faGamepad,
-        className: "esportsIcon",
-    },
-};
-
-const DEFAULT_CATEGORY = {
-    label: "EVENTO",
-    icon: fas.faCalendarDays,
-    className: "athleticsIcon",
-};
+import {
+    CATEGORY_CONFIG,
+    DEFAULT_CATEGORY,
+} from "../constants/eventCategories";
 
 export default function EventDetails() {
     const { id } = useParams();
@@ -90,51 +40,51 @@ export default function EventDetails() {
         fetchEvent();
     }, [id]);
 
-const handleDelete = async () => {
-    const result = await Swal.fire({
-        title: "Excluir evento?",
-        text: "Essa ação não poderá ser desfeita.",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonText: "Sim, excluir",
-        cancelButtonText: "Cancelar",
-        customClass: {
-            popup: "logout-alert"
+    const handleDelete = async () => {
+        const result = await Swal.fire({
+            title: "Excluir evento?",
+            text: "Essa ação não poderá ser desfeita.",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Sim, excluir",
+            cancelButtonText: "Cancelar",
+            customClass: {
+                popup: "logout-alert"
+            }
+        });
+
+        if (!result.isConfirmed) return;
+
+        try {
+            setDeleting(true);
+            await api.delete(`/events/${id}`);
+
+            await Swal.fire({
+                icon: "success",
+                title: "Evento excluído",
+                text: "O evento foi excluído com sucesso.",
+                customClass: {
+                    popup: "success-alert"
+                }
+            });
+
+            navigate("/events");
+
+        } catch (err) {
+            console.error("Erro ao excluir evento:", err);
+
+            Swal.fire({
+                icon: "error",
+                title: "Erro ao excluir",
+                text: "Não foi possível excluir o evento. Tente novamente.",
+                customClass: {
+                    popup: "error-alert"
+                }
+            });
+        } finally {
+            setDeleting(false);
         }
-    });
-
-    if (!result.isConfirmed) return;
-
-    try {
-        setDeleting(true);
-        await api.delete(`/events/${id}`);
-
-        await Swal.fire({
-            icon: "success",
-            title: "Evento excluído",
-            text: "O evento foi excluído com sucesso.",
-            customClass: {
-                popup: "success-alert"
-            }
-        });
-
-        navigate("/events");
-
-    } catch (err) {
-        console.error("Erro ao excluir evento:", err);
-
-        Swal.fire({
-            icon: "error",
-            title: "Erro ao excluir",
-            text: "Não foi possível excluir o evento. Tente novamente.",
-            customClass: {
-                popup: "error-alert"
-            }
-        });
-    } finally {
-        setDeleting(false);
-    }
-};
+    };
 
 
     if (loading) {
@@ -147,22 +97,38 @@ const handleDelete = async () => {
 
     const cfg = CATEGORY_CONFIG[event.category] || DEFAULT_CATEGORY;
 
-    let formattedDate = "";
-    let formattedTime = "";
+    let publishedDate = "";
+    let publishedTime = "";
+    let eventDate = "";
+    let eventTime = "";
+
+    if (event.created_at) {
+        const created = new Date(event.created_at);
+        publishedDate = created.toLocaleDateString("pt-BR", {
+            day: "2-digit",
+            month: "long",
+            year: "numeric",
+        });
+        publishedTime = created.toLocaleTimeString("pt-BR", {
+            hour: "2-digit",
+            minute: "2-digit",
+        });
+    }
 
     if (event.start_date) {
         const start = new Date(event.start_date);
-        formattedDate = start.toLocaleDateString("pt-BR", {
+        eventDate = start.toLocaleDateString("pt-BR", {
             weekday: "long",
             day: "2-digit",
             month: "long",
             year: "numeric",
         });
-        formattedTime = start.toLocaleTimeString("pt-BR", {
+        eventTime = start.toLocaleTimeString("pt-BR", {
             hour: "2-digit",
             minute: "2-digit",
         });
     }
+
 
     return (
         <>
@@ -180,8 +146,15 @@ const handleDelete = async () => {
                             </span>
                             <h1>{event.title}</h1>
                             <p className="event-details-subtitle">
-                                Evento cadastrado por {event.creator_name}
+                                Publicado por {event.creator_name} • 
+                                {publishedDate && (
+                                    <>
+                                        {" "}em {publishedDate}
+                                        {publishedTime && <> às {publishedTime}</>}
+                                    </>
+                                )}
                             </p>
+
                         </div>
 
                         {event.cover_image && (
@@ -192,17 +165,17 @@ const handleDelete = async () => {
 
                         <div className="event-details-body">
                             <div className="event-meta">
-                                {formattedDate && (
+                                {eventDate && (
                                     <div className="event-meta-item">
-                                        <span className="event-meta-label">Data</span>
-                                        <span className="event-meta-value">{formattedDate}</span>
+                                        <span className="event-meta-label">Data do evento</span>
+                                        <span className="event-meta-value">{eventDate}</span>
                                     </div>
                                 )}
 
-                                {formattedTime && (
+                                {eventTime && (
                                     <div className="event-meta-item">
-                                        <span className="event-meta-label">Horário</span>
-                                        <span className="event-meta-value">{formattedTime}</span>
+                                        <span className="event-meta-label">Horário do evento</span>
+                                        <span className="event-meta-value">{eventTime}</span>
                                     </div>
                                 )}
 
@@ -214,11 +187,6 @@ const handleDelete = async () => {
                                         </span>
                                     </div>
                                 )}
-
-                                <div className="event-meta-item">
-                                    <span className="event-meta-label">CPF de Max</span>
-                                    <span className="event-meta-value">053.787.594-80</span>
-                                </div>
                             </div>
 
                             <div className="event-details-info">

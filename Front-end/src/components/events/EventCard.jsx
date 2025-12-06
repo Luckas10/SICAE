@@ -1,10 +1,12 @@
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { timeAgo } from "../../constants/timeAgo";
 import news1 from "../../assets/news1.jpg";
 import {
     CATEGORY_CONFIG,
     DEFAULT_CATEGORY,
 } from "../../constants/eventCategories";
+
 
 export default function EventCard({ event }) {
     const cfg = CATEGORY_CONFIG[event.category] || DEFAULT_CATEGORY;
@@ -26,6 +28,8 @@ export default function EventCard({ event }) {
                 {cfg.label}
             </p>
             <h5>{event.title}</h5>
+
+            <p className="timeAgoInfo">{timeAgo(event.created_at)}</p>
         </NavLink>
     );
 }

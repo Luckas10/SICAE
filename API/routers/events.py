@@ -30,7 +30,7 @@ class EventRead(BaseModel):
     is_initiation: bool = False
     creator_id: int
     creator_name: str
-
+    created_at: datetime
 
 class EventUpdate(BaseModel):
     local_id: Optional[int] = None
@@ -78,6 +78,7 @@ def obter_evento(
         is_initiation=event.is_initiation,
         creator_id=event.creator_id,
         creator_name=event.creator.full_name,
+        created_at=event.created_at,
     )
 
 

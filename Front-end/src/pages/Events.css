@@ -294,8 +294,8 @@ input[type="file"] {
     background-color: #ffffff;
     overflow: hidden;
     cursor: pointer;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
     transition: transform 0.15s ease, box-shadow 0.15s ease;
-    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.18);
 }
 
 .event-card:hover {
@@ -307,14 +307,14 @@ input[type="file"] {
     height: auto;
     object-fit: cover;
     border-radius: 10px 10px 0 0;
-    filter: brightness(0.6);
+    background-color: #ffffff;
 }
 
 .event-card .sportsNewsId {
     display: flex;
     align-items: center;
     gap: 6px;
-    margin: 6px 8px 0;
+    margin: 6px 4px 0;
     font-size: 15px;
     font-weight: 600;
 }
@@ -384,8 +384,7 @@ input[type="file"] {
     margin-bottom: 60px;
     background-color: #ffffff;
     border-radius: 16px;
-    padding: 24px 28px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+    padding: 0px 24px;
 }
 
 .event-details-header {
@@ -427,8 +426,8 @@ input[type="file"] {
     height: auto;
     object-fit: contain;
     display: block;
-    filter: brightness(0.9);
-    transition: transform 0.2s ease, filter 0.2s ease;
+    background-color: #ffffff;
+    transition: transform 0.2s ease;
 }
 
 .event-details-cover img:hover {
@@ -483,6 +482,12 @@ input[type="file"] {
     line-height: 1.6;
     color: #111827;
     white-space: pre-line;
+}
+
+p.timeAgoInfo {
+    font-size: 12px;
+    color: #000000;
+    padding: 0px 8px;
 }
 
 .event-actions {
@@ -602,6 +607,12 @@ input[type="file"] {
 :root[data-theme="dark"] #buttonAdd button {
     color: #ffffff;
     background-color: #333333;
+}
+
+:root[data-theme="dark"] p.timeAgoInfo {
+    font-size: 12px;
+    color: #ffffff;
+    padding: 0px 8px;
 }
 
 :root[data-theme="dark"] .event-details {

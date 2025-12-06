@@ -18,9 +18,14 @@ import EventMeta from "../components/events/eventdetails/EventMeta.jsx";
 import EventDescription from "../components/events/eventdetails/EventDescription.jsx";
 import EventActions from "../components/events/eventdetails/EventActions.jsx";
 
+import EventsComments from "../components/news/EventComments.jsx";
+import { useUser } from "../context/UserContext.jsx";
+
 export default function EventDetails() {
     const { id } = useParams();
     const navigate = useNavigate();
+
+    const { user, loadingUser } = useUser();
 
     const [event, setEvent] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -171,6 +176,8 @@ export default function EventDetails() {
                                 deleting={deleting}
                             />
                         </div>
+
+                        <EventsComments eventId={event.id} currentUser={user}/>
                     </div>
                 </div>
             </div>

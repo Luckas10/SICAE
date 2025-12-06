@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useUser } from "../../../context/UserContext";
 import api from "../../../services/api";
 import Swal from "sweetalert2";
 import "./NewsComments.css";
@@ -12,6 +13,7 @@ export default function NewsComments({ articleId, currentUser }) {
     const [editingId, setEditingId] = useState(null);
     const [editContent, setEditContent] = useState("");
     const [openMenuId, setOpenMenuId] = useState(null);
+    const { refreshUser } = useUser();
 
     async function loadComments() {
         try {
@@ -108,6 +110,8 @@ export default function NewsComments({ articleId, currentUser }) {
         } finally {
             setSubmitting(false);
         }
+
+        refreshUser();
     };
 
     const handleUpdate = async (commentId) => {

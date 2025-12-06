@@ -106,6 +106,18 @@ div:where(.swal2-icon).swal2-success [class^=swal2-success-line] {
     color: #e4e7ff;
 }
 
+html.swal2-shown,
+body.swal2-shown {
+    overflow-x: hidden !important;
+    padding-right: 0 !important;
+}
+
+html.swal2-height-auto,
+body.swal2-height-auto {
+    height: 100% !important;
+    overflow-x: hidden !important;
+}
+
 @keyframes toast-in {
     from {
         opacity: 0;

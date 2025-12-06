@@ -57,7 +57,6 @@ export default function NewsDetails() {
                             onBack={navigateBack}
                         />
 
-                        <NewsComments articleId={news.id} currentUser={user}/>
                     </div>
                 </div>
             </div>

@@ -150,6 +150,7 @@
     padding-top: 50px;
     gap: 2%;
     flex-wrap: wrap;
+    
 }
 
 .dashboard-page .cards .card {
@@ -159,6 +160,10 @@
     border: none;
     box-shadow: 0 4px 18px rgba(0, 0, 0, 0.18);
     cursor: pointer;
+}
+
+.card { 
+    transition: 0.3s;
 }
 
 .cards .card:hover {
@@ -172,7 +177,7 @@
 
 .dashboard-page #cardType {
     color: #369949;
-    font-size: 15px;
+    font-size: 0.8rem;
     font-weight: 600;
     margin: 6px 0px 0px 0px;
 }
@@ -188,7 +193,7 @@
 
 .dashboard-page .cardText {
     font-weight: bold;
-    font-size: 26px;
+    font-size: 1rem;
     padding: 0px 8px;
 }
 

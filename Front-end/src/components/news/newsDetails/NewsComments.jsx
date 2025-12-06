@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import api from "../../services/api";
+import api from "../../../services/api";
 import Swal from "sweetalert2";
-import "./NewsComments.css"; // pode reutilizar o mesmo CSS
+import "./NewsComments.css";
 
-export default function EventsComments({ eventId, currentUser }) {
+export default function NewsComments({ articleId, currentUser }) {
     const [comments, setComments] = useState([]);
     const [usersMap, setUsersMap] = useState({});
     const [loading, setLoading] = useState(true);
@@ -16,7 +16,7 @@ export default function EventsComments({ eventId, currentUser }) {
     async function loadComments() {
         try {
             const { data } = await api.get(
-                `/events-comments/event/${eventId}`
+                `/news-comments/article/${articleId}`
             );
 
             const ordered = data.sort(
@@ -27,6 +27,12 @@ export default function EventsComments({ eventId, currentUser }) {
             await loadUsers(ordered);
         } catch (err) {
             console.error("Erro ao carregar comentários:", err);
+            Swal.fire({
+                title: "Erro",
+                text: "Não foi possível carregar os comentários.",
+                icon: "error",
+                customClass: { popup: "comment-alert" },
+            });
         } finally {
             setLoading(false);
         }
@@ -38,9 +44,7 @@ export default function EventsComments({ eventId, currentUser }) {
                 ...new Set(commentsList.map((c) => c.author_id)),
             ];
 
-            const usersNotLoaded = uniqueIds.filter(
-                (id) => !usersMap[id]
-            );
+            const usersNotLoaded = uniqueIds.filter((id) => !usersMap[id]);
 
             if (usersNotLoaded.length === 0) return;
 
@@ -58,25 +62,36 @@ export default function EventsComments({ eventId, currentUser }) {
             setUsersMap((prev) => ({ ...prev, ...newUsers }));
         } catch (err) {
             console.error("Erro ao carregar usuários:", err);
+            Swal.fire({
+                title: "Erro",
+                text: "Não foi possível carregar os autores dos comentários.",
+                icon: "error",
+                customClass: { popup: "comment-alert" },
+            });
         }
     }
 
     useEffect(() => {
-        if (eventId) {
+        if (articleId) {
             loadComments();
         }
-    }, [eventId]);
+    }, [articleId]);
 
     const handleCreate = async () => {
         if (!newComment.trim()) {
-            Swal.fire("Atenção", "Digite um comentário.", "warning");
+            Swal.fire({
+                title: "Atenção",
+                text: "Digite um comentário.",
+                icon: "warning",
+                customClass: { popup: "comment-alert" },
+            });
             return;
         }
 
         try {
             setSubmitting(true);
-            await api.post("/events-comments", {
-                event_id: eventId,
+            await api.post("/news-comments", {
+                article_id: articleId,
                 content: newComment,
             });
 
@@ -84,7 +99,12 @@ export default function EventsComments({ eventId, currentUser }) {
             await loadComments();
         } catch (err) {
             console.error(err);
-            Swal.fire("Erro", "Não foi possível enviar o comentário.", "error");
+            Swal.fire({
+                title: "Erro",
+                text: "Não foi possível enviar o comentário.",
+                icon: "error",
+                customClass: { popup: "comment-alert" },
+            });
         } finally {
             setSubmitting(false);
         }
@@ -92,12 +112,17 @@ export default function EventsComments({ eventId, currentUser }) {
 
     const handleUpdate = async (commentId) => {
         if (!editContent.trim()) {
-            Swal.fire("Atenção", "O comentário não pode ficar vazio.", "warning");
+            Swal.fire({
+                title: "Atenção",
+                text: "O comentário não pode ficar vazio.",
+                icon: "warning",
+                customClass: { popup: "comment-alert" },
+            });
             return;
         }
 
         try {
-            await api.put(`/events-comments/${commentId}`, null, {
+            await api.put(`/news-comments/${commentId}`, null, {
                 params: { new_content: editContent },
             });
 
@@ -106,7 +131,12 @@ export default function EventsComments({ eventId, currentUser }) {
             await loadComments();
         } catch (err) {
             console.error(err);
-            Swal.fire("Erro", "Não foi possível editar.", "error");
+            Swal.fire({
+                title: "Erro",
+                text: "Não foi possível editar o comentário.",
+                icon: "error",
+                customClass: { popup: "comment-alert" },
+            });
         }
     };
 
@@ -116,30 +146,39 @@ export default function EventsComments({ eventId, currentUser }) {
             text: "Essa ação não poderá ser desfeita.",
             icon: "warning",
             showCancelButton: true,
-            confirmButtonText: "Excluir",
+            confirmButtonText: "Sim, excluir",
             cancelButtonText: "Cancelar",
+            customClass: { popup: "comment-alert" },
         });
 
         if (!result.isConfirmed) return;
 
         try {
-            await api.delete(`/events-comments/${commentId}`);
+            await api.delete(`/news-comments/${commentId}`);
             await loadComments();
         } catch (err) {
             console.error(err);
-            Swal.fire("Erro", "Não foi possível excluir.", "error");
+            Swal.fire({
+                title: "Erro",
+                text: "Não foi possível excluir o comentário.",
+                icon: "error",
+                customClass: { popup: "comment-alert" },
+            });
         }
     };
 
     if (loading) {
-        return <p className="news-comments-loading">Carregando comentários...</p>;
+        return (
+            <p className="news-comments-loading">
+                Carregando comentários...
+            </p>
+        );
     }
 
     return (
         <div className="news-comments">
             <h2>Comentários</h2>
 
-            {/* NOVO COMENTÁRIO */}
             <div className="news-comments-form">
                 <textarea
                     placeholder="Escreva um comentário..."
@@ -158,11 +197,12 @@ export default function EventsComments({ eventId, currentUser }) {
                 </p>
             )}
 
-            {/* LISTA */}
             <div className="news-comments-list">
                 {comments.map((comment) => {
                     const isOwner = currentUser?.id === comment.author_id;
-                    const createdAt = new Date(comment.created_at).toLocaleString("pt-BR");
+                    const createdAt = new Date(
+                        comment.created_at
+                    ).toLocaleString("pt-BR");
                     const user = usersMap[comment.author_id];
 
                     return (
@@ -174,16 +214,21 @@ export default function EventsComments({ eventId, currentUser }) {
                                 <span>{createdAt}</span>
                             </div>
 
-                            {/* EDIÇÃO */}
                             {editingId === comment.id ? (
                                 <div className="news-comment-edit">
                                     <textarea
                                         value={editContent}
-                                        onChange={(e) => setEditContent(e.target.value)}
+                                        onChange={(e) =>
+                                            setEditContent(e.target.value)
+                                        }
                                     />
 
                                     <div className="news-comment-actions">
-                                        <button onClick={() => handleUpdate(comment.id)}>
+                                        <button
+                                            onClick={() =>
+                                                handleUpdate(comment.id)
+                                            }
+                                        >
                                             Salvar
                                         </button>
 
@@ -204,14 +249,15 @@ export default function EventsComments({ eventId, currentUser }) {
                                 </p>
                             )}
 
-                            {/* MENU DE 3 PONTOS */}
                             {isOwner && editingId !== comment.id && (
                                 <div className="news-comment-menu">
                                     <button
                                         className="news-comment-menu-btn"
                                         onClick={() =>
                                             setOpenMenuId(
-                                                openMenuId === comment.id ? null : comment.id
+                                                openMenuId === comment.id
+                                                    ? null
+                                                    : comment.id
                                             )
                                         }
                                     >
@@ -223,7 +269,9 @@ export default function EventsComments({ eventId, currentUser }) {
                                             <button
                                                 onClick={() => {
                                                     setEditingId(comment.id);
-                                                    setEditContent(comment.content);
+                                                    setEditContent(
+                                                        comment.content
+                                                    );
                                                     setOpenMenuId(null);
                                                 }}
                                             >

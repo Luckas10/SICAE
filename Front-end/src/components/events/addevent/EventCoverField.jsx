@@ -126,7 +126,7 @@ export default function EventCoverField({ value, onChange }) {
             </div>
 
             {fileName && <span className="image_name">{fileName}</span>}
-
+            
             {imageSrc && (
                 <div className="crop-wrapper">
                     <ReactCrop

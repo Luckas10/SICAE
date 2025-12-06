@@ -2,16 +2,16 @@ import { useParams } from "react-router-dom";
 import Header from "../components/general/Header.jsx";
 import Sidebar from "../components/general/Sidebar.jsx";
 
-import NewsHeader from "../components/news/newsDetails/NewsHeader.jsx";
-import NewsCover from "../components/news/newsDetails/NewsCover.jsx";
-import NewsContent from "../components/news/newsDetails/NewsContent.jsx";
-import NewsActions from "../components/news/newsDetails/NewsActions.jsx";
+import NewsHeader from "../components/news/newsdetails/NewsHeader.jsx";
+import NewsCover from "../components/news/newsdetails/NewsCover.jsx";
+import NewsContent from "../components/news/newsdetails/NewsContent.jsx";
+import NewsActions from "../components/news/newsdetails/NewsActions.jsx";
 
-import useNewsDetails from "../components/news/newsDetails/useNewsDetails.js"; 
+import useNewsDetails from "../components/news/newsdetails/useNewsDetails.js"; 
 import "./News.css";
 
 import { useUser } from "../context/UserContext.jsx";
-import NewsComments from "../components/news/NewsComments.jsx";
+import NewsComments from "../components/news/newsdetails/NewsComments.jsx";
 
 export default function NewsDetails() {
 

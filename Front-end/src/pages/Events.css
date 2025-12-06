@@ -128,16 +128,18 @@
 .capa {
     border-radius: 8px;
     border: 1px solid grey;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
     display: inline-block;
     height: 50px;
     margin: 5px 0;
     padding: 10px;
     width: 100%;
+    outline: none;
+    cursor:auto;
 }
 
 input#titulo {
     padding-left: 35px;
+    outline: none;
 }
 
 .addEvents-content #conteudo {
@@ -153,7 +155,7 @@ input#titulo {
     border-radius: 10px;
     color: white;
     border: 1px solid grey;
-    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+
 }
 
 .addEvents-content form button:hover {
@@ -227,14 +229,15 @@ input[type="file"] {
     margin-inline: auto;
     margin-block: 0.5rem;
     border-radius: 10px;
+    border: none;
     color: white;
-    border: 1px solid grey;
-    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+
 }
 
 .input-label {
     margin-left: 35px;
     cursor: pointer;
+    border: none;
 }
 
 .image_name {

@@ -1,12 +1,11 @@
 import "./Dashboard.css";
 import Header from "../components/general/Header.jsx";
 import Sidebar from "../components/general/Sidebar.jsx";
+import { useEffect, useState } from "react";
+import api from "../services/api.js";
 
 import { fas } from "@fortawesome/free-solid-svg-icons";
 
-import img1 from "../assets/carousel/imagem1.png";
-import img2 from "../assets/carousel/imagem2.jpeg";
-import img3 from "../assets/carousel/imagem3.jpg";
 import card1 from "../assets/card1.jpg";
 import card2 from "../assets/card2.jpg";
 import card3 from "../assets/card3.jpg";
@@ -16,29 +15,48 @@ import NotificationBell from "../components/dashboard/NotificationBell.jsx";
 import DashboardCard from "../components/dashboard/DashboardCard.jsx";
 
 export default function Dashboard() {
-    const carouselSlides = [
-        {
-            image: img1,
-            alt: "Primeiro slide",
-            title: "IF BRILHA NO INTERCAMPI",
-            description: "ATLETAS DO SICAE BRILHARAM ESTA NOITE, FAZENDO UM ESPETÁCULO EM SEUS RESPECTIVOS ESPORTES",
-            date: "17 DE NOVEMBRO DE 2025",
-        },
-        {
-            image: img2,
-            alt: "Segundo slide",
-            title: "CIRILO",
-            description: "MENINO DO CARROSSEL",
-            date: "18 DE NOVEMBRO DE 2025",
-        },
-        {
-            image: img3,
-            alt: "Terceiro slide",
-            title: "ESPORTES",
-            description: "OLHA AQUI OS ESPORTES",
-            date: "17 DE NOVEMBRO DE 2025",
-        },
-    ];
+    const [topNews, setTopNews] = useState([]);
+
+    useEffect(() => {
+    async function fetchTopNews() {
+        try {
+            const response = await api.get("/news");
+            const raw = response.data;
+
+            const list =
+                Array.isArray(raw)
+                    ? raw
+                    : Array.isArray(raw.data)
+                        ? raw.data
+                        : Array.isArray(raw.news)
+                            ? raw.news
+                            : [];
+
+            const top = list
+                .filter(n => n.priority === "top")
+                .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+                .slice(0, 5); // quantas notícias você quiser no carrossel
+
+            setTopNews(top);
+
+        } catch (err) {
+            console.error("Erro ao buscar notícias:", err);
+            setTopNews([]);
+        }
+    }
+
+    fetchTopNews();
+    }, []);
+
+    const newsSlides = topNews.map(news => ({
+        id: news.id,
+        image: news.cover_image,   // coloque aqui o nome do campo da imagem
+        alt: news.title,
+        title: news.title,
+        description: news.text || news.subtitle || "",
+        date: new Date(news.created_at).toLocaleDateString("pt-BR"),
+    }));
+
 
     const dashboardCards = [
         {
@@ -74,7 +92,7 @@ export default function Dashboard() {
                 <Sidebar />
                 <div className="dashboard-content">
                     <div className="main-content">
-                        <HighlightCarousel slides={carouselSlides} />
+                        <HighlightCarousel slides={newsSlides} />
                         <NotificationBell />
                     </div>
 

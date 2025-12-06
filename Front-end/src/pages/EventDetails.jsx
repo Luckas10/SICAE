@@ -1,16 +1,22 @@
+// src/pages/EventDetails.jsx
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Header from "../components/general/Header.jsx";
 import Sidebar from "../components/general/Sidebar.jsx";
 import api from "../services/api";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { fas } from "@fortawesome/free-solid-svg-icons";
 import Swal from "sweetalert2";
 import "./Events.css";
+
 import {
     CATEGORY_CONFIG,
     DEFAULT_CATEGORY,
 } from "../constants/eventCategories";
+
+import EventDetailsHeader from "../components/events/eventdetails/EventDetailsHeader.jsx";
+import EventCover from "../components/events/eventdetails/EventCover.jsx";
+import EventMeta from "../components/events/eventdetails/EventMeta.jsx";
+import EventDescription from "../components/events/eventdetails/EventDescription.jsx";
+import EventActions from "../components/events/eventdetails/EventActions.jsx";
 
 export default function EventDetails() {
     const { id } = useParams();
@@ -49,8 +55,8 @@ export default function EventDetails() {
             confirmButtonText: "Sim, excluir",
             cancelButtonText: "Cancelar",
             customClass: {
-                popup: "logout-alert"
-            }
+                popup: "logout-alert",
+            },
         });
 
         if (!result.isConfirmed) return;
@@ -64,12 +70,11 @@ export default function EventDetails() {
                 title: "Evento excluído",
                 text: "O evento foi excluído com sucesso.",
                 customClass: {
-                    popup: "success-alert"
-                }
+                    popup: "success-alert",
+                },
             });
 
             navigate("/events");
-
         } catch (err) {
             console.error("Erro ao excluir evento:", err);
 
@@ -78,14 +83,13 @@ export default function EventDetails() {
                 title: "Erro ao excluir",
                 text: "Não foi possível excluir o evento. Tente novamente.",
                 customClass: {
-                    popup: "error-alert"
-                }
+                    popup: "error-alert",
+                },
             });
         } finally {
             setDeleting(false);
         }
     };
-
 
     if (loading) {
         return <p className="event-details-loading">Carregando evento...</p>;
@@ -129,7 +133,6 @@ export default function EventDetails() {
         });
     }
 
-
     return (
         <>
             <Header />
@@ -139,90 +142,34 @@ export default function EventDetails() {
 
                 <div className="events-content">
                     <div className="event-details">
-                        <div className="event-details-header">
-                            <span className="event-category-chip sportsNewsId">
-                                <FontAwesomeIcon icon={cfg.icon} className={cfg.className} />{" "}
-                                {cfg.label}
-                            </span>
-                            <h1>{event.title}</h1>
-                            <p className="event-details-subtitle">
-                                Publicado por {event.creator_name} • 
-                                {publishedDate && (
-                                    <>
-                                        {" "}em {publishedDate}
-                                        {publishedTime && <> às {publishedTime}</>}
-                                    </>
-                                )}
-                            </p>
+                        <EventDetailsHeader
+                            categoryConfig={cfg}
+                            title={event.title}
+                            creatorName={event.creator_name}
+                            publishedDate={publishedDate}
+                            publishedTime={publishedTime}
+                        />
 
-                        </div>
-
-                        {event.cover_image && (
-                            <div className="event-details-cover">
-                                <img src={event.cover_image} alt={event.title} />
-                            </div>
-                        )}
+                        <EventCover
+                            src={event.cover_image}
+                            alt={event.title}
+                        />
 
                         <div className="event-details-body">
-                            <div className="event-meta">
-                                {eventDate && (
-                                    <div className="event-meta-item">
-                                        <span className="event-meta-label">Data do evento</span>
-                                        <span className="event-meta-value">{eventDate}</span>
-                                    </div>
-                                )}
+                            <EventMeta
+                                eventDate={eventDate}
+                                eventTime={eventTime}
+                                localId={event.local_id}
+                            />
 
-                                {eventTime && (
-                                    <div className="event-meta-item">
-                                        <span className="event-meta-label">Horário do evento</span>
-                                        <span className="event-meta-value">{eventTime}</span>
-                                    </div>
-                                )}
+                            <EventDescription description={event.description} />
 
-                                {event.local_id && (
-                                    <div className="event-meta-item">
-                                        <span className="event-meta-label">Local</span>
-                                        <span className="event-meta-value">
-                                            Local #{event.local_id}
-                                        </span>
-                                    </div>
-                                )}
-                            </div>
-
-                            <div className="event-details-info">
-                                <h2>Descrição</h2>
-                                <p>
-                                    {event.description && event.description.trim().length > 0
-                                        ? event.description
-                                        : "Nenhuma descrição foi cadastrada para este evento."}
-                                </p>
-                            </div>
-
-                            <div className="event-actions">
-                                <button
-                                    type="button"
-                                    className="event-button-secondary"
-                                    onClick={() => navigate("/events")}
-                                >
-                                    Voltar para lista
-                                </button>
-                                <button
-                                    type="button"
-                                    className="event-button-secondary"
-                                    onClick={() => navigate("/events/games")}
-                                >
-                                    Adicionar jogo
-                                </button>
-
-                                <button
-                                    type="button"
-                                    className="event-button-danger"
-                                    onClick={handleDelete}
-                                    disabled={deleting}
-                                >
-                                    {deleting ? "Excluindo..." : "Excluir evento"}
-                                </button>
-                            </div>
+                            <EventActions
+                                onBackToList={() => navigate("/events")}
+                                onAddGame={() => navigate("/events/games")}
+                                onDelete={handleDelete}
+                                deleting={deleting}
+                            />
                         </div>
                     </div>
                 </div>

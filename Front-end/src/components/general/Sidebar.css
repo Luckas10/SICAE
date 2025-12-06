@@ -102,11 +102,6 @@
   background: rgba(255, 255, 255, 0.06);
 }
 
-:root[data-theme='dark'] .sidebar, :root[data-theme='dark'] .logout {
-  background-color: #06200d;
-  border-color: #0C3617;
-}
-
 @media (max-width: 850px) {
   .sidebar {
     width: 70px;

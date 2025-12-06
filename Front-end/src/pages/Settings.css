@@ -120,38 +120,6 @@
     }
 }
 
-:root[data-theme='dark'] .settings-header p {
-    color: #9ca3af;
-}
-
-:root[data-theme='dark'] .settings-header h1 {
-    color: #ffffff;
-}
-
-:root[data-theme='dark'] .settings-page {
-    background-color: #031001;
-}
-
-:root[data-theme='dark'] .settings-card {
-    background-color: #202020;
-}
-
-:root[data-theme='dark'] .settings-card p {
-    color: #9ca3af;
-}
-
-:root[data-theme='dark'] .settings-card h2 {
-    color: #ffffff;
-}
-
-:root[data-theme='dark'] .theme-status {
-    color: #9ca3af;
-}
-
-:root[data-theme='dark'] .theme-status strong{
-    color: #E3B52E;
-}
-
 .settings-page,
 .settings-card,
 .settings-header h1,

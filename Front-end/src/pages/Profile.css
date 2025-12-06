@@ -181,64 +181,6 @@
     color: #111827;
 }
 
-:root[data-theme="dark"] .profile-page {
-    background-color: #0a0a0a;
-    color: #e5e7eb;
-}
-
-:root[data-theme="dark"] .profile-card {
-    background-color: #333333;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
-}
-
-:root[data-theme="dark"] .profile-name {
-    color: #ffffff;
-}
-
-:root[data-theme="dark"] .profile-info-card {
-    background: #202020;
-}
-
-:root[data-theme="dark"] .profile-info-label {
-    color: #9ca3af;
-}
-
-:root[data-theme="dark"] .profile-info-value {
-    color: #e5e7eb;
-}
-
-:root[data-theme="dark"] .edit-avatar-btn {
-    background: #14532d;
-    color: #ffffff;
-}
-
-:root[data-theme="dark"] .modal-overlay {
-    background: rgba(0, 0, 0, 0.75);
-}
-
-:root[data-theme="dark"] .modal-content {
-    background: #333333;
-    color: #e5e7eb;
-}
-
-:root[data-theme="dark"] .modal-btn.cancel {
-    background: #1f2937;
-    color: #e5e7eb;
-}
-
-:root[data-theme="dark"] .modal-btn.save {
-    background: #14532d;
-    color: white;
-}
-
-:root[data-theme="dark"] .crop-container img {
-    filter: brightness(0.9);
-}
-
-:root[data-theme="dark"] .profile-info-value {
-    color: #f3f4f6;
-}
-
 @media (max-width: 900px) {
     .profile-card {
         width: 100%;

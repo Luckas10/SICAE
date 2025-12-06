@@ -72,7 +72,7 @@
 }
 
 .atleta-card:hover {
-    transform: translateY(-3px);
+    transform: translateY(-1px);
     filter: brightness(0.9);
 }
 

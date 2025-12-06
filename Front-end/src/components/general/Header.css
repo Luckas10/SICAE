@@ -48,10 +48,6 @@
     background-color: white;
 }
 
-:root[data-theme='dark'] .header {
-    background-color: #06200d;
-}
-
 /* ====== RESPONSIVIDADE ====== */
 @media (max-width: 900px) {
     .header {

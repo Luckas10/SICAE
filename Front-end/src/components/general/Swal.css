@@ -106,12 +106,6 @@ div:where(.swal2-icon).swal2-success [class^=swal2-success-line] {
     color: #e4e7ff;
 }
 
-.swal2-timer-progress-bar {
-    background: linear-gradient(90deg, #4A4DFF, #6A7CFF);
-    height: 4px !important;
-    border-radius: 10px;
-}
-
 @keyframes toast-in {
     from {
         opacity: 0;

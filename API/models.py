@@ -66,9 +66,13 @@ class Event(SQLModel, table=True):
 
     creator: Optional[User] = Relationship(back_populates="events")
     local: Optional[Local] = Relationship(back_populates="events")
-    comments: List["EventComment"] = Relationship(back_populates="event")
     ratings: List["EventRating"] = Relationship(back_populates="event")
     registrations: List["EventRegistration"] = Relationship(back_populates="event")
+    
+    comments: List["EventComment"] = Relationship(
+        back_populates="event",
+        sa_relationship_kwargs={"cascade": "all, delete"}
+    )
 
 class LocalReservation(SQLModel, table=True):
     __tablename__ = "local_reservations"
@@ -88,12 +92,23 @@ class EventComment(SQLModel, table=True):
     __tablename__ = "event_comments"
 
     id: Optional[int] = Field(default=None, primary_key=True)
-    event_id: int = Field(foreign_key="events.id")
-    author_id: int = Field(foreign_key="users.id")
+
+    event_id: int = Field(
+        foreign_key="events.id",
+        nullable=False,
+        ondelete="CASCADE"
+    )
+
+    author_id: int = Field(
+        foreign_key="users.id",
+        nullable=False,
+        ondelete="CASCADE"
+    )
+
     content: str
     created_at: datetime = Field(default_factory=now_brazil_timezone)
 
-    event: Optional[Event] = Relationship(back_populates="comments")
+    event: Optional["Event"] = Relationship(back_populates="comments")
     author: Optional[User] = Relationship(back_populates="comments")
 
 class EventRating(SQLModel, table=True):
@@ -143,7 +158,11 @@ class NewsArticle(SQLModel, table=True):
 
     creator: Optional[User] = Relationship(back_populates="news_articles")
 
-    comments: List["NewsComment"] = Relationship(back_populates="article")
+    comments: List["NewsComment"] = Relationship(
+        back_populates="article",
+        sa_relationship_kwargs={"cascade": "all, delete"}
+    )
+
     ratings: List["NewsRating"] = Relationship(back_populates="article")
     registrations: List["NewsRegistration"] = Relationship(back_populates="article")
 
@@ -151,14 +170,25 @@ class NewsComment(SQLModel, table=True):
     __tablename__ = "news_comments"
 
     id: Optional[int] = Field(default=None, primary_key=True)
-    article_id: int = Field(foreign_key="news_articles.id")
-    author_id: int = Field(foreign_key="users.id")
+
+    article_id: int = Field(
+        foreign_key="news_articles.id",
+        nullable=False,
+        ondelete="CASCADE"
+    )
+
+    author_id: int = Field(
+        foreign_key="users.id",
+        nullable=False,
+        ondelete="CASCADE"
+    )
+
     content: str
     created_at: datetime = Field(default_factory=now_brazil_timezone)
 
-    article: Optional[NewsArticle] = Relationship(back_populates="comments")
+    article: Optional["NewsArticle"] = Relationship(back_populates="comments")
     author: Optional[User] = Relationship()
-
+    
 class NewsRating(SQLModel, table=True):
     __tablename__ = "news_ratings"
 

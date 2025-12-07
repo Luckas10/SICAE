@@ -5,7 +5,6 @@ import Background from "../components/auth/Background";
 import LoginRegisterContainer from "../components/auth/LoginRegisterContainer";
 import { loginWithPassword, registerUser } from "../services/auth";
 import "../style.css";
-import "../components/general/Swal.css";
 
 import { useUser } from "../context/UserContext";
 

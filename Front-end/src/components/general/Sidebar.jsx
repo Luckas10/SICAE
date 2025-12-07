@@ -3,7 +3,6 @@ import { fas } from "@fortawesome/free-solid-svg-icons";
 import { NavLink, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import "./Sidebar.css";
-import "./Swal.css";
 
 import { useUser } from "../../context/UserContext";
 

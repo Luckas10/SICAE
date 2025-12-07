@@ -3,6 +3,7 @@ import { UserProvider } from "./context/UserContext";
 import App from './App.jsx'
 import "./style.css";
 import "./DarkTheme.css";
+import "./Swal.css"
 
 
 createRoot(document.getElementById('root')).render(

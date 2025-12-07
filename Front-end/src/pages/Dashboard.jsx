@@ -18,45 +18,55 @@ export default function Dashboard() {
     const [topNews, setTopNews] = useState([]);
 
     useEffect(() => {
-    async function fetchTopNews() {
-        try {
-            const response = await api.get("/news");
-            const raw = response.data;
+        async function fetchTopNews() {
+            try {
+                const response = await api.get("/news");
+                const raw = response.data;
 
-            const list =
-                Array.isArray(raw)
-                    ? raw
-                    : Array.isArray(raw.data)
-                        ? raw.data
-                        : Array.isArray(raw.news)
-                            ? raw.news
-                            : [];
+                const list =
+                    Array.isArray(raw)
+                        ? raw
+                        : Array.isArray(raw.data)
+                            ? raw.data
+                            : Array.isArray(raw.news)
+                                ? raw.news
+                                : [];
 
-            const top = list
-                .filter(n => n.priority === "top")
-                .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
-                .slice(0, 5); // quantas notícias você quiser no carrossel
+                const top = list
+                    .filter(n => n.priority === "top")
+                    .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+                    .slice(0, 5);
 
-            setTopNews(top);
+                setTopNews(top);
 
-        } catch (err) {
-            console.error("Erro ao buscar notícias:", err);
-            setTopNews([]);
+            } catch (err) {
+                console.error("Erro ao buscar notícias:", err);
+                setTopNews([]);
+            }
         }
-    }
 
-    fetchTopNews();
+        fetchTopNews();
     }, []);
 
-    const newsSlides = topNews.map(news => ({
-        id: news.id,
-        image: news.cover_image,   // coloque aqui o nome do campo da imagem
-        alt: news.title,
-        title: news.title,
-        description: news.text || news.subtitle || "",
-        date: new Date(news.created_at).toLocaleDateString("pt-BR"),
-    }));
+    const newsSlides = topNews.map((news) => {
+        const formattedDate =
+            news.created_at
+                ? new Date(news.created_at).toLocaleDateString("pt-BR", {
+                    day: "2-digit",
+                    month: "long",
+                    year: "numeric",
+                })
+                : "";
 
+        return {
+            id: news.id,
+            image: news.cover_image, // campo da imagem
+            alt: news.title,
+            title: news.title,
+            description: news.text || news.subtitle || "",
+            date: formattedDate,
+        };
+    });
 
     const dashboardCards = [
         {

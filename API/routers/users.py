@@ -1,11 +1,11 @@
 from fastapi import APIRouter, HTTPException, status, Depends
 from fastapi.security import OAuth2PasswordRequestForm, OAuth2PasswordBearer
-from sqlmodel import select
+from sqlmodel import select, func
 from pydantic import BaseModel
 from typing import List
 from passlib.context import CryptContext
 from database import SessionDep
-from models import User, Role
+from models import User, Role, EventComment, NewsComment
 
 from routers.auth import get_current_user
 
@@ -108,14 +108,29 @@ def deletar_user(
 
 
 @router.get("/me")
-def get_me(current_user: User = Depends(get_current_user)):
+def get_me(
+    session: SessionDep,
+    current_user: User = Depends(get_current_user)
+):
+    # Conta comentários em eventos
+    event_comments = session.exec(
+        select(func.count(EventComment.id)).where(EventComment.author_id == current_user.id)
+    ).one()
+
+    # Conta comentários em notícias
+    news_comments = session.exec(
+        select(func.count(NewsComment.id)).where(NewsComment.author_id == current_user.id)
+    ).one()
+
     return {
         "id": current_user.id,
         "full_name": current_user.full_name,
         "email": current_user.email,
         "profile_image": current_user.profile_image,
+        "total_comments": event_comments + news_comments,
+        "event_comments": event_comments,
+        "news_comments": news_comments,
     }
-
 
 @router.put("/me/avatar")
 def update_my_avatar(

@@ -18,12 +18,13 @@ export function UserProvider({ children }) {
     }, [theme]);
 
     const fetchCurrentUser = async () => {
-        const token = localStorage.getItem("token");
-        if (!token) {
-            setUser(null);
-            setLoadingUser(false);
-            return;
+        try {
+            const response = await api.get("/users/me");
+            setUser(response.data);
+        } catch (err) {
+            console.error("Erro ao atualizar usuário", err);
         }
+
 
         try {
             setLoadingUser(true);
@@ -105,6 +106,7 @@ export function UserProvider({ children }) {
 
 export function useUser() {
     const ctx = useContext(UserContext);
+
     if (!ctx) {
         throw new Error("useUser deve ser usado dentro de <UserProvider>");
     }

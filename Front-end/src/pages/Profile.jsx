@@ -11,6 +11,12 @@ import ProfileInfoGrid from "../components/profile/ProfileInfoGrid.jsx";
 
 export default function Profile() {
     const { user, loadingUser } = useUser();
+    const [commentsCount, setCommentsCount] = useState(0);
+
+    useEffect(() => {
+        if (!user) return;
+        setCommentsCount(user.total_comments || 0);
+    }, [user]);
 
     const [username, setUsername] = useState("Nome do usuário");
     const [email, setEmail] = useState("");
@@ -19,7 +25,7 @@ export default function Profile() {
         if (!user) return;
         setUsername(user.full_name || "Nome do usuário");
         setEmail(user.email || "");
-    }, [user]);
+    }, []);
 
     const profileInfoItems = [
         {
@@ -32,7 +38,7 @@ export default function Profile() {
         },
         {
             label: "Comentários feitos",
-            value: "777",
+            value: commentsCount,
         },
         {
             label: "Eventos participados",

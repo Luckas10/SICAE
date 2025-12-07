@@ -1,20 +1,22 @@
-import './News.css';
+import "./News.css";
 import { NavLink } from "react-router-dom";
-import Header from '../components/general/Header.jsx'
-import Sidebar from '../components/general/Sidebar.jsx';
+import { useEffect, useState } from "react";
+
+import Header from "../components/general/Header.jsx";
+import Sidebar from "../components/general/Sidebar.jsx";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 
-import TopCard from '../components/news/TopCard.jsx';
-import CenterCard from '../components/news/CenterCard.jsx';
-import BottomCard from '../components/news/BottomCard.jsx';
+import TopCard from "../components/news/TopCard.jsx";
+import CenterCard from "../components/news/CenterCard.jsx";
+import BottomCard from "../components/news/BottomCard.jsx";
 
-import { useEffect, useState } from 'react';
-import api from '../services/api';
+import api from "../services/api";
+
+import CenterSlider from "../components/news/CenterSlider.jsx";
 
 export default function News() {
-
     const [news, setNews] = useState([]);
 
     useEffect(() => {
@@ -23,14 +25,13 @@ export default function News() {
                 const response = await api.get("/news");
                 const raw = response.data;
 
-                const list =
-                    Array.isArray(raw)
-                        ? raw
-                        : Array.isArray(raw.data)
-                            ? raw.data
-                            : Array.isArray(raw.news)
-                                ? raw.news
-                                : [];
+                const list = Array.isArray(raw)
+                    ? raw
+                    : Array.isArray(raw?.data)
+                        ? raw.data
+                        : Array.isArray(raw?.news)
+                            ? raw.news
+                            : [];
 
                 setNews(list);
             } catch (err) {
@@ -43,25 +44,24 @@ export default function News() {
     }, []);
 
     const topNews = news
-        .filter(n => n.priority === "top")
+        .filter((n) => n.priority === "top")
         .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
         .slice(0, 2);
 
-    const centerNews = news.filter(n => n.priority === "center");
+    const centerNews = news.filter((n) => n.priority === "center");
 
     const bottomNews = news
-        .filter(n => !n.priority || n.priority === "none")
+        .filter((n) => !n.priority || n.priority === "none")
         .sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 
     return (
         <>
             <Header />
 
-            <div className='news-page'>
+            <div className="news-page">
                 <Sidebar />
 
                 <div className="news-content">
-
                     <div className="news-nav">
                         <div className="buscar-content">
                             <label htmlFor="buscar">
@@ -71,36 +71,30 @@ export default function News() {
                                 />
                             </label>
 
-                            <input
-                                id='buscar'
-                                type="text"
-                                placeholder="Buscar..."
-                            />
+                            <input id="buscar" type="text" placeholder="Buscar..." />
                         </div>
 
-                        <NavLink to="./add" id='buttonAdd'>
+                        <NavLink to="./add" id="buttonAdd">
                             <button>+ Adicionar notícia</button>
                         </NavLink>
                     </div>
 
+                    {/* Notícias destaque (topo) */}
                     <div className="main-content">
-                        {topNews.map(item => (
+                        {topNews.map((item) => (
                             <TopCard key={item.id} data={item} />
                         ))}
                     </div>
+                    
+                    {/* Notícias do centro */}
+                    <CenterSlider news={centerNews} />
 
-                    <div className="sliding-cards">
-                        {centerNews.map(item => (
-                            <CenterCard key={item.id} data={item} />
-                        ))}
-                    </div>
-
+                    {/* Notícias mais recentes/sem prioridade */}
                     <div className="bottom-content">
-                        {bottomNews.map(item => (
+                        {bottomNews.map((item) => (
                             <BottomCard key={item.id} data={item} />
                         ))}
                     </div>
-
                 </div>
             </div>
         </>

@@ -33,41 +33,42 @@ class GameRead(BaseModel):
     
 
 
-
-
 router = APIRouter(prefix="/games", tags=["Jogos"])
+
 
 @router.get("", response_model=list[Game])
 def listar_games(
     session: SessionDep,
-    current_user: User = Depends(get_current_user)
+    current_user: User = Depends(get_current_user),
 ):
     return session.exec(select(Game)).all()
 
 
-@router.get("/{id}", response_model=GameRead)
-def obter_game(
-    id: int,
+# ⬇️ MOVER PARA CIMA — ESSENCIAL!
+@router.get("/event/{event_id}", response_model=list[GameRead])
+def listar_games_do_evento(
+    event_id: int,
     session: SessionDep,
-    current_user: User = Depends(get_current_user)
+    current_user: User = Depends(get_current_user),
 ):
-    game = session.get(Game, id)
-    if not game:
-        raise HTTPException(404, "Jogo não encontrado")
+    games = session.exec(select(Game).where(Game.event_id == event_id)).all()
 
-    return GameRead(
-        id=game.id,
-        event_id=game.event_id,
-        team1=game.team1,
-        team2=game.team2,
-        game_date=game.game_date,
-        game_time=game.game_time,
-        location=game.location,
-        notes=game.notes,
-        created_at=game.created_at,
-        creator_id=game.creator_id,
-        creator_name=game.creator.full_name,
-    )
+    return [
+        GameRead(
+            id=g.id,
+            event_id=g.event_id,
+            team1=g.team1,
+            team2=g.team2,
+            game_date=g.game_date,
+            game_time=g.game_time,
+            location=g.location,
+            notes=g.notes,
+            created_at=g.created_at,
+            creator_id=g.creator_id,
+            creator_name=g.creator.full_name if g.creator else None,
+        )
+        for g in games
+    ]
 
 
 
@@ -75,11 +76,11 @@ def obter_game(
 def criar_game(
     game: GameCreate,
     session: SessionDep,
-    current_user: User = Depends(get_current_user)
+    current_user: User = Depends(get_current_user),
 ):
     novo = Game(
         **game.dict(),
-        creator_id=current_user.id
+        creator_id=current_user.id,
     )
     session.add(novo)
     session.commit()
@@ -87,13 +88,12 @@ def criar_game(
     return novo
 
 
-
 @router.put("/{id}", response_model=Game)
 def atualizar_game(
     id: int,
     game_data: GameCreate,
     session: SessionDep,
-    current_user: User = Depends(get_current_user)
+    current_user: User = Depends(get_current_user),
 ):
     game = session.get(Game, id)
     if not game:
@@ -112,7 +112,7 @@ def atualizar_game(
 def deletar_game(
     id: int,
     session: SessionDep,
-    current_user: User = Depends(get_current_user)
+    current_user: User = Depends(get_current_user),
 ):
     game = session.get(Game, id)
     if not game:
@@ -121,15 +121,3 @@ def deletar_game(
     session.delete(game)
     session.commit()
     return {"message": "Jogo excluído com sucesso"}
-
-@router.get("/event/{event_id}", response_model=list[Game])
-def listar_games_do_evento(
-    event_id: int,
-    session: SessionDep,
-    current_user: User = Depends(get_current_user)
-):
-    jogos = session.exec(
-        select(Game).where(Game.event_id == event_id)
-    ).all()
-
-    return jogos

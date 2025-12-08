@@ -19,7 +19,7 @@ export default function EventActions({
                 className="event-button-secondary"
                 onClick={onAddGame}
             >
-                Adicionar jogo
+                + Adicionar Jogo
             </button>
 
             <button

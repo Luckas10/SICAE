@@ -1,6 +1,6 @@
 // src/pages/EventDetails.jsx
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import Header from "../components/general/Header.jsx";
 import Sidebar from "../components/general/Sidebar.jsx";
 import api from "../services/api";
@@ -171,16 +171,20 @@ export default function EventDetails() {
                             <EventDescription description={event.description} />
 
                             <EventActions
-                                onBackToList={() => navigate("/events")}
-                                onAddGame={() => navigate("/events/games")}
-                                onDelete={handleDelete}
-                                deleting={deleting}
-                            />
-                        </div>
-                        
-                        
+                            onBackToList={() => navigate("/events")}
+                            onAddGame={() => navigate(`/events/${event.id}/games`)}
+                            onDelete={handleDelete}
+                            deleting={deleting}
+                        />
 
-                        <EventsComments eventId={event.id} currentUser={user}/>
+                        </div>
+
+                        <EventGames eventId={event.id} />
+
+                        <EventsComments
+                            eventId={event.id}
+                            currentUser={user}
+                        />
                     </div>
                 </div>
             </div>

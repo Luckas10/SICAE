@@ -11,9 +11,11 @@ class Role(str, Enum):
     servidor = "Servidor"
     gestor = "Gestor"
     admin = "Admin"
-    
+
+
 def now_brazil_timezone():
     return datetime.now(timezone.utc) - timedelta(hours=3)
+
 
 class User(SQLModel, table=True):
     __tablename__ = "users"
@@ -49,6 +51,7 @@ class Local(SQLModel, table=True):
     events: List["Event"] = Relationship(back_populates="local")
     reservations: List["LocalReservation"] = Relationship(back_populates="local")
 
+
 class Event(SQLModel, table=True):
     __tablename__ = "events"
 
@@ -71,12 +74,16 @@ class Event(SQLModel, table=True):
     local: Optional[Local] = Relationship(back_populates="events")
     ratings: List["EventRating"] = Relationship(back_populates="event")
     registrations: List["EventRegistration"] = Relationship(back_populates="event")
-    
-    
     comments: List["EventComment"] = Relationship(
         back_populates="event",
-        sa_relationship_kwargs={"cascade": "all, delete"}
+        sa_relationship_kwargs={"cascade": "all, delete"},
     )
+    games: List["Game"] = Relationship(back_populates="event")
+
+    comments: List["EventComment"] = Relationship(
+        back_populates="event", sa_relationship_kwargs={"cascade": "all, delete"}
+    )
+
 
 class LocalReservation(SQLModel, table=True):
     __tablename__ = "local_reservations"
@@ -92,28 +99,22 @@ class LocalReservation(SQLModel, table=True):
     local: Optional[Local] = Relationship(back_populates="reservations")
     user: Optional[User] = Relationship()
 
+
 class EventComment(SQLModel, table=True):
     __tablename__ = "event_comments"
 
     id: Optional[int] = Field(default=None, primary_key=True)
 
-    event_id: int = Field(
-        foreign_key="events.id",
-        nullable=False,
-        ondelete="CASCADE"
-    )
+    event_id: int = Field(foreign_key="events.id", nullable=False, ondelete="CASCADE")
 
-    author_id: int = Field(
-        foreign_key="users.id",
-        nullable=False,
-        ondelete="CASCADE"
-    )
+    author_id: int = Field(foreign_key="users.id", nullable=False, ondelete="CASCADE")
 
     content: str
     created_at: datetime = Field(default_factory=now_brazil_timezone)
 
     event: Optional["Event"] = Relationship(back_populates="comments")
     author: Optional[User] = Relationship(back_populates="comments")
+
 
 class EventRating(SQLModel, table=True):
     __tablename__ = "event_ratings"
@@ -126,6 +127,7 @@ class EventRating(SQLModel, table=True):
 
     event: Optional[Event] = Relationship(back_populates="ratings")
 
+
 class EventRegistration(SQLModel, table=True):
     __tablename__ = "event_registrations"
 
@@ -135,6 +137,7 @@ class EventRegistration(SQLModel, table=True):
     registered_at: datetime = Field(default_factory=now_brazil_timezone)
 
     event: Optional[Event] = Relationship(back_populates="registrations")
+
 
 class Notification(SQLModel, table=True):
     __tablename__ = "notifications"
@@ -146,6 +149,7 @@ class Notification(SQLModel, table=True):
     created_at: datetime = Field(default_factory=now_brazil_timezone)
 
     user: Optional[User] = Relationship(back_populates="notifications")
+
 
 class NewsArticle(SQLModel, table=True):
     __tablename__ = "news_articles"
@@ -163,12 +167,12 @@ class NewsArticle(SQLModel, table=True):
     creator: Optional[User] = Relationship(back_populates="news_articles")
 
     comments: List["NewsComment"] = Relationship(
-        back_populates="article",
-        sa_relationship_kwargs={"cascade": "all, delete"}
+        back_populates="article", sa_relationship_kwargs={"cascade": "all, delete"}
     )
 
     ratings: List["NewsRating"] = Relationship(back_populates="article")
     registrations: List["NewsRegistration"] = Relationship(back_populates="article")
+
 
 class NewsComment(SQLModel, table=True):
     __tablename__ = "news_comments"
@@ -176,23 +180,18 @@ class NewsComment(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
 
     article_id: int = Field(
-        foreign_key="news_articles.id",
-        nullable=False,
-        ondelete="CASCADE"
+        foreign_key="news_articles.id", nullable=False, ondelete="CASCADE"
     )
 
-    author_id: int = Field(
-        foreign_key="users.id",
-        nullable=False,
-        ondelete="CASCADE"
-    )
+    author_id: int = Field(foreign_key="users.id", nullable=False, ondelete="CASCADE")
 
     content: str
     created_at: datetime = Field(default_factory=now_brazil_timezone)
 
     article: Optional["NewsArticle"] = Relationship(back_populates="comments")
     author: Optional[User] = Relationship()
-    
+
+
 class NewsRating(SQLModel, table=True):
     __tablename__ = "news_ratings"
 
@@ -204,6 +203,7 @@ class NewsRating(SQLModel, table=True):
 
     article: Optional[NewsArticle] = Relationship(back_populates="ratings")
 
+
 class NewsRegistration(SQLModel, table=True):
     __tablename__ = "news_registrations"
 
@@ -213,6 +213,7 @@ class NewsRegistration(SQLModel, table=True):
     registered_at: datetime = Field(default_factory=now_brazil_timezone)
 
     article: Optional[NewsArticle] = Relationship(back_populates="registrations")
+
 
 class AuditLog(SQLModel, table=True):
     __tablename__ = "audit_log"
@@ -226,10 +227,11 @@ class AuditLog(SQLModel, table=True):
 
     user: Optional[User] = Relationship(back_populates="audit_logs")
 
+
 class Game(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
 
-    event_id: int = Field(foreign_key="events.id")  # CORRIGIDO ✔️
+    event_id: int = Field(foreign_key="events.id")
 
     team1: str
     team2: str
@@ -246,5 +248,3 @@ class Game(SQLModel, table=True):
     creator: Optional["User"] = Relationship(back_populates="games")
 
     event: Optional["Event"] = Relationship(back_populates="games")
-
-    

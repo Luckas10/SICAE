@@ -91,6 +91,12 @@ body.swal2-height-auto {
     overflow-x: hidden !important;
 }
 
+.swal2-timer-progress-bar {
+    background: linear-gradient(90deg, #0D4F1D, #1f8a2b);
+    height: 4px !important;
+    border-radius: 10px;
+}
+
 @keyframes toast-in {
     from {
         opacity: 0;

@@ -17,6 +17,7 @@ import EventCover from "../components/events/eventdetails/EventCover.jsx";
 import EventMeta from "../components/events/eventdetails/EventMeta.jsx";
 import EventDescription from "../components/events/eventdetails/EventDescription.jsx";
 import EventActions from "../components/events/eventdetails/EventActions.jsx";
+import EventGames from "../components/events/eventdetails/EventGames.jsx";
 
 import EventsComments from "../components/events/eventdetails/EventComments.jsx";
 import { useUser } from "../context/UserContext.jsx";
@@ -176,6 +177,8 @@ export default function EventDetails() {
                                 deleting={deleting}
                             />
                         </div>
+                        
+                        
 
                         <EventsComments eventId={event.id} currentUser={user}/>
                     </div>

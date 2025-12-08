@@ -2,6 +2,7 @@ from sqlmodel import SQLModel, Field, Relationship
 from datetime import datetime, timezone, timedelta
 from enum import Enum
 from typing import Optional, List
+from datetime import datetime, date, time
 
 
 class Role(str, Enum):
@@ -33,6 +34,8 @@ class User(SQLModel, table=True):
     audit_logs: List["AuditLog"] = Relationship(back_populates="user")
 
     news_articles: List["NewsArticle"] = Relationship(back_populates="creator")
+    games: list["Game"] = Relationship(back_populates="creator")
+
 
 class Local(SQLModel, table=True):
     __tablename__ = "locals"
@@ -68,6 +71,7 @@ class Event(SQLModel, table=True):
     local: Optional[Local] = Relationship(back_populates="events")
     ratings: List["EventRating"] = Relationship(back_populates="event")
     registrations: List["EventRegistration"] = Relationship(back_populates="event")
+    
     
     comments: List["EventComment"] = Relationship(
         back_populates="event",
@@ -221,3 +225,26 @@ class AuditLog(SQLModel, table=True):
     timestamp: datetime = Field(default_factory=now_brazil_timezone)
 
     user: Optional[User] = Relationship(back_populates="audit_logs")
+
+class Game(SQLModel, table=True):
+    id: Optional[int] = Field(default=None, primary_key=True)
+
+    event_id: int = Field(foreign_key="events.id")  # CORRIGIDO ✔️
+
+    team1: str
+    team2: str
+
+    game_date: date
+    game_time: time
+
+    location: Optional[str] = None
+    notes: Optional[str] = None
+
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+
+    creator_id: Optional[int] = Field(default=None, foreign_key="users.id")
+    creator: Optional["User"] = Relationship(back_populates="games")
+
+    event: Optional["Event"] = Relationship(back_populates="games")
+
+    

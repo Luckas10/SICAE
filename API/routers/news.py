@@ -23,9 +23,14 @@ class NewsArticleRead(BaseModel):
     add_info: Optional[str] = None
     category: Optional[str] = None
     cover_image: Optional[str] = None
+    priority: Optional[str] = None
     creator_id: int
     creator_name: str
     created_at: datetime
+
+    class Config:
+        orm_mode = True
+
 
     class Config:
         orm_mode = True

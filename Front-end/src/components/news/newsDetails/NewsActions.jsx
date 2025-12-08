@@ -1,4 +1,8 @@
-export default function NewsActions({ onBack, onDelete, deleting }) {
+import { useNavigate } from "react-router-dom";
+
+export default function NewsActions({ onBack, onDelete, deleting, onEdit }) {
+    const navigate = useNavigate();
+
     return (
         <div className="news-actions">
             <button
@@ -7,6 +11,14 @@ export default function NewsActions({ onBack, onDelete, deleting }) {
                 onClick={onBack}
             >
                 Voltar para notícias
+            </button>
+
+            <button
+                type="button"
+                className="news-button-secondary"
+                onClick={onEdit}
+            >
+                Editar notícia
             </button>
 
             <button

@@ -56,6 +56,10 @@ export default function useNewsDetails(id) {
         }
     }
 
+    async function handleEdit() {
+        navigate(`/news/edit/${id}`)
+    }
+
     const formattedDate =
         news?.created_at
             ? new Date(news.created_at).toLocaleDateString("pt-BR", {
@@ -76,5 +80,6 @@ export default function useNewsDetails(id) {
         formattedDate,
         handleDelete,
         navigateBack,
+        handleEdit,
     };
 }

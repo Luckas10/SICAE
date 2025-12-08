@@ -24,7 +24,8 @@ export default function NewsDetails() {
         deleting,
         formattedDate,
         handleDelete,
-        navigateBack
+        navigateBack,
+        handleEdit
     } = useNewsDetails(id);
 
     if (loading) return <p className="news-details-loading">Carregando notícia...</p>;
@@ -55,6 +56,7 @@ export default function NewsDetails() {
                             deleting={deleting}
                             onDelete={handleDelete}
                             onBack={navigateBack}
+                            onEdit={handleEdit}
                         />
 
                         <NewsComments articleId={news.id} currentUser={user}/>

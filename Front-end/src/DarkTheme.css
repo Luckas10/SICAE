@@ -255,3 +255,18 @@
 :root[data-theme='dark'] .news-page .news-details-info p{
     color: #e5e7eb;
 }
+:root[data-theme='dark'] .dashboard-page {
+    background: #202020;
+    
+    
+}
+:root[data-theme='dark'] .dashboard-page .notifications{
+    background-color: #202020;
+    border: #E3B52E solid 3px;
+}
+:root[data-theme='dark'] .dashboard-page .notifications .bell-icon{
+    color: #E3B52E;
+}
+:root[data-theme='dark'] .dashboard-page .notifications-upper{
+    border-bottom: #E3B52E solid 3px;
+}

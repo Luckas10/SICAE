@@ -1,12 +1,17 @@
 import { useState, useEffect } from "react";
 import api from "../../../services/api";
 import Swal from "sweetalert2";
-import "./EventGames.css"; // usa o mesmo visual
+import "./EventGames.css"; 
+import Header from "../../general/Header";
+import Sidebar from "../../general/Sidebar";
+import { useNavigate } from "react-router-dom";
 
-export default function GSingleGame({ gameId, onUpdated, onDeleted }) {
+export default function SingleGame({ gameId, onUpdated, onDeleted }) {
     const [game, setGame] = useState(null);
     const [loading, setLoading] = useState(true);
     const [editing, setEditing] = useState(false);
+    const navigate = useNavigate();
+
 
     const [form, setForm] = useState({
         team1: "",
@@ -15,11 +20,13 @@ export default function GSingleGame({ gameId, onUpdated, onDeleted }) {
         game_time: "",
         location: "",
         notes: "",
+        event_id: "", 
     });
+
 
     async function loadGame() {
         try {
-            const { data } = await api.get(`/games/event/${gameId}`);
+            const { data } = await api.get(`/games/${gameId}`);
             setGame(data);
         } catch (err) {
             console.error("Erro ao carregar jogo:", err);
@@ -28,6 +35,7 @@ export default function GSingleGame({ gameId, onUpdated, onDeleted }) {
             setLoading(false);
         }
     }
+
 
     useEffect(() => {
         if (gameId) loadGame();
@@ -42,25 +50,38 @@ export default function GSingleGame({ gameId, onUpdated, onDeleted }) {
             game_time: game.game_time.substring(0, 5),
             location: game.location || "",
             notes: game.notes || "",
+            event_id: game.event_id, 
         });
+
         setEditing(true);
     }
 
     async function handleUpdate() {
-        try {
-            const { data } = await api.put(`/games/${game.id}`, form);
-            setGame(data);
-            setEditing(false);
+    try {
+        const payload = {
+            ...form,
+            game_time: form.game_time.length === 5 
+                ? `${form.game_time}:00` 
+                : form.game_time,
+        };
 
-            if (onUpdated) onUpdated(data);
+        console.log("Enviando PUT:", payload);
 
-            Swal.fire("Sucesso!", "Jogo atualizado!", "success");
-        } catch (err) {
-            console.error(err);
-            Swal.fire("Erro", "Não foi possível atualizar o jogo.", "error");
-        }
+        const { data } = await api.put(`/games/${game.id}`, form);
+        setGame(data);
+        setEditing(false);
+
+        Swal.fire("Sucesso!", "Jogo atualizado!", "success");
+    } catch (err) {
+        console.error("Erro no PUT:", err.response?.data || err);
+        Swal.fire("Erro", "Não foi possível atualizar o jogo.", "error");
+        
     }
+}
 
+    async function backEvent() {
+        navigate(`/events/${game.event_id}`);
+    };
     async function handleDelete() {
         const res = await Swal.fire({
             title: "Excluir jogo?",
@@ -87,15 +108,24 @@ export default function GSingleGame({ gameId, onUpdated, onDeleted }) {
     if (loading) return <p className="event-games-loading">Carregando jogo...</p>;
     if (!game) return <p className="event-games-empty">Jogo não encontrado.</p>;
 
-    // ------------------------
-    // TRATAR DATA E HORA
-    // ------------------------
+    
     const date = new Date(game.game_date).toLocaleDateString("pt-BR");
     const time = game.game_time.substring(0, 5);
 
     return (
-        <div className="event-games">
+        <>
+        <Header/>
+        <div className="events-page">
+            <Sidebar/>
+            <div className="event-game">
             <h2>Detalhes do Jogo</h2>
+            <div className="event-game-info">
+                <p><strong>ID:</strong> {game.id}</p>
+                <p><strong>Evento:</strong> {game.event_id}</p>
+                <p><strong>Criado por:</strong> {game.creator_name || "—"}</p>
+                <p><strong>Registro:</strong> {new Date(game.created_at).toLocaleString("pt-BR")}</p>
+            </div>
+
 
             {!editing ? (
                 <div className="event-game-card">
@@ -106,9 +136,9 @@ export default function GSingleGame({ gameId, onUpdated, onDeleted }) {
                     </div>
 
                     <div className="event-game-teams">
-                        <div><strong>{game.team1}</strong></div>
+                        <div className="time"><strong>{game.team1}</strong></div>
                         <span className="event-game-x">X</span>
-                        <div><strong>{game.team2}</strong></div>
+                        <div className="time"><strong>{game.team2}</strong></div>
                     </div>
 
                     <p className="event-game-location">
@@ -123,6 +153,9 @@ export default function GSingleGame({ gameId, onUpdated, onDeleted }) {
 
                     {/* BOTÕES */}
                     <div className="event-game-actions">
+                        <button className="btn-edit" onClick={backEvent}>
+                            Voltar
+                        </button>
                         <button className="btn-edit" onClick={startEdit}>
                             Editar
                         </button>
@@ -132,9 +165,7 @@ export default function GSingleGame({ gameId, onUpdated, onDeleted }) {
                     </div>
                 </div>
             ) : (
-                // ------------------------
-                // FORMULÁRIO DE EDIÇÃO
-                // ------------------------
+                
                 <div className="event-game-card edit-mode">
 
                     <label>Time 1:</label>
@@ -187,5 +218,8 @@ export default function GSingleGame({ gameId, onUpdated, onDeleted }) {
                 </div>
             )}
         </div>
+        </div>
+        </>
+        
     );
 }

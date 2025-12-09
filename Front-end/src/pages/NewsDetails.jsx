@@ -10,6 +10,12 @@ import NewsActions from "../components/news/newsdetails/NewsActions.jsx";
 import useNewsDetails from "../components/news/newsdetails/useNewsDetails.js"; 
 import "./News.css";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+    CATEGORY_CONFIG,
+    DEFAULT_CATEGORY,
+} from "../constants/eventCategories";
+
 import { useUser } from "../context/UserContext.jsx";
 import NewsComments from "../components/news/newsdetails/NewsComments.jsx";
 
@@ -31,6 +37,9 @@ export default function NewsDetails() {
     if (loading) return <p className="news-details-loading">Carregando notícia...</p>;
     if (!news) return <p className="news-details-loading">Notícia não encontrada.</p>;
 
+    const categoryConfig =
+    CATEGORY_CONFIG[news.category] || DEFAULT_CATEGORY;
+
     return (
         <>
             <Header />
@@ -41,11 +50,14 @@ export default function NewsDetails() {
                 <div className="news-content">
                     <div className="news-details">
 
+                        
+
                         <NewsHeader
                             title={news.title}
                             addInfo={news.add_info}
                             creator={news.creator_name}
                             date={formattedDate}
+                            categoryConfig={categoryConfig}
                         />
 
                         <NewsCover src={news.cover_image} title={news.title} />

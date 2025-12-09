@@ -121,3 +121,27 @@ def deletar_game(
     session.delete(game)
     session.commit()
     return {"message": "Jogo excluído com sucesso"}
+
+@router.get("/{id}", response_model=GameRead)
+def obter_game(
+    id: int,
+    session: SessionDep,
+    current_user: User = Depends(get_current_user),
+):
+    g = session.get(Game, id)
+    if not g:
+        raise HTTPException(404, "Jogo não encontrado")
+
+    return GameRead(
+        id=g.id,
+        event_id=g.event_id,
+        team1=g.team1,
+        team2=g.team2,
+        game_date=g.game_date,
+        game_time=g.game_time,
+        location=g.location,
+        notes=g.notes,
+        created_at=g.created_at,
+        creator_id=g.creator_id,
+        creator_name=g.creator.full_name if g.creator else None,
+    )

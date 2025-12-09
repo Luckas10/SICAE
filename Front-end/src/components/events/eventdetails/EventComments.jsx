@@ -4,6 +4,8 @@ import api from "../../../services/api";
 import Swal from "sweetalert2";
 import "./EventComments.css";
 
+import { NavLink } from "react-router-dom";
+
 export default function EventsComments({ eventId, currentUser }) {
     const [comments, setComments] = useState([]);
     const [usersMap, setUsersMap] = useState({});
@@ -175,17 +177,17 @@ export default function EventsComments({ eventId, currentUser }) {
 
     if (loading) {
         return (
-            <p className="news-comments-loading">
+            <p className="event-comments-loading">
                 Carregando comentários...
             </p>
         );
     }
 
     return (
-        <div className="news-comments">
+        <div className="event-comments">
             <h2>Comentários</h2>
 
-            <div className="news-comments-form">
+            <div className="event-comments-form">
                 <textarea
                     placeholder="Escreva um comentário..."
                     value={newComment}
@@ -198,12 +200,12 @@ export default function EventsComments({ eventId, currentUser }) {
             </div>
 
             {comments.length === 0 && (
-                <p className="news-comments-empty">
+                <p className="event-comments-empty">
                     Nenhum comentário ainda.
                 </p>
             )}
 
-            <div className="news-comments-list">
+            <div className="event-comments-list">
                 {comments.map((comment) => {
                     const isOwner = currentUser?.id === comment.author_id;
                     const createdAt = new Date(
@@ -212,16 +214,37 @@ export default function EventsComments({ eventId, currentUser }) {
                     const user = usersMap[comment.author_id];
 
                     return (
-                        <div key={comment.id} className="news-comment-card">
-                            <div className="news-comment-header">
-                                <strong>
-                                    {user?.full_name || "Usuário"}
-                                </strong>
-                                <span>{createdAt}</span>
+                        <div key={comment.id} className="event-comment-card">
+
+                            <div className="event-comment-header">
+                                <div className="event-comment-user">
+                                    <NavLink to={`/profile/${user?.id}`}>
+                                        <img
+                                            src={
+                                                user?.profile_image
+                                                    ? user.profile_image
+                                                    : "/img/profile.png"
+                                            }
+                                            alt="Foto do usuário"
+                                            className="event-comment-avatar"
+                                        />
+                                    </NavLink>
+
+                                    <div className="event-comment-user-info">
+                                        <NavLink
+                                            to={`/profile/${user?.id}`}
+                                            style={{ textDecoration: "none" }}
+                                        >
+                                            <strong>{user?.full_name || "Usuário"}</strong>
+                                        </NavLink>
+                                        <span>{createdAt}</span>
+                                    </div>
+                                </div>
                             </div>
 
+
                             {editingId === comment.id ? (
-                                <div className="news-comment-edit">
+                                <div className="event-comment-edit">
                                     <textarea
                                         value={editContent}
                                         onChange={(e) =>
@@ -229,7 +252,7 @@ export default function EventsComments({ eventId, currentUser }) {
                                         }
                                     />
 
-                                    <div className="news-comment-actions">
+                                    <div className="event-comment-actions">
                                         <button
                                             onClick={() =>
                                                 handleUpdate(comment.id)
@@ -250,15 +273,15 @@ export default function EventsComments({ eventId, currentUser }) {
                                     </div>
                                 </div>
                             ) : (
-                                <p className="news-comment-content">
+                                <p className="event-comment-content">
                                     {comment.content}
                                 </p>
                             )}
 
                             {isOwner && editingId !== comment.id && (
-                                <div className="news-comment-menu">
+                                <div className="event-comment-menu">
                                     <button
-                                        className="news-comment-menu-btn"
+                                        className="event-comment-menu-btn"
                                         onClick={() =>
                                             setOpenMenuId(
                                                 openMenuId === comment.id
@@ -271,7 +294,7 @@ export default function EventsComments({ eventId, currentUser }) {
                                     </button>
 
                                     {openMenuId === comment.id && (
-                                        <div className="news-comment-dropdown">
+                                        <div className="event-comment-dropdown">
                                             <button
                                                 onClick={() => {
                                                     setEditingId(comment.id);

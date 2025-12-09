@@ -3,6 +3,7 @@ import { useUser } from "../../../context/UserContext";
 import api from "../../../services/api";
 import Swal from "sweetalert2";
 import "./NewsComments.css";
+import { NavLink } from "react-router-dom";
 
 export default function NewsComments({ articleId, currentUser }) {
     const [comments, setComments] = useState([]);
@@ -207,15 +208,48 @@ export default function NewsComments({ articleId, currentUser }) {
                     const createdAt = new Date(
                         comment.created_at
                     ).toLocaleString("pt-BR");
+
                     const user = usersMap[comment.author_id];
 
                     return (
                         <div key={comment.id} className="news-comment-card">
                             <div className="news-comment-header">
-                                <strong>
-                                    {user?.full_name || "Usuário"}
-                                </strong>
-                                <span>{createdAt}</span>
+                                <div className="news-comment-user">
+
+                                    {user ? (
+                                        <NavLink to={`/profile/${user.id}`}>
+                                            <img
+                                                src={
+                                                    user.profile_image
+                                                        ? user.profile_image
+                                                        : "/default-avatar.png"
+                                                }
+                                                alt="Foto do usuário"
+                                                className="news-comment-avatar"
+                                            />
+                                        </NavLink>
+                                    ) : (
+                                        <img
+                                            src="/default-avatar.png"
+                                            alt="Foto padrão"
+                                            className="news-comment-avatar"
+                                        />
+                                    )}
+
+                                    <div className="news-comment-user-info">
+                                        {user ? (
+                                            <NavLink
+                                                to={`/profile/${user.id}`}
+                                                style={{ textDecoration: "none" }}
+                                            >
+                                                <strong>{user.full_name}</strong>
+                                            </NavLink>
+                                        ) : (
+                                            <strong>Usuário</strong>
+                                        )}
+                                        <span>{createdAt}</span>
+                                    </div>
+                                </div>
                             </div>
 
                             {editingId === comment.id ? (

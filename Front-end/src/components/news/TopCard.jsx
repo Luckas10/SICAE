@@ -6,6 +6,7 @@ import { NavLink } from "react-router-dom";
 
 export default function TopCard({ data }) {
     const cfg = CATEGORY_CONFIG[data.category] || DEFAULT_CATEGORY;
+    const dataFormatada = new Date(data.created_at).toLocaleDateString("pt-BR")
 
     return (
         <NavLink className="top-news-card" to={`/news/${data.id}`}>
@@ -14,6 +15,7 @@ export default function TopCard({ data }) {
                 <h4>{data.title}</h4>
                 <p>{data.add_info}</p>
             </div>
+            <h6 className="top-news-date">{dataFormatada}</h6>
         </NavLink>
     );
 }

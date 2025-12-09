@@ -57,12 +57,12 @@ export default function Athletes() {
 
                     <div className="athletes-grid">
                         {filteredAthletes.map((atleta) => (
-                            <div className="atleta-card" key={atleta.id}>
+                            <NavLink className="atleta-card" key={atleta.id} to={`/profile/${atleta.id}`}>
                                 <img
                                     src={atleta.profile_image || "/img/profile.png"}
                                 />
                                 <p style={{textAlign: "center"}}>{atleta.full_name}</p>
-                            </div>
+                            </NavLink>
                         ))}
                     </div>
                 </div>

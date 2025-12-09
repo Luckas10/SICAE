@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import api from "../../../services/api";
 import Swal from "sweetalert2";
 import "./EventGames.css";
@@ -6,12 +7,12 @@ import "./EventGames.css";
 export default function EventGames({ eventId }) {
     const [games, setGames] = useState([]);
     const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
 
     async function loadGames() {
         try {
             const { data } = await api.get(`/games/event/${eventId}`);
 
-            // Ordenação segura
             const ordered = data.sort((a, b) => {
                 const da = new Date(a.game_date);
                 const db = new Date(b.game_date);
@@ -49,17 +50,14 @@ export default function EventGames({ eventId }) {
             ) : (
                 <div className="event-games-list">
                     {games.map((game) => {
-                        // Trata data
                         const date = game.game_date
                             ? new Date(game.game_date).toLocaleDateString("pt-BR")
                             : "—";
 
-                        // Trata horário (string ou objeto)
                         let time = "—";
                         if (typeof game.game_time === "string") {
                             time = game.game_time.substring(0, 5);
                         } else if (typeof game.game_time === "object" && game.game_time !== null) {
-                            // Ex.: { hour: 14, minute: 30 }
                             const h = String(game.game_time.hour).padStart(2, "0");
                             const m = String(game.game_time.minute).padStart(2, "0");
                             time = `${h}:${m}`;
@@ -87,6 +85,16 @@ export default function EventGames({ eventId }) {
                                         Observações: {game.notes}
                                     </p>
                                 )}
+
+                                
+                                <div className="event-game-actions">
+                                    <button
+                                        className="btn-details"
+                                        onClick={() => navigate(`/games/${game.id}`)}
+                                    >
+                                        Ver detalhes
+                                    </button>
+                                </div>
                             </div>
                         );
                     })}

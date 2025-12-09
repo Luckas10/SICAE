@@ -19,7 +19,7 @@
 
 
 :root[data-theme="dark"] body {
-    background-color: #071204;
+    background-color: #000000e2;
     color: #e5e7eb;
 }
 
@@ -55,11 +55,16 @@
 }
 
 :root[data-theme="dark"] .event-card {
-    background-color: #333333;
+    background-color: #fefdfd16;
+    color: rgb(255, 255, 255);
     box-shadow: 0 4px 18px rgba(0, 0, 0, 0.7);
 }
 
 :root[data-theme="dark"] .event-card h5 {
+    color: #ffffff;
+}
+
+:root [data-theme="dark"] .event-gamme-list{
     color: #e5e7eb;
 }
 
@@ -138,12 +143,12 @@
 
 
 :root[data-theme="dark"] .profile-page {
-    background-color: #071204;
+    background-color: #00000010;
     color: #e5e7eb;
 }
 
 :root[data-theme="dark"] .profile-card {
-    background-color: #333333;
+    background-color: #33333338;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
 }
 
@@ -152,7 +157,7 @@
 }
 
 :root[data-theme="dark"] .profile-info-card {
-    background: #202020;
+    background: #333232;
 }
 
 :root[data-theme="dark"] .profile-info-label {
@@ -254,4 +259,13 @@
 
 :root[data-theme='dark'] .news-page .news-details-info p{
     color: #e5e7eb;
+}
+
+:root[data-theme='dark'] .div.notification-card {
+    border: #E3B52E;
+}
+
+:root[data-theme='dark'] .event-game-card{
+    color: #e5e7eb;
+    background-color: #3333339c;
 }

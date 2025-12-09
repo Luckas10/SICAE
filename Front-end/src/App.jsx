@@ -18,6 +18,7 @@ import PublicRoute from "./routes/PublicRoute.jsx";
 import NewsDetails from "./pages/NewsDetails.jsx";
 import EditNews from "./pages/editNews.jsx";
 import EditEvent from "./pages/editEvent.jsx";
+import ManageAthletes from "./pages/manageAthletes.jsx";
 
 export default function App() {
   return (
@@ -41,6 +42,7 @@ export default function App() {
           <Route path="/settings" element={<Settings />} />
           <Route path="events/games" element={<EventGame />}> </Route>
           <Route path="/athletes" element={<Athletes />}> </Route>
+          <Route path="/athletes/manage" element={<ManageAthletes />}> </Route>
         </Route>
       </Routes>
     </Router>

@@ -4,11 +4,14 @@ import Swal from "sweetalert2";
 import "./EventGames.css"; 
 import Header from "../../general/Header";
 import Sidebar from "../../general/Sidebar";
+import { useNavigate } from "react-router-dom";
 
 export default function SingleGame({ gameId, onUpdated, onDeleted }) {
     const [game, setGame] = useState(null);
     const [loading, setLoading] = useState(true);
     const [editing, setEditing] = useState(false);
+    const navigate = useNavigate();
+
 
     const [form, setForm] = useState({
         team1: "",
@@ -17,7 +20,9 @@ export default function SingleGame({ gameId, onUpdated, onDeleted }) {
         game_time: "",
         location: "",
         notes: "",
+        event_id: "", 
     });
+
 
     async function loadGame() {
         try {
@@ -45,25 +50,38 @@ export default function SingleGame({ gameId, onUpdated, onDeleted }) {
             game_time: game.game_time.substring(0, 5),
             location: game.location || "",
             notes: game.notes || "",
+            event_id: game.event_id, 
         });
+
         setEditing(true);
     }
 
     async function handleUpdate() {
-        try {
-            const { data } = await api.put(`/games/${game.id}`, form);
-            setGame(data);
-            setEditing(false);
+    try {
+        const payload = {
+            ...form,
+            game_time: form.game_time.length === 5 
+                ? `${form.game_time}:00` 
+                : form.game_time,
+        };
 
-            if (onUpdated) onUpdated(data);
+        console.log("Enviando PUT:", payload);
 
-            Swal.fire("Sucesso!", "Jogo atualizado!", "success");
-        } catch (err) {
-            console.error(err);
-            Swal.fire("Erro", "Não foi possível atualizar o jogo.", "error");
-        }
+        const { data } = await api.put(`/games/${game.id}`, form);
+        setGame(data);
+        setEditing(false);
+
+        Swal.fire("Sucesso!", "Jogo atualizado!", "success");
+    } catch (err) {
+        console.error("Erro no PUT:", err.response?.data || err);
+        Swal.fire("Erro", "Não foi possível atualizar o jogo.", "error");
+        
     }
+}
 
+    async function backEvent() {
+        navigate(`/events/${game.event_id}`);
+    };
     async function handleDelete() {
         const res = await Swal.fire({
             title: "Excluir jogo?",
@@ -135,6 +153,9 @@ export default function SingleGame({ gameId, onUpdated, onDeleted }) {
 
                     {/* BOTÕES */}
                     <div className="event-game-actions">
+                        <button className="btn-edit" onClick={backEvent}>
+                            Voltar
+                        </button>
                         <button className="btn-edit" onClick={startEdit}>
                             Editar
                         </button>
@@ -144,9 +165,7 @@ export default function SingleGame({ gameId, onUpdated, onDeleted }) {
                     </div>
                 </div>
             ) : (
-                // ------------------------
-                // FORMULÁRIO DE EDIÇÃO
-                // ------------------------
+                
                 <div className="event-game-card edit-mode">
 
                     <label>Time 1:</label>

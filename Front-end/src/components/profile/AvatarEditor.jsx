@@ -9,13 +9,10 @@ import api from "../../services/api";
 import Swal from "sweetalert2";
 import { useUser } from "../../context/UserContext";
 
-const DEFAULT_AVATAR =
-    "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
-
 export default function AvatarEditor() {
     const { user, updateAvatar } = useUser();
 
-    const [avatarUrl, setAvatarUrl] = useState(DEFAULT_AVATAR);
+    const [avatarUrl, setAvatarUrl] = useState("/img/profile.png");
 
     const [fileName, setFileName] = useState("");
     const [imageSrc, setImageSrc] = useState(null);
@@ -29,7 +26,7 @@ export default function AvatarEditor() {
 
     useEffect(() => {
         if (!user) return;
-        setAvatarUrl(user.profile_image || DEFAULT_AVATAR);
+        setAvatarUrl(user.profile_image || "/img/profile.png");
     }, [user]);
 
     const handleFileChange = (e) => {

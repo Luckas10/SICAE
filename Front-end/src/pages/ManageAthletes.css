@@ -1,0 +1,126 @@
+/* ===== CONTROLE DE ATLETAS ===== */
+
+.users-list {
+    margin-top: 2rem;
+    width: 100%;
+    max-height: 25rem;
+    overflow-y: auto;
+}
+
+.users-list::-webkit-scrollbar {
+  width: 8px;
+  margin-left: 1rem;
+}
+
+.users-list::-webkit-scrollbar-track {
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+}
+
+.users-list::-webkit-scrollbar-thumb {
+  background: rgba(29, 160, 29, 0.5);
+  border-radius: 10px;
+}
+
+.users-list::-webkit-scrollbar-thumb:hover {
+  background: rgba(15, 90, 8, 0.8);
+}
+
+
+.user-card {
+    margin-right: 1rem;
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #fff;
+}
+
+.user-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-right: 3rem;
+}
+
+.user-avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #008000;
+}
+
+.user-info small {
+    color: #666;
+}
+
+.role-button {
+    color: white;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 500;
+}
+
+.role-button.add {
+    background-color: #008000;
+}
+
+.role-button.remove {
+    background-color: #c0392b;
+}
+
+.manage-buttons {
+    margin-top: 2rem;
+}
+
+.button-secondary {
+    min-width: 140px;
+    height: 40px;
+    border-radius: 999px;
+    border: none;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.12s ease;
+    background-color: #ffffff;
+    color: #0D4F1D;
+    border: 1px solid #0D4F1D;
+}
+
+
+.button-secondary:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.02);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+}
+
+.filter-buttons {
+    display: flex;
+    gap: 10px;
+    margin: 1rem 0;
+}
+
+.filter-buttons button {
+    padding: 6px 14px;
+    border-radius: 999px;
+    border: 1px solid #008000;
+    background: white;
+    color: #008000;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.filter-buttons button.active {
+    background: #008000;
+    color: white;
+}

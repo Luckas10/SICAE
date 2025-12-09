@@ -18,6 +18,7 @@ import PublicRoute from "./routes/PublicRoute.jsx";
 import NewsDetails from "./pages/NewsDetails.jsx";
 import EditNews from "./pages/editNews.jsx";
 import EditEvent from "./pages/editEvent.jsx";
+import ManageAthletes from "./pages/manageAthletes.jsx";
 
 export default function App() {
   return (
@@ -28,24 +29,22 @@ export default function App() {
         </Route>
 
         <Route element={<ProtectedRoute />}>
-        <Route path="/" element={<Dashboard />} />
-        <Route path="/events" element={<Events />} />
-        <Route path="/events/add" element={<AddEvent />} />
-        <Route path="/events/edit/:id" element={<EditEvent />} />
-        <Route path="/events/:id" element={<EventDetails />} />
-
-        {/* ROTA CORRETA PARA CRIAR JOGO */}
-        <Route path="/events/:id/games" element={<EventGame />} />
-
-        <Route path="/news" element={<News />} />
-        <Route path="/news/add" element={<AddNews />} />
-        <Route path="/news/edit/:id" element={<EditNews />} />
-        <Route path="/news/:id" element={<NewsDetails />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/settings" element={<Settings />} />
-        <Route path="/athletes" element={<Athletes />} />
-      </Route>
-
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/events" element={<Events />} />
+          <Route path="/events/add" element={<AddEvent />} />
+          <Route path="/events/edit/:id" element={<EditEvent />} />
+          <Route path="/events/:id" element={<EventDetails />} />
+          <Route path="/events/:id/games" element={<EventGame />} />
+          <Route path="/news" element={<News />} />
+          <Route path="/news/add" element={<AddNews />} />
+          <Route path="/news/edit/:id" element={<EditNews />} />
+          <Route path="/news/:id" element={<NewsDetails />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/settings" element={<Settings />} />
+          <Route path="events/games" element={<EventGame />}> </Route>
+          <Route path="/athletes" element={<Athletes />}> </Route>
+          <Route path="/athletes/manage" element={<ManageAthletes />}> </Route>
+        </Route>
       </Routes>
     </Router>
   );

@@ -34,6 +34,7 @@ export default function App() {
           <Route path="/events/add" element={<AddEvent />} />
           <Route path="/events/edit/:id" element={<EditEvent />} />
           <Route path="/events/:id" element={<EventDetails />} />
+          <Route path="/events/:id/games" element={<EventGame />} />
           <Route path="/news" element={<News />} />
           <Route path="/news/add" element={<AddNews />} />
           <Route path="/news/edit/:id" element={<EditNews />} />

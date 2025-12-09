@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import Header from "../components/general/Header";
 import Sidebar from "../components/general/Sidebar";
 import "./EventGame.css";
+import { useParams, useNavigate } from "react-router-dom";
 
 export default function EventGame() {
     const [team1, setTeam1] = useState("");
@@ -14,20 +15,27 @@ export default function EventGame() {
     const [location, setLocation] = useState("");
     const [notes, setNotes] = useState("");
 
+    const { id } = useParams();            // <-- ID do evento
+    const navigate = useNavigate();
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         try {
             await api.post("/games", {
+                event_id: Number(id),   // <-- Agora está certo!
                 team1,
                 team2,
                 game_date: date,
                 game_time: time,
                 location,
-                notes
+                notes,
             });
 
             Swal.fire("Jogo criado!", "", "success");
+
+            // Redireciona de volta para a página do evento
+            navigate(`/events/${id}`);
         } catch (error) {
             Swal.fire("Erro", "Não foi possível criar o jogo", "error");
         }
@@ -100,18 +108,20 @@ export default function EventGame() {
                             ></textarea>
 
                             <div className="game-button">
-                                <button type="submit">Salvar</button>
+                                <button type="submit">
+                                    Salvar
+                                </button>
 
                                 <button
                                     type="button"
                                     style={{ backgroundColor: "white", color: "green" }}
+                                    onClick={() => navigate(`/events/${id}`)}
                                 >
                                     Cancelar
                                 </button>
                             </div>
                         </div>
                     </form>
-
                 </div>
             </div>
         </>

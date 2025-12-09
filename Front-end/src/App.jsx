@@ -20,6 +20,7 @@ import GameDetails from "./pages/GameDetails.jsx";   // 🔥 IMPORT FALTANDO
 
 import ProtectedRoute from "./routes/ProtectedRoute.jsx";
 import PublicRoute from "./routes/PublicRoute.jsx";
+import ProfileID from "./pages/ProfileID.jsx";
 
 export default function App() {
   return (
@@ -44,7 +45,7 @@ export default function App() {
           <Route path="/events/:id/games" element={<EventGame />} />
 
           {/* GAMES */}
-          <Route path="/games/:id" element={<GameDetails />} />  {/* 🔥 ROTA CERTA */}
+          <Route path="/games/:id" element={<GameDetails />} />
 
           {/* NEWS */}
           <Route path="/news" element={<News />} />
@@ -58,6 +59,7 @@ export default function App() {
 
           {/* PROFILE & SETTINGS */}
           <Route path="/profile" element={<Profile />} />
+          <Route path="/profile/:id" element={<ProfileID />} />
           <Route path="/settings" element={<Settings />} />
 
         </Route>

@@ -69,6 +69,7 @@
 
 .news-comment-header strong {
     font-size: 0.95rem;
+    color: #30924c;
 }
 
 .news-comment-header span {
@@ -187,4 +188,26 @@
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+.news-comment-user {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    gap: 10px;
+}
+
+.news-comment-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid #ccc;
+}
+
+.news-comment-user-info {
+    display: flex;
+    font-size: 14px;
+    width: 100%;
+    justify-content: space-between;
 }

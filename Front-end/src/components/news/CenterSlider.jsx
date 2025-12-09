@@ -11,6 +11,7 @@ export default function CenterSlider({ news }) {
         speed: 500,
         slidesToShow: 4,
         slidesToScroll: 2,
+        swipe: false,
 
         responsive: [
             {
@@ -24,14 +25,16 @@ export default function CenterSlider({ news }) {
                 breakpoint: 900,
                 settings: {
                     slidesToShow: 2,
-                    slidesToScroll: 1
+                    slidesToScroll: 1,
+                    swipe: true
                 }
             },
             {
                 breakpoint: 480,
                 settings: {
                     slidesToShow: 1,
-                    slidesToScroll: 1
+                    slidesToScroll: 1,
+                    swipe: true
                 }
             }
         ]

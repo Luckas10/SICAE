@@ -8,31 +8,29 @@ import SportsFilterBar from "../components/events/SportsFilterBar.jsx";
 import AddEventButton from "../components/events/AddEventButton.jsx";
 import EventCard from "../components/events/EventCard.jsx";
 
-
 export default function Events() {
     const [events, setEvents] = useState([]);
     const [activeCategory, setActiveCategory] = useState("all");
+    const [showInitiation, setShowInitiation] = useState(false);
 
     useEffect(() => {
         async function fetchEvents() {
             try {
                 const response = await api.get("/events");
-                console.log("Resposta /events:", response.data);
-
                 const raw = response.data;
 
                 const list =
                     Array.isArray(raw)
                         ? raw
                         : Array.isArray(raw.data)
-                            ? raw.data
-                            : Array.isArray(raw.events)
-                                ? raw.events
-                                : [];
+                        ? raw.data
+                        : Array.isArray(raw.events)
+                        ? raw.events
+                        : [];
 
                 setEvents(list);
             } catch (err) {
-                console.error("Erro ao buscar eventos da API:", err);
+                console.error("Erro ao buscar eventos:", err);
                 setEvents([]);
             }
         }
@@ -40,11 +38,21 @@ export default function Events() {
         fetchEvents();
     }, []);
 
-    const filteredEvents = Array.isArray(events)
-        ? activeCategory === "all"
-            ? events
-            : events.filter((ev) => ev.category === activeCategory)
-        : [];
+    
+    const filteredEvents = events
+        .filter((ev) => {
+            
+            if (activeCategory !== "all" && ev.category !== activeCategory) {
+                return false;
+            }
+
+            
+            if (showInitiation && !ev.is_initiation) {
+                return false;
+            }
+
+            return true;
+        });
 
     return (
         <>
@@ -58,7 +66,18 @@ export default function Events() {
                         onChangeCategory={setActiveCategory}
                     />
 
-                    <AddEventButton />
+                    <div className="events-toolbar">
+
+                        
+                        <button
+                            className={`initiation-filter-btn ${showInitiation ? "active" : ""}`}
+                            onClick={() => setShowInitiation((prev) => !prev)}
+                        >
+                            Iniciação Esportiva
+                        </button>
+
+                        <AddEventButton />
+                    </div>
 
                     <div className="cards">
                         {filteredEvents.map((ev) => (
@@ -70,4 +89,3 @@ export default function Events() {
         </>
     );
 }
-

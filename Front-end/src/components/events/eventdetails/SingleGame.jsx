@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import api from "../../../services/api";
 import Swal from "sweetalert2";
-import "./EventGames.css"; // usa o mesmo visual
+import "./EventGames.css"; 
+import Header from "../../general/Header";
+import Sidebar from "../../general/Sidebar";
 
-export default function GSingleGame({ gameId, onUpdated, onDeleted }) {
+export default function SingleGame({ gameId, onUpdated, onDeleted }) {
     const [game, setGame] = useState(null);
     const [loading, setLoading] = useState(true);
     const [editing, setEditing] = useState(false);
@@ -19,7 +21,7 @@ export default function GSingleGame({ gameId, onUpdated, onDeleted }) {
 
     async function loadGame() {
         try {
-            const { data } = await api.get(`/games/event/${gameId}`);
+            const { data } = await api.get(`/games/${gameId}`);
             setGame(data);
         } catch (err) {
             console.error("Erro ao carregar jogo:", err);
@@ -28,6 +30,7 @@ export default function GSingleGame({ gameId, onUpdated, onDeleted }) {
             setLoading(false);
         }
     }
+
 
     useEffect(() => {
         if (gameId) loadGame();
@@ -87,15 +90,24 @@ export default function GSingleGame({ gameId, onUpdated, onDeleted }) {
     if (loading) return <p className="event-games-loading">Carregando jogo...</p>;
     if (!game) return <p className="event-games-empty">Jogo não encontrado.</p>;
 
-    // ------------------------
-    // TRATAR DATA E HORA
-    // ------------------------
+    
     const date = new Date(game.game_date).toLocaleDateString("pt-BR");
     const time = game.game_time.substring(0, 5);
 
     return (
-        <div className="event-games">
+        <>
+        <Header/>
+        <div className="events-page">
+            <Sidebar/>
+            <div className="event-game">
             <h2>Detalhes do Jogo</h2>
+            <div className="event-game-info">
+                <p><strong>ID:</strong> {game.id}</p>
+                <p><strong>Evento:</strong> {game.event_id}</p>
+                <p><strong>Criado por:</strong> {game.creator_name || "—"}</p>
+                <p><strong>Registro:</strong> {new Date(game.created_at).toLocaleString("pt-BR")}</p>
+            </div>
+
 
             {!editing ? (
                 <div className="event-game-card">
@@ -106,9 +118,9 @@ export default function GSingleGame({ gameId, onUpdated, onDeleted }) {
                     </div>
 
                     <div className="event-game-teams">
-                        <div><strong>{game.team1}</strong></div>
+                        <div className="time"><strong>{game.team1}</strong></div>
                         <span className="event-game-x">X</span>
-                        <div><strong>{game.team2}</strong></div>
+                        <div className="time"><strong>{game.team2}</strong></div>
                     </div>
 
                     <p className="event-game-location">
@@ -187,5 +199,8 @@ export default function GSingleGame({ gameId, onUpdated, onDeleted }) {
                 </div>
             )}
         </div>
+        </div>
+        </>
+        
     );
 }

@@ -1,7 +1,14 @@
 .event-games {
     width: 100%;
     margin-top: 2rem;
+    
 }
+.event-game{
+    width: 100%;
+    margin-top: 2rem;
+    padding: 5%;
+}
+
 
 .event-games h2 {
     font-size: 1.4rem;
@@ -40,6 +47,12 @@
     font-weight: 600;
     cursor: pointer;
     transition: 0.2s;
+}
+.events-page {
+    display: block;
+    padding-left: 15%;
+    padding-top: calc(5vh);
+    min-height: 100%;
 }
 
 .event-games-form button:hover {
@@ -198,6 +211,20 @@
     gap: 10px;
     margin-top: 10px;
 }
+.event-game-info {
+    background: #fafafa;
+    padding: 12px 15px;
+    margin-bottom: 20px;
+    border-left: 4px solid #185c2a;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    color: #444;
+}
+
+.event-game-info p {
+    margin: 4px 0;
+}
+
 
 .btn-edit,
 .btn-delete,
@@ -211,7 +238,7 @@
 }
 
 .btn-edit {
-    background: #4fa3ff;
+    background: #185c2a;
     color: white;
 }
 
@@ -221,7 +248,7 @@
 }
 
 .btn-save {
-    background: #4fd15a;
+    background: #185c2a;
     color: white;
 }
 

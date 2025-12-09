@@ -1,0 +1,243 @@
+.event-games {
+    width: 100%;
+    margin-top: 2rem;
+}
+
+.event-games h2 {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+}
+
+.event-games-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 1.5rem;
+}
+
+.event-games-form textarea {
+    width: 100%;
+    min-height: 90px;
+    resize: none;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    font-size: 0.95rem;
+}
+
+.event-games-form textarea:focus {
+    outline: none;
+    border-color: #2563eb;
+}
+
+.event-games-form button {
+    align-self: flex-end;
+    padding: 8px 18px;
+    border: none;
+    border-radius: 8px;
+    background-color: #185c2a;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.event-games-form button:hover {
+    background-color: #30924c;
+}
+
+.event-games-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.event-game-card {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 12px 14px;
+    position: relative;
+}
+
+.event-game-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 6px;
+}
+
+.event-game-header strong {
+    font-size: 0.95rem;
+}
+
+.event-game-header span {
+    font-size: 0.75rem;
+    color: #6b7280;
+}
+
+.event-game-content {
+    font-size: 0.95rem;
+    color: #111827;
+    line-height: 1.4;
+}
+
+.event-game-edit textarea {
+    width: 100%;
+    min-height: 80px;
+    resize: none;
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid #d1d5db;
+    margin-bottom: 8px;
+}
+
+.event-game-actions {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+}
+
+.event-game-actions button {
+    padding: 6px 14px;
+    font-size: 0.85rem;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.event-game-actions button:first-child {
+    background-color: #16a34a;
+    color: #fff;
+}
+
+.event-game-actions .cancel {
+    background-color: #9ca3af;
+    color: #fff;
+}
+
+.event-game-menu {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+.event-game-menu-btn {
+    border: none;
+    background: none;
+    font-size: 1.4rem;
+    cursor: pointer;
+    padding: 2px 6px;
+    border-radius: 6px;
+    transition: 0.2s;
+}
+
+.event-game-menu-btn:hover {
+    background-color: #e5e7eb;
+}
+
+.event-game-dropdown {
+    position: absolute;
+    top: 28px;
+    right: 0;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 6px 22px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    z-index: 20;
+    min-width: 120px;
+    animation: fadeIn 0.15s ease-in-out;
+}
+
+.event-game-dropdown button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background: none;
+    text-align: left;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.event-game-dropdown button:hover {
+    background: #f3f4f6;
+}
+
+.event-game-dropdown .danger {
+    color: #dc2626;
+    font-weight: 600;
+}
+
+.event-games-empty,
+.event-games-loading {
+    font-size: 0.9rem;
+    color: #6b7280;
+    text-align: center;
+    margin-top: 1rem;
+}
+.event-game-teams{
+    width: 100%;
+    justify-content: space-between;
+    display: flex;
+
+}
+.event-game-teams .time{
+    width: 40%;
+    padding: 10px;
+    background-color:#185c2a;
+    color: white;
+}
+.event-game-teams .event-game-x{
+    font-size: xx-large;
+}
+
+.event-game-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.btn-edit,
+.btn-delete,
+.btn-save,
+.btn-cancel {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-edit {
+    background: #4fa3ff;
+    color: white;
+}
+
+.btn-delete {
+    background: #ff4f4f;
+    color: white;
+}
+
+.btn-save {
+    background: #4fd15a;
+    color: white;
+}
+
+.btn-cancel {
+    background: #b5b5b5;
+    color: white;
+}
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

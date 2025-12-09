@@ -73,9 +73,9 @@ export default function EventGames({ eventId }) {
                                 </div>
 
                                 <div className="event-game-teams">
-                                    <strong>{game.team1}</strong>
+                                    <div className="time"><strong>{game.team1}</strong></div>
                                     <span className="event-game-x">X</span>
-                                    <strong>{game.team2}</strong>
+                                    <div className="time"><strong>{game.team2}</strong></div>
                                 </div>
 
                                 <p className="event-game-location">

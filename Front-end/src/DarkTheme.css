@@ -269,3 +269,8 @@
     color: #e5e7eb;
     background-color: #3333339c;
 }
+
+:root[data-theme='dark'] .event-game-card{
+    color: #e5e7eb;
+    background-color: #3333339c;
+}

@@ -14,12 +14,14 @@ export default function Profile() {
     const [commentsCount, setCommentsCount] = useState(0);
     const [username, setUsername] = useState("Nome do usuário");
     const [email, setEmail] = useState("");
+    const [role, setRole] = useState("")
 
     useEffect(() => {
         if (!user) return;
         setCommentsCount(user.total_comments || 0);
         setUsername(user.full_name || "Nome do usuário");
-        setEmail(user.email || "");
+        setEmail(user.email || "E-mail do usuário");
+        setRole(user.role || "Cargo do usuário");
     }, [user]);
 
     const profileInfoItems = [
@@ -41,7 +43,7 @@ export default function Profile() {
         },
         {
             label: "Status",
-            value: "Aluno",
+            value: role,
         },
     ];
 

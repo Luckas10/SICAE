@@ -32,7 +32,7 @@
 }
 
 :root[data-theme="dark"] .addEvents-content {
-    background-color: #071204;
+    background-color: #33333338;
     color: #e5e7eb;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
 }
@@ -45,7 +45,7 @@
 :root[data-theme="dark"] .addEvents-content form input,
 :root[data-theme="dark"] .addEvents-content form textarea,
 :root[data-theme="dark"] .capa {
-    background-color: #020617;
+    background-color: #333232;
     color: #e5e7eb;
     border-color: #333333;
 }
@@ -142,8 +142,9 @@
 
 
 
+
 :root[data-theme="dark"] .profile-page {
-    background-color: #00000010;
+    background-color: #202020;
     color: #e5e7eb;
 }
 
@@ -273,4 +274,72 @@
 :root[data-theme='dark'] .event-game-card{
     color: #e5e7eb;
     background-color: #3333339c;
+}
+:root[data-theme="dark"] .sportsNewsId:has(.chessIcon),
+:root[data-theme="dark"] .chessIcon {
+    color: #f3dcbd;
+    margin-bottom: 3px;
+}
+:root[data-theme="dark"] .initiation-filter-btn{
+    color: white;
+}
+:root[data-theme="dark"] #event-button-cancel{
+    background-color: transparent;
+    color: white;
+}
+:root[data-theme="dark"] .event-game-info{
+    background-color: #3333339c;
+    color: white;
+}
+:root[data-theme="dark"] .edit-mode input, .edit-mode textarea{
+    background-color:#242424 ;
+    color: white;
+
+}
+:root[data-theme="dark"] .games-content{
+    background-color: #33333338;
+    color: white;
+}
+:root[data-theme="dark"] .games-content form input, .games-content form #notes{
+    background-color: #333232;
+
+}
+:root[data-theme="dark"] .game-button .bnt-cancel{
+    background-color: transparent;
+    color: white;
+}
+:root[data-theme="dark"] .event-comments-form textarea{
+    background-color: #333232;
+}
+:root[data-theme="dark"] .event-comment-card {
+    background-color: #333232;
+    color: white;
+}
+:root[data-theme="dark"] .event-comment-card p{
+    color: white;
+}
+:root[data-theme="dark"] .addNews-content{
+    background-color: #33333338;
+    color: white;
+}
+:root[data-theme="dark"] .addNews-content input,.addNews-content form textarea, .addNews-content form select  {
+    background-color: #333232;
+    color: white;
+}
+
+:root[data-theme="dark"] .news-form-buttons .bnt-cancel{
+    background-color: transparent;
+}
+
+:root[data-theme="dark"] .user-card{
+    background-color:#333232 ;
+}
+
+.addNews-content .filter-buttons button,.addNews-content .button-secondary {
+    background-color: transparent;
+    color: white;
+}
+.addNews-content .filter-buttons .active{
+    background-color: #14532d;
+    color: white;
 }

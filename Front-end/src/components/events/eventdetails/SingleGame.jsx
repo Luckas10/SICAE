@@ -211,7 +211,7 @@ export default function SingleGame({ gameId, onUpdated, onDeleted }) {
                             Salvar
                         </button>
 
-                        <button className="btn-cancel" onClick={() => setEditing(false)}>
+                        <button className="cancel" onClick={() => setEditing(false)}>
                             Cancelar
                         </button>
                     </div>

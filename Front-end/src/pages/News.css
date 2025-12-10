@@ -211,8 +211,8 @@
 }
 
 .addNews-content form select,
-.addNews-content input,
-.addNews-content textarea,
+.addNews-content form input,
+.addNews-content form textarea,
 .capa {
     border-radius: 8px;
     border: 1px solid grey;
@@ -221,6 +221,8 @@
     display: "inline-block";
     margin: 5px 0;
     padding: 10px;
+    background-color: white;
+    
 }
 
 .addNews-content form button {
@@ -332,6 +334,10 @@ input[type="file"] {
     display: flex;
     justify-content: center;
     gap: 1rem;
+}
+.news-form-buttons .bnt-cancel{
+    background-color: transparent;
+    color: #0D4F1D;
 }
 
 @media (max-width: 850px) {

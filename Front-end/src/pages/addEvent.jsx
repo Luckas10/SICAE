@@ -170,10 +170,7 @@ export default function AddEvent() {
                                 <button type="submit">Salvar</button>
                                 <button
                                     type="button"
-                                    style={{
-                                        backgroundColor: "white",
-                                        color: "green",
-                                    }}
+                                    id="event-button-cancel"
                                     onClick={handleCancel}
                                 >
                                     Cancelar

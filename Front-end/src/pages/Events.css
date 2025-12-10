@@ -136,6 +136,10 @@
     outline: none;
     cursor:auto;
 }
+.addEvents-content form .event-colum .event-button #event-button-cancel{
+    background-color: white;
+    color: green;
+}
 
 input#titulo {
     padding-left: 35px;
@@ -555,12 +559,13 @@ p.timeAgoInfo {
 
 .initiation-filter-btn {
     border-radius: 10px;
+    border: none;
     border: 1px solid grey;
     width: 25%;
     height: 40px;
-    background-color: white;
+    background-color: transparent;
     color: #0D4F1D;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 15px 25px rgba(1, 0, 0, 0.2);
 }
 
 .initiation-filter-btn:hover {

@@ -3,6 +3,7 @@ import Header from "../components/general/Header.jsx";
 import Sidebar from "../components/general/Sidebar.jsx";
 import { useEffect, useState } from "react";
 import api from "../services/api";
+import { NavLink } from "react-router-dom"; // 👈 FALTAVA ISSO
 
 import SportsFilterBar from "../components/events/SportsFilterBar.jsx";
 import EventCard from "../components/events/EventCard.jsx";

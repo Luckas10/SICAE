@@ -336,7 +336,7 @@ input[type="file"] {
     gap: 1rem;
 }
 .news-form-buttons .bnt-cancel{
-    background-color: transparent;
+    background-color: white;
     color: #0D4F1D;
 }
 

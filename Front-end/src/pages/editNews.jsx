@@ -296,7 +296,7 @@ export default function EditNews() {
               <button
                 type="button"
                 onClick={handleCancel}
-                style={{ backgroundColor: "white", color: "#008000" }}
+                className="bnt-cancel"
               >
                 Cancelar
               </button>

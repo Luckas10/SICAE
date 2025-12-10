@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import api from "../services/api";
 
 import SportsFilterBar from "../components/events/SportsFilterBar.jsx";
-import AddEventButton from "../components/events/AddEventButton.jsx";
 import EventCard from "../components/events/EventCard.jsx";
 
 export default function Events() {
@@ -23,10 +22,10 @@ export default function Events() {
                     Array.isArray(raw)
                         ? raw
                         : Array.isArray(raw.data)
-                        ? raw.data
-                        : Array.isArray(raw.events)
-                        ? raw.events
-                        : [];
+                            ? raw.data
+                            : Array.isArray(raw.events)
+                                ? raw.events
+                                : [];
 
                 setEvents(list);
             } catch (err) {
@@ -38,15 +37,15 @@ export default function Events() {
         fetchEvents();
     }, []);
 
-    
+
     const filteredEvents = events
         .filter((ev) => {
-            
+
             if (activeCategory !== "all" && ev.category !== activeCategory) {
                 return false;
             }
 
-            
+
             if (showInitiation && !ev.is_initiation) {
                 return false;
             }
@@ -68,7 +67,7 @@ export default function Events() {
 
                     <div className="events-toolbar">
 
-                        
+
                         <button
                             className={`initiation-filter-btn ${showInitiation ? "active" : ""}`}
                             onClick={() => setShowInitiation((prev) => !prev)}
@@ -76,7 +75,9 @@ export default function Events() {
                             Iniciação Esportiva
                         </button>
 
-                        <AddEventButton />
+                        <NavLink to="/events/add" id="buttonAdd">
+                            <button type="button" className="buttonAdd">+ Adicionar evento</button>
+                        </NavLink>
                     </div>
 
                     <div className="cards">

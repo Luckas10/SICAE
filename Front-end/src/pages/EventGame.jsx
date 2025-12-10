@@ -114,8 +114,9 @@ export default function EventGame() {
 
                                 <button
                                     type="button"
-                                    style={{ backgroundColor: "white", color: "green" }}
+                                    id="event-button-cancel"
                                     onClick={() => navigate(`/events/${id}`)}
+                                    
                                 >
                                     Cancelar
                                 </button>

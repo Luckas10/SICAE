@@ -279,7 +279,7 @@ export default function AddNews() {
                         
                         <div className="news-form-buttons">
                             <button type="submit">Salvar</button>
-                            <button type="button" onClick={handleCancel} style={{backgroundColor: "white", color: "#008000"}}>
+                            <button className='bnt-cancel' type="button" onClick={handleCancel} >
                                 Cancelar</button>
                         </div>
                     </form>

@@ -126,6 +126,7 @@ def get_me(
         "id": current_user.id,
         "full_name": current_user.full_name,
         "email": current_user.email,
+        "role": current_user.role,
         "profile_image": current_user.profile_image,
         "total_comments": event_comments + news_comments,
         "event_comments": event_comments,

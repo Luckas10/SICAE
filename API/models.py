@@ -9,9 +9,6 @@ class Role(str, Enum):
     aluno = "Aluno"
     atleta = "Atleta"
     servidor = "Servidor"
-    gestor = "Gestor"
-    admin = "Admin"
-
 
 def now_brazil_timezone():
     return datetime.now(timezone.utc) - timedelta(hours=3)

@@ -23,7 +23,7 @@ export default function ManageAthletes() {
     const loadUsers = async () => {
         try {
             const res = await api.get("/users");
-            setUsers(res.data);
+            setUsers(res.data.filter((user) => user.role !== "Servidor"));
         } catch (err) {
             console.error(err);
         }
@@ -58,6 +58,8 @@ export default function ManageAthletes() {
     };
 
     const filteredUsers = users.filter((user) => {
+        user.role === "Servidor";
+
         const matchName = user.full_name
             .toLowerCase()
             .includes(search.toLowerCase());

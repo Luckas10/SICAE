@@ -6,21 +6,25 @@ import Header from "../components/general/Header.jsx";
 import Sidebar from "../components/general/Sidebar.jsx";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { fas } from "@fortawesome/free-solid-svg-icons";
+import { faAngleLeft, faAngleRight, fas } from "@fortawesome/free-solid-svg-icons";
 
 import TopCard from "../components/news/TopCard.jsx";
+import CenterSlider from "../components/news/CenterSlider.jsx";
 import BottomCard from "../components/news/BottomCard.jsx";
 
 import api from "../services/api";
-
-import CenterSlider from "../components/news/CenterSlider.jsx";
-
 import { CATEGORY_CONFIG } from "../constants/eventCategories.js";
+import { useUser } from "../context/UserContext.jsx";
 
 export default function News() {
+    const { user, loadingUser } = useUser();
+
     const [news, setNews] = useState([]);
     const [search, setSearch] = useState("");
     const [categoryFilter, setCategoryFilter] = useState("");
+
+    const [currentPage, setCurrentPage] = useState(1);
+    const ITEMS_PER_PAGE = 10;
 
     useEffect(() => {
         async function fetchNews() {
@@ -46,6 +50,10 @@ export default function News() {
         fetchNews();
     }, []);
 
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [search, categoryFilter]);
+
     const filteredBySearch = news.filter((item) => {
         const text = search.toLowerCase();
 
@@ -60,10 +68,8 @@ export default function News() {
         return matchText && matchCategory;
     });
 
-
     const isSearching =
         search.trim().length > 0 || categoryFilter.trim().length > 0;
-
 
     const sortedNews = [...news].sort(
         (a, b) => new Date(b.created_at) - new Date(a.created_at)
@@ -89,6 +95,10 @@ export default function News() {
         (a, b) => new Date(b.created_at) - new Date(a.created_at)
     );
 
+    const totalPages = Math.ceil(bottomNews.length / ITEMS_PER_PAGE);
+    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+    const endIndex = startIndex + ITEMS_PER_PAGE;
+    const paginatedBottomNews = bottomNews.slice(startIndex, endIndex);
 
     return (
         <>
@@ -99,7 +109,6 @@ export default function News() {
 
                 <div className="news-content">
                     <div className="news-nav">
-
                         <div className="buscar-content">
                             <label htmlFor="buscar">
                                 <FontAwesomeIcon
@@ -129,12 +138,13 @@ export default function News() {
                                     </option>
                                 ))}
                             </select>
-
                         </div>
 
-                        <NavLink to="./add" id="buttonAdd">
-                            <button>+ Adicionar notícia</button>
-                        </NavLink>
+                        {!loadingUser && user?.role === "Servidor" && (
+                            <NavLink to="./add" id="buttonAdd">
+                                <button>+ Adicionar notícia</button>
+                            </NavLink>
+                        )}
                     </div>
 
                     {isSearching ? (
@@ -151,22 +161,39 @@ export default function News() {
                         </div>
                     ) : (
                         <>
-                            {/* Notícias destaque (topo) */}
                             <div className="main-content">
                                 {topNews.map((item) => (
                                     <TopCard key={item.id} data={item} />
                                 ))}
                             </div>
 
-                            {/* Notícias do centro */}
                             <CenterSlider news={centerNews} />
 
-                            {/* Notícias mais recentes/sem prioridade */}
                             <div className="bottom-content">
-                                {bottomNews.map((item) => (
+                                {paginatedBottomNews.map((item) => (
                                     <BottomCard key={item.id} data={item} />
                                 ))}
                             </div>
+
+                            {totalPages > 1 && (
+                                <div className="pagination">
+                                    <button
+                                        disabled={currentPage === 1}
+                                        onClick={() => setCurrentPage(prev => prev - 1)}
+                                    >
+                                        <FontAwesomeIcon icon={faAngleLeft} />
+                                    </button>
+
+                                    <span>Página {currentPage} de {totalPages}</span>
+
+                                    <button
+                                        disabled={currentPage === totalPages}
+                                        onClick={() => setCurrentPage(prev => prev + 1)}
+                                    >
+                                        <FontAwesomeIcon icon={faAngleRight} />
+                                    </button>
+                                </div>
+                            )}
                         </>
                     )}
                 </div>

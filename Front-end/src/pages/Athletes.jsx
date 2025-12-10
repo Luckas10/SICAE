@@ -8,7 +8,10 @@ import api from "../services/api.js";
 
 import { NavLink } from "react-router-dom";
 
+import { useUser } from "../context/UserContext.jsx";
+
 export default function Athletes() {
+    const { user, loadingUser } = useUser();
     const [athletes, setAthletes] = useState([]);
     const [search, setSearch] = useState("");
 
@@ -48,9 +51,11 @@ export default function Athletes() {
                             onChange={(e) => setSearch(e.target.value)}
                         />
 
-                        <NavLink to="./manage" id="buttonAdd">
-                            <button>+ Gerenciar atletas</button>
-                        </NavLink>
+                        {!loadingUser && user?.role === "Servidor" && (
+                            <NavLink to="./manage" id="buttonAdd">
+                                <button>+ Gerenciar atletas</button>
+                            </NavLink>
+                        )}
                     </div>
 
                     <h1 className="title">Atletas</h1>
@@ -61,7 +66,7 @@ export default function Athletes() {
                                 <img
                                     src={atleta.profile_image || "/img/profile.png"}
                                 />
-                                <p style={{textAlign: "center"}}>{atleta.full_name}</p>
+                                <p style={{ textAlign: "center" }}>{atleta.full_name}</p>
                             </NavLink>
                         ))}
                     </div>

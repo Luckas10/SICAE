@@ -12,20 +12,15 @@ import ProfileInfoGrid from "../components/profile/ProfileInfoGrid.jsx";
 export default function Profile() {
     const { user, loadingUser } = useUser();
     const [commentsCount, setCommentsCount] = useState(0);
-
-    useEffect(() => {
-        if (!user) return;
-        setCommentsCount(user.total_comments || 0);
-    }, [user]);
-
     const [username, setUsername] = useState("Nome do usuário");
     const [email, setEmail] = useState("");
 
     useEffect(() => {
         if (!user) return;
+        setCommentsCount(user.total_comments || 0);
         setUsername(user.full_name || "Nome do usuário");
         setEmail(user.email || "");
-    }, []);
+    }, [user]);
 
     const profileInfoItems = [
         {

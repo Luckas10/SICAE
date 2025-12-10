@@ -6,8 +6,12 @@ import api from "../services/api";
 
 import SportsFilterBar from "../components/events/SportsFilterBar.jsx";
 import EventCard from "../components/events/EventCard.jsx";
+import { NavLink } from "react-router-dom";
+
+import { useUser } from "../context/UserContext.jsx";
 
 export default function Events() {
+    const { user, loadingUser } = useUser();
     const [events, setEvents] = useState([]);
     const [activeCategory, setActiveCategory] = useState("all");
     const [showInitiation, setShowInitiation] = useState(false);
@@ -75,9 +79,11 @@ export default function Events() {
                             Iniciação Esportiva
                         </button>
 
-                        <NavLink to="/events/add" id="buttonAdd">
-                            <button type="button" className="buttonAdd">+ Adicionar evento</button>
-                        </NavLink>
+                        {!loadingUser && user?.role === "Servidor" && (
+                            <NavLink to="/events/add" id="buttonAdd">
+                                <button type="button" className="buttonAdd">+ Adicionar evento</button>
+                            </NavLink>
+                        )}
                     </div>
 
                     <div className="cards">

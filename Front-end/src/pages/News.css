@@ -702,3 +702,41 @@ input[type="file"] {
     background: #fff;
     cursor: pointer;
 }
+
+.pagination {
+  margin: 2.5rem 0 3rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.pagination button {
+  padding: 10px 10px;
+  border-radius: 100%;
+  border: none;
+  background: #2c9643;
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pagination button:hover:not(:disabled) {
+  background: #3c8158;
+  transform: translateY(-1px);
+}
+
+.pagination button:disabled {
+  background: #0f1a0e;
+  cursor: not-allowed;
+  transform: none;
+  opacity: 0.7;
+}
+
+.pagination span {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #399939;
+}

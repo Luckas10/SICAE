@@ -222,7 +222,7 @@ export default function NewsComments({ articleId, currentUser }) {
                                                 src={
                                                     user.profile_image
                                                         ? user.profile_image
-                                                        : "/default-avatar.png"
+                                                        : "/img/profile.png"
                                                 }
                                                 alt="Foto do usuário"
                                                 className="news-comment-avatar"

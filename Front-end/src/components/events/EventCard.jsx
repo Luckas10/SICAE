@@ -25,7 +25,7 @@ export default function EventCard({ event }) {
                     icon={cfg.icon}
                     className={cfg.className}
                 />{" "}
-                {cfg.label}
+                {cfg.label} {event.is_initiation && " | INICIAÇÃO ESPORTIVA"}
             </p>
             <h5>{event.title}</h5>
 

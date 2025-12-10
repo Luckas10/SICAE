@@ -163,9 +163,9 @@ input#titulo {
 }
 
 .events-content #buttonAdd {
-    margin-top: 50px;
+   
     align-self: flex-end;
-    width: 15%;
+    width: 25%;
     height: 40px;
 }
 
@@ -542,6 +542,33 @@ p.timeAgoInfo {
     color: #0D4F1D;
     font-weight: 600;
 }
+.events-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    gap: 12px;
+    margin-bottom: 20px;
+    margin-top: 3%;
+    width: 80%;
+}
+
+.initiation-filter-btn {
+    border-radius: 10px;
+    border: 1px solid grey;
+    width: 25%;
+    height: 40px;
+    background-color: white;
+    color: #0D4F1D;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.initiation-filter-btn:hover {
+    background-color: #ddd;
+}
+
+
+
 
 @media (max-width: 900px) {
     .event-card {

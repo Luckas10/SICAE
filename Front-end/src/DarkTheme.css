@@ -291,16 +291,24 @@
     background-color: #3333339c;
     color: white;
 }
-:root[data-theme="dark"] .edit-mode input, .edit-mode textarea{
+:root[data-theme="dark"] .edit-mode input{
     background-color:#242424 ;
     color: white;
 
+}
+:root[data-theme="dark"] .edit-mode textarea{
+    background-color:#242424 ;
+    color: white;
 }
 :root[data-theme="dark"] .games-content{
     background-color: #33333338;
     color: white;
 }
-:root[data-theme="dark"] .games-content form input, .games-content form #notes{
+:root[data-theme="dark"] .games-content form input{
+    background-color: #333232;
+
+}
+:root[data-theme="dark"] .games-content form textarea{
     background-color: #333232;
 
 }
@@ -322,7 +330,19 @@
     background-color: #33333338;
     color: white;
 }
-:root[data-theme="dark"] .addNews-content input,.addNews-content form textarea, .addNews-content form select  {
+:root[data-theme="dark"] .addNews-content input {
+    background-color: #333232;
+    color: white;
+}
+:root[data-theme="dark"] .textarea-icon #conteudo{
+    background-color: #333232;
+    color: white;
+}
+:root[data-theme="dark"] .input-icon #categorias{
+    background-color: #333232;
+    color: white;
+}
+:root[data-theme="dark"] .input-icon #prioridades{
     background-color: #333232;
     color: white;
 }
@@ -334,12 +354,61 @@
 :root[data-theme="dark"] .user-card{
     background-color:#333232 ;
 }
-
-.addNews-content .filter-buttons button,.addNews-content .button-secondary {
+:root[data-theme="dark"] .addNews-content .filter-buttons button,.addNews-content .button-secondary {
     background-color: transparent;
     color: white;
 }
-.addNews-content .filter-buttons .active{
+:root[data-theme="dark"] .addNews-content .filter-buttons .active{
     background-color: #14532d;
     color: white;
+}
+:root[data-theme="dark"] .news-form-buttons button{
+    background-color: #06200d;
+    color: white;
+
+}
+:root[data-theme="dark"] .addNews-content select{
+    background-color: #333232;
+    color: white;
+}
+:root[data-theme="dark"]  .buscar-content #buscar{
+    background-color: #333232;
+}
+:root[data-theme="dark"] .news-category-filter{
+    background-color: #333232;
+    color: white;
+}
+:root[data-theme="dark"]  .news-actions .news-button-secondary{
+    background-color: #333232;
+    color: white;
+}
+:root[data-theme="dark"]  .news-comments textarea{
+    background-color: #333232;
+    color: white;
+}
+:root[data-theme="dark"]  .news-comment-card{
+    background-color: #333232;
+    color: white;
+
+}
+:root[data-theme="dark"]  .news-comment-card .news-comment-content{
+    background-color: #333232;
+    color: white;
+
+}
+:root[data-theme="dark"] .news-comment-dropdown button {
+    background: #242424;
+    color: white;
+}
+:root[data-theme="dark"] .news-comment-dropdown .danger {
+    background: #242424;
+    color: red;
+}
+:root[data-theme="dark"] .event-comment-dropdown button{
+    background: #242424;
+    color: white;
+}
+:root[data-theme="dark"] .event-comment-dropdown .danger {
+    background: #242424;
+    color: red;
 }

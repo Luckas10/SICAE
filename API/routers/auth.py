@@ -17,9 +17,7 @@ router = APIRouter(prefix="/auth", tags=["Login"])
 bcrypt_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 oauth2_bearer = OAuth2PasswordBearer(tokenUrl="/auth/token")  # tokenUrl consistente
 
-# ==============================
-# Configurações JWT
-# ==============================
+
 SECRET_KEY = "minha_chave_secreta_super_segura"  # troque para produção
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 60

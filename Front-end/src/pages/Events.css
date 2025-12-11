@@ -172,7 +172,7 @@ input#titulo {
 
 .events-content #buttonAdd {
     align-self: flex-end;
-    width: 15%;
+    width: 20%;
     height: 40px;
 }
 
@@ -918,9 +918,11 @@ p.timeAgoInfo {
        
     }
     
-    .events-page #buttonAdd{
-        width: 45%;
-        margin-top: 5%;
+    .events-page .events-content .events-toolbar #buttonAdd{
+        width: 40%;
+        font-size: 8pt;
+        
+        
     }
 
     .event-card {

@@ -106,7 +106,8 @@
   .sidebar {
     width: 70px;
     top: 15vh;
-    height: calc(100% - 15vh);
+    height: 100%;
+    position: fixed;
   }
 
   .sidebar a span {

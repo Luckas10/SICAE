@@ -8,8 +8,9 @@
 .dashboard-page {
     display: block;
     padding-left: 15%;
-    padding-top: calc(5vh);
+    padding-top: calc(9.5vh + 5vh) ;
     min-height: 100vh;
+    
 }
 
 .dashboard-page .dashboard-content {
@@ -208,6 +209,10 @@
 @media (max-width: 900px) {
     .dashboard-page {
         padding-top: calc(15vh + 20px);
+        
+    }
+    .dashboard-page .cards .card {
+        width: 48%;
     }
 }
 
@@ -216,5 +221,9 @@
         padding-left: 0;
         padding-bottom: 70px;
         padding-top: calc(15vh + 20px);
+    }
+    .dashboard-page .cards .card {
+        width: 90%;
+        margin-left: 5%;
     }
 }

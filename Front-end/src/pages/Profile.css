@@ -8,7 +8,7 @@
 .profile-page {
     display: flex;
     padding-left: 15%;
-    padding-top: calc(5vh);
+    padding-top: calc(9.5vh + 5vh);
     min-height: 100%;
     background-color: #f9fafb;
 }
@@ -189,5 +189,11 @@
 
     .profile-info-grid {
         grid-template-columns: 1fr;
+    }
+    
+}
+@media (max-width: 900px){
+    .profile-page{
+        padding-left: 5%;
     }
 }

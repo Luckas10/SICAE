@@ -3,7 +3,7 @@
     margin-top: 2rem;
     
 }
-.event-game{
+.event-game {
     width: 100%;
     margin-top: 2rem;
     padding: 5%;
@@ -49,12 +49,7 @@
     cursor: pointer;
     transition: 0.2s;
 }
-.events-page {
-    display: block;
-    padding-left: 15%;
-    padding-top: calc(5vh);
-    min-height: 100%;
-}
+
 
 .event-games-form button:hover {
     background-color: #30924c;

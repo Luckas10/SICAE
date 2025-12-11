@@ -12,7 +12,7 @@
     padding: 0 2vw;
     top: 0;
     box-sizing: border-box;
-    position: sticky;
+    position: fixed;
     z-index: 1000;
 }
 

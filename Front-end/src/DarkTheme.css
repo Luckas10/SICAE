@@ -383,6 +383,8 @@
 :root[data-theme="dark"] .news-category-filter{
     background-color: #333232;
     color: white;
+    border: none;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
 }
 :root[data-theme="dark"]  .news-actions .news-button-secondary{
     background-color: #333232;
@@ -426,4 +428,3 @@
 :root[data-theme="dark"] .settings-page .logout-button:hover {
     color: #E3B52E;
 }
-

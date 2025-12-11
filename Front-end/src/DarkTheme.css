@@ -280,9 +280,15 @@
     color: #f3dcbd;
     margin-bottom: 3px;
 }
+
 :root[data-theme="dark"] .initiation-filter-btn{
     color: white;
 }
+
+:root[data-theme="dark"] .initiation-filter-btn:hover {
+    color: #0D4F1D;
+}
+
 :root[data-theme="dark"] #event-button-cancel{
     background-color: transparent;
     color: white;
@@ -412,3 +418,12 @@
     background: #242424;
     color: red;
 }
+
+:root[data-theme="dark"] .settings-page .logout-button {
+    color: white;
+}
+
+:root[data-theme="dark"] .settings-page .logout-button:hover {
+    color: #E3B52E;
+}
+

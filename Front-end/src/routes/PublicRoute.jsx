@@ -1,7 +1,14 @@
 import { Navigate, Outlet } from "react-router-dom";
+import { useUser } from "../context/UserContext";
 
 export default function PublicRoute({ redirectTo = "/" }) {
-    const token = localStorage.getItem("token");
+  const { user, loadingUser } = useUser();
 
-    return token ? <Navigate to={redirectTo} replace /> : <Outlet />;
+  if (loadingUser) return null;
+
+  if (user) {
+    return <Navigate to={redirectTo} replace />;
+  }
+
+  return <Outlet />;
 }

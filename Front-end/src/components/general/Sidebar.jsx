@@ -8,7 +8,7 @@ import { useUser } from "../../context/UserContext";
 
 export default function Sidebar() {
   const navigate = useNavigate();
-  const { logout } = useUser();
+  const { logout, user, loadingUser } = useUser();
 
   const handleLogout = async (event) => {
     event.preventDefault();
@@ -41,6 +41,11 @@ export default function Sidebar() {
 
       navigate("/auth");
     }
+  };
+
+  const handleLogin = async (event) => {
+    event.preventDefault();
+    navigate("/auth");
   };
 
   return (
@@ -79,16 +84,19 @@ export default function Sidebar() {
           </NavLink>
         </li>
 
-        <li>
-          <NavLink to="/profile">
-            <FontAwesomeIcon
-              size="lg"
-              icon={fas.faAddressCard}
-              style={{ marginBottom: "1px" }}
-            />
-            <span>SEU PERFIL</span>
-          </NavLink>
-        </li>
+        {!loadingUser && user && (
+          <li>
+            <NavLink to="/profile">
+              <FontAwesomeIcon
+                size="lg"
+                icon={fas.faAddressCard}
+                style={{ marginBottom: "1px" }}
+              />
+              <span>SEU PERFIL</span>
+            </NavLink>
+          </li>
+        )}
+
 
         <li>
           <NavLink to="/athletes">
@@ -106,9 +114,18 @@ export default function Sidebar() {
 
       <ul className="logout">
         <li>
-          <NavLink to="/auth" onClick={handleLogout}>
-            <FontAwesomeIcon size="lg" icon={fas.faRightFromBracket} />
-            <span>SAIR</span>
+          <NavLink to="/auth" onClick={user ? handleLogout : handleLogin} style={user ? { backgroundColor: "" } : { backgroundColor: "#0D4F1D" }}>
+            {!loadingUser && user ? (
+              <>
+                <FontAwesomeIcon size="lg" icon={fas.faRightFromBracket} />
+                <span>SAIR</span>
+              </>
+            ) : (
+              <>
+                <FontAwesomeIcon size="lg" icon={fas.faRightToBracket} />
+                <span>ENTRAR</span>
+              </>
+            )}
           </NavLink>
         </li>
       </ul>

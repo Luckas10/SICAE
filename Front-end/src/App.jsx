@@ -32,43 +32,44 @@ export default function App() {
           <Route path="/auth" element={<LoginRegister />} />
         </Route>
 
-        <Route element={<ProtectedRoute />}>
+        <Route path="/" element={<Dashboard />} />
+        <Route path="/events" element={<Events />} />
+        <Route path="/events/:id" element={<EventDetails />} />
+        <Route path="/games/:id" element={<GameDetails />} />
 
-          <Route path="/" element={<Dashboard />} />
-
-          <Route path="/events" element={<Events />} />
-
-          <Route element={<ProtectedRole allowedRoles={["Servidor"]} redirectTo={"/events"}/>}>
-            <Route path="/events/add" element={<AddEvent />} />
-            <Route path="/events/edit/:id" element={<EditEvent />} />
-          </Route>
-
-          <Route path="/events/:id" element={<EventDetails />} />
+        <Route element={<ProtectedRole allowedRoles={["Servidor"]} redirectTo="/events" />}>
           <Route path="/events/:id/games" element={<EventGame />} />
-
-          <Route path="/games/:id" element={<GameDetails />} />
-
-          <Route path="/news" element={<News />} />
-
-          <Route element={<ProtectedRole allowedRoles={["Servidor"]} redirectTo={"/news"}/>}>
-            <Route path="/news/add" element={<AddNews />} />
-            <Route path="/news/edit/:id" element={<EditNews />} />
-          </Route>
-
-          <Route path="/news/:id" element={<NewsDetails />} />
-
-          <Route path="/athletes" element={<Athletes />} />
-
-          <Route element={<ProtectedRole allowedRoles={["Servidor"]} redirectTo={"/athletes"}/>}>
-            <Route path="/athletes/manage" element={<ManageAthletes />} />
-          </Route>
-
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/profile/:id" element={<ProfileID />} />
-          <Route path="/settings" element={<Settings />} />
-
         </Route>
+
+        <Route path="/news" element={<News />} />
+        <Route path="/news/:id" element={<NewsDetails />} />
+
+        <Route path="/athletes" element={<Athletes />} />
+
+        <Route path="/profile/:id" element={<ProfileID />} />
+
+        <Route element={<ProtectedRole allowedRoles={["Servidor"]} redirectTo="/events" />}>
+          <Route path="/events/add" element={<AddEvent />} />
+          <Route path="/events/edit/:id" element={<EditEvent />} />
+        </Route>
+
+        <Route element={<ProtectedRole allowedRoles={["Servidor"]} redirectTo="/news" />}>
+          <Route path="/news/add" element={<AddNews />} />
+          <Route path="/news/edit/:id" element={<EditNews />} />
+        </Route>
+
+        <Route element={<ProtectedRole allowedRoles={["Servidor"]} redirectTo="/athletes" />}>
+          <Route path="/athletes/manage" element={<ManageAthletes />} />
+        </Route>
+
+        <Route element={<ProtectedRoute />}>
+          <Route path="/profile" element={<Profile />} />
+        </Route>
+
+        <Route path="/settings" element={<Settings />} />
       </Routes>
     </Router>
   );
 }
+
+

@@ -53,7 +53,7 @@ export default function EventsComments({ eventId, currentUser }) {
             if (usersNotLoaded.length === 0) return;
 
             const requests = usersNotLoaded.map((id) =>
-                api.get(`/users/${id}`)
+                api.get(`/users/public/${id}`)
             );
 
             const responses = await Promise.all(requests);
@@ -103,6 +103,24 @@ export default function EventsComments({ eventId, currentUser }) {
             await loadComments();
         } catch (err) {
             console.error(err);
+
+            if (err.response?.status === 401) {
+                Swal.fire({
+                    title: "Você não pode enviar comentários sem estar logado!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonText: "Logar-se",
+                    cancelButtonText: "Cancelar",
+                    customClass: { popup: "comment-alert" },
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "/auth";
+                    }
+                });
+
+                return;
+            }
+
             Swal.fire({
                 title: "Erro",
                 text: "Não foi possível enviar o comentário.",

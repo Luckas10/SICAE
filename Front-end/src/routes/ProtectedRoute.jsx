@@ -1,8 +1,14 @@
-// src/routes/ProtectedRoute.jsx
 import { Navigate, Outlet } from "react-router-dom";
+import { useUser } from "../context/UserContext";
 
 export default function ProtectedRoute({ redirectTo = "/auth" }) {
-    const token = localStorage.getItem("token");
+  const { user, loadingUser } = useUser();
 
-    return token ? <Outlet /> : <Navigate to={redirectTo} replace />;
+  if (loadingUser) return null;
+
+  if (!user) {
+    return <Navigate to={redirectTo} replace />;
+  }
+
+  return <Outlet />;
 }

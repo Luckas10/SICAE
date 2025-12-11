@@ -1,16 +1,35 @@
 from fastapi import APIRouter, HTTPException, status, Depends
-from fastapi.security import OAuth2PasswordRequestForm, OAuth2PasswordBearer
 from sqlmodel import select, func
 from pydantic import BaseModel
 from typing import List
 from passlib.context import CryptContext
+
 from database import SessionDep
 from models import User, Role, EventComment, NewsComment
-
 from routers.auth import get_current_user
 
 bcrypt_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-oauth2_bearer = OAuth2PasswordBearer(tokenUrl="auth/token")
+
+router = APIRouter(prefix="/users", tags=["Usuários"])
+
+
+
+class PublicUser(BaseModel):
+    id: int  
+    full_name: str
+    role: Role
+    profile_image: str | None = None
+
+
+class PublicUserProfile(BaseModel):
+    id: int
+    full_name: str
+    email: str
+    role: Role
+    profile_image: str | None = None
+    total_comments: int
+    event_comments: int
+    news_comments: int
 
 
 class UserCreate(BaseModel):
@@ -24,7 +43,53 @@ class UserAvatarUpdate(BaseModel):
     profile_image: str
 
 
-router = APIRouter(prefix="/users", tags=["Usuários"])
+
+@router.get("/public", response_model=List[PublicUser])
+def listar_users_publico(session: SessionDep):
+    users = session.exec(select(User)).all()
+
+    return [
+        {
+            "id": u.id,
+            "full_name": u.full_name,
+            "role": u.role,
+            "profile_image": u.profile_image,
+        }
+        for u in users
+    ]
+
+
+@router.get("/public/{id}", response_model=PublicUserProfile)
+def perfil_publico_user(session: SessionDep, id: int):
+
+    user = session.get(User, id)
+    if not user:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Usuário não encontrado.",
+        )
+
+    event_comments = session.exec(
+        select(func.count(EventComment.id))
+        .where(EventComment.author_id == user.id)
+    ).one()
+
+    news_comments = session.exec(
+        select(func.count(NewsComment.id))
+        .where(NewsComment.author_id == user.id)
+    ).one()
+
+    return {
+        "id": user.id,
+        "full_name": user.full_name,
+        "email": user.email,
+        "role": user.role,
+        "profile_image": user.profile_image,
+        "total_comments": event_comments + news_comments,
+        "event_comments": event_comments,
+        "news_comments": news_comments,
+    }
+
 
 
 @router.get("")
@@ -37,6 +102,7 @@ def listar_users(
 
 @router.post("", status_code=status.HTTP_201_CREATED)
 def cadastrar_user(session: SessionDep, data: UserCreate) -> User:
+
     exists = session.exec(
         select(User).where(User.full_name == data.full_name)
     ).first()
@@ -86,7 +152,14 @@ def atualizar_user(
     role: str,
     current_user: User = Depends(get_current_user),
 ) -> User:
-    user = session.exec(select(User).where(User.id == id)).one()
+
+    user = session.get(User, id)
+    if not user:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Usuário não encontrado.",
+        )
+
     user.full_name = full_name
     user.role = role
     session.add(user)
@@ -101,7 +174,14 @@ def deletar_user(
     id: int,
     current_user: User = Depends(get_current_user),
 ) -> str:
-    user = session.exec(select(User).where(User.id == id)).one()
+
+    user = session.get(User, id)
+    if not user:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Usuário não encontrado.",
+        )
+
     session.delete(user)
     session.commit()
     return "Usuário excluído com sucesso."
@@ -112,14 +192,15 @@ def get_me(
     session: SessionDep,
     current_user: User = Depends(get_current_user)
 ):
-    # Conta comentários em eventos
+
     event_comments = session.exec(
-        select(func.count(EventComment.id)).where(EventComment.author_id == current_user.id)
+        select(func.count(EventComment.id))
+        .where(EventComment.author_id == current_user.id)
     ).one()
 
-    # Conta comentários em notícias
     news_comments = session.exec(
-        select(func.count(NewsComment.id)).where(NewsComment.author_id == current_user.id)
+        select(func.count(NewsComment.id))
+        .where(NewsComment.author_id == current_user.id)
     ).one()
 
     return {
@@ -133,12 +214,14 @@ def get_me(
         "news_comments": news_comments,
     }
 
+
 @router.put("/me/avatar")
 def update_my_avatar(
     data: UserAvatarUpdate,
     session: SessionDep,
     current_user: User = Depends(get_current_user),
 ):
+
     user = session.get(User, current_user.id)
     if not user:
         raise HTTPException(
@@ -157,19 +240,3 @@ def update_my_avatar(
         "email": user.email,
         "profile_image": user.profile_image,
     }
-
-@router.get("/{id}")
-def buscar_user_por_id(
-    session: SessionDep,
-    id: int,
-    current_user: User = Depends(get_current_user),
-) -> User:
-    user = session.get(User, id)
-
-    if not user:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail="Usuário não encontrado.",
-        )
-
-    return user

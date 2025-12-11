@@ -3,9 +3,11 @@ from sqlmodel import select
 from datetime import datetime
 from pydantic import BaseModel
 from typing import List, Optional
+
 from database import SessionDep
 from models import Event, User
 from routers.auth import get_current_user
+
 
 
 class EventCreate(BaseModel):
@@ -32,6 +34,10 @@ class EventRead(BaseModel):
     creator_name: str
     created_at: datetime
 
+    class Config:
+        orm_mode = True
+
+
 class EventUpdate(BaseModel):
     local_id: Optional[int] = None
     title: Optional[str] = None
@@ -49,11 +55,9 @@ class EventUpdate(BaseModel):
 router = APIRouter(prefix="/events", tags=["Eventos"])
 
 
+
 @router.get("", response_model=List[Event])
-def listar_events(
-    session: SessionDep,
-    current_user: User = Depends(get_current_user),
-):
+def listar_events(session: SessionDep):
     return session.exec(select(Event)).all()
 
 
@@ -61,7 +65,6 @@ def listar_events(
 def obter_evento(
     id: int,
     session: SessionDep,
-    current_user: User = Depends(get_current_user),
 ):
     event = session.get(Event, id)
     if not event:
@@ -77,9 +80,10 @@ def obter_evento(
         cover_image=event.cover_image,
         is_initiation=event.is_initiation,
         creator_id=event.creator_id,
-        creator_name=event.creator.full_name,
+        creator_name=event.creator.full_name if event.creator else None,
         created_at=event.created_at,
     )
+
 
 
 @router.post("", status_code=status.HTTP_201_CREATED, response_model=Event)
@@ -113,7 +117,10 @@ def atualizar_event(
     session: SessionDep,
     current_user: User = Depends(get_current_user),
 ):
-    event = session.exec(select(Event).where(Event.id == id)).one()
+    event = session.exec(select(Event).where(Event.id == id)).first()
+
+    if not event:
+        raise HTTPException(status_code=404, detail="Evento não encontrado.")
 
     update_data = event_data.dict(exclude_unset=True)
 
@@ -126,13 +133,17 @@ def atualizar_event(
     return event
 
 
-@router.delete("/{id}")
+@router.delete("/{id}", status_code=status.HTTP_200_OK)
 def deletar_event(
     id: int,
     session: SessionDep,
     current_user: User = Depends(get_current_user),
 ):
-    event = session.exec(select(Event).where(Event.id == id)).one()
+    event = session.exec(select(Event).where(Event.id == id)).first()
+
+    if not event:
+        raise HTTPException(status_code=404, detail="Evento não encontrado.")
+
     session.delete(event)
     session.commit()
-    return "Evento excluído com sucesso."
+    return {"message": "Evento excluído com sucesso."}

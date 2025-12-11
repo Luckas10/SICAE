@@ -39,16 +39,14 @@ router = APIRouter(prefix="/news", tags=["Notícias"])
 
 @router.get("", response_model=List[NewsArticle])
 def listar_noticias(
-    session: SessionDep,
-    current_user: User = Depends(get_current_user),
+    session: SessionDep
 ):
     return session.exec(select(NewsArticle)).all()
 
 @router.get("/{id}", response_model=NewsArticleRead)
 def obter_noticia(
     id: int,
-    session: SessionDep,
-    current_user: User = Depends(get_current_user),
+    session: SessionDep
 ):
     article = session.get(NewsArticle, id)
     if not article:

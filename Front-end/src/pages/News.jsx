@@ -29,7 +29,7 @@ export default function News() {
     useEffect(() => {
         async function fetchNews() {
             try {
-                const response = await api.get("/news");
+                const response = await api.get("/news/");
                 const raw = response.data;
 
                 const list = Array.isArray(raw)

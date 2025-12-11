@@ -6,9 +6,9 @@
 }
 
 .events-page {
-    padding-left: 15%;
     display: block;
-    padding-top: calc(9.5vh + 5vh);
+    padding-left: 15%;
+    padding-top: calc(5vh);
     min-height: 100%;
 }
 
@@ -21,15 +21,14 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 90%;
-    margin-left: 5%;
+    width: 100%;
     padding: 0 2%;
 }
 
 .sports-content {
     display: flex;
     align-items: center;
-    width: 100%;
+    width: 80%;
     justify-content: center;
     position: relative;
 }
@@ -161,7 +160,6 @@ input#titulo {
     border-radius: 10px;
     color: white;
     border: 1px solid grey;
-
 }
 
 .addEvents-content form button:hover {
@@ -170,11 +168,13 @@ input#titulo {
 
 .events-content #buttonAdd {
     align-self: flex-end;
-    width: 15%;
+    width: 25%;
     height: 40px;
 }
 
-
+.events-page #buttonAdd {
+    width: 15%;
+}
 
 .events-page #buttonAdd button {
     width: 100%;
@@ -284,7 +284,6 @@ input[type="file"] {
     margin-top: 10px;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
     gap: 8px;
     font-weight: bold;
     color: #0D4F1D;
@@ -578,362 +577,32 @@ p.timeAgoInfo {
 .initiation-filter-btn {
     border-radius: 10px;
     border: none;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    border: 1px solid grey;
     width: 25%;
     height: 40px;
     background-color: transparent;
     color: #0D4F1D;
-    
+    box-shadow: 0 15px 25px rgba(1, 0, 0, 0.2);
 }
 
 .initiation-filter-btn:hover {
     background-color: #ddd;
 }
 
-
-.place-modal {
-    max-width: 520px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.place-modal h3 {
-    font-size: 20px;
-    font-weight: 700;
-    margin-bottom: 4px;
-}
-
-.place-modal form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.place-input-row {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
-.place-input-row label {
-    font-size: 14px;
-    font-weight: 600;
-}
-
-.place-input-row input,
-.place-input-row textarea {
-    border-radius: 8px;
-    border: 1px solid #d1d5db;
-    padding: 8px 10px;
-    font-size: 14px;
-    outline: none;
-}
-
-.place-input-row textarea {
-    min-height: 80px;
-    resize: vertical;
-}
-
-.modal-actions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 8px;
-    margin-top: 8px;
-}
-
-.modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.45);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 999;
-}
-
-.modal-content {
-    background: #ffffff;
-    border-radius: 12px;
-    padding: 20px 22px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
-    max-height: 90vh;
-    overflow-y: auto;
-    width: 90%;
-    max-width: 520px;
-    box-sizing: border-box;
-}
-
-.place-modal {
-    max-width: 520px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.place-modal .crop-wrapper {
-    width: 100%;
-    max-width: 100%;
-    margin: 10px 0;
-}
-
-.place-modal .image-preview {
-    width: 100%;
-    max-width: 100%;
-    border-radius: 10px;
-    margin-top: 10px;
-}
-
-/* === Cards de Locais === */
-
-.local-card {
-    width: 32%;
-    border-radius: 15px 15px 10px 10px;
-    margin-bottom: 25px;
-    background-color: #ffffff;
-    overflow: hidden;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
-    display: flex;
-    flex-direction: column;
-}
-
-.local-card:hover {
-    transform: translateY(-3px);
-}
-
-.local-card-cover img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-    border-radius: 10px 10px 0 0;
-    display: block;
-}
-
-.local-card-body {
-    padding: 10px 12px 12px;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
-.local-card-body h5 {
-    font-weight: bold;
-    font-size: 18px;
-    margin: 0 0 4px;
-    color: #0D4F1D;
-}
-
-.local-capacity {
-    font-size: 13px;
-    font-weight: 600;
-    color: #111827;
-}
-
-.local-description {
-    font-size: 13px;
-    color: #4b5563;
-    line-height: 1.5;
-    max-height: 4.5em;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.local-created-at {
-    font-size: 11px;
-    color: #6b7280;
-    margin-top: 4px;
-}
-
-/* === DETALHES DO LOCAL === */
-
-.place-details-card {
-    width: 100%;
-    max-width: 960px;
-    margin-bottom: 60px;
-    background-color: #ffffff;
-    border-radius: 16px;
-    padding: 24px 28px;
-    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.12);
-    box-sizing: border-box;
-}
-
-.place-details-header {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-bottom: 20px;
-}
-
-.place-details-header h1 {
-    font-size: 26px;
-    font-weight: 800;
-    color: #0d4f1d;
-    line-height: 1.2;
-}
-
-.place-details-subtitle {
-    font-size: 14px;
-    color: #4b5563;
-}
-
-.place-details-cover {
-    margin: 18px 0 24px;
-    border-radius: 14px;
-    overflow: hidden;
-}
-
-.place-details-cover img {
-    width: 100%;
-    height: auto;
-    object-fit: contain;
-    display: block;
-    background-color: #ffffff;
-    transition: transform 0.2s ease;
-}
-
-.place-details-cover img:hover {
-    transform: scale(1.01);
-    filter: brightness(1.02);
-}
-
-.place-details-body {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-}
-
-.place-meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-}
-
-.place-meta-item {
-    min-width: 160px;
-    padding: 10px 12px;
-    border-radius: 12px;
-    background-color: #f3f4f6;
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-}
-
-.place-meta-label {
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: #6b7280;
-    font-weight: 600;
-}
-
-.place-meta-value {
-    font-size: 14px;
-    color: #111827;
-    font-weight: 600;
-}
-
-.place-description h2 {
-    font-size: 18px;
-    margin-bottom: 8px;
-    color: #0d4f1d;
-}
-
-.place-description p {
-    font-size: 14px;
-    line-height: 1.6;
-    color: #111827;
-    white-space: pre-line;
-}
-
-.place-details-actions {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 8px;
-}
-
-
-/* Responsivo compartilhando lógica com cards de eventos */
+/* Responsivo – cards de eventos */
 @media (max-width: 900px) {
-    .local-card {
+    .event-card {
         width: 48%;
     }
 }
 
 @media (max-width: 600px) {
-    .local-card {
-        width: 100%;
-    }
-}
-
-
-@media (max-width: 900px) {
-    .event-card  {
-        width: 48%;
-    }
-    
-    .events-page #buttonAdd{
-        width: 30%;
-    }
-    
-    .sports-content img{
-        width: 50px;
-        height: 50px;
-    }
-    .addEvents-content{
-        width: 90%;
-        display: flex;
-        flex-direction: column;
-    }
-    .addEvents-content form .event-colum .initiation-flag{
-        width: 100%;
-        display: flex;
-        justify-content: space-around;
-    }
-    .addEvents-content form .event-colum .initiation-flag label{
-        font-size: 12pt;
-    } 
-    .addEvents-content form {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-    }
-    .addEvents-content form .event-colum {
-        width: 100%;
-    }
-    .addEvents-content form .event-colum input{
-        width: 100%;
-    }
-}
-
-@media (max-width: 530px) {
     .events-page {
+        padding-left: 0;
         padding-bottom: 70px;
-        padding-left: 2%;
-        
-       
-    }
-    
-    .events-page #buttonAdd{
-        width: 45%;
-        margin-top: 5%;
     }
 
     .event-card {
         width: 100%;
-        
-       
     }
-    .sports-content img{
-        width: 35px;
-        height: 35px;
-    }
-    .sports-content .sport-filter-label {
-        font-size: 5px;
-    }
-    .addEvents-content form .event-colum .initiation-flag label{
-        font-size: 8pt;
-    } 
 }

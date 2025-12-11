@@ -63,26 +63,23 @@ def _check_local_availability(
 ) -> None:
     """
     Verifica se o local está disponível entre start_date e end_date.
-    Lança HTTPException 400 se houver conflito.
+    Lança HTTPException 400 se houver conflito ou se o intervalo for inválido.
     """
 
-    if local_id is None:
-        # Evento sem local não participa da regra de conflito
-        return
-
-    if end_date <= start_date:
+    if end_date < start_date:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail="A data de término deve ser posterior à data de início.",
+            detail="A data de término deve ser igual ou posterior à data de início.",
         )
+
+    if local_id is None:
+        return
 
     stmt = select(Event).where(Event.local_id == local_id)
 
     if ignore_event_id is not None:
         stmt = stmt.where(Event.id != ignore_event_id)
 
-    # Regra de sobreposição de intervalos:
-    # (start < existing_end) AND (end > existing_start)
     stmt = stmt.where(
         Event.start_date < end_date,
         Event.end_date > start_date,
@@ -131,7 +128,6 @@ def cadastrar_event(
     session: SessionDep,
     current_user: User = Depends(get_current_user),
 ):
-    # Verificar disponibilidade do local, se informado
     _check_local_availability(
         session=session,
         local_id=event.local_id,
@@ -169,7 +165,6 @@ def atualizar_event(
     if not event:
         raise HTTPException(status_code=404, detail="Evento não encontrado.")
 
-    # Calcular os novos valores (merge entre antigo e o payload)
     new_local_id = (
         event_data.local_id
         if event_data.local_id is not None
@@ -182,7 +177,6 @@ def atualizar_event(
         event_data.end_date if event_data.end_date is not None else event.end_date
     )
 
-    # Verificar disponibilidade do local com os novos valores
     _check_local_availability(
         session=session,
         local_id=new_local_id,
@@ -191,7 +185,6 @@ def atualizar_event(
         ignore_event_id=event.id,
     )
 
-    # Aplicar atualização campo a campo
     update_data = event_data.dict(exclude_unset=True)
     for key, value in update_data.items():
         setattr(event, key, value)

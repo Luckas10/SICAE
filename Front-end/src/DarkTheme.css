@@ -428,3 +428,15 @@
 :root[data-theme="dark"] .settings-page .logout-button:hover {
     color: #E3B52E;
 }
+
+:root[data-theme="dark"] input[type="date"]::-webkit-calendar-picker-indicator,
+:root[data-theme="dark"] input[type="time"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    cursor: pointer;
+    opacity: 0.9;
+}
+
+:root[data-theme="dark"] input[type="date"],
+:root[data-theme="dark"] input[type="time"] {
+    color-scheme: dark;
+}

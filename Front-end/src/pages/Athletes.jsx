@@ -51,13 +51,13 @@ export default function Athletes() {
                             onChange={(e) => setSearch(e.target.value)}
                         />
 
-                        {!loadingUser && user?.role === "Servidor" && (
-                            <NavLink to="./manage" id="buttonAdd">
-                                <button>+ Gerenciar atletas</button>
-                            </NavLink>
-                        )}
                     </div>
 
+                    {!loadingUser && user?.role === "Servidor" && (
+                        <NavLink to="./manage" id="buttonAdd">
+                            <button>+ Gerenciar atletas</button>
+                        </NavLink>
+                    )}
                     <h1 className="title">Atletas</h1>
 
                     <div className="athletes-grid">

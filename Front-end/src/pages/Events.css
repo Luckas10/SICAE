@@ -167,15 +167,27 @@ input#titulo {
 }
 
 .events-content #buttonAdd {
-   
     align-self: flex-end;
     width: 25%;
     height: 40px;
 }
 
-#buttonAdd button {
+.events-page #buttonAdd {
+    width: 15%;
+}
+
+.events-page #buttonAdd button {
     width: 100%;
     height: 100%;
+    background-color: white;
+    color: #0D4F1D;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+}
+
+.events-page #buttonAdd button:hover {
+    border: 1px solid gray;
 }
 
 .input-icon {

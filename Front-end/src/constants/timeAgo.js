@@ -9,7 +9,7 @@ export function timeAgo(dateString) {
     const hours = Math.floor(minutes / 60);
     const days = Math.floor(hours / 24);
 
-    if (seconds < 60) return "agora mesmo";
+    if (seconds < 60) return "Agora mesmo";
     if (minutes < 60) return `${minutes} min atrás`;
     if (hours < 24) return `${hours} h atrás`;
     if (days < 7) return `${days} d atrás`;

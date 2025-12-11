@@ -55,7 +55,7 @@ export default function Settings() {
                         <div className="logout-text">
                             <h2>Sair da conta</h2>
                             <p>
-                                Encerre sua sessão com segurança neste dispositivo.
+                                Encerre sua sessão neste dispositivo.
                             </p>
                         </div>
 

@@ -87,7 +87,6 @@
 }
 
 .logout-card {
-    margin-top: 8px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -98,13 +97,14 @@
     font-size: 20px;
     font-weight: 600;
     color: #0d4f1d;
-    margin-bottom: 4px;
+    margin-bottom: 6px;
 }
 
 .logout-text p {
     font-size: 14px;
     color: #5d5e5d;
     max-width: 420px;
+    margin-bottom: 0;
 }
 
 .logout-button {

@@ -22,13 +22,30 @@ api.interceptors.response.use(
     (error) => {
         const status = error.response?.status;
         const originalRequest = error.config;
+        const url = originalRequest?.url || "";
 
-        if (
-            status === 401 &&
-            !originalRequest?.url?.includes("/auth/token")
-        ) {
-            console.warn("Token expirou ou não foi enviado — deslogando...");
+        /** ✅ ROTAS PÚBLICAS REAIS */
+        const publicPaths = [
+            "/news",
+            "/events",
+            "/athletes",
+            "/locals",
+            "/news-comments",
+            "/games/event",
+            "/events",
+            "/users/public"
+        ];
 
+        const isPublicRequest = publicPaths.some((path) =>
+            url.startsWith(path)
+        );
+
+        if (status === 401 && isPublicRequest) {
+            return Promise.reject(error);
+        }
+
+        if (status === 401) {
+            console.warn("Token inválido — redirecionando...");
             localStorage.removeItem("token");
 
             if (window.location.pathname !== "/auth") {
@@ -39,6 +56,5 @@ api.interceptors.response.use(
         return Promise.reject(error);
     }
 );
-
 
 export default api;

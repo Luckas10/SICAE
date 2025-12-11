@@ -24,7 +24,7 @@ export default function ProfileID() {
     const loadProfileUser = async () => {
         try {
             setLoading(true);
-            const res = await api.get(`/users/${id}`);
+            const res = await api.get(`/users/public/${id}`);
             setProfileUser(res.data);
         } catch (err) {
             console.error("Erro ao carregar perfil:", err);

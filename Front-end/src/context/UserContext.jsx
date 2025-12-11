@@ -18,13 +18,13 @@ export function UserProvider({ children }) {
     }, [theme]);
 
     const fetchCurrentUser = async () => {
-        try {
-            const response = await api.get("/users/me");
-            setUser(response.data);
-        } catch (err) {
-            console.error("Erro ao atualizar usuário", err);
-        }
+        const token = localStorage.getItem("token");
 
+        if (!token) {
+            setUser(null);
+            setLoadingUser(false);
+            return;
+        }
 
         try {
             setLoadingUser(true);
@@ -32,7 +32,6 @@ export function UserProvider({ children }) {
 
             const { data } = await api.get("/users/me");
             setUser(data);
-
 
         } catch (err) {
             console.error("Erro ao carregar usuário atual:", err);
@@ -76,7 +75,6 @@ export function UserProvider({ children }) {
     const logout = () => {
         localStorage.removeItem("token");
         setUser(null);
-
         if (window.location.pathname !== "/auth") {
             window.location.href = "/auth";
         }
@@ -92,9 +90,11 @@ export function UserProvider({ children }) {
                 updateAvatar,
                 updateName,
                 updateEmail,
+
                 theme,
                 updateTheme,
                 toggleTheme,
+
                 logout,
                 setUser,
             }}

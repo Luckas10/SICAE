@@ -16,7 +16,7 @@ export default function Athletes() {
     const [search, setSearch] = useState("");
 
     useEffect(() => {
-        api.get("/users")
+        api.get("/users/public")
             .then((res) => {
                 const apenasAtletas = res.data.filter(
                     (user) => user.role === "Atleta"

@@ -104,6 +104,14 @@ export default function Sidebar() {
             <span>ATLETAS</span>
           </NavLink>
         </li>
+
+        <li>
+          <NavLink to="/places">
+            <FontAwesomeIcon size="lg" icon={fas.faMapPin} />
+            <span>LOCAIS</span>
+          </NavLink>
+        </li>
+
         <li>
           <NavLink to="/settings">
             <FontAwesomeIcon size="lg" icon={fas.faGear} />

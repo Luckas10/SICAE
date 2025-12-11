@@ -17,6 +17,8 @@ import NewsDetails from "./pages/NewsDetails.jsx";
 import EditNews from "./pages/editNews.jsx";
 import EditEvent from "./pages/editEvent.jsx";
 import GameDetails from "./pages/GameDetails.jsx";
+import Places from "./pages/Places.jsx";
+import PlaceDetails from "./pages/PlaceDetails.jsx";
 
 import ProtectedRoute from "./routes/ProtectedRoute.jsx";
 import ProtectedRole from "./routes/ProtectedRole.jsx";
@@ -65,6 +67,10 @@ export default function App() {
         <Route element={<ProtectedRoute />}>
           <Route path="/profile" element={<Profile />} />
         </Route>
+
+        <Route path="/places" element={<Places />} />
+
+        <Route path="/places/:id" element={<PlaceDetails />} />
 
         <Route path="/settings" element={<Settings />} />
       </Routes>

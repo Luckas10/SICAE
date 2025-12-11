@@ -9,7 +9,6 @@ from models import Event, User
 from routers.auth import get_current_user
 
 
-
 class EventCreate(BaseModel):
     local_id: Optional[int] = None
     title: str
@@ -55,6 +54,47 @@ class EventUpdate(BaseModel):
 router = APIRouter(prefix="/events", tags=["Eventos"])
 
 
+def _check_local_availability(
+    session: SessionDep,
+    local_id: Optional[int],
+    start_date: datetime,
+    end_date: datetime,
+    ignore_event_id: Optional[int] = None,
+) -> None:
+    """
+    Verifica se o local está disponível entre start_date e end_date.
+    Lança HTTPException 400 se houver conflito.
+    """
+
+    if local_id is None:
+        # Evento sem local não participa da regra de conflito
+        return
+
+    if end_date <= start_date:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="A data de término deve ser posterior à data de início.",
+        )
+
+    stmt = select(Event).where(Event.local_id == local_id)
+
+    if ignore_event_id is not None:
+        stmt = stmt.where(Event.id != ignore_event_id)
+
+    # Regra de sobreposição de intervalos:
+    # (start < existing_end) AND (end > existing_start)
+    stmt = stmt.where(
+        Event.start_date < end_date,
+        Event.end_date > start_date,
+    )
+
+    conflict = session.exec(stmt).first()
+    if conflict:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Local indisponível neste horário. Já existe um evento agendado.",
+        )
+
 
 @router.get("", response_model=List[Event])
 def listar_events(session: SessionDep):
@@ -85,13 +125,20 @@ def obter_evento(
     )
 
 
-
 @router.post("", status_code=status.HTTP_201_CREATED, response_model=Event)
 def cadastrar_event(
     event: EventCreate,
     session: SessionDep,
     current_user: User = Depends(get_current_user),
 ):
+    # Verificar disponibilidade do local, se informado
+    _check_local_availability(
+        session=session,
+        local_id=event.local_id,
+        start_date=event.start_date,
+        end_date=event.end_date,
+    )
+
     new_event = Event(
         creator_id=current_user.id,
         local_id=event.local_id,
@@ -122,8 +169,30 @@ def atualizar_event(
     if not event:
         raise HTTPException(status_code=404, detail="Evento não encontrado.")
 
-    update_data = event_data.dict(exclude_unset=True)
+    # Calcular os novos valores (merge entre antigo e o payload)
+    new_local_id = (
+        event_data.local_id
+        if event_data.local_id is not None
+        else event.local_id
+    )
+    new_start_date = (
+        event_data.start_date if event_data.start_date is not None else event.start_date
+    )
+    new_end_date = (
+        event_data.end_date if event_data.end_date is not None else event.end_date
+    )
 
+    # Verificar disponibilidade do local com os novos valores
+    _check_local_availability(
+        session=session,
+        local_id=new_local_id,
+        start_date=new_start_date,
+        end_date=new_end_date,
+        ignore_event_id=event.id,
+    )
+
+    # Aplicar atualização campo a campo
+    update_data = event_data.dict(exclude_unset=True)
     for key, value in update_data.items():
         setattr(event, key, value)
 

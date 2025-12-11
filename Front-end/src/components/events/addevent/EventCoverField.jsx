@@ -1,11 +1,16 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useId } from "react";
 import ReactCrop, { centerCrop, makeAspectCrop } from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faImage } from "@fortawesome/free-solid-svg-icons";
 
-export default function EventCoverField({ value, onChange }) {
+export default function EventCoverField({
+    value,
+    onChange,
+    label = "Adicionar capa do evento",
+    inputId, // opcional, se não vier eu gero um id único
+}) {
     const [fileName, setFileName] = useState("");
     const [imageSrc, setImageSrc] = useState(null);
     const [crop, setCrop] = useState();
@@ -14,11 +19,18 @@ export default function EventCoverField({ value, onChange }) {
 
     const imgRef = useRef(null);
 
+    // id único por instância do componente
+    const generatedId = useId();
+    const finalInputId = inputId || generatedId;
+
+    // Mantém o componente sincronizado com o value vindo de fora (edição, reset, etc.)
     useEffect(() => {
-        if (value && !croppedImageUrl) {
+        if (value) {
             setCroppedImageUrl(value);
+        } else {
+            setCroppedImageUrl(null);
         }
-    }, [value, croppedImageUrl]);
+    }, [value]);
 
     const handleFileChange = (e) => {
         const file = e.target.files[0];
@@ -83,7 +95,7 @@ export default function EventCoverField({ value, onChange }) {
         ctx.drawImage(
             image,
             cropX * scaleX,
-            cropY * scaleX,
+            cropY * scaleY,
             cropWidth * scaleX,
             cropHeight * scaleY,
             0,
@@ -101,13 +113,15 @@ export default function EventCoverField({ value, onChange }) {
         if (completedCrop?.width && completedCrop?.height) {
             generateCroppedImg(completedCrop);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [completedCrop]);
 
     return (
-        <>
-            <label>Adicionar capa do evento</label>
+        <div className="event-cover-field">
+            {label && <label>{label}</label>}
+
             <div className="input-icon image-selector-button">
-                <label htmlFor="capa_selector" className="input-label">
+                <label htmlFor={finalInputId} className="input-label">
                     <FontAwesomeIcon
                         icon={faImage}
                         className="icon"
@@ -117,7 +131,7 @@ export default function EventCoverField({ value, onChange }) {
                 </label>
 
                 <input
-                    id="capa_selector"
+                    id={finalInputId}
                     type="file"
                     accept="image/*"
                     onChange={handleFileChange}
@@ -126,7 +140,7 @@ export default function EventCoverField({ value, onChange }) {
             </div>
 
             {fileName && <span className="image_name">{fileName}</span>}
-            
+
             {imageSrc && (
                 <div className="crop-wrapper">
                     <ReactCrop
@@ -138,7 +152,7 @@ export default function EventCoverField({ value, onChange }) {
                         <img
                             ref={imgRef}
                             src={imageSrc}
-                            alt="crop-area"
+                            alt="Área de recorte"
                             onLoad={onImageLoad}
                         />
                     </ReactCrop>
@@ -148,10 +162,10 @@ export default function EventCoverField({ value, onChange }) {
             {croppedImageUrl && (
                 <img
                     src={croppedImageUrl}
-                    alt="capa do evento cortada"
+                    alt="capa cortada"
                     className="image-preview"
                 />
             )}
-        </>
+        </div>
     );
 }

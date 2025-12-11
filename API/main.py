@@ -17,7 +17,7 @@ app = FastAPI(
     title="SICAE API",
     description="API de gerenciamento do sistema de esportes.",
     version="1.0.0",
-    openapi_tags=tags_metadata
+    openapi_tags=tags_metadata,
 )
 
 app.add_middleware(
@@ -34,4 +34,5 @@ app.include_router(news.router, tags=["Notícias"])
 app.include_router(news_comments.router, tags=["Notícias"])
 app.include_router(events.router, tags=["Eventos"])
 app.include_router(event_comment.router, tags=["Eventos"])
+app.include_router(places.router, tags=["Locais"])
 app.include_router(games.router, tags=["Jogos"])

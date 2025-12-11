@@ -1,4 +1,4 @@
-import "./Events.css";
+import "./Places.css";
 import Header from "../components/general/Header.jsx";
 import Sidebar from "../components/general/Sidebar.jsx";
 

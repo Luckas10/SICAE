@@ -9,7 +9,7 @@
 .news-page {
     display: block;
     padding-left: 15%;
-    padding-top: calc(5vh);
+    padding-top: calc(9.5vh + 5vh);
     min-height: 100%;
 }
 
@@ -17,6 +17,7 @@
     display: block;
     padding-left: 15%;
     min-height: 100%;
+    padding-top: calc(9.5vh + 5vh);
 }
 
 
@@ -339,32 +340,55 @@ input[type="file"] {
     color: #0D4F1D;
 }
 
-@media (max-width: 850px) {
-    .news-page {
-        padding-left: 70px;
-        padding-top: calc(9.5vh + 20px);
+@media (max-width: 900px) {
+    .news-page #buttonAdd {
+        width: 30%;
+    }
+    
+    .center-news-card {
+        width: 40%;
     }
 
-    .news-page .sliding-cards .news-card,
-    .news-page .main-content .news-card {
-        width: 48%;
+    .slick-prev {
+        left: 2% !important;
+        top: 35% !important;
+    }
+
+    .slick-next {
+        right: 2% !important;
+        top: 35% !important;
     }
 }
 
+/* Telas pequenas (até 530px) */
 @media (max-width: 530px) {
-    .news-page {
-        padding-left: 0;
-        padding-bottom: 70px;
-        padding-top: calc(15vh + 20px);
+    .news-page #buttonAdd {
+        width: 45%;
     }
 
-    .news-page .sliding-cards .news-card,
-    .news-page .main-content .news-card {
+    .center-news-card {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    .slick-prev, .slick-next {
+        top: 30% !important;
+        font-size: 1.5rem !important;
+    }
+
+    .slick-slide {
+        padding: 3px;
+    }
+    .news-page {
+        padding-left: 2%;
+    }
+    .bottom-news-card{
         width: 100%;
     }
+    
 }
 
-/* Estilo dos cards do centro */
+
 
 .center-news-card {
     width: 23%;
@@ -666,6 +690,46 @@ input[type="file"] {
     .news-details-cover {
         max-height: 280px;
     }
+}
+@media (max-width: 900px){
+    .news-page #buttonAdd{
+        width: 30%;
+        
+    }}
+    .news-page {
+        display: block;
+        
+        padding-top: calc(9.5vh + 8vh);
+        min-height: 100%;
+    }
+    .center-news-card {
+        width: 40%;
+    }
+    .addNews-content{
+        width: 90%;
+        padding-left: 2%;
+    }
+    @media (max-width: 530px){
+        .news-page #buttonAdd{
+            width: 45%;
+            
+        }
+        .center-news-card {
+            width: 100%;
+        }
+        .news-content .bottom-content{
+            display: flex;
+            flex-direction: column;
+        }
+        .news-content .bottom-content .bottom-news-card{
+            width: 100%;
+        }
+        .addnews-page{
+            padding-left: 2%;
+            width: 100%;
+        }
+    
+    
 }
 
 

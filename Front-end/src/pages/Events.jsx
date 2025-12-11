@@ -75,6 +75,7 @@ export default function Events() {
                         <button
                             className={`initiation-filter-btn ${showInitiation ? "active" : ""}`}
                             onClick={() => setShowInitiation((prev) => !prev)}
+                            id="buttonAdd"
                         >
                             Iniciação Esportiva
                         </button>

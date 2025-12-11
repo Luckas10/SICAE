@@ -1,12 +1,12 @@
-import futsalImg from "../assets/eventsIcons/eventDefault.jpg";
-import basketballImg from "../assets/eventsIcons/eventDefault.jpg";
-import tabletennisImg from "../assets/eventsIcons/eventTableTennis.png";
-import fightingImg from "../assets/eventsIcons/eventDefault.jpg";
-import athleticsImg from "../assets/eventsIcons/eventAthletics.png";
-import volleyballImg from "../assets/eventsIcons/eventVolleyball.png";
-import swimmingImg from "../assets/eventsIcons/eventDefault.jpg";
-import chessImg from "../assets/eventsIcons/eventChess.png";
-import esportsImg from "../assets/eventsIcons/eventDefault.jpg";
+import futsalImg from "../assets/eventsIcons/eventFutsal.svg";
+import basketballImg from "../assets/eventsIcons/eventBasketball.svg";
+import tabletennisImg from "../assets/eventsIcons/eventTableTennis.svg";
+import fightingImg from "../assets/eventsIcons/eventFigths.svg";
+import athleticsImg from "../assets/eventsIcons/eventAthletics.svg";
+import volleyballImg from "../assets/eventsIcons/eventVolleyball.svg";
+import swimmingImg from "../assets/eventsIcons/eventSwimming.svg";
+import chessImg from "../assets/eventsIcons/eventChess.svg";
+import esportsImg from "../assets/eventsIcons/eventEsports.svg";
 
 import { fas } from "@fortawesome/free-solid-svg-icons";
 

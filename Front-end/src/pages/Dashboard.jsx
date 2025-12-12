@@ -91,7 +91,7 @@ export default function Dashboard() {
     return (
         <>
             <Header />
-            <div className="dashboard-page">
+            <main className="dashboard-page">
                 <Sidebar />
                 <div className="dashboard-content">
                     <div className="main-content">
@@ -105,7 +105,7 @@ export default function Dashboard() {
                         ))}
                     </div>
                 </div>
-            </div>
+            </main>
         </>
     );
 }

@@ -1,4 +1,4 @@
-import { CATEGORY_CONFIG, NEWS_CATEGORY } from "../../constants/eventCategories";
+import { CATEGORY_CONFIG, NEWS_CATEGORY, EVENT_CATEGORY } from "../../constants/eventCategories";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NavLink } from "react-router-dom";
 
@@ -20,8 +20,8 @@ export default function DashboardCard({ data }) {
 
             <div className="dashboard-card-sub">
                 <p className="sportsNewsId" style={{margin: "0"}}>
-                    <FontAwesomeIcon icon={cfg.icon} className={cfg.className} />{" "}
-                    {cfg.label}
+                    <FontAwesomeIcon icon={data.isEvent ? EVENT_CATEGORY.icon : NEWS_CATEGORY.icon} className={data.isEvent ? EVENT_CATEGORY.className : NEWS_CATEGORY.className} />{" "}
+                    {data.isEvent ? EVENT_CATEGORY.label : NEWS_CATEGORY.label}
                 </p>
 
                 <h6 className="dashboard-card-date">{dataFormatada}</h6>

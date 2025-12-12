@@ -61,7 +61,7 @@ export default function Events() {
     return (
         <>
             <Header />
-            <div className="events-page">
+            <main className="events-page">
                 <Sidebar />
 
                 <div className="events-content">
@@ -89,7 +89,7 @@ export default function Events() {
                         ))}
                     </div>
                 </div>
-            </div>
+            </main>
         </>
     );
 }

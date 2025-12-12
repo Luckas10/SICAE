@@ -44,7 +44,7 @@ export default function NewsDetails() {
         <>
             <Header />
 
-            <div className="news-page">
+            <main className="news-page">
                 <Sidebar />
 
                 <div className="news-content">
@@ -74,7 +74,7 @@ export default function NewsDetails() {
                         <NewsComments articleId={news.id} currentUser={user}/>
                     </div>                 
                 </div>          
-            </div>
+            </main>
         </>
     );
 }

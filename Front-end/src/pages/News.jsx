@@ -104,7 +104,7 @@ export default function News() {
         <>
             <Header />
 
-            <div className="news-page">
+            <main className="news-page">
                 <Sidebar />
 
                 <div className="news-content">
@@ -197,7 +197,7 @@ export default function News() {
                         </>
                     )}
                 </div>
-            </div>
+            </main>
         </>
     );
 }

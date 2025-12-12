@@ -233,7 +233,7 @@ export default function AddEvent() {
         <>
             <Header />
 
-            <div className="events-page">
+            <main className="events-page">
                 <Sidebar />
 
                 <div className="addEvents-content">
@@ -448,7 +448,7 @@ export default function AddEvent() {
                         </div>
                     </div>
                 )}
-            </div>
+            </main>
         </>
     );
 }

@@ -44,7 +44,7 @@ export default function EventGame() {
     return (
         <>
             <Header />
-            <div className="games-page">
+            <main className="games-page">
                 <Sidebar />
 
                 <div className="games-content">
@@ -124,7 +124,7 @@ export default function EventGame() {
                         </div>
                     </form>
                 </div>
-            </div>
+            </main>
         </>
     );
 }

@@ -9,7 +9,7 @@ import "./Events.css";
 
 import {
     CATEGORY_CONFIG,
-    DEFAULT_CATEGORY,
+    EVENT_CATEGORY,
 } from "../constants/eventCategories";
 
 import EventDetailsHeader from "../components/events/eventdetails/EventDetailsHeader.jsx";
@@ -105,7 +105,7 @@ export default function EventDetails() {
         return <p className="event-details-loading">Evento não encontrado.</p>;
     }
 
-    const cfg = CATEGORY_CONFIG[event.category] || DEFAULT_CATEGORY;
+    const cfg = CATEGORY_CONFIG[event.category] || EVENT_CATEGORY;
 
     let publishedDate = "";
     let publishedTime = "";

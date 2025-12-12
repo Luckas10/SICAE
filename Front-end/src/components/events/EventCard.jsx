@@ -4,12 +4,12 @@ import { timeAgo } from "../../constants/timeAgo";
 import news1 from "../../assets/news1.jpg";
 import {
     CATEGORY_CONFIG,
-    DEFAULT_CATEGORY,
+    EVENT_CATEGORY,
 } from "../../constants/eventCategories";
 
 
 export default function EventCard({ event }) {
-    const cfg = CATEGORY_CONFIG[event.category] || DEFAULT_CATEGORY;
+    const cfg = CATEGORY_CONFIG[event.category] || EVENT_CATEGORY;
 
     return (
         <NavLink

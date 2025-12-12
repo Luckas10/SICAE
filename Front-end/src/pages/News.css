@@ -390,6 +390,20 @@ input[type="file"] {
     .bottom-news-card{
         width: 100%;
     }
+    .news-nav #buttonAdd{
+        font-size: 8pt;
+        width: 20%;
+    }
+    .news-nav .buscar-content input{
+        width: 60%;
+    }
+    .news-page .main-content .top-news-card{
+        width: 100%;
+    }
+    .news-page .main-content{
+        display: flex;
+        flex-direction: column;
+    }
     
 }
 

@@ -13,7 +13,7 @@ import "./News.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     CATEGORY_CONFIG,
-    DEFAULT_CATEGORY,
+    NEWS_CATEGORY,
 } from "../constants/eventCategories";
 
 import { useUser } from "../context/UserContext.jsx";
@@ -38,7 +38,7 @@ export default function NewsDetails() {
     if (!news) return <p className="news-details-loading">Notícia não encontrada.</p>;
 
     const categoryConfig =
-    CATEGORY_CONFIG[news.category] || DEFAULT_CATEGORY;
+    CATEGORY_CONFIG[news.category] || NEWS_CATEGORY;
 
     return (
         <>

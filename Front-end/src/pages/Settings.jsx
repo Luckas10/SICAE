@@ -13,7 +13,7 @@ import { fas } from "@fortawesome/free-solid-svg-icons";
 
 
 export default function Settings() {
-    const { theme, toggleTheme } = useUser();
+    const { theme, toggleTheme, user } = useUser();
     const isNight = theme === "dark";
 
     const navigate = useNavigate();
@@ -51,25 +51,21 @@ export default function Settings() {
                         toggleTheme={toggleTheme}
                     />
 
-                    <div className="settings-card logout-card">
-                        <div className="logout-text">
-                            <h2>Sair da conta</h2>
-                            <p>
-                                Encerre sua sessão neste dispositivo.
-                            </p>
+                    {user && (
+                        <div className="settings-card logout-card">
+                            <div className="logout-text">
+                                <h2>Sair da conta</h2>
+                                <p>
+                                    Encerre sua sessão neste dispositivo.
+                                </p>
+                            </div>
+
+                            <button type="button" className="logout-button" onClick={handleLogout}>
+                                <FontAwesomeIcon size="lg" icon={fas.faRightFromBracket} />
+                                <span>Sair</span>
+                            </button>
                         </div>
-
-                        <button
-                            type="button"
-                            className="logout-button"
-                            onClick={handleLogout}
-                        >
-                            <FontAwesomeIcon size="lg" icon={fas.faRightFromBracket} />
-                            <span>Sair</span>
-                        </button>
-
-
-                    </div>
+                    )}
                 </div>
             </div>
         </>

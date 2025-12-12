@@ -1,11 +1,11 @@
-import { CATEGORY_CONFIG, DEFAULT_CATEGORY } from "../../constants/eventCategories";
+import { CATEGORY_CONFIG, NEWS_CATEGORY } from "../../constants/eventCategories";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { NavLink } from "react-router-dom";
 
 export default function CenterCard({ data }) {
-    const cfg = CATEGORY_CONFIG[data.category] || DEFAULT_CATEGORY;
+    const cfg = CATEGORY_CONFIG[data.category] || NEWS_CATEGORY;
     const dataFormatada = new Date(data.created_at).toLocaleDateString("pt-BR", {
         day: "2-digit",
         month: "long",

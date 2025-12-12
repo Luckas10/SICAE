@@ -1,4 +1,4 @@
-import { CATEGORY_CONFIG, DEFAULT_CATEGORY } from "../../constants/eventCategories";
+import { CATEGORY_CONFIG, NEWS_CATEGORY } from "../../constants/eventCategories";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { timeAgo } from "../../constants/timeAgo";
@@ -6,7 +6,7 @@ import { timeAgo } from "../../constants/timeAgo";
 import { NavLink } from "react-router-dom";
 
 export default function BottomCard({ data }) {
-    const cfg = CATEGORY_CONFIG[data.category] || DEFAULT_CATEGORY;
+    const cfg = CATEGORY_CONFIG[data.category] || NEWS_CATEGORY;
 
     return (
         <NavLink className="bottom-news-card" to={`/news/${data.id}`}>

@@ -317,12 +317,13 @@ input[type="file"] {
     background-color: #ffffff;
     overflow: hidden;
     cursor: pointer;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    border: solid 1px rgba(185, 185, 185, 0.473);
     transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 .event-card:hover {
     transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
 
 .event-card img {

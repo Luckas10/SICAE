@@ -68,8 +68,15 @@ export const CATEGORY_CONFIG = {
 };
 
 
-export const DEFAULT_CATEGORY = {
+export const EVENT_CATEGORY = {
     label: "EVENTO",
+    icon: fas.faCalendarDays,
+    image: athleticsImg,
+    className: "athleticsIcon",
+};
+
+export const NEWS_CATEGORY = {
+    label: "NOTÍCIA",
     icon: fas.faCalendarDays,
     image: athleticsImg,
     className: "athleticsIcon",

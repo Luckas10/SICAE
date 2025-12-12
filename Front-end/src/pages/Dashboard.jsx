@@ -4,18 +4,13 @@ import Sidebar from "../components/general/Sidebar.jsx";
 import { useEffect, useState } from "react";
 import api from "../services/api.js";
 
-import { fas } from "@fortawesome/free-solid-svg-icons";
-
-import card1 from "../assets/card1.jpg";
-import card2 from "../assets/card2.jpg";
-import card3 from "../assets/card3.jpg";
-
 import HighlightCarousel from "../components/dashboard/HighlightCarousel.jsx";
 import NotificationBell from "../components/dashboard/NotificationBell.jsx";
 import DashboardCard from "../components/dashboard/DashboardCard.jsx";
 
 export default function Dashboard() {
     const [topNews, setTopNews] = useState([]);
+    const [topEvents, setTopEvents] = useState([]);
 
     useEffect(() => {
         async function fetchTopNews() {
@@ -41,58 +36,56 @@ export default function Dashboard() {
 
             } catch (err) {
                 console.error("Erro ao buscar notícias:", err);
-                setTopNews([]);
+            }
+        }
+
+        async function fetchTopEvents() {
+            try {
+                const response = await api.get("/events");
+                const raw = response.data;
+
+                const events =
+                    Array.isArray(raw)
+                        ? raw
+                        : Array.isArray(raw.data)
+                            ? raw.data
+                            : Array.isArray(raw.events)
+                                ? raw.events
+                                : [];
+
+                const latestEvents = events
+                    .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+                    .slice(0, 5);
+
+                setTopEvents(latestEvents);
+
+            } catch (err) {
+                console.error("Erro ao buscar eventos:", err);
             }
         }
 
         fetchTopNews();
+        fetchTopEvents();
     }, []);
 
-    const newsSlides = topNews.map((news) => {
-        const formattedDate =
-            news.created_at
-                ? new Date(news.created_at).toLocaleDateString("pt-BR", {
-                    day: "2-digit",
-                    month: "long",
-                    year: "numeric",
-                })
-                : "";
-
-        return {
-            id: news.id,
-            image: news.cover_image, // campo da imagem
-            alt: news.title,
-            title: news.title,
-            description: news.text || news.subtitle || "",
-            date: formattedDate,
-        };
-    });
+    const newsSlides = topNews.map((news) => ({
+        id: news.id,
+        image: news.cover_image,
+        alt: news.title,
+        title: news.title,
+        description: news.text || news.subtitle || "",
+        date: news.created_at
+            ? new Date(news.created_at).toLocaleDateString("pt-BR", {
+                day: "2-digit",
+                month: "long",
+                year: "numeric",
+            })
+            : "",
+    }));
 
     const dashboardCards = [
-        {
-            image: card1,
-            typeIcon: fas.faCalendarDays,
-            typeLabel: "EVENTO",
-            text: "Equipe de Vôlei do Campus Garante Vitória em Jogo Acirrado",
-        },
-        {
-            image: card2,
-            typeIcon: fas.faNewspaper,
-            typeLabel: "NOTÍCIA",
-            text: "Atletas do Badminton do IFRN se Destacam em Competição Regional",
-        },
-        {
-            image: card3,
-            typeIcon: fas.faCalendarDays,
-            typeLabel: "EVENTO",
-            text: "Treinador Ricardo Anuncia Novo Cursinho de Futsal para Iniciantes e Atletas em Formação",
-        },
-        {
-            image: card1,
-            typeIcon: fas.faCalendarDays,
-            typeLabel: "EVENTO",
-            text: "Equipe de Vôlei do Campus Garante Vitória em Jogo Acirrado",
-        },
+        ...topNews.map(n => ({ ...n, isEvent: false })),
+        ...topEvents.map(e => ({ ...e, isEvent: true }))
     ];
 
     return (
@@ -107,14 +100,8 @@ export default function Dashboard() {
                     </div>
 
                     <div className="cards">
-                        {dashboardCards.map((card) => (
-                            <DashboardCard
-                                key={card.id}
-                                image={card.image}
-                                typeIcon={card.typeIcon}
-                                typeLabel={card.typeLabel}
-                                text={card.text}
-                            />
+                        {dashboardCards.map((item) => (
+                            <DashboardCard key={item.id} data={item} />
                         ))}
                     </div>
                 </div>

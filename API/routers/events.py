@@ -10,7 +10,7 @@ from routers.auth import get_current_user
 
 
 class EventCreate(BaseModel):
-    local_id: Optional[int] = None
+    place_id: Optional[int] = None
     title: str
     description: Optional[str] = None
     start_date: datetime
@@ -38,7 +38,7 @@ class EventRead(BaseModel):
 
 
 class EventUpdate(BaseModel):
-    local_id: Optional[int] = None
+    place_id: Optional[int] = None
     title: Optional[str] = None
     description: Optional[str] = None
     start_date: Optional[datetime] = None
@@ -54,9 +54,9 @@ class EventUpdate(BaseModel):
 router = APIRouter(prefix="/events", tags=["Eventos"])
 
 
-def _check_local_availability(
+def _check_place_availability(
     session: SessionDep,
-    local_id: Optional[int],
+    place_id: Optional[int],
     start_date: datetime,
     end_date: datetime,
     ignore_event_id: Optional[int] = None,
@@ -72,10 +72,10 @@ def _check_local_availability(
             detail="A data de término deve ser igual ou posterior à data de início.",
         )
 
-    if local_id is None:
+    if place_id is None:
         return
 
-    stmt = select(Event).where(Event.local_id == local_id)
+    stmt = select(Event).where(Event.place_id == place_id)
 
     if ignore_event_id is not None:
         stmt = stmt.where(Event.id != ignore_event_id)
@@ -128,16 +128,16 @@ def cadastrar_event(
     session: SessionDep,
     current_user: User = Depends(get_current_user),
 ):
-    _check_local_availability(
+    _check_place_availability(
         session=session,
-        local_id=event.local_id,
+        place_id=event.place_id,
         start_date=event.start_date,
         end_date=event.end_date,
     )
 
     new_event = Event(
         creator_id=current_user.id,
-        local_id=event.local_id,
+        place_id=event.place_id,
         title=event.title,
         description=event.description,
         start_date=event.start_date,
@@ -165,10 +165,10 @@ def atualizar_event(
     if not event:
         raise HTTPException(status_code=404, detail="Evento não encontrado.")
 
-    new_local_id = (
-        event_data.local_id
-        if event_data.local_id is not None
-        else event.local_id
+    new_place_id = (
+        event_data.place_id
+        if event_data.place_id is not None
+        else event.place_id
     )
     new_start_date = (
         event_data.start_date if event_data.start_date is not None else event.start_date
@@ -177,9 +177,9 @@ def atualizar_event(
         event_data.end_date if event_data.end_date is not None else event.end_date
     )
 
-    _check_local_availability(
+    _check_place_availability(
         session=session,
-        local_id=new_local_id,
+        place_id=new_place_id,
         start_date=new_start_date,
         end_date=new_end_date,
         ignore_event_id=event.id,

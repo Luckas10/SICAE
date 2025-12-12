@@ -36,6 +36,38 @@
     width: 80%;
 }
 
+.places-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #0D4F1D;
+}
+
+.place-add-button {
+    min-width: 160px;
+    height: 40px;
+    border-radius: 999px;
+    border: none;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    background-color: #0D4F1D;
+    color: #ffffff;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.12s ease;
+}
+
+.place-add-button:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.02);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+}
+
+.places-empty {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #4b5563;
+}
+
 input[type="file"] {
     display: none;
 }
@@ -55,11 +87,6 @@ input[type="file"] {
     cursor: pointer;
 }
 
-.place-add-button {
-    width: 100% !important;
-    margin-block: 0.5rem 1rem;
-}
-
 .input-label {
     margin-left: 35px;
     cursor: pointer;
@@ -71,7 +98,6 @@ input[type="file"] {
     font-size: 14px;
     color: #555;
 }
-
 
 .modal-overlay {
     position: fixed;
@@ -195,24 +221,24 @@ input[type="file"] {
     width: 100%;
 }
 
-.local-card {
-    width: 100%;
+
+.place-card {
+    width: 32%;
     border-radius: 15px 15px 10px 10px;
     margin-bottom: 25px;
     background-color: #ffffff;
     overflow: hidden;
+    cursor: pointer;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
     transition: transform 0.15s ease, box-shadow 0.15s ease;
-    display: flex;
-    flex-direction: column;
 }
 
-.local-card:hover {
+.place-card:hover {
     transform: translateY(-3px);
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.28);
 }
 
-.local-card-cover img {
+.place-card-cover img {
     width: 100%;
     height: 180px;
     object-fit: cover;
@@ -220,27 +246,27 @@ input[type="file"] {
     display: block;
 }
 
-.local-card-body {
+.place-card-body {
     padding: 10px 12px 12px;
     display: flex;
     flex-direction: column;
     gap: 4px;
 }
 
-.local-card-body h5 {
+.place-card-body h5 {
     font-weight: bold;
     font-size: 18px;
     margin: 0 0 4px;
     color: #0D4F1D;
 }
 
-.local-capacity {
+.place-capacity {
     font-size: 13px;
     font-weight: 600;
     color: #111827;
 }
 
-.local-description {
+.place-description {
     font-size: 13px;
     color: #4b5563;
     line-height: 1.5;
@@ -249,7 +275,7 @@ input[type="file"] {
     text-overflow: ellipsis;
 }
 
-.local-created-at {
+.place-created-at {
     font-size: 11px;
     color: #6b7280;
     margin-top: 4px;
@@ -257,13 +283,37 @@ input[type="file"] {
 
 
 @media (max-width: 900px) {
-    .local-card {
-        width: 48%;
+    .place-card-link {
+        flex: 1 1 48%;
+        max-width: 48%;
+    }
+
+    .places-toolbar {
+        width: 90%;
     }
 }
 
 @media (max-width: 600px) {
-    .local-card {
+    .places-page {
+        padding-left: 0;
+        padding-right: 2%;
+        padding-bottom: 70px;
+    }
+
+    .places-toolbar {
         width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .place-add-button {
+        width: 60%;
+        max-width: 260px;
+    }
+
+    .place-card-link {
+        flex: 1 1 100%;
+        max-width: 100%;
     }
 }

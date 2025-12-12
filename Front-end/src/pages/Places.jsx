@@ -1,19 +1,20 @@
+// src/pages/Places.jsx
 import "./Places.css";
 import Header from "../components/general/Header.jsx";
 import Sidebar from "../components/general/Sidebar.jsx";
 
 import { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
 import api from "../services/api";
+import PlaceCard from "../components/places/PlaceCard.jsx";
 
-import EventCoverField from "../components/events/addevent/EventCoverField.jsx";
+import CoverField from "../components/general/CoverField.jsx";
 import Swal from "sweetalert2";
 import { useUser } from "../context/UserContext.jsx";
 
 export default function Places() {
     const { user, loadingUser } = useUser();
 
-    const [locals, setLocals] = useState([]);
+    const [places, setPlaces] = useState([]);
 
     const [isPlaceModalOpen, setIsPlaceModalOpen] = useState(false);
     const [placeName, setPlaceName] = useState("");
@@ -22,17 +23,17 @@ export default function Places() {
     const [placeImage, setPlaceImage] = useState(null);
 
     useEffect(() => {
-        async function loadLocals() {
+        async function loadPlaces() {
             try {
-                const res = await api.get("/locals");
-                setLocals(res.data || []);
+                const res = await api.get("/places");
+                setPlaces(res.data || []);
             } catch (error) {
                 console.error("Erro ao carregar locais:", error);
-                setLocals([]);
+                setPlaces([]);
             }
         }
 
-        loadLocals();
+        loadPlaces();
     }, []);
 
     const handleOpenPlaceModal = () => {
@@ -47,7 +48,7 @@ export default function Places() {
         setIsPlaceModalOpen(false);
     };
 
-    const handleSaveLocal = async (e) => {
+    const handleSavePlace = async (e) => {
         e.preventDefault();
 
         if (!placeName.trim()) {
@@ -78,10 +79,10 @@ export default function Places() {
                 image_path: placeImage || null,
             };
 
-            const res = await api.post("/locals", payload);
+            const res = await api.post("/places", payload);
             const created = res.data;
 
-            setLocals((prev) => [...prev, created]);
+            setPlaces((prev) => [...prev, created]);
             setIsPlaceModalOpen(false);
 
             await Swal.fire({
@@ -122,13 +123,13 @@ export default function Places() {
     return (
         <>
             <Header />
-
             <div className="places-page">
                 <Sidebar />
 
                 <div className="places-content">
+
                     <div className="places-toolbar">
-                        <h2>Locais cadastrados</h2>
+                        <h2 className="places-title">Locais cadastrados</h2>
 
                         {!loadingUser && user?.role === "Servidor" && (
                             <button
@@ -139,50 +140,20 @@ export default function Places() {
                                 + Cadastrar novo local
                             </button>
                         )}
+
                     </div>
 
                     <div className="cards">
-                        {locals.map((local) => (
-                            <NavLink
-                                to={`/places/${local.id}`}
-                                key={local.id}
-                                className="local-card-link"
-                            >
-                                <div className="local-card">
-                                    {local.image_path && (
-                                        <div className="local-card-cover">
-                                            <img
-                                                src={local.image_path}
-                                                alt={`Imagem do local ${local.name}`}
-                                            />
-                                        </div>
-                                    )}
-
-                                    <div className="local-card-body">
-                                        <h5>{local.name}</h5>
-
-                                        {local.capacity > 0 && (
-                                            <p className="local-capacity">
-                                                Capacidade: {local.capacity} pessoas
-                                            </p>
-                                        )}
-
-                                        {local.description && (
-                                            <p className="local-description">
-                                                {local.description}
-                                            </p>
-                                        )}
-
-                                        <p className="local-created-at">
-                                            Criado em: {formatDate(local.created_at)}
-                                        </p>
-                                    </div>
-                                </div>
-                            </NavLink>
+                        {places.map((place) => (
+                            <PlaceCard
+                                key={place.id}
+                                place={place}
+                                createdAtLabel={formatDate(place.created_at)}
+                            />
                         ))}
 
-                        {locals.length === 0 && (
-                            <p style={{ marginTop: "20px" }}>
+                        {places.length === 0 && (
+                            <p className="places-empty">
                                 Nenhum local cadastrado até o momento.
                             </p>
                         )}
@@ -195,7 +166,7 @@ export default function Places() {
                     <div className="modal-content place-modal">
                         <h3>Cadastrar novo local</h3>
 
-                        <form onSubmit={handleSaveLocal}>
+                        <form onSubmit={handleSavePlace}>
                             <div className="place-input-row">
                                 <label htmlFor="place-name">Nome do local</label>
                                 <input
@@ -212,7 +183,9 @@ export default function Places() {
                                 <textarea
                                     id="place-description"
                                     value={placeDescription}
-                                    onChange={(e) => setPlaceDescription(e.target.value)}
+                                    onChange={(e) =>
+                                        setPlaceDescription(e.target.value)
+                                    }
                                     placeholder="Descrição do local (opcional)"
                                 />
                             </div>
@@ -230,7 +203,7 @@ export default function Places() {
                             </div>
 
                             <div className="place-input-row">
-                                <EventCoverField
+                                <CoverField
                                     value={placeImage}
                                     onChange={setPlaceImage}
                                     label="Imagem do local"

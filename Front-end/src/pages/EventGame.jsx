@@ -92,10 +92,10 @@ export default function EventGame() {
                                 onChange={(e) => setTime(e.target.value)}
                             />
 
-                            <label htmlFor="local">Local</label>
+                            <label htmlFor="place">Local</label>
                             <input
                                 type="text"
-                                id="local"
+                                id="place"
                                 value={location}
                                 onChange={(e) => setLocation(e.target.value)}
                             />

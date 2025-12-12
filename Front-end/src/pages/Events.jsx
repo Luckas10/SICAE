@@ -71,8 +71,6 @@ export default function Events() {
                     />
 
                     <div className="events-toolbar">
-
-
                         <button
                             className={`initiation-filter-btn ${showInitiation ? "active" : ""}`}
                             onClick={() => setShowInitiation((prev) => !prev)}

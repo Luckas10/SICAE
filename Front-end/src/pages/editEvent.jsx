@@ -10,7 +10,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import api from "../services/api";
 import Swal from "sweetalert2";
 
-import EventCoverField from "../components/events/addevent/EventCoverField.jsx";
+import CoverField from "../components/general/CoverField.jsx";
 import EventCategorySelect from "../components/events/addevent/EventCategorySelect.jsx";
 import EventInitiationToggle from "../components/events/addevent/EventInitiationToggle.jsx";
 
@@ -36,7 +36,7 @@ export default function EditEvent() {
 
                 setTitle(data.title);
                 setDescription(data.description || "");
-                setLocation(data.local_name || "");
+                setLocation(data.place_name || "");
                 setCategory(data.category || "futsal");
 
                 if (data.start_date) {
@@ -67,7 +67,7 @@ export default function EditEvent() {
             const safeTime = time || "00:00";
 
             const payload = {
-                local_id: null,
+                place_id: null,
                 title,
                 description,
                 start_date: `${date}T${safeTime}`,
@@ -153,18 +153,18 @@ export default function EditEvent() {
                                 />
                             </div>
 
-                            <label htmlFor="local">Localização</label>
+                            <label htmlFor="place">Localização</label>
                             <div className="input-icon">
                                 <input
                                     type="text"
-                                    id="local"
+                                    id="place"
                                     placeholder="Local do evento"
                                     value={location}
                                     onChange={(e) => setLocation(e.target.value)}
                                 />
                             </div>
 
-                            <EventCoverField
+                            <CoverField
                                 value={coverImage}
                                 onChange={setCoverImage}
                             />

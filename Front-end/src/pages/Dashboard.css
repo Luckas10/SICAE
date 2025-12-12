@@ -25,6 +25,7 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
+    
 }
 
 .dashboard-page .main-content::after {
@@ -225,5 +226,8 @@
     .dashboard-page .cards .card {
         width: 90%;
         margin-left: 5%;
+    }
+    .dashboard-page .main-content{
+        max-height: 300px;
     }
 }

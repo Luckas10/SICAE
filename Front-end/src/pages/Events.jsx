@@ -72,13 +72,13 @@ export default function Events() {
                     <div className="events-toolbar">
 
 
-                        <button
-                            className={`initiation-filter-btn ${showInitiation ? "active" : ""}`}
+                        <div id="buttonAdd"><button
+                            className={` ${showInitiation ? "active" : ""}`}
                             onClick={() => setShowInitiation((prev) => !prev)}
-                            id="buttonAdd"
+                            
                         >
                             Iniciação Esportiva
-                        </button>
+                        </button></div>
 
                         {!loadingUser && user?.role === "Servidor" && (
                             <NavLink to="/events/add" id="buttonAdd">

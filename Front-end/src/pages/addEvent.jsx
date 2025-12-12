@@ -136,7 +136,7 @@ export default function AddEvent() {
                 title,
                 description,
                 start_date: `${date}T${safeTime}`,
-                end_date: `${date}T${safeTime}`,
+                end_date: `${date}T23:59`,
                 category,
                 cover_image: coverImage || null,
                 is_initiation: isInitiation,

@@ -25,6 +25,7 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
+    
 }
 
 .dashboard-page .main-content::after {
@@ -226,6 +227,7 @@
         width: 90%;
         margin-left: 5%;
     }
+<<<<<<< HEAD
 }
 
 /* Container dos cards do dashboard */
@@ -296,4 +298,9 @@
 
 .dashboard-card-category {
     margin: 0;
+=======
+    .dashboard-page .main-content{
+        max-height: 300px;
+    }
+>>>>>>> 92c5d511e93770feabc3bc5d5b0f5ec3d7038b35
 }

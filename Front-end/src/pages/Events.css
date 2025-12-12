@@ -575,16 +575,6 @@ p.timeAgoInfo {
     width: 80%;
 }
 
-.initiation-filter-btn {
-    border-radius: 10px;
-    border: none;
-    border: 1px solid grey;
-    width: 25%;
-    height: 40px;
-    background-color: transparent;
-    color: #0D4F1D;
-    box-shadow: 0 15px 25px rgba(1, 0, 0, 0.2);
-}
 
 .initiation-filter-btn:hover {
     background-color: #ddd;
@@ -598,6 +588,55 @@ p.timeAgoInfo {
 }
 
 @media (max-width: 600px) {
+    .local-card {
+        width: 100%;
+    }
+}
+
+
+@media (max-width: 900px) {
+    .event-card  {
+        width: 48%;
+    }
+    
+    .events-page #buttonAdd{
+        width: 30%;
+    }
+    
+    .sports-content img{
+        width: 50px;
+        height: 50px;
+    }
+    .addEvents-content{
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+    }
+    .addEvents-content form .event-colum .initiation-flag{
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+    }
+    .addEvents-content form .event-colum .initiation-flag label{
+        font-size: 12pt;
+    } 
+    .addEvents-content form {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    .addEvents-content form .event-colum {
+        width: 100%;
+    }
+    .addEvents-content form .event-colum input{
+        width: 100%;
+    }
+    .sports-content{
+        margin-top: 3%;
+    }
+}
+
+@media (max-width: 530px) {
     .events-page {
         padding-left: 0;
         padding-bottom: 70px;
@@ -607,9 +646,24 @@ p.timeAgoInfo {
     .events-page .events-content .events-toolbar #buttonAdd {
         width: 40%;
         font-size: 8pt;
+        margin-top: 2%;
+        
+        
     }
 
     .event-card {
         width: 100%;
     }
+    
+    
+    .sports-content img{
+        width: 30px;
+        height: 30px;
+    }
+    .sports-content .sport-filter-label {
+        font-size: 5px;
+    }
+    .addEvents-content form .event-colum .initiation-flag label{
+        font-size: 8pt;
+    } 
 }

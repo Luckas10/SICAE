@@ -7,12 +7,14 @@ import api from "../services/api";
 
 import SportsFilterBar from "../components/events/SportsFilterBar.jsx";
 import EventCard from "../components/events/EventCard.jsx";
-import { NavLink } from "react-router-dom";
 
 import { useUser } from "../context/UserContext.jsx";
+import { useNavigate } from "react-router-dom";
 
 export default function Events() {
+    const navigate = useNavigate();
     const { user, loadingUser } = useUser();
+
     const [events, setEvents] = useState([]);
     const [activeCategory, setActiveCategory] = useState("all");
     const [showInitiation, setShowInitiation] = useState(false);
@@ -42,21 +44,11 @@ export default function Events() {
         fetchEvents();
     }, []);
 
-
-    const filteredEvents = events
-        .filter((ev) => {
-
-            if (activeCategory !== "all" && ev.category !== activeCategory) {
-                return false;
-            }
-
-
-            if (showInitiation && !ev.is_initiation) {
-                return false;
-            }
-
-            return true;
-        });
+    const filteredEvents = events.filter((ev) => {
+        if (activeCategory !== "all" && ev.category !== activeCategory) return false;
+        if (showInitiation && !ev.is_initiation) return false;
+        return true;
+    });
 
     return (
         <>
@@ -69,25 +61,31 @@ export default function Events() {
                         activeCategory={activeCategory}
                         onChangeCategory={setActiveCategory}
                     />
+                </div>
+                <div className="events-toolbar">
+                    <button
+                        type="button"
+                        className="add-button"
+                        onClick={() => setShowInitiation((prev) => !prev)}
+                    >
+                        Iniciação Esportiva
+                    </button>
 
-                    <div className="events-toolbar">
+                    {!loadingUser && user?.role === "Servidor" && (
                         <button
+                            type="button"
                             className="add-button"
-                            onClick={() => setShowInitiation((prev) => !prev)}
+                            onClick={() => navigate("/events/add")}
                         >
-                            Iniciação Esportiva
+                            + Adicionar evento
                         </button>
+                    )}
+                </div>
 
-                        {!loadingUser && user?.role === "Servidor" && (
-                            <button type="button" className="add-button" to="/events/add">+ Adicionar evento</button>
-                        )}
-                    </div>
-
-                    <div className="cards">
-                        {filteredEvents.map((ev) => (
-                            <EventCard key={ev.id} event={ev} />
-                        ))}
-                    </div>
+                <div className="cards">
+                    {filteredEvents.map((ev) => (
+                        <EventCard key={ev.id} event={ev} />
+                    ))}
                 </div>
             </main>
         </>

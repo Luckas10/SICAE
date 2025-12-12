@@ -15,8 +15,10 @@ import BottomCard from "../components/news/BottomCard.jsx";
 import api from "../services/api";
 import { CATEGORY_CONFIG } from "../constants/eventCategories.js";
 import { useUser } from "../context/UserContext.jsx";
+import { useNavigate } from "react-router-dom";
 
 export default function News() {
+    const navigate = useNavigate();
     const { user, loadingUser } = useUser();
 
     const [news, setNews] = useState([]);
@@ -141,9 +143,13 @@ export default function News() {
                         </div>
 
                         {!loadingUser && user?.role === "Servidor" && (
-                            <NavLink to="./add" id="buttonAdd">
-                                <button>+ Adicionar notícia</button>
-                            </NavLink>
+                        <button
+                            type="button"
+                            className="add-button"
+                            onClick={() => navigate("/news/add")}
+                        >
+                            + Adicionar notícia
+                        </button>
                         )}
                     </div>
 

@@ -92,7 +92,7 @@ export default function Sidebar() {
                 icon={fas.faAddressCard}
                 style={{ marginBottom: "1px" }}
               />
-              <span>SEU PERFIL</span>
+              <span>PERFIL</span>
             </NavLink>
           </li>
         )}

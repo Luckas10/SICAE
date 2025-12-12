@@ -9,8 +9,10 @@ import api from "../services/api.js";
 import { NavLink } from "react-router-dom";
 
 import { useUser } from "../context/UserContext.jsx";
+import { useNavigate } from "react-router-dom";
 
 export default function Athletes() {
+    const navigate = useNavigate();
     const { user, loadingUser } = useUser();
     const [athletes, setAthletes] = useState([]);
     const [search, setSearch] = useState("");
@@ -54,9 +56,13 @@ export default function Athletes() {
                     </div>
 
                     {!loadingUser && user?.role === "Servidor" && (
-                        <NavLink to="./manage" id="buttonAdd">
-                            <button>+ Gerenciar atletas</button>
-                        </NavLink>
+                        <button
+                            type="button"
+                            className="add-button"
+                            onClick={() => navigate("/news/add")}
+                        >
+                            + Gerenciar atletas
+                        </button>
                     )}
                     <h1 className="title">Atletas</h1>
 

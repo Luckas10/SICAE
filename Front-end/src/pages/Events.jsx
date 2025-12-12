@@ -71,20 +71,15 @@ export default function Events() {
                     />
 
                     <div className="events-toolbar">
-
-
-                        <div id="buttonAdd"><button
-                            className={` ${showInitiation ? "active" : ""}`}
+                        <button
+                            className="add-button"
                             onClick={() => setShowInitiation((prev) => !prev)}
-                            
                         >
                             Iniciação Esportiva
-                        </button></div>
+                        </button>
 
                         {!loadingUser && user?.role === "Servidor" && (
-                            <NavLink to="/events/add" id="buttonAdd">
-                                <button type="button" className="buttonAdd">+ Adicionar evento</button>
-                            </NavLink>
+                            <button type="button" className="add-button" to="/events/add">+ Adicionar evento</button>
                         )}
                     </div>
 

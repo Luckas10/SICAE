@@ -126,14 +126,14 @@ export default function Places() {
                 <Sidebar />
 
                 <div className="places-content">
+                    <h2 className="places-title">Locais cadastrados</h2>
 
                     <div className="places-toolbar">
-                        <h2 className="places-title">Locais cadastrados</h2>
 
                         {!loadingUser && user?.role === "Servidor" && (
                             <button
                                 type="button"
-                                className="place-add-button"
+                                className="add-button"
                                 onClick={handleOpenPlaceModal}
                             >
                                 + Cadastrar novo local

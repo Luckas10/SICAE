@@ -166,29 +166,19 @@ input#titulo {
     filter: brightness(60%);
 }
 
-.events-content #buttonAdd {
-    align-self: flex-end;
-    width: 20%;
-    height: 40px;
-}
-
-.events-page #buttonAdd {
-    width: 15%;
-}
-
-.events-page #buttonAdd button {
+.events-page .add-button {
     width: 100%;
-    height: 100%;
-    background-color: white;
-    color: #0D4F1D;
-    border-radius: 10px;
+    height: 40px;
+    border-radius: 999px;
     border: none;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    background-color: #0D4F1D;
+    color: #ffffff;
+    transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.12s ease;
 }
 
-.events-page #buttonAdd button:hover {
-    border: 1px solid gray;
-}
 
 .input-icon {
     position: relative;
@@ -247,11 +237,6 @@ input[type="file"] {
     border-radius: 10px;
     border: none;
     color: white;
-}
-
-.place-add-button {
-    width: 100% !important;
-    margin-block: 0.5rem 1rem;
 }
 
 .input-label {
@@ -566,21 +551,24 @@ p.timeAgoInfo {
 
 .events-toolbar {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
-    padding: 10px;
-    gap: 12px;
-    margin-bottom: 20px;
-    margin-top: 3%;
-    width: 80%;
+    margin-top: 50px;
+    width: 100%;
 }
 
+.events-toolbar a {
+    width: 20%;
+}
+
+.events-toolbar .add-button {
+    width: 50%;
+}
 
 .initiation-filter-btn:hover {
     background-color: #ddd;
 }
 
-/* Responsivo – cards de eventos */
 @media (max-width: 900px) {
     .event-card {
         width: 48%;
@@ -595,43 +583,50 @@ p.timeAgoInfo {
 
 
 @media (max-width: 900px) {
-    .event-card  {
+    .event-card {
         width: 48%;
     }
-    
-    .events-page #buttonAdd{
+
+    .events-page .add-button {
         width: 30%;
     }
-    
-    .sports-content img{
+
+    .sports-content img {
         width: 50px;
         height: 50px;
     }
-    .addEvents-content{
+
+    .addEvents-content {
         width: 90%;
         display: flex;
         flex-direction: column;
     }
-    .addEvents-content form .event-colum .initiation-flag{
+
+    .addEvents-content form .event-colum .initiation-flag {
         width: 100%;
         display: flex;
         justify-content: space-around;
     }
-    .addEvents-content form .event-colum .initiation-flag label{
+
+    .addEvents-content form .event-colum .initiation-flag label {
         font-size: 12pt;
-    } 
+    }
+
     .addEvents-content form {
         width: 100%;
         display: flex;
         flex-direction: column;
     }
+
     .addEvents-content form .event-colum {
         width: 100%;
     }
-    .addEvents-content form .event-colum input{
+
+    .addEvents-content form .event-colum input {
         width: 100%;
     }
-    .sports-content{
+
+    .sports-content {
         margin-top: 3%;
     }
 }
@@ -643,27 +638,26 @@ p.timeAgoInfo {
         padding-left: 2%;
     }
 
-    .events-page .events-content .events-toolbar #buttonAdd {
-        width: 40%;
+    .events-page .add-button {
+        width: 100%;
         font-size: 8pt;
         margin-top: 2%;
-        
-        
     }
 
     .event-card {
         width: 100%;
     }
-    
-    
-    .sports-content img{
+
+    .sports-content img {
         width: 30px;
         height: 30px;
     }
+
     .sports-content .sport-filter-label {
         font-size: 5px;
     }
-    .addEvents-content form .event-colum .initiation-flag label{
+
+    .addEvents-content form .event-colum .initiation-flag label {
         font-size: 8pt;
-    } 
+    }
 }

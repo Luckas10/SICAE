@@ -27,7 +27,7 @@
 
 .places-toolbar {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     padding: 10px;
     gap: 12px;
@@ -42,8 +42,8 @@
     color: #0D4F1D;
 }
 
-.place-add-button {
-    min-width: 160px;
+.places-page .add-button {
+    width: 25%;
     height: 40px;
     border-radius: 999px;
     border: none;
@@ -56,7 +56,7 @@
     transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.12s ease;
 }
 
-.place-add-button:hover {
+.add-button:hover {
     transform: translateY(-1px);
     filter: brightness(1.02);
     box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
@@ -253,6 +253,14 @@ input[type="file"] {
     gap: 4px;
 }
 
+.places-title {
+    font-size: 26px;
+    font-weight: 800;
+    color: #0D4F1D;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
 .place-card h5 {
     font-weight: bold;
     font-size: 18px;
@@ -289,7 +297,7 @@ input[type="file"] {
     }
 
     .places-toolbar {
-        width: 90%;
+        width: 60%;
     }
 }
 
@@ -303,11 +311,11 @@ input[type="file"] {
     .places-toolbar {
         width: 100%;
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
         gap: 10px;
     }
 
-    .place-add-button {
+    .add-button {
         width: 60%;
         max-width: 260px;
     }

@@ -47,11 +47,11 @@
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
-.athletes-page #buttonAdd {
+.athletes-page .add-button {
     display: flex;
 }
 
-.athletes-page #buttonAdd button {
+.athletes-page .add-button button {
     height: 40px;
     width: 100%;
     border-radius: 10px;
@@ -65,12 +65,12 @@
     padding: 0 12px;
 }
 
-.athletes-page #buttonAdd button:hover {
+.athletes-page .add-button button:hover {
     border: 1px solid gray;
     transform: translateY(-1px);
 }
 
-.athletes-page #buttonAdd button:active {
+.athletes-page .add-button button:active {
     transform: translateY(0);
 }
 

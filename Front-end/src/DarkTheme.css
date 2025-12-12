@@ -68,7 +68,7 @@
     color: #e5e7eb;
 }
 
-:root[data-theme="dark"] #buttonAdd button {
+:root[data-theme="dark"] .add-button button {
     color: #ffffff;
     background-color: #333333;
 }

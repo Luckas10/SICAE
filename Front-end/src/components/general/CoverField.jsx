@@ -5,7 +5,7 @@ import "react-image-crop/dist/ReactCrop.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faImage } from "@fortawesome/free-solid-svg-icons";
 
-export default function EventCoverField({
+export default function CoverField({
     value,
     onChange,
     label = "Adicionar capa do evento",

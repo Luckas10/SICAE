@@ -21,7 +21,7 @@ export default function PlaceDetails() {
     useEffect(() => {
         async function fetchPlace() {
             try {
-                const { data } = await api.get(`/locals/${id}`);
+                const { data } = await api.get(`/places/${id}`);
                 setPlace(data);
             } catch (err) {
                 console.error("Erro ao buscar local:", err);

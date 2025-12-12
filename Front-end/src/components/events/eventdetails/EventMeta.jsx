@@ -1,5 +1,5 @@
-export default function EventMeta({ eventDate, eventTime, localId }) {
-    if (!eventDate && !eventTime && !localId) return null;
+export default function EventMeta({ eventDate, eventTime, placeId }) {
+    if (!eventDate && !eventTime && !placeId) return null;
 
     return (
         <div className="event-meta">
@@ -17,10 +17,10 @@ export default function EventMeta({ eventDate, eventTime, localId }) {
                 </div>
             )}
 
-            {localId && (
+            {placeId && (
                 <div className="event-meta-item">
                     <span className="event-meta-label">Local</span>
-                    <span className="event-meta-value">Local #{localId}</span>
+                    <span className="event-meta-value">Local #{placeId}</span>
                 </div>
             )}
         </div>

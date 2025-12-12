@@ -29,7 +29,7 @@ api.interceptors.response.use(
             "/news",
             "/events",
             "/athletes",
-            "/locals",
+            "/places",
             "/news-comments",
             "/games/event",
             "/events",

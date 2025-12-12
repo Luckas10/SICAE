@@ -165,7 +165,7 @@ export default function EventDetails() {
                             <EventMeta
                                 eventDate={eventDate}
                                 eventTime={eventTime}
-                                localId={event.local_id}
+                                placeId={event.place_id}
                             />
 
                             <EventDescription description={event.description} />

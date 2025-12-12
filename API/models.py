@@ -37,8 +37,8 @@ class User(SQLModel, table=True):
     games: List["Game"] = Relationship(back_populates="creator")
 
 
-class Local(SQLModel, table=True):
-    __tablename__ = "locals"
+class Place(SQLModel, table=True):
+    __tablename__ = "places"
 
     id: Optional[int] = Field(default=None, primary_key=True)
     name: str = Field(max_length=120, nullable=False)
@@ -47,8 +47,8 @@ class Local(SQLModel, table=True):
     image_path: Optional[str] = Field(default=None)
     created_at: datetime = Field(default_factory=now_brazil_timezone)
 
-    events: List["Event"] = Relationship(back_populates="local")
-    reservations: List["LocalReservation"] = Relationship(back_populates="local")
+    events: List["Event"] = Relationship(back_populates="place")
+    reservations: List["PlaceReservation"] = Relationship(back_populates="place")
 
 
 class Event(SQLModel, table=True):
@@ -56,7 +56,7 @@ class Event(SQLModel, table=True):
 
     id: Optional[int] = Field(default=None, primary_key=True)
     creator_id: int = Field(foreign_key="users.id")
-    local_id: Optional[int] = Field(default=None, foreign_key="locals.id")
+    place_id: Optional[int] = Field(default=None, foreign_key="places.id")
     title: str = Field(max_length=120)
     description: Optional[str] = Field(default=None)
     start_date: datetime = Field()
@@ -70,7 +70,7 @@ class Event(SQLModel, table=True):
     is_initiation: bool = Field(default=False, nullable=False)
 
     creator: Optional[User] = Relationship(back_populates="events")
-    local: Optional[Local] = Relationship(back_populates="events")
+    place: Optional[Place] = Relationship(back_populates="events")
     ratings: List["EventRating"] = Relationship(back_populates="event")
     registrations: List["EventRegistration"] = Relationship(back_populates="event")
     comments: List["EventComment"] = Relationship(
@@ -78,17 +78,17 @@ class Event(SQLModel, table=True):
         sa_relationship_kwargs={"cascade": "all, delete"},
     )
     games: List["Game"] = Relationship(back_populates="event")
-    reservations: List["LocalReservation"] = Relationship(
+    reservations: List["PlaceReservation"] = Relationship(
         back_populates="event",
         sa_relationship_kwargs={"cascade": "all, delete"},
     )
 
 
-class LocalReservation(SQLModel, table=True):
-    __tablename__ = "local_reservations"
+class PlaceReservation(SQLModel, table=True):
+    __tablename__ = "place_reservations"
 
     id: Optional[int] = Field(default=None, primary_key=True)
-    local_id: int = Field(foreign_key="locals.id")
+    place_id: int = Field(foreign_key="places.id")
     event_id: int = Field(foreign_key="events.id")
     user_id: int = Field(foreign_key="users.id")
     purpose: str = Field(max_length=120)
@@ -96,7 +96,7 @@ class LocalReservation(SQLModel, table=True):
     end_time: datetime
     created_at: datetime = Field(default_factory=now_brazil_timezone)
 
-    local: Optional[Local] = Relationship(back_populates="reservations")
+    place: Optional[Place] = Relationship(back_populates="reservations")
     user: Optional[User] = Relationship()
     event: Optional[Event] = Relationship(back_populates="reservations")
 

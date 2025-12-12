@@ -4,93 +4,93 @@ from pydantic import BaseModel
 from typing import List
 
 from database import SessionDep
-from models import Local, User
+from models import Place, User
 from routers.auth import get_current_user
 
 
-class LocalCreate(BaseModel):
+class PlaceCreate(BaseModel):
     name: str
     description: str
     capacity: int
     image_path: str | None = None
 
 
-class LocalUpdate(BaseModel):
+class PlaceUpdate(BaseModel):
     name: str | None = None
     description: str | None = None
     capacity: int | None = None
     image_path: str | None = None
 
 
-router = APIRouter(prefix="/locals", tags=["Locais"])
+router = APIRouter(prefix="/places", tags=["Locais"])
 
 
-@router.get("", response_model=List[Local])
-def listar_locals(session: SessionDep):
-    return session.exec(select(Local)).all()
+@router.get("", response_model=List[Place])
+def listar_places(session: SessionDep):
+    return session.exec(select(Place)).all()
 
 
-@router.get("/{id}", response_model=Local)
-def obter_local(id: int, session: SessionDep):
-    local = session.exec(select(Local).where(Local.id == id)).first()
+@router.get("/{id}", response_model=Place)
+def obter_place(id: int, session: SessionDep):
+    place = session.exec(select(Place).where(Place.id == id)).first()
 
-    if not local:
+    if not place:
         raise HTTPException(status_code=404, detail="Local não encontrado.")
 
-    return local
+    return place
 
 
-@router.post("", status_code=status.HTTP_201_CREATED, response_model=Local)
-def cadastrar_local(
-    local: LocalCreate,
+@router.post("", status_code=status.HTTP_201_CREATED, response_model=Place)
+def cadastrar_place(
+    place: PlaceCreate,
     session: SessionDep,
     current_user: User = Depends(get_current_user),
 ):
-    new_local = Local(
-        name=local.name,
-        description=local.description,
-        capacity=local.capacity,
-        image_path=local.image_path,
+    new_place = Place(
+        name=place.name,
+        description=place.description,
+        capacity=place.capacity,
+        image_path=place.image_path,
     )
 
-    session.add(new_local)
+    session.add(new_place)
     session.commit()
-    session.refresh(new_local)
-    return new_local
+    session.refresh(new_place)
+    return new_place
 
 
-@router.put("/{id}", response_model=Local)
-def atualizar_local(
+@router.put("/{id}", response_model=Place)
+def atualizar_place(
     id: int,
-    local_data: LocalUpdate,
+    place_data: PlaceUpdate,
     session: SessionDep,
     current_user: User = Depends(get_current_user),
 ):
-    local = session.exec(select(Local).where(Local.id == id)).first()
+    place = session.exec(select(Place).where(Place.id == id)).first()
 
-    if not local:
+    if not place:
         raise HTTPException(status_code=404, detail="Local não encontrado.")
 
-    for key, value in local_data.dict(exclude_unset=True).items():
-        setattr(local, key, value)
+    for key, value in place_data.dict(exclude_unset=True).items():
+        setattr(place, key, value)
 
-    session.add(local)
+    session.add(place)
     session.commit()
-    session.refresh(local)
-    return local
+    session.refresh(place)
+    return place
 
 
 @router.delete("/{id}", status_code=status.HTTP_200_OK)
-def deletar_local(
+def deletar_place(
     id: int,
     session: SessionDep,
     current_user: User = Depends(get_current_user),
 ):
-    local = session.exec(select(Local).where(Local.id == id)).first()
+    place = session.exec(select(Place).where(Place.id == id)).first()
 
-    if not local:
+    if not place:
         raise HTTPException(status_code=404, detail="Local não encontrado.")
 
-    session.delete(local)
+    session.delete(place)
     session.commit()
     return {"message": "Local excluído com sucesso."}

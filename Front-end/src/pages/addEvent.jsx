@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 import api from "../services/api";
 import Swal from "sweetalert2";
 
-import EventCoverField from "../components/events/addevent/EventCoverField.jsx";
+import CoverField from "../components/general/CoverField.jsx";
 import EventCategorySelect from "../components/events/addevent/EventCategorySelect.jsx";
 import EventInitiationToggle from "../components/events/addevent/EventInitiationToggle.jsx";
 
@@ -29,8 +29,8 @@ export default function AddEvent() {
     const [isInitiation, setIsInitiation] = useState(false);
     const [coverImage, setCoverImage] = useState(null);
 
-    const [locals, setLocals] = useState([]);
-    const [localId, setLocalId] = useState("");
+    const [places, setPlaces] = useState([]);
+    const [placeId, setPlaceId] = useState("");
 
     const [isPlaceModalOpen, setIsPlaceModalOpen] = useState(false);
     const [placeName, setPlaceName] = useState("");
@@ -41,16 +41,16 @@ export default function AddEvent() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        async function loadLocals() {
+        async function loadPlaces() {
             try {
-                const res = await api.get("/locals");
-                setLocals(res.data || []);
+                const res = await api.get("/places");
+                setPlaces(res.data || []);
             } catch (error) {
                 console.error("Erro ao carregar locais:", error);
             }
         }
 
-        loadLocals();
+        loadPlaces();
     }, []);
 
     const handleOpenPlaceModal = () => {
@@ -65,7 +65,7 @@ export default function AddEvent() {
         setIsPlaceModalOpen(false);
     };
 
-    const handleSaveLocal = async (e) => {
+    const handleSavePlace = async (e) => {
         e.preventDefault();
 
         if (!placeName.trim()) {
@@ -96,11 +96,11 @@ export default function AddEvent() {
                 image_path: placeImage || null,
             };
 
-            const res = await api.post("/locals", payload);
+            const res = await api.post("/places", payload);
             const created = res.data;
 
-            setLocals((prev) => [...prev, created]);
-            setLocalId(String(created.id));
+            setPlaces((prev) => [...prev, created]);
+            setPlaceId(String(created.id));
             setIsPlaceModalOpen(false);
 
             await Swal.fire({
@@ -182,7 +182,7 @@ export default function AddEvent() {
 
         try {
             const payload = {
-                local_id: localId ? Number(localId) : null,
+                place_id: placeId ? Number(placeId) : null,
                 title,
                 description,
                 start_date: startDateTimeStr,
@@ -233,7 +233,7 @@ export default function AddEvent() {
         <>
             <Header />
 
-            <div className="events-page">
+            <main className="events-page">
                 <Sidebar />
 
                 <div className="addEvents-content">
@@ -309,19 +309,19 @@ export default function AddEvent() {
                                 </div>
                             </div>
 
-                            <label htmlFor="local">Local</label>
+                            <label htmlFor="place">Local</label>
                             <div className="input-icon">
                                 <select
-                                    id="local"
-                                    value={localId}
-                                    onChange={(e) => setLocalId(e.target.value)}
+                                    id="place"
+                                    value={placeId}
+                                    onChange={(e) => setPlaceId(e.target.value)}
                                 >
                                     <option value="">
                                         Selecione um local
                                     </option>
-                                    {locals.map((local) => (
-                                        <option key={local.id} value={local.id}>
-                                            {local.name}
+                                    {places.map((place) => (
+                                        <option key={place.id} value={place.id}>
+                                            {place.name}
                                         </option>
                                     ))}
                                 </select>
@@ -335,7 +335,7 @@ export default function AddEvent() {
                                 + Cadastrar novo local
                             </button>
 
-                            <EventCoverField
+                            <CoverField
                                 value={coverImage}
                                 onChange={setCoverImage}
                                 label="Adicionar capa do evento"
@@ -384,7 +384,7 @@ export default function AddEvent() {
                         <div className="modal-content place-modal">
                             <h3>Cadastrar novo local</h3>
 
-                            <form onSubmit={handleSaveLocal}>
+                            <form onSubmit={handleSavePlace}>
                                 <div className="place-input-row">
                                     <label htmlFor="place-name">Nome do local</label>
                                     <input
@@ -421,7 +421,7 @@ export default function AddEvent() {
                                 </div>
 
                                 <div className="place-input-row">
-                                    <EventCoverField
+                                    <CoverField
                                         value={placeImage}
                                         onChange={setPlaceImage}
                                         label="Imagem do local"
@@ -448,7 +448,7 @@ export default function AddEvent() {
                         </div>
                     </div>
                 )}
-            </div>
+            </main>
         </>
     );
 }

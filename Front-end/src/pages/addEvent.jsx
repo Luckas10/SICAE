@@ -29,7 +29,7 @@ export default function AddEvent() {
     const [isInitiation, setIsInitiation] = useState(false);
     const [coverImage, setCoverImage] = useState(null);
 
-    const [places, setPLaces] = useState([]);
+    const [places, setPlaces] = useState([]);
     const [placeId, setPlaceId] = useState("");
 
     const [isPlaceModalOpen, setIsPlaceModalOpen] = useState(false);

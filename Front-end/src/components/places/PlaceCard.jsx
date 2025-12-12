@@ -25,10 +25,6 @@ export default function PlaceCard({ place, createdAtLabel }) {
                     {place.description}
                 </p>
             )}
-
-            <p className="place-created-at">
-                {createdAtLabel}
-            </p>
         </NavLink>
     );
 }

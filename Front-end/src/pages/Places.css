@@ -229,7 +229,7 @@ input[type="file"] {
     background-color: #ffffff;
     overflow: hidden;
     cursor: pointer;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    border: solid 1px rgba(185, 185, 185, 0.473);
     transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
@@ -238,7 +238,7 @@ input[type="file"] {
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.28);
 }
 
-.place-card-cover img {
+.place-card img {
     width: 100%;
     height: 180px;
     object-fit: cover;
@@ -246,14 +246,14 @@ input[type="file"] {
     display: block;
 }
 
-.place-card-body {
+.place-card {
     padding: 10px 12px 12px;
     display: flex;
     flex-direction: column;
     gap: 4px;
 }
 
-.place-card-body h5 {
+.place-card h5 {
     font-weight: bold;
     font-size: 18px;
     margin: 0 0 4px;

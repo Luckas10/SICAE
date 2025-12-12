@@ -113,7 +113,7 @@ export default function EditEvent() {
         <>
             <Header />
 
-            <div className="events-page">
+            <main className="events-page">
                 <Sidebar />
 
                 <div className="addEvents-content">
@@ -205,7 +205,7 @@ export default function EditEvent() {
                         </div>
                     </form>
                 </div>
-            </div>
+            </main>
         </>
     );
 }

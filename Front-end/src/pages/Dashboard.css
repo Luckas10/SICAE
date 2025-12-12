@@ -8,7 +8,7 @@
 .dashboard-page {
     display: block;
     padding-left: 15%;
-    padding-top: calc(9.5vh + 5vh) ;
+    padding-top: calc(9.5vh + 5vh);
     min-height: 100vh;
     padding-bottom: 5rem;
 }
@@ -17,7 +17,7 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    padding: 0% 2%;
+    padding: 0% 6%;
 }
 
 .dashboard-page .main-content {
@@ -25,7 +25,7 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
-    
+
 }
 
 .dashboard-page .main-content::after {
@@ -152,7 +152,7 @@
     padding-top: 50px;
     gap: 2%;
     flex-wrap: wrap;
-    
+
 }
 
 .dashboard-page .cards .card {
@@ -164,7 +164,7 @@
     cursor: pointer;
 }
 
-.card { 
+.card {
     transition: 0.3s;
 }
 
@@ -205,13 +205,21 @@
         padding-left: 70px;
         padding-top: calc(9.5vh + 20px);
     }
+
+    .dashboard-page .dashboard-content {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        padding-inline: 2% !important;
+    }
 }
 
 @media (max-width: 900px) {
     .dashboard-page {
         padding-top: calc(15vh + 20px);
-        
+
     }
+
     .dashboard-page .cards .card {
         width: 48%;
     }
@@ -223,18 +231,19 @@
         padding-bottom: 70px;
         padding-top: calc(15vh + 20px);
     }
+
     .dashboard-page .cards .card {
         width: 90%;
         margin-left: 5%;
     }
-<<<<<<< HEAD
 }
 
 /* Container dos cards do dashboard */
 .cards {
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 cartões por linha */
+    grid-template-columns: repeat(3, 1fr);
+    /* 3 cartões por linha */
     gap: 20px;
     margin-top: 20px;
 }
@@ -254,7 +263,7 @@
 
 .dashboard-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
 }
 
 /* Imagem */
@@ -298,9 +307,4 @@
 
 .dashboard-card-category {
     margin: 0;
-=======
-    .dashboard-page .main-content{
-        max-height: 300px;
-    }
->>>>>>> 92c5d511e93770feabc3bc5d5b0f5ec3d7038b35
 }

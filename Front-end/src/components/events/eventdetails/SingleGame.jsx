@@ -119,7 +119,7 @@ export default function SingleGame({ gameId, onUpdated, onDeleted }) {
     return (
         <>
             <Header />
-            <div className="events-page">
+            <main className="events-page">
                 <Sidebar />
                 <div className="event-game">
                     <h2>Detalhes do Jogo</h2>
@@ -228,7 +228,7 @@ export default function SingleGame({ gameId, onUpdated, onDeleted }) {
                         </div>
                     )}
                 </div>
-            </div>
+            </main>
         </>
 
     );

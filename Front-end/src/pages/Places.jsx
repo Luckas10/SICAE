@@ -123,7 +123,7 @@ export default function Places() {
         <>
             <Header />
 
-            <div className="places-page">
+            <main className="places-page">
                 <Sidebar />
 
                 <div className="places-content">
@@ -188,7 +188,7 @@ export default function Places() {
                         )}
                     </div>
                 </div>
-            </div>
+            </main>
 
             {isPlaceModalOpen && (
                 <div className="modal-overlay">

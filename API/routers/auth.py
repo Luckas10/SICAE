@@ -20,7 +20,7 @@ oauth2_bearer = OAuth2PasswordBearer(tokenUrl="/auth/token")  # tokenUrl consist
 
 SECRET_KEY = "minha_chave_secreta_super_segura"  # troque para produção
 ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 60
+ACCESS_TOKEN_EXPIRE_MINUTES = 525960
 
 def create_access_token(email: str, user_id: int, expires_delta: Optional[timedelta] = None):
     expire = datetime.now(timezone.utc) + (expires_delta or timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES))

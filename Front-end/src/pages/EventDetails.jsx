@@ -143,7 +143,7 @@ export default function EventDetails() {
         <>
             <Header />
 
-            <div className="events-page">
+            <main className="events-page">
                 <Sidebar />
 
                 <div className="events-content">
@@ -187,7 +187,7 @@ export default function EventDetails() {
                         />
                     </div>
                 </div>
-            </div>
+            </main>
         </>
     );
 }

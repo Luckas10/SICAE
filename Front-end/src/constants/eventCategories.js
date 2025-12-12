@@ -72,12 +72,12 @@ export const EVENT_CATEGORY = {
     label: "EVENTO",
     icon: fas.faCalendarDays,
     image: athleticsImg,
-    className: "athleticsIcon",
+    className: "eventIcon",
 };
 
 export const NEWS_CATEGORY = {
     label: "NOTÍCIA",
     icon: fas.faCalendarDays,
     image: athleticsImg,
-    className: "athleticsIcon",
+    className: "newsIcon",
 };

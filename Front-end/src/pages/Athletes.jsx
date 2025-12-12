@@ -35,7 +35,7 @@ export default function Athletes() {
     return (
         <>
             <Header />
-            <div className="athletes-page">
+            <main className="athletes-page">
                 <Sidebar />
                 <div className="athletes-content">
                     <div className="search-bar">
@@ -71,7 +71,7 @@ export default function Athletes() {
                         ))}
                     </div>
                 </div>
-            </div>
+            </main>
         </>
     );
 }

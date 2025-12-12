@@ -79,7 +79,7 @@ export default function ManageAthletes() {
         <>
             <Header />
 
-            <div className="addnews-page">
+            <main className="addnews-page">
                 <Sidebar />
 
                 <div className="addNews-content">
@@ -156,7 +156,7 @@ export default function ManageAthletes() {
                         </button>
                     </div>
                 </div>
-            </div>
+            </main>
         </>
     );
 }

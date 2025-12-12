@@ -401,6 +401,17 @@ input[type="file"] {
     color: #4AF956;
 }
 
+.sportsNewsId:has(.newsIcon),
+.newsIcon {
+    color: #4a60df;
+}
+
+.sportsNewsId:has(.eventIcon),
+.eventIcon {
+    color: #f1b124;
+}
+
+
 .event-details {
     width: 100%;
     max-width: 960px;

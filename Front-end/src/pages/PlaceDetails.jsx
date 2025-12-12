@@ -71,7 +71,7 @@ export default function PlaceDetails() {
         <>
             <Header />
 
-            <div className="events-page">
+            <main className="events-page">
                 <Sidebar />
 
                 <div className="events-content">
@@ -127,7 +127,7 @@ export default function PlaceDetails() {
                         </div>
                     </div>
                 </div>
-            </div>
+            </main>
         </>
     );
 }

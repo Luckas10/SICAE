@@ -166,7 +166,7 @@ export default function EditNews() {
     <>
       <Header />
 
-      <div className="addnews-page">
+      <main className="addnews-page">
         <Sidebar />
 
         <div className="addNews-content">
@@ -303,7 +303,7 @@ export default function EditNews() {
             </div>
           </form>
         </div>
-      </div>
+      </main>
     </>
   );
 }

@@ -40,7 +40,7 @@ export default function Settings() {
     return (
         <>
             <Header />
-            <div className="settings-page">
+            <main className="settings-page">
                 <Sidebar />
 
                 <div className="settings-content">
@@ -67,7 +67,7 @@ export default function Settings() {
                         </div>
                     )}
                 </div>
-            </div>
+            </main>
         </>
     );
 }

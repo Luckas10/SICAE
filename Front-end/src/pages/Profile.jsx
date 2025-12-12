@@ -51,7 +51,7 @@ export default function Profile() {
         <>
             <Header />
 
-            <div className="profile-page">
+            <main className="profile-page">
                 <Sidebar />
 
                 <div className="profile-container">
@@ -65,7 +65,7 @@ export default function Profile() {
                         <ProfileInfoGrid items={profileInfoItems} />
                     </div>
                 </div>
-            </div>
+            </main>
         </>
     );
 }

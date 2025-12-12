@@ -107,7 +107,7 @@ export default function Sidebar() {
 
         <li>
           <NavLink to="/places">
-            <FontAwesomeIcon size="lg" icon={fas.faMapPin} />
+            <FontAwesomeIcon size="lg" icon={fas.faMap} />
             <span>LOCAIS</span>
           </NavLink>
         </li>

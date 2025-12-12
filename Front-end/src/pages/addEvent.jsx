@@ -18,18 +18,20 @@ import EventInitiationToggle from "../components/events/addevent/EventInitiation
 export default function AddEvent() {
     const [title, setTitle] = useState("");
     const [date, setDate] = useState("");
-    const [time, setTime] = useState("");
+    const [endDate, setEndDate] = useState("");
+
+    const [startTime, setStartTime] = useState("");
+    const [endTime, setEndTime] = useState("");
+
     const [category, setCategory] = useState("futsal");
     const [description, setDescription] = useState("");
 
     const [isInitiation, setIsInitiation] = useState(false);
     const [coverImage, setCoverImage] = useState(null);
 
-    // Locais
     const [locals, setLocals] = useState([]);
     const [localId, setLocalId] = useState("");
 
-    // Modal de novo local
     const [isPlaceModalOpen, setIsPlaceModalOpen] = useState(false);
     const [placeName, setPlaceName] = useState("");
     const [placeDescription, setPlaceDescription] = useState("");
@@ -97,7 +99,6 @@ export default function AddEvent() {
             const res = await api.post("/locals", payload);
             const created = res.data;
 
-            // Atualiza lista de locais e já seleciona o novo
             setLocals((prev) => [...prev, created]);
             setLocalId(String(created.id));
             setIsPlaceModalOpen(false);
@@ -128,15 +129,64 @@ export default function AddEvent() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        try {
-            const safeTime = time || "00:00";
+        if (!date) {
+            Swal.fire({
+                icon: "warning",
+                title: "Data de início obrigatória",
+                text: "Informe a data de início do evento.",
+            });
+            return;
+        }
 
+        if (!endDate) {
+            Swal.fire({
+                icon: "warning",
+                title: "Data de término obrigatória",
+                text: "Informe a data de término do evento.",
+            });
+            return;
+        }
+
+        if (!startTime) {
+            Swal.fire({
+                icon: "warning",
+                title: "Hora de início obrigatória",
+                text: "Informe o horário de início do evento.",
+            });
+            return;
+        }
+
+        if (!endTime) {
+            Swal.fire({
+                icon: "warning",
+                title: "Hora de término obrigatória",
+                text: "Informe o horário de término do evento.",
+            });
+            return;
+        }
+
+        const startDateTimeStr = `${date}T${startTime}`;
+        const endDateTimeStr = `${endDate}T${endTime}`;
+
+        const startDateObj = new Date(startDateTimeStr);
+        const endDateObj = new Date(endDateTimeStr);
+
+        if (endDateObj < startDateObj) {
+            Swal.fire({
+                icon: "warning",
+                title: "Intervalo de datas/horas inválido",
+                text: "A data/hora de término deve ser igual ou posterior à data/hora de início.",
+            });
+            return;
+        }
+
+        try {
             const payload = {
                 local_id: localId ? Number(localId) : null,
                 title,
                 description,
-                start_date: `${date}T${safeTime}`,
-                end_date: `${date}T23:59`,
+                start_date: startDateTimeStr,
+                end_date: endDateTimeStr,
                 category,
                 cover_image: coverImage || null,
                 is_initiation: isInitiation,
@@ -203,24 +253,60 @@ export default function AddEvent() {
                                 />
                             </div>
 
-                            <label htmlFor="data">Data</label>
-                            <div className="input-icon">
-                                <input
-                                    type="date"
-                                    id="data"
-                                    value={date}
-                                    onChange={(e) => setDate(e.target.value)}
-                                />
+                            <label>Datas</label>
+                            <div
+                                className="event-dates-row"
+                                style={{
+                                    display: "flex",
+                                    gap: "8px",
+                                    width: "100%",
+                                }}
+                            >
+                                <div className="input-icon" style={{ flex: 1 }}>
+                                    <input
+                                        type="date"
+                                        id="data-inicio"
+                                        value={date}
+                                        onChange={(e) => setDate(e.target.value)}
+                                    />
+                                </div>
+
+                                <div className="input-icon" style={{ flex: 1 }}>
+                                    <input
+                                        type="date"
+                                        id="data-fim"
+                                        value={endDate}
+                                        onChange={(e) => setEndDate(e.target.value)}
+                                    />
+                                </div>
                             </div>
 
-                            <label htmlFor="hora">Horário</label>
-                            <div className="input-icon">
-                                <input
-                                    type="time"
-                                    id="hora"
-                                    value={time}
-                                    onChange={(e) => setTime(e.target.value)}
-                                />
+                            <label>Horários</label>
+                            <div
+                                className="event-hours-row"
+                                style={{
+                                    display: "flex",
+                                    gap: "8px",
+                                    width: "100%",
+                                }}
+                            >
+                                <div className="input-icon" style={{ flex: 1 }}>
+                                    <input
+                                        type="time"
+                                        id="hora-inicio"
+                                        value={startTime}
+                                        onChange={(e) => setStartTime(e.target.value)}
+                                    />
+                                </div>
+
+                                <div className="input-icon" style={{ flex: 1 }}>
+                                    <input
+                                        type="time"
+                                        id="hora-fim"
+                                        value={endTime}
+                                        onChange={(e) => setEndTime(e.target.value)}
+                                    />
+                                </div>
                             </div>
 
                             <label htmlFor="local">Local</label>
@@ -249,7 +335,6 @@ export default function AddEvent() {
                                 + Cadastrar novo local
                             </button>
 
-                            {/* Capa do evento */}
                             <EventCoverField
                                 value={coverImage}
                                 onChange={setCoverImage}
@@ -316,7 +401,9 @@ export default function AddEvent() {
                                     <textarea
                                         id="place-description"
                                         value={placeDescription}
-                                        onChange={(e) => setPlaceDescription(e.target.value)}
+                                        onChange={(e) =>
+                                            setPlaceDescription(e.target.value)
+                                        }
                                         placeholder="Descrição do local (opcional)"
                                     />
                                 </div>
@@ -334,7 +421,6 @@ export default function AddEvent() {
                                 </div>
 
                                 <div className="place-input-row">
-                                    {/* Aqui usamos o mesmo componente, mas com id e label próprios */}
                                     <EventCoverField
                                         value={placeImage}
                                         onChange={setPlaceImage}

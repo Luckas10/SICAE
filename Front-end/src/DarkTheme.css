@@ -208,11 +208,11 @@
 }
 
 :root[data-theme='dark'] .settings-page {
-    background-color: #071204;
+    background-color: #202020;
 }
 
 :root[data-theme='dark'] .settings-card {
-    background-color: #202020;
+    background-color: #fefdfd16;
 }
 
 :root[data-theme='dark'] .settings-card p {
@@ -440,3 +440,4 @@
 :root[data-theme="dark"] input[type="time"] {
     color-scheme: dark;
 }
+

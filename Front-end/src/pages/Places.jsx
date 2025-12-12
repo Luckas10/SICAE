@@ -123,11 +123,11 @@ export default function Places() {
         <>
             <Header />
 
-            <div className="events-page">
+            <div className="places-page">
                 <Sidebar />
 
-                <div className="events-content">
-                    <div className="events-toolbar">
+                <div className="places-content">
+                    <div className="places-toolbar">
                         <h2>Locais cadastrados</h2>
 
                         {!loadingUser && user?.role === "Servidor" && (

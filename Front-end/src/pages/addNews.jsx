@@ -26,7 +26,7 @@ export default function AddNews() {
     const [add_info, setAddInfo] = useState("");
     const [category, setCategory] = useState("futsal");
     const [priority, setPriority] = useState("none");
-    
+
     const imgRef = useRef(null);
     const navigate = useNavigate();
 
@@ -186,14 +186,14 @@ export default function AddNews() {
                         <div className="input-icon">
                             <FontAwesomeIcon icon={faFont} className="icon" />
                             <input type="text" id="titulo" placeholder="Título da notícia" value={title} required
-                            onChange={(e) => setTitle(e.target.value)}/>
+                                onChange={(e) => setTitle(e.target.value)} />
                         </div>
 
                         <label htmlFor="info">Sub-título</label>
                         <div className="input-icon">
                             <FontAwesomeIcon icon={faInfo} className="icon" />
                             <input type="text" id="info" placeholder="Sub-título da notícia" value={add_info} required maxLength="150"
-                            onChange={(e) => setAddInfo(e.target.value)}/>
+                                onChange={(e) => setAddInfo(e.target.value)} />
                         </div>
 
                         <label>Adicionar capa da notícia</label>
@@ -223,7 +223,7 @@ export default function AddNews() {
                                     onComplete={generateCroppedImg}
                                     aspect={16 / 9}
                                 >
-                                    <img ref={imgRef} src={imageSrc} alt="to-crop" onLoad={onImageLoad}/>
+                                    <img ref={imgRef} src={imageSrc} alt="to-crop" onLoad={onImageLoad} />
                                 </ReactCrop>
                             </div>
                         )}
@@ -240,11 +240,11 @@ export default function AddNews() {
                         <div className="textarea-icon">
                             <FontAwesomeIcon icon={faIndent} className="icon" style={{ marginTop: '0.5rem' }} />
                             <textarea id="conteudo" placeholder="Digite o conteúdo..." value={content}
-                            onChange={(e) => setContent(e.target.value)}></textarea>
+                                onChange={(e) => setContent(e.target.value)}></textarea>
                         </div>
 
-                        <label htmlFor="esporte">Esporte</label>
                         <div className="input-icon">
+                            <label htmlFor="esporte">Esporte</label>
                             <select
                                 name="categorias"
                                 id="categorias"
@@ -261,10 +261,8 @@ export default function AddNews() {
                                 <option value="chess">Xadrez</option>
                                 <option value="esports">E-sports</option>
                             </select>
-                        </div>
 
-                        <label htmlFor="prioridade">Prioridade</label>
-                        <div className="input-icon">
+                            <label htmlFor="prioridade">Prioridade</label>
                             <select
                                 name="prioridades"
                                 id="prioridades"
@@ -273,10 +271,10 @@ export default function AddNews() {
                             >
                                 <option value="none">Sem prioridade</option>
                                 <option value="top">Topo</option>
-                                <option value="center">Centro</option>           
+                                <option value="center">Centro</option>
                             </select>
                         </div>
-                        
+
                         <div className="news-form-buttons">
                             <button type="submit">Salvar</button>
                             <button className='bnt-cancel' type="button" onClick={handleCancel} >

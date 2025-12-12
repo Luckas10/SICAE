@@ -226,19 +226,19 @@ input[type="file"] {
     display: none;
 }
 
-.image-selector-button {
+.events-page .image-selector-button {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 12rem !important;
+    width: 12rem;
     height: 40px;
     background-color: #0D4F1D;
-    margin-inline: auto;
-    margin-block: 0.5rem;
     border-radius: 10px;
     border: none;
     color: white;
+    cursor: pointer;
 }
+
 
 .input-label {
     margin-left: 35px;

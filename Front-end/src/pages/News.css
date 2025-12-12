@@ -218,7 +218,7 @@
     border-radius: 8px;
     border: 1px solid grey;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
-    height: 50px;
+    height: 2.5rem;
     display: "inline-block";
     margin: 5px 0;
     padding: 10px;
@@ -228,7 +228,8 @@
 .addnews-page input#titulo,
 .addnews-page input#info,
 .addnews-page textarea#conteudo {
-    padding-left: 35px;
+    padding-left: 2rem;
+
 }
 
 .addNews-content form button {
@@ -260,20 +261,20 @@ input[type="file"] {
     max-width: 500px;
 }
 
-.image-selector-button {
+.addnews-page .image-selector-button {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 12rem !important;
+    width: 12rem;
     height: 40px;
     background-color: #0D4F1D;
     margin-inline: auto;
-    margin-block: 0.5rem;
     border-radius: 10px;
+    border: none;
     color: white;
-    border: 1px solid grey;
-    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
 }
+
 
 
 .image-preview {
@@ -301,7 +302,7 @@ input[type="file"] {
 .input-icon input,
 .input-icon select {
     padding-left: 35px;
-    width: 100%;
+    width: 30%;
     height: 37px;
 }
 
@@ -340,6 +341,7 @@ input[type="file"] {
     display: flex;
     justify-content: center;
     gap: 1rem;
+    margin-top: 1.5rem;
 }
 
 .news-form-buttons .bnt-cancel {

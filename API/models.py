@@ -33,7 +33,6 @@ class User(SQLModel, table=True):
     audit_logs: List["AuditLog"] = Relationship(back_populates="user")
 
     news_articles: List["NewsArticle"] = Relationship(back_populates="creator")
-    # CORRIGIDO: back_populates precisa apontar para "creator" em Game
     games: List["Game"] = Relationship(back_populates="creator")
 
 
@@ -242,8 +241,6 @@ class Game(SQLModel, table=True):
 
     creator_id: Optional[int] = Field(default=None, foreign_key="users.id")
 
-    # Lado "many" do relacionamento com User
     creator: Optional["User"] = Relationship(back_populates="games")
 
-    # Lado "many" do relacionamento com Event
     event: Optional["Event"] = Relationship(back_populates="games")

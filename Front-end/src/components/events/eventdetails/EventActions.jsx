@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { useUser } from "../../../context/UserContext";
 
 export default function EventActions({
@@ -5,8 +6,10 @@ export default function EventActions({
     onAddGame,
     onDelete,
     deleting,
+    onEdit
 }) {
     const { user, loadingUser } = useUser();
+    const navigate = useNavigate();
 
     return (
         <div className="event-actions">
@@ -26,6 +29,14 @@ export default function EventActions({
                         onClick={onAddGame}
                     >
                         + Adicionar Jogo
+                    </button>
+
+                    <button
+                        type="button"
+                        className="event-button-secondary"
+                        onClick={onEdit}
+                    >
+                        Editar Evento
                     </button>
 
                     <button

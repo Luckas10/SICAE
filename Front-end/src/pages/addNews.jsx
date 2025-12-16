@@ -243,36 +243,40 @@ export default function AddNews() {
                                 onChange={(e) => setContent(e.target.value)}></textarea>
                         </div>
 
-                        <div className="input-icon">
-                            <label htmlFor="esporte">Esporte</label>
-                            <select
-                                name="categorias"
-                                id="categorias"
-                                value={category}
-                                onChange={(e) => setCategory(e.target.value)} required
-                            >
-                                <option value="futsal">Futsal</option>
-                                <option value="basketball">Basquete</option>
-                                <option value="tabletennis">Tênis de Mesa</option>
-                                <option value="fighting">Lutas</option>
-                                <option value="athletics">Atletismo</option>
-                                <option value="volleyball">Voleibol</option>
-                                <option value="swimming">Natação</option>
-                                <option value="chess">Xadrez</option>
-                                <option value="esports">E-sports</option>
-                            </select>
+                        <div className="form-row">
+                            <div className="form-field">
+                                <label htmlFor="categorias">Esporte</label>
+                                <select
+                                    id="categorias"
+                                    value={category}
+                                    onChange={(e) => setCategory(e.target.value)}
+                                    required
+                                >
+                                    <option value="futsal">Futsal</option>
+                                    <option value="basketball">Basquete</option>
+                                    <option value="tabletennis">Tênis de Mesa</option>
+                                    <option value="fighting">Lutas</option>
+                                    <option value="athletics">Atletismo</option>
+                                    <option value="volleyball">Voleibol</option>
+                                    <option value="swimming">Natação</option>
+                                    <option value="chess">Xadrez</option>
+                                    <option value="esports">E-sports</option>
+                                </select>
+                            </div>
 
-                            <label htmlFor="prioridade">Prioridade</label>
-                            <select
-                                name="prioridades"
-                                id="prioridades"
-                                value={priority}
-                                onChange={(e) => setPriority(e.target.value)} required
-                            >
-                                <option value="none">Sem prioridade</option>
-                                <option value="top">Topo</option>
-                                <option value="center">Centro</option>
-                            </select>
+                            <div className="form-field">
+                                <label htmlFor="prioridades">Prioridade</label>
+                                <select
+                                    id="prioridades"
+                                    value={priority}
+                                    onChange={(e) => setPriority(e.target.value)}
+                                    required
+                                >
+                                    <option value="none">Sem prioridade</option>
+                                    <option value="top">Topo</option>
+                                    <option value="center">Centro</option>
+                                </select>
+                            </div>
                         </div>
 
                         <div className="news-form-buttons">

@@ -233,6 +233,7 @@ input[type="file"] {
     width: 12rem;
     height: 40px;
     background-color: #0D4F1D;
+    margin-inline: auto;
     border-radius: 10px;
     border: none;
     color: white;
@@ -575,6 +576,13 @@ p.timeAgoInfo {
 
 .initiation-filter-btn:hover {
     background-color: #ddd;
+}
+
+.event-cover-field {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 @media (max-width: 900px) {

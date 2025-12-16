@@ -97,6 +97,10 @@ export default function EventDetails() {
         }
     };
 
+    const HandleEdit = async () => {
+        navigate(`/events/edit/${id}`)
+    }
+
     if (loading) {
         return <p className="event-details-loading">Carregando evento...</p>;
     }
@@ -175,6 +179,7 @@ export default function EventDetails() {
                             onAddGame={() => navigate(`/events/${event.id}/games`)}
                             onDelete={handleDelete}
                             deleting={deleting}
+                            onEdit={HandleEdit}
                         />
 
                         </div>

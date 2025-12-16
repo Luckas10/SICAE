@@ -185,7 +185,7 @@ export default function AddNews() {
                         <label htmlFor="titulo">Título</label>
                         <div className="input-icon">
                             <FontAwesomeIcon icon={faFont} className="icon" />
-                            <input type="text" id="titulo" placeholder="Título da notícia" value={title} required
+                            <input type="text" id="titulo" placeholder="Título da notícia" value={title} maxLength="150" required
                                 onChange={(e) => setTitle(e.target.value)} />
                         </div>
 

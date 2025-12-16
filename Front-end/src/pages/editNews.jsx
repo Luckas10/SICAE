@@ -181,6 +181,7 @@ export default function EditNews() {
                 id="titulo"
                 placeholder="Título da notícia"
                 value={title}
+                maxLength="150"
                 required
                 onChange={(e) => setTitle(e.target.value)}
               />

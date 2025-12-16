@@ -17,6 +17,15 @@
 main {
   padding-left: 17vw !important;
   padding-right: 2vw !important;
+  min-height: 100vh !important;
+}
+
+main.ib-shell {
+  padding: 0 !important;
+}
+
+.ib-shell main {
+  padding: 0 !important;
 }
 
 .sidebarLinks,

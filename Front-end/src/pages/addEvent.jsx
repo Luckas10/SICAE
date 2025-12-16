@@ -249,6 +249,7 @@ export default function AddEvent() {
                                     id="titulo"
                                     placeholder="Título do evento"
                                     value={title}
+                                    maxLength="150"
                                     onChange={(e) => setTitle(e.target.value)}
                                 />
                             </div>
@@ -361,6 +362,7 @@ export default function AddEvent() {
                                     id="conteudo"
                                     placeholder="Descrição do evento..."
                                     value={description}
+                                    maxLength="150"
                                     onChange={(e) => setDescription(e.target.value)}
                                 ></textarea>
                             </div>

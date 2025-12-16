@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { LoginRegister } from "./pages/LoginRegister.jsx";
 
 import Events from "./pages/Events.jsx";
-import Dashboard from "./pages/Dashboard.jsx";
+import Home from "./pages/Home.jsx";
 import News from "./pages/News.jsx";
 import Profile from "./pages/Profile.jsx";
 import Settings from "./pages/Settings.jsx";
@@ -12,7 +12,7 @@ import AddEvent from "./pages/addEvent.jsx";
 import EventDetails from "./pages/EventDetails.jsx";
 import EventGame from "./pages/EventGame.jsx";
 import Athletes from "./pages/Athletes.jsx";
-import ManageAthletes from "./pages/manageAthletes.jsx";
+import ManageAthletes from "./pages/ManageAthletes.jsx";
 import NewsDetails from "./pages/NewsDetails.jsx";
 import EditNews from "./pages/editNews.jsx";
 import EditEvent from "./pages/editEvent.jsx";
@@ -34,7 +34,7 @@ export default function App() {
           <Route path="/auth" element={<LoginRegister />} />
         </Route>
 
-        <Route path="/" element={<Dashboard />} />
+        <Route path="/" element={<Home />} />
         <Route path="/events" element={<Events />} />
         <Route path="/events/:id" element={<EventDetails />} />
         <Route path="/games/:id" element={<GameDetails />} />

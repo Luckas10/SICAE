@@ -322,3 +322,266 @@ input[type="file"] {
         max-width: 100%;
     }
 }
+
+/* =========================================================
+   PLACE DETAILS — Layout e design no padrão do EventDetails
+   (sem reutilizar classes do Events.css)
+========================================================= */
+
+/* Page shell (mesma lógica do events-page) */
+.place-details-page {
+    display: block;
+    padding-left: 15%;
+    padding-top: calc(5vh + 9.5vh);
+    min-height: 100%;
+}
+
+.place-details-page a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Central wrapper (mesma lógica do events-content) */
+.place-details-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 0 2%;
+}
+
+/* Main card (mesma lógica do event-details) */
+.place-details {
+    width: 100%;
+    max-width: 960px;
+    margin-bottom: 60px;
+    background-color: #ffffff;
+    border-radius: 16px;
+    padding: 24px 28px;
+    box-sizing: border-box;
+}
+
+/* Header (mesma lógica do event-details-header) */
+.place-details-header {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.place-details-header h1 {
+    font-size: 26px;
+    font-weight: 800;
+    color: #0D4F1D;
+    line-height: 1.2;
+    margin: 0;
+}
+
+.place-details-subtitle {
+    font-size: 14px;
+    color: #4b5563;
+    margin: 0;
+}
+
+/* Cover (mesma lógica do event-details-cover) */
+.place-details-cover {
+    margin: 18px 0 24px;
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+.place-details-cover img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    background-color: #ffffff;
+    transition: transform 0.2s ease;
+}
+
+.place-details-cover img:hover {
+    transform: scale(1.01);
+}
+
+/* Body (mesma lógica do event-details-body) */
+.place-details-body {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/* Meta (mesma lógica do event-meta / event-meta-item) */
+.place-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.place-meta-item {
+    min-width: 140px;
+    padding: 10px 12px;
+    border-radius: 12px;
+    background-color: #f3f4f6;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    box-sizing: border-box;
+}
+
+.place-meta-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #6b7280;
+    font-weight: 600;
+}
+
+.place-meta-value {
+    font-size: 14px;
+    color: #111827;
+    font-weight: 600;
+}
+
+/* Description (mesma lógica do event-details-info) */
+.place-details-info h2 {
+    font-size: 18px;
+    margin: 0 0 8px;
+    color: #0D4F1D;
+}
+
+.place-details-info p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #111827;
+    white-space: pre-line;
+    margin: 0;
+}
+
+/* Actions (mesma lógica do event-actions e botões) */
+.place-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 4px;
+}
+
+.place-button-secondary,
+.place-button-danger {
+    min-width: 140px;
+    height: 40px;
+    border-radius: 999px;
+    border: none;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.12s ease;
+}
+
+.place-button-secondary {
+    background-color: #ffffff;
+    color: #0D4F1D;
+    border: 1px solid #0D4F1D;
+}
+
+.place-button-danger {
+    background-color: #dc2626;
+    color: #ffffff;
+}
+
+.place-button-secondary:hover,
+.place-button-danger:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.02);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+}
+
+.place-button-danger:disabled {
+    opacity: 0.7;
+    cursor: default;
+    box-shadow: none;
+    transform: none;
+}
+
+/* Loading */
+.place-details-loading {
+    padding: 40px;
+    text-align: center;
+    color: #0D4F1D;
+    font-weight: 600;
+}
+
+/* =========================================================
+   DARK MODE — equivalente ao que você aplica no EventDetails
+========================================================= */
+:root[data-theme="dark"] .place-details {
+    background-color: transparent;
+}
+
+:root[data-theme="dark"] .place-details-header h1 {
+    color: #e5e7eb;
+}
+
+:root[data-theme="dark"] .place-details-subtitle {
+    color: #9ca3af;
+}
+
+:root[data-theme="dark"] .place-meta-item {
+    background-color: #333333;
+    border: 1px solid #1f2937;
+}
+
+:root[data-theme="dark"] .place-meta-label {
+    color: #dddd;
+}
+
+:root[data-theme="dark"] .place-meta-value {
+    color: #e5e7eb;
+}
+
+:root[data-theme="dark"] .place-details-info h2 {
+    color: #e5e7eb;
+}
+
+:root[data-theme="dark"] .place-details-info p {
+    color: #e5e7eb;
+}
+
+:root[data-theme="dark"] .place-button-secondary {
+    background-color: transparent;
+    color: #e5e7eb;
+    border-color: #e5e7eb;
+}
+
+:root[data-theme="dark"] .place-button-danger {
+    background-color: #b91c1c;
+}
+
+:root[data-theme="dark"] .place-details-loading {
+    color: #e5e7eb;
+}
+
+/* =========================================================
+   RESPONSIVO — mesma lógica do EventDetails (sem sidebar no mobile)
+========================================================= */
+@media (max-width: 600px) {
+    .place-details-page {
+        padding-left: 0;
+        padding-right: 2%;
+        padding-bottom: 70px;
+    }
+
+    .place-details {
+        padding: 18px 16px;
+    }
+
+    .place-actions {
+        justify-content: stretch;
+        flex-direction: column;
+    }
+
+    .place-button-secondary,
+    .place-button-danger {
+        width: 100%;
+        min-width: 0;
+    }
+}

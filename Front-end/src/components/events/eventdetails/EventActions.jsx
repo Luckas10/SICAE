@@ -18,7 +18,7 @@ export default function EventActions({
                 className="event-button-secondary"
                 onClick={onBackToList}
             >
-                Voltar para eventos
+                Voltar
             </button>
 
             {!loadingUser && user?.role === "Servidor" && (

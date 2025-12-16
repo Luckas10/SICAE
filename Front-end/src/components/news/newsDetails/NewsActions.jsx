@@ -14,7 +14,7 @@ export default function NewsActions({ onBack, onDelete, deleting, onEdit }) {
                 className="news-button-secondary"
                 onClick={onBack}
             >
-                Voltar para notícias
+                Voltar
             </button>
 
             {!loadingUser && user?.role === "Servidor" && (

@@ -16,8 +16,6 @@
     background-color: #242424;
 }
 
-
-
 :root[data-theme="dark"] body {
     background-color: #000000e2;
     color: #e5e7eb;
@@ -45,7 +43,7 @@
 :root[data-theme="dark"] .addEvents-content form input,
 :root[data-theme="dark"] .addEvents-content form textarea,
 :root[data-theme="dark"] .capa {
-    background-color: #333232;
+    background-color: #333333;
     color: #e5e7eb;
     border-color: #333333;
 }
@@ -55,7 +53,7 @@
 }
 
 :root[data-theme="dark"] .event-card {
-    background-color: #fefdfd16;
+    background-color: #333333;
     color: rgb(255, 255, 255);
     box-shadow: 0 4px 18px rgba(0, 0, 0, 0.7);
 }
@@ -64,7 +62,7 @@
     color: #ffffff;
 }
 
-:root [data-theme="dark"] .event-gamme-list{
+:root [data-theme="dark"] .event-gamme-list {
     color: #e5e7eb;
 }
 
@@ -74,18 +72,16 @@
 }
 
 :root[data-theme="dark"] p.timeAgoInfo {
-    font-size: 12px;
     color: #ffffff;
-    padding: 0px 8px;
 }
 
+:root[data-theme="dark"] .settings-page,
 :root[data-theme="dark"] .event-details {
-    background-color: #333333;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7);
+    background: transparent;
 }
 
 :root[data-theme="dark"] .event-category-chip {
-    background-color: #202020;
+    background-color: #333333;
     color: #e5e7eb;
 }
 
@@ -106,12 +102,12 @@
 }
 
 :root[data-theme="dark"] .event-meta-item {
-    background-color: #202020;
+    background-color: #333333;
     border: 1px solid #1f2937;
 }
 
 :root[data-theme="dark"] .event-meta-label {
-    color: #9ca3af;
+    color: #dddd;
 }
 
 :root[data-theme="dark"] .event-meta-value {
@@ -138,13 +134,8 @@
     color: #e5e7eb;
 }
 
-
-
-
-
-
 :root[data-theme="dark"] .profile-page {
-    background-color: #202020;
+    background: transparent;
     color: #e5e7eb;
 }
 
@@ -158,7 +149,7 @@
 }
 
 :root[data-theme="dark"] .profile-info-card {
-    background: #333232;
+    background: #333333;
 }
 
 :root[data-theme="dark"] .profile-info-label {
@@ -207,12 +198,9 @@
     color: #ffffff;
 }
 
-:root[data-theme='dark'] .settings-page {
-    background-color: #202020;
-}
 
 :root[data-theme='dark'] .settings-card {
-    background-color: #fefdfd16;
+    background-color: #333333;
 }
 
 :root[data-theme='dark'] .settings-card p {
@@ -251,14 +239,14 @@
 }
 
 :root[data-theme='dark'] .news-page .news-details-header h3 {
-    color: #737373;
+    color: #777777;
 }
 
 :root[data-theme='dark'] .news-page .news-details-subtitle {
     color: #9ca3af;
 }
 
-:root[data-theme='dark'] .news-page .news-details-info p{
+:root[data-theme='dark'] .news-page .news-details-info p {
     color: #e5e7eb;
 }
 
@@ -266,22 +254,22 @@
     border: #E3B52E;
 }
 
-:root[data-theme='dark'] .event-game-card{
+:root[data-theme='dark'] .event-game-card {
     color: #e5e7eb;
     background-color: #3333339c;
 }
 
-:root[data-theme='dark'] .event-game-card{
+:root[data-theme='dark'] .event-game-card {
     color: #e5e7eb;
     background-color: #3333339c;
 }
+
 :root[data-theme="dark"] .sportsNewsId:has(.chessIcon),
 :root[data-theme="dark"] .chessIcon {
     color: #f3dcbd;
-    margin-bottom: 3px;
 }
 
-:root[data-theme="dark"] .initiation-filter-btn{
+:root[data-theme="dark"] .initiation-filter-btn {
     color: white;
 }
 
@@ -289,133 +277,163 @@
     color: #0D4F1D;
 }
 
-:root[data-theme="dark"] #event-button-cancel{
+:root[data-theme="dark"] #event-button-cancel {
     background-color: transparent;
     color: white;
 }
-:root[data-theme="dark"] .event-game-info{
+
+:root[data-theme="dark"] .event-game-info {
     background-color: #3333339c;
     color: white;
 }
-:root[data-theme="dark"] .edit-mode input{
-    background-color:#242424 ;
+
+:root[data-theme="dark"] .edit-mode input {
+    background-color: #242424;
     color: white;
 
 }
-:root[data-theme="dark"] .edit-mode textarea{
-    background-color:#242424 ;
+
+:root[data-theme="dark"] .edit-mode textarea {
+    background-color: #242424;
     color: white;
 }
-:root[data-theme="dark"] .games-content{
+
+:root[data-theme="dark"] .games-content {
     background-color: #33333338;
     color: white;
 }
-:root[data-theme="dark"] .games-content form input{
-    background-color: #333232;
+
+:root[data-theme="dark"] .games-content form input {
+    background-color: #333333;
 
 }
-:root[data-theme="dark"] .games-content form textarea{
-    background-color: #333232;
+
+:root[data-theme="dark"] .games-content form textarea {
+    background-color: #333333;
 
 }
-:root[data-theme="dark"] .game-button .bnt-cancel{
+
+:root[data-theme="dark"] .game-button .bnt-cancel {
     background-color: transparent;
     color: white;
 }
-:root[data-theme="dark"] .event-comments-form textarea{
-    background-color: #333232;
+
+:root[data-theme="dark"] .event-comments-form textarea {
+    background-color: #333333;
 }
+
 :root[data-theme="dark"] .event-comment-card {
-    background-color: #333232;
+    background-color: #333333;
     color: white;
 }
-:root[data-theme="dark"] .event-comment-card p{
+
+:root[data-theme="dark"] .event-comment-card p {
     color: white;
 }
-:root[data-theme="dark"] .addNews-content{
+
+:root[data-theme="dark"] .addNews-content {
     background-color: #33333338;
     color: white;
 }
+
 :root[data-theme="dark"] .addNews-content input {
-    background-color: #333232;
-    color: white;
-}
-:root[data-theme="dark"] .textarea-icon #conteudo{
-    background-color: #333232;
-    color: white;
-}
-:root[data-theme="dark"] .input-icon #categorias{
-    background-color: #333232;
-    color: white;
-}
-:root[data-theme="dark"] .input-icon #prioridades{
-    background-color: #333232;
+    background-color: #333333;
     color: white;
 }
 
-:root[data-theme="dark"] .news-form-buttons .bnt-cancel{
+:root[data-theme="dark"] .textarea-icon #conteudo {
+    background-color: #333333;
+    color: white;
+}
+
+:root[data-theme="dark"] .input-icon #categorias {
+    background-color: #333333;
+    color: white;
+}
+
+:root[data-theme="dark"] .input-icon #prioridades {
+    background-color: #333333;
+    color: white;
+}
+
+:root[data-theme="dark"] .news-form-buttons .bnt-cancel {
     background-color: transparent;
 }
 
-:root[data-theme="dark"] .user-card{
-    background-color:#333232 ;
+:root[data-theme="dark"] .user-card {
+    background-color: #333333;
 }
-:root[data-theme="dark"] .addNews-content .filter-buttons button,.addNews-content .button-secondary {
+
+:root[data-theme="dark"] .addNews-content .filter-buttons button,
+.addNews-content .button-secondary {
     background-color: transparent;
     color: white;
 }
-:root[data-theme="dark"] .addNews-content .filter-buttons .active{
+
+:root[data-theme="dark"] .addNews-content .filter-buttons .active {
     background-color: #14532d;
     color: white;
 }
-:root[data-theme="dark"] .news-form-buttons button{
+
+:root[data-theme="dark"] .news-form-buttons button {
     background-color: #06200d;
     color: white;
 
 }
-:root[data-theme="dark"] .addNews-content select{
-    background-color: #333232;
+
+:root[data-theme="dark"] .addNews-content select {
+    background-color: #333333;
     color: white;
 }
-:root[data-theme="dark"]  .buscar-content #buscar{
-    background-color: #333232;
+
+:root[data-theme="dark"] .buscar-content #buscar {
+    background-color: #333333;
 }
-:root[data-theme="dark"] .news-category-filter{
-    background-color: #333232;
+
+:root[data-theme="dark"] .news-category-filter {
+    background-color: #333333;
     color: white;
     border: none;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
 }
-:root[data-theme="dark"]  .news-actions .news-button-secondary{
-    background-color: #333232;
+
+:root[data-theme="dark"] .news-actions .news-button-secondary {
+    background-color: #333333;
     color: white;
 }
-:root[data-theme="dark"]  .news-comments textarea{
-    background-color: #333232;
+
+:root[data-theme="dark"] .news-comments textarea {
+    background-color: #333333;
     color: white;
 }
-:root[data-theme="dark"]  .news-comment-card{
-    background-color: #333232;
+
+:root[data-theme="dark"] .news-comment-card {
+    background-color: #333333;
     color: white;
 
 }
-:root[data-theme="dark"]  .news-comment-card .news-comment-content{
-    background-color: #333232;
+
+:root[data-theme="dark"] .news-comment-card .news-comment-content {
+    background-color: #333333;
     color: white;
 
 }
+
 :root[data-theme="dark"] .news-comment-dropdown button {
     background: #242424;
     color: white;
 }
+
 :root[data-theme="dark"] .news-comment-dropdown .danger {
     background: #242424;
     color: red;
 }
-:root[data-theme="dark"] .event-comment-dropdown button{
+
+:root[data-theme="dark"] .event-comment-dropdown button {
     background: #242424;
     color: white;
 }
+
 :root[data-theme="dark"] .event-comment-dropdown .danger {
     background: #242424;
     color: red;
@@ -441,3 +459,57 @@
     color-scheme: dark;
 }
 
+:root[data-theme="dark"] .home-card {
+    background-color: #333333;
+    border-color: #242424;
+}
+
+:root[data-theme="dark"] .home-card-info h4,
+:root[data-theme="dark"] .center-news-info h4,
+:root[data-theme="dark"] .bottom-news-content h4 {
+    color: #ffffff;
+}
+
+:root[data-theme="dark"] .home-card-info p,
+:root[data-theme="dark"] .center-news-info p,
+:root[data-theme="dark"] .bottom-news-content p {
+    color: #e5e7eb;
+}
+
+:root[data-theme="dark"] .home-card-date,
+:root[data-theme="dark"] .center-news-card .center-news-date {
+    color: #e5e7eb;
+}
+
+.center-news-card:hover .center-news-info p,
+.center-news-card:hover .center-news-info h4 {
+    color: rgb(28, 153, 23);
+    transition: .3s;
+}
+
+:root[data-theme="dark"] .bottom-news-card:hover {
+    background-color: #333333;
+}
+
+:root[data-theme="dark"] .bottom-news-card:hover h4,
+:root[data-theme="dark"] .bottom-news-card:hover .bottom-news-desc,
+:root[data-theme="dark"] .bottom-news-card:hover {
+    background-color: #333333;
+    color: rgb(28, 153, 23);
+}
+
+:root[data-theme="dark"] .places-title {
+    color: #ffffff;
+}
+
+:root[data-theme="dark"] .place-card {
+    background-color: #333333;
+}
+
+:root[data-theme="dark"] .place-card h5 {
+    color: #ffffff;
+}
+
+:root[data-theme="dark"] .place-card p {
+    color: #e5e7eb;
+}

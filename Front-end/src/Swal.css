@@ -261,7 +261,7 @@ body.swal2-height-auto {
 
 :root[data-theme="dark"] .logout-alert,
 :root[data-theme="dark"] .comment-alert {
-    background: linear-gradient(to bottom, #241a03 0%, #1a1202 60%);
+    background: linear-gradient(to bottom, #1c0601 0%, #2a230b 60%);
     border: 1px solid #E3B52E !important;
     box-shadow: 0 2px 45px rgba(227, 181, 46, 0.35);
 }

@@ -1,0 +1,40 @@
+import { CATEGORY_CONFIG, NEWS_CATEGORY, EVENT_CATEGORY } from "../../constants/eventCategories";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { NavLink } from "react-router-dom";
+
+export default function HomeCard({ data }) {
+    const cfg = CATEGORY_CONFIG[data.category] || NEWS_CATEGORY;
+
+    const dataFormatada =
+        data.created_at
+            ? new Date(data.created_at).toLocaleDateString("pt-BR", {
+                day: "2-digit",
+                month: "long",
+                year: "numeric",
+            })
+            : "";
+
+    return (
+        <NavLink className="home-card" to={`/${data.isEvent ? "events" : "news"}/${data.id}`}>
+            <img src={data.cover_image} alt="" />
+
+            <div className="home-card-sub">
+                <p className="sportsNewsId" style={{ margin: "0" }}>
+                    <FontAwesomeIcon icon={data.isEvent ? EVENT_CATEGORY.icon : NEWS_CATEGORY.icon} className={data.isEvent ? EVENT_CATEGORY.className : NEWS_CATEGORY.className} />{" "}
+                    {data.isEvent ? EVENT_CATEGORY.label : NEWS_CATEGORY.label}
+                </p>
+
+                <h6 className="home-card-date">{dataFormatada}</h6>
+            </div>
+
+            <div className="home-card-info">
+                <h4>{data.title || data.name}</h4>
+                <p>
+                    {(data.add_info || data.description || "").length > 150
+                        ? (data.add_info || data.description).slice(0, 150) + "..."
+                        : (data.add_info || data.description)}
+                </p>
+            </div>
+        </NavLink>
+    );
+}

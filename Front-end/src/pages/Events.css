@@ -383,7 +383,7 @@ input[type="file"] {
 .sportsNewsId:has(.chessIcon),
 .chessIcon {
     color: #bd936d;
-    margin-bottom: 3px;
+    margin-bottom: 1px;
 }
 
 .sportsNewsId:has(.esportsIcon),

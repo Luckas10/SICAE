@@ -181,7 +181,7 @@
 
 :root[data-theme="dark"] .modal-btn.save {
     background: #14532d;
-    color: white;
+    color: #ffffff;
 }
 
 :root[data-theme="dark"] .crop-container img {
@@ -270,7 +270,7 @@
 }
 
 :root[data-theme="dark"] .initiation-filter-btn {
-    color: white;
+    color: #ffffff;
 }
 
 :root[data-theme="dark"] .initiation-filter-btn:hover {
@@ -279,28 +279,28 @@
 
 :root[data-theme="dark"] #event-button-cancel {
     background-color: transparent;
-    color: white;
+    color: #ffffff;
 }
 
 :root[data-theme="dark"] .event-game-info {
     background-color: #3333339c;
-    color: white;
+    color: #ffffff;
 }
 
 :root[data-theme="dark"] .edit-mode input {
     background-color: #242424;
-    color: white;
+    color: #ffffff;
 
 }
 
 :root[data-theme="dark"] .edit-mode textarea {
     background-color: #242424;
-    color: white;
+    color: #ffffff;
 }
 
 :root[data-theme="dark"] .games-content {
     background-color: #33333338;
-    color: white;
+    color: #ffffff;
 }
 
 :root[data-theme="dark"] .games-content form input {
@@ -315,7 +315,7 @@
 
 :root[data-theme="dark"] .game-button .bnt-cancel {
     background-color: transparent;
-    color: white;
+    color: #ffffff;
 }
 
 :root[data-theme="dark"] .event-comments-form textarea {
@@ -324,36 +324,36 @@
 
 :root[data-theme="dark"] .event-comment-card {
     background-color: #333333;
-    color: white;
+    color: #ffffff;
 }
 
 :root[data-theme="dark"] .event-comment-card p {
-    color: white;
+    color: #ffffff;
 }
 
 :root[data-theme="dark"] .addNews-content {
     background-color: #33333338;
-    color: white;
+    color: #ffffff;
 }
 
 :root[data-theme="dark"] .addNews-content input {
     background-color: #333333;
-    color: white;
+    color: #ffffff;
 }
 
 :root[data-theme="dark"] .textarea-icon #conteudo {
     background-color: #333333;
-    color: white;
+    color: #ffffff;
 }
 
 :root[data-theme="dark"] .input-icon #categorias {
     background-color: #333333;
-    color: white;
+    color: #ffffff;
 }
 
 :root[data-theme="dark"] .input-icon #prioridades {
     background-color: #333333;
-    color: white;
+    color: #ffffff;
 }
 
 :root[data-theme="dark"] .news-form-buttons .bnt-cancel {
@@ -367,23 +367,23 @@
 :root[data-theme="dark"] .addNews-content .filter-buttons button,
 .addNews-content .button-secondary {
     background-color: transparent;
-    color: white;
+    color: #ffffff;
 }
 
 :root[data-theme="dark"] .addNews-content .filter-buttons .active {
     background-color: #14532d;
-    color: white;
+    color: #ffffff;
 }
 
 :root[data-theme="dark"] .news-form-buttons button {
     background-color: #06200d;
-    color: white;
+    color: #ffffff;
 
 }
 
 :root[data-theme="dark"] .addNews-content select {
     background-color: #333333;
-    color: white;
+    color: #ffffff;
 }
 
 :root[data-theme="dark"] .buscar-content #buscar {
@@ -392,36 +392,36 @@
 
 :root[data-theme="dark"] .news-category-filter {
     background-color: #333333;
-    color: white;
+    color: #ffffff;
     border: none;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
 }
 
 :root[data-theme="dark"] .news-actions .news-button-secondary {
-    background-color: #333333;
-    color: white;
+    color: #ffffff;
+    border-color: #ffffff;
 }
 
 :root[data-theme="dark"] .news-comments textarea {
     background-color: #333333;
-    color: white;
+    color: #ffffff;
 }
 
 :root[data-theme="dark"] .news-comment-card {
     background-color: #333333;
-    color: white;
+    color: #ffffff;
 
 }
 
 :root[data-theme="dark"] .news-comment-card .news-comment-content {
     background-color: #333333;
-    color: white;
+    color: #ffffff;
 
 }
 
 :root[data-theme="dark"] .news-comment-dropdown button {
     background: #242424;
-    color: white;
+    color: #ffffff;
 }
 
 :root[data-theme="dark"] .news-comment-dropdown .danger {
@@ -431,7 +431,7 @@
 
 :root[data-theme="dark"] .event-comment-dropdown button {
     background: #242424;
-    color: white;
+    color: #ffffff;
 }
 
 :root[data-theme="dark"] .event-comment-dropdown .danger {
@@ -440,7 +440,7 @@
 }
 
 :root[data-theme="dark"] .settings-page .logout-button {
-    color: white;
+    color: #ffffff;
 }
 
 :root[data-theme="dark"] .settings-page .logout-button:hover {

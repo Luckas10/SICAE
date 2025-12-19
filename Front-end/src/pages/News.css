@@ -700,6 +700,7 @@ input[type="file"] {
     margin-top: 3rem;
     border-top: 1px solid #ddd;
     padding-top: 2rem;
+    justify-content: flex-end;
 }
 
 .news-button-secondary,
@@ -727,7 +728,7 @@ input[type="file"] {
 }
 
 .news-button-secondary {
-    background-color: #ffffff;
+    background: transparent;
     color: #0D4F1D;
     border: 1px solid #0D4F1D;
 }

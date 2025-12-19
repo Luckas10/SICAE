@@ -158,6 +158,7 @@
     flex-direction: column;
     gap: 10px;
     overflow-y: auto;
+    background-color: #f4fbf6;
 }
 
 .home-page .notification-item {

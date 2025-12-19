@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException, status, Depends
 from sqlmodel import select, func
 from pydantic import BaseModel
-from typing import List
+from typing import List, Optional
 from passlib.context import CryptContext
 
 from database import SessionDep
@@ -13,9 +13,8 @@ bcrypt_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 router = APIRouter(prefix="/users", tags=["Usuários"])
 
 
-
 class PublicUser(BaseModel):
-    id: int  
+    id: int
     full_name: str
     role: Role
     profile_image: str | None = None
@@ -24,7 +23,7 @@ class PublicUser(BaseModel):
 class PublicUserProfile(BaseModel):
     id: int
     full_name: str
-    email: str
+    matricula: int
     role: Role
     profile_image: str | None = None
     total_comments: int
@@ -34,14 +33,13 @@ class PublicUserProfile(BaseModel):
 
 class UserCreate(BaseModel):
     full_name: str
-    email: str
+    matricula: int
     password: str
     Role: str = "Aluno"
 
 
 class UserAvatarUpdate(BaseModel):
     profile_image: str
-
 
 
 @router.get("/public", response_model=List[PublicUser])
@@ -61,7 +59,6 @@ def listar_users_publico(session: SessionDep):
 
 @router.get("/public/{id}", response_model=PublicUserProfile)
 def perfil_publico_user(session: SessionDep, id: int):
-
     user = session.get(User, id)
     if not user:
         raise HTTPException(
@@ -70,26 +67,23 @@ def perfil_publico_user(session: SessionDep, id: int):
         )
 
     event_comments = session.exec(
-        select(func.count(EventComment.id))
-        .where(EventComment.author_id == user.id)
+        select(func.count(EventComment.id)).where(EventComment.author_id == user.id)
     ).one()
 
     news_comments = session.exec(
-        select(func.count(NewsComment.id))
-        .where(NewsComment.author_id == user.id)
+        select(func.count(NewsComment.id)).where(NewsComment.author_id == user.id)
     ).one()
 
     return {
         "id": user.id,
         "full_name": user.full_name,
-        "email": user.email,
+        "matricula": user.matricula,
         "role": user.role,
         "profile_image": user.profile_image,
         "total_comments": event_comments + news_comments,
         "event_comments": event_comments,
         "news_comments": news_comments,
     }
-
 
 
 @router.get("")
@@ -102,24 +96,20 @@ def listar_users(
 
 @router.post("", status_code=status.HTTP_201_CREATED)
 def cadastrar_user(session: SessionDep, data: UserCreate) -> User:
-
-    exists = session.exec(
-        select(User).where(User.full_name == data.full_name)
-    ).first()
+    exists = session.exec(select(User).where(User.full_name == data.full_name)).first()
     if exists:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Username já existe.",
         )
 
-    exists_email = session.exec(
-        select(User).where(User.email == data.email)
-    ).first()
-    if exists_email:
+    exists_matricula = session.exec(select(User).where(User.matricula == data.matricula)).first()
+    if exists_matricula:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Email já cadastrado.",
+            detail="Matrícula já cadastrada.",
         )
+
 
     hashed = bcrypt_context.hash(data.password)
 
@@ -133,7 +123,7 @@ def cadastrar_user(session: SessionDep, data: UserCreate) -> User:
 
     new_user = User(
         full_name=data.full_name,
-        email=data.email,
+        matricula=data.matricula,
         password_hash=hashed,
         role=role_enum,
     )
@@ -152,7 +142,6 @@ def atualizar_user(
     role: str,
     current_user: User = Depends(get_current_user),
 ) -> User:
-
     user = session.get(User, id)
     if not user:
         raise HTTPException(
@@ -174,7 +163,6 @@ def deletar_user(
     id: int,
     current_user: User = Depends(get_current_user),
 ) -> str:
-
     user = session.get(User, id)
     if not user:
         raise HTTPException(
@@ -192,21 +180,18 @@ def get_me(
     session: SessionDep,
     current_user: User = Depends(get_current_user)
 ):
-
     event_comments = session.exec(
-        select(func.count(EventComment.id))
-        .where(EventComment.author_id == current_user.id)
+        select(func.count(EventComment.id)).where(EventComment.author_id == current_user.id)
     ).one()
 
     news_comments = session.exec(
-        select(func.count(NewsComment.id))
-        .where(NewsComment.author_id == current_user.id)
+        select(func.count(NewsComment.id)).where(NewsComment.author_id == current_user.id)
     ).one()
 
     return {
         "id": current_user.id,
         "full_name": current_user.full_name,
-        "email": current_user.email,
+        "matricula": current_user.matricula,
         "role": current_user.role,
         "profile_image": current_user.profile_image,
         "total_comments": event_comments + news_comments,
@@ -221,7 +206,6 @@ def update_my_avatar(
     session: SessionDep,
     current_user: User = Depends(get_current_user),
 ):
-
     user = session.get(User, current_user.id)
     if not user:
         raise HTTPException(
@@ -237,6 +221,6 @@ def update_my_avatar(
     return {
         "id": user.id,
         "full_name": user.full_name,
-        "email": user.email,
+        "matricula": user.matricula,
         "profile_image": user.profile_image,
     }

@@ -75,13 +75,13 @@ export default function LoginRegisterContainer({
         const loginForm = root.querySelector("form.sign-in-form");
         if (!loginForm) return;
 
-        const emailInput = loginForm.querySelector('input[name="email"]');
+        const matriculaInput = loginForm.querySelector('input[name="matricula"]');
         const passInput = loginForm.querySelector('input[name="password"]');
 
-        if (emailInput) {
-            emailInput.value = loginPrefill.email || "";
-            if (loginPrefill.email) {
-                emailInput.classList.add("active");
+        if (matriculaInput) {
+            matriculaInput.value = loginPrefill.matricula || "";
+            if (loginPrefill.matricula) {
+                matriculaInput.classList.add("active");
             }
         }
 
@@ -96,9 +96,10 @@ export default function LoginRegisterContainer({
     const handleSignIn = async (e) => {
         e.preventDefault();
         const fd = new FormData(e.currentTarget);
-        const email = fd.get("email")?.toString().trim();
+        const matricula = fd.get("matricula")?.toString().trim();
         const password = fd.get("password")?.toString();
-        if (onLogin) await onLogin({ email, password });
+
+        if (onLogin) await onLogin({ matricula, password });
     };
 
     const handleSignUp = async (e) => {
@@ -106,10 +107,10 @@ export default function LoginRegisterContainer({
         const fd = new FormData(e.currentTarget);
 
         const full_name = fd.get("full_name")?.toString().trim();
-        const email = fd.get("email")?.toString().trim();
+        const matricula = fd.get("matricula")?.toString().trim();
         const password = fd.get("password")?.toString();
 
-        if (onRegister) await onRegister({ full_name, email, password });
+        if (onRegister) await onRegister({ full_name, matricula, password });
     };
 
     return (
@@ -135,14 +136,16 @@ export default function LoginRegisterContainer({
                             <div className="actual-form">
                                 <div className="input-wrap">
                                     <input
-                                        name="email"
-                                        type="email"
+                                        name="matricula"
+                                        type="text"
+                                        inputMode="numeric"
+                                        pattern="[0-9]+"
                                         minLength={4}
                                         className="input-field"
                                         autoComplete="off"
                                         required
                                     />
-                                    <label className="labelLoginContainer">E-mail</label>
+                                    <label className="labelLoginContainer">Matrícula</label>
                                 </div>
 
                                 <div className="input-wrap">
@@ -197,13 +200,16 @@ export default function LoginRegisterContainer({
 
                                 <div className="input-wrap">
                                     <input
-                                        name="email"
-                                        type="email"
+                                        name="matricula"
+                                        type="text"
+                                        inputMode="numeric"
+                                        pattern="[0-9]+"
+                                        minLength={4}
                                         className="input-field"
                                         autoComplete="off"
                                         required
                                     />
-                                    <label className="labelLoginContainer">Email</label>
+                                    <label className="labelLoginContainer">Matrícula</label>
                                 </div>
 
                                 <div className="input-wrap">

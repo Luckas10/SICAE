@@ -1,8 +1,8 @@
 import api from "./api";
 
-export async function loginWithPassword({ email, password }) {
+export async function loginWithPassword({ matricula, password }) {
     const params = new URLSearchParams();
-    params.append("username", email);
+    params.append("username", String(matricula).trim());
     params.append("password", password);
 
     const { data } = await api.post("/auth/token", params, {
@@ -14,12 +14,12 @@ export async function loginWithPassword({ email, password }) {
     return data;
 }
 
-export async function registerUser({ full_name, email, password }) {
+export async function registerUser({ full_name, matricula, password }) {
     const { data } = await api.post("/users", {
         full_name,
-        email,
+        matricula: Number(matricula),
         password,
-        Role: "Aluno",
+        role: "Aluno",
     });
 
     return data;

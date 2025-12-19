@@ -15,12 +15,12 @@ export function LoginRegister() {
     const isNight = theme === "dark";
     const imageSrc = "/img/Background.jpg";
 
-    const [loginPrefill, setLoginPrefill] = useState({ email: "", password: "" });
+    const [loginPrefill, setLoginPrefill] = useState({ matricula: "", password: "" });
     const [forceLoginModeKey, setForceLoginModeKey] = useState(0);
 
-    const handleLogin = async ({ email, password }) => {
+    const handleLogin = async ({ matricula, password }) => {
         try {
-            const { access_token } = await loginWithPassword({ email, password });
+            const { access_token } = await loginWithPassword({ matricula, password });
             localStorage.setItem("token", access_token);
 
             await refreshUser();
@@ -55,9 +55,9 @@ export function LoginRegister() {
         }
     };
 
-    const handleRegister = async ({ full_name, email, password }) => {
+    const handleRegister = async ({ full_name, matricula, password }) => {
         try {
-            await registerUser({ full_name, email, password });
+            await registerUser({ full_name, matricula, password });
 
             await Swal.fire({
                 icon: "success",
@@ -69,7 +69,7 @@ export function LoginRegister() {
                 },
             });
 
-            setLoginPrefill({ email, password });
+            setLoginPrefill({ matricula, password });
             setForceLoginModeKey((k) => k + 1);
         } catch (err) {
             const msg =

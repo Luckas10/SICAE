@@ -20,7 +20,7 @@ class User(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
     role: Role = Field(default=Role.aluno, nullable=False)
     full_name: str = Field(max_length=150, nullable=False)
-    email: str = Field(unique=True, nullable=False, index=True)
+    matricula: int = Field(unique=True, nullable=False, index=True)
     password_hash: str = Field(nullable=False)
     profile_image: Optional[str] = Field(default=None)
     theme: str = Field(default="light", max_length=20, nullable=False)
@@ -235,12 +235,15 @@ class Game(SQLModel, table=True):
     team2: str
     game_date: date
     game_time: time
-    location: Optional[str] = None
+    game_end_time: time
     notes: Optional[str] = None
-    created_at: datetime = Field(default_factory=datetime.utcnow)
 
+    status: str = Field(default="scheduled", max_length=20, nullable=False)
+
+    created_at: datetime = Field(default_factory=datetime.utcnow)
     creator_id: Optional[int] = Field(default=None, foreign_key="users.id")
 
     creator: Optional["User"] = Relationship(back_populates="games")
-
     event: Optional["Event"] = Relationship(back_populates="games")
+
+

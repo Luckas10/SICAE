@@ -1,4 +1,3 @@
-// src/pages/Profile.jsx (ou onde já estava)
 import "./Profile.css";
 import Header from "../components/general/Header.jsx";
 import Sidebar from "../components/general/Sidebar.jsx";
@@ -13,22 +12,16 @@ export default function Profile() {
     const { user, loadingUser } = useUser();
     const [commentsCount, setCommentsCount] = useState(0);
     const [username, setUsername] = useState("Nome do usuário");
-    const [email, setEmail] = useState("");
     const [role, setRole] = useState("")
 
     useEffect(() => {
         if (!user) return;
         setCommentsCount(user.total_comments || 0);
         setUsername(user.full_name || "Nome do usuário");
-        setEmail(user.email || "E-mail do usuário");
         setRole(user.role || "Cargo do usuário");
     }, [user]);
 
     const profileInfoItems = [
-        {
-            label: "Email",
-            value: email || "email@example.com",
-        },
         {
             label: "Matrícula",
             value: "20221101110019",

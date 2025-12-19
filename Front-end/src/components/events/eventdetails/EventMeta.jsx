@@ -1,26 +1,40 @@
-export default function EventMeta({ eventDate, eventTime, placeId }) {
-    if (!eventDate && !eventTime && !placeId) return null;
+export default function EventMeta({
+    eventDate,
+    eventTime,
+    endEventDate,
+    endEventTime,
+    placeName,
+}) {
+    if (!eventDate && !eventTime && !endEventDate && !endEventTime && !placeName) {
+        return null;
+    }
 
     return (
         <div className="event-meta">
-            {eventDate && (
+            {(eventDate || eventTime) && (
                 <div className="event-meta-item">
-                    <span className="event-meta-label">Data do evento</span>
-                    <span className="event-meta-value">{eventDate}</span>
+                    <span className="event-meta-label">Início</span>
+                    <span className="event-meta-value">
+                        {eventDate}
+                        {eventTime && ` • ${eventTime}`}
+                    </span>
                 </div>
             )}
 
-            {eventTime && (
+            {(endEventDate || endEventTime) && (
                 <div className="event-meta-item">
-                    <span className="event-meta-label">Horário do evento</span>
-                    <span className="event-meta-value">{eventTime}</span>
+                    <span className="event-meta-label">Fim</span>
+                    <span className="event-meta-value">
+                        {endEventDate}
+                        {endEventTime && ` • ${endEventTime}`}
+                    </span>
                 </div>
             )}
 
-            {placeId && (
+            {placeName && (
                 <div className="event-meta-item">
                     <span className="event-meta-label">Local</span>
-                    <span className="event-meta-value">Local #{placeId}</span>
+                    <span className="event-meta-value">{placeName}</span>
                 </div>
             )}
         </div>

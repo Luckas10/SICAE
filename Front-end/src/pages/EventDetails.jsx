@@ -1,4 +1,3 @@
-// src/pages/EventDetails.jsx
 import { useEffect, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import Header from "../components/general/Header.jsx";
@@ -115,6 +114,8 @@ export default function EventDetails() {
     let publishedTime = "";
     let eventDate = "";
     let eventTime = "";
+    let endEventDate = "";
+    let endEventTime = "";
 
     if (event.created_at) {
         const created = new Date(event.created_at);
@@ -138,6 +139,20 @@ export default function EventDetails() {
             year: "numeric",
         });
         eventTime = start.toLocaleTimeString("pt-BR", {
+            hour: "2-digit",
+            minute: "2-digit",
+        });
+    }
+
+    if (event.end_date) {
+        const end = new Date(event.end_date);
+        endEventDate = end.toLocaleDateString("pt-BR", {
+            weekday: "long",
+            day: "2-digit",
+            month: "long",
+            year: "numeric",
+        });
+        endEventTime = end.toLocaleTimeString("pt-BR", {
             hour: "2-digit",
             minute: "2-digit",
         });
@@ -169,18 +184,20 @@ export default function EventDetails() {
                             <EventMeta
                                 eventDate={eventDate}
                                 eventTime={eventTime}
-                                placeId={event.place_id}
+                                endEventDate={endEventDate}
+                                endEventTime={endEventTime}
+                                placeName={event.place_name}
                             />
 
                             <EventDescription description={event.description} />
 
                             <EventActions
-                            onBackToList={() => navigate("/events")}
-                            onAddGame={() => navigate(`/events/${event.id}/games`)}
-                            onDelete={handleDelete}
-                            deleting={deleting}
-                            onEdit={HandleEdit}
-                        />
+                                onBackToList={() => navigate("/events")}
+                                onAddGame={() => navigate(`/events/${event.id}/games`)}
+                                onDelete={handleDelete}
+                                deleting={deleting}
+                                onEdit={HandleEdit}
+                            />
 
                         </div>
 

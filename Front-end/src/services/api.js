@@ -24,7 +24,6 @@ api.interceptors.response.use(
         const originalRequest = error.config;
         const url = originalRequest?.url || "";
 
-        /** ✅ ROTAS PÚBLICAS REAIS */
         const publicPaths = [
             "/news",
             "/events",

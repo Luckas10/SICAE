@@ -165,6 +165,15 @@ export default function AddEvent() {
             return;
         }
 
+        if (!placeId) {
+            Swal.fire({
+                icon: "warning",
+                title: "Local obrigatório",
+                text: "Selecione um local para o evento.",
+            });
+            return;
+        }
+
         const startDateTimeStr = `${date}T${startTime}`;
         const endDateTimeStr = `${endDate}T${endTime}`;
 

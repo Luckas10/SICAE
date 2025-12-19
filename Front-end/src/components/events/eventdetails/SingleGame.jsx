@@ -16,17 +16,15 @@ export default function SingleGame({ gameId, onUpdated, onDeleted }) {
     const [editing, setEditing] = useState(false);
     const navigate = useNavigate();
 
-
     const [form, setForm] = useState({
         team1: "",
         team2: "",
         game_date: "",
         game_time: "",
-        location: "",
+        game_end_time: "",
         notes: "",
         event_id: "",
     });
-
 
     async function loadGame() {
         try {
@@ -40,19 +38,19 @@ export default function SingleGame({ gameId, onUpdated, onDeleted }) {
         }
     }
 
-
     useEffect(() => {
         if (gameId) loadGame();
     }, [gameId]);
 
     function startEdit() {
         if (!game) return;
+
         setForm({
             team1: game.team1,
             team2: game.team2,
             game_date: game.game_date,
-            game_time: game.game_time.substring(0, 5),
-            location: game.location || "",
+            game_time: game.game_time?.substring(0, 5) || "",
+            game_end_time: game.game_end_time?.substring(0, 5) || "",
             notes: game.notes || "",
             event_id: game.event_id,
         });
@@ -60,32 +58,60 @@ export default function SingleGame({ gameId, onUpdated, onDeleted }) {
         setEditing(true);
     }
 
+    function normalizeTimeToHHMMSS(t) {
+        if (!t) return t;
+        return t.length === 5 ? `${t}:00` : t; // HH:MM -> HH:MM:SS
+    }
+
     async function handleUpdate() {
         try {
+            // Validação mínima no front (o backend também valida)
+            if (!form.game_time || !form.game_end_time) {
+                Swal.fire("Atenção", "Informe o horário inicial e final.", "warning");
+                return;
+            }
+            if (form.game_end_time < form.game_time) {
+                Swal.fire(
+                    "Atenção",
+                    "O horário final deve ser igual ou posterior ao horário inicial.",
+                    "warning"
+                );
+                return;
+            }
+
             const payload = {
-                ...form,
-                game_time: form.game_time.length === 5
-                    ? `${form.game_time}:00`
-                    : form.game_time,
+                event_id: form.event_id,
+                team1: form.team1,
+                team2: form.team2,
+                game_date: form.game_date,
+                game_time: normalizeTimeToHHMMSS(form.game_time),
+                game_end_time: normalizeTimeToHHMMSS(form.game_end_time),
+                notes: form.notes,
             };
 
-            console.log("Enviando PUT:", payload);
+            const { data } = await api.put(`/games/${game.id}`, payload);
 
-            const { data } = await api.put(`/games/${game.id}`, form);
             setGame(data);
             setEditing(false);
+
+            if (onUpdated) onUpdated(data);
 
             Swal.fire("Sucesso!", "Jogo atualizado!", "success");
         } catch (err) {
             console.error("Erro no PUT:", err.response?.data || err);
-            Swal.fire("Erro", "Não foi possível atualizar o jogo.", "error");
 
+            const msg =
+                err?.response?.data?.detail ||
+                "Não foi possível atualizar o jogo.";
+
+            Swal.fire("Erro", msg, "error");
         }
     }
 
-    async function backEvent() {
+    function backEvent() {
         navigate(`/events/${game.event_id}`);
-    };
+    }
+
     async function handleDelete() {
         const res = await Swal.fire({
             title: "Excluir jogo?",
@@ -112,9 +138,9 @@ export default function SingleGame({ gameId, onUpdated, onDeleted }) {
     if (loading) return <p className="event-games-loading">Carregando jogo...</p>;
     if (!game) return <p className="event-games-empty">Jogo não encontrado.</p>;
 
-
     const date = new Date(game.game_date).toLocaleDateString("pt-BR");
-    const time = game.game_time.substring(0, 5);
+    const time = game.game_time?.substring(0, 5) || "—";
+    const endTime = game.game_end_time?.substring(0, 5) || "—";
 
     return (
         <>
@@ -123,6 +149,7 @@ export default function SingleGame({ gameId, onUpdated, onDeleted }) {
                 <Sidebar />
                 <div className="event-game">
                     <h2>Detalhes do Jogo</h2>
+
                     <div className="event-game-info">
                         <p><strong>ID:</strong> {game.id}</p>
                         <p><strong>Evento:</strong> {game.event_id}</p>
@@ -130,13 +157,11 @@ export default function SingleGame({ gameId, onUpdated, onDeleted }) {
                         <p><strong>Registro:</strong> {new Date(game.created_at).toLocaleString("pt-BR")}</p>
                     </div>
 
-
                     {!editing ? (
                         <div className="event-game-card">
-
                             <div className="event-game-header">
                                 <span className="event-game-date">{date}</span>
-                                <span className="event-game-time">{time}</span>
+                                <span className="event-game-time">{time} – {endTime}</span>
                             </div>
 
                             <div className="event-game-teams">
@@ -145,17 +170,12 @@ export default function SingleGame({ gameId, onUpdated, onDeleted }) {
                                 <div className="time"><strong>{game.team2}</strong></div>
                             </div>
 
-                            <p className="event-game-location">
-                                Local: <strong>{game.location || "—"}</strong>
-                            </p>
-
                             {game.notes && (
                                 <p className="event-game-notes">
                                     Observações: {game.notes}
                                 </p>
                             )}
 
-                            {/* BOTÕES */}
                             <div className="event-game-actions">
                                 <button className="btn-edit" onClick={backEvent}>
                                     Voltar
@@ -171,13 +191,10 @@ export default function SingleGame({ gameId, onUpdated, onDeleted }) {
                                         </button>
                                     </>
                                 )}
-
                             </div>
                         </div>
                     ) : (
-
                         <div className="event-game-card edit-mode">
-
                             <label>Time 1:</label>
                             <input
                                 value={form.team1}
@@ -197,17 +214,18 @@ export default function SingleGame({ gameId, onUpdated, onDeleted }) {
                                 onChange={(e) => setForm({ ...form, game_date: e.target.value })}
                             />
 
-                            <label>Hora:</label>
+                            <label>Hora inicial:</label>
                             <input
                                 type="time"
                                 value={form.game_time}
                                 onChange={(e) => setForm({ ...form, game_time: e.target.value })}
                             />
 
-                            <label>Local:</label>
+                            <label>Hora final:</label>
                             <input
-                                value={form.location}
-                                onChange={(e) => setForm({ ...form, location: e.target.value })}
+                                type="time"
+                                value={form.game_end_time}
+                                onChange={(e) => setForm({ ...form, game_end_time: e.target.value })}
                             />
 
                             <label>Notas:</label>
@@ -230,6 +248,5 @@ export default function SingleGame({ gameId, onUpdated, onDeleted }) {
                 </div>
             </main>
         </>
-
     );
 }

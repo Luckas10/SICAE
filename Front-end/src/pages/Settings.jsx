@@ -29,10 +29,8 @@ export default function Settings() {
         });
 
         if (result.isConfirmed) {
-            // limpa o token do usuário
             localStorage.removeItem("token");
 
-            // redireciona para a tela de login
             navigate("/auth");
         }
     };

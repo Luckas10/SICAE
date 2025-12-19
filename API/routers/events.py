@@ -1,16 +1,16 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlmodel import select
-from datetime import datetime
+from datetime import datetime, date, time
 from pydantic import BaseModel
 from typing import List, Optional
 
 from database import SessionDep
-from models import Event, User
+from models import Event, User, Game
 from routers.auth import get_current_user
 
 
 class EventCreate(BaseModel):
-    place_id: Optional[int] = None
+    place_id: int
     title: str
     description: Optional[str] = None
     start_date: datetime
@@ -22,6 +22,8 @@ class EventCreate(BaseModel):
 
 class EventRead(BaseModel):
     id: int
+    place_id: int
+    place_name: Optional[str] = None
     title: str
     description: Optional[str] = None
     start_date: datetime
@@ -38,7 +40,7 @@ class EventRead(BaseModel):
 
 
 class EventUpdate(BaseModel):
-    place_id: Optional[int] = None
+    place_id: int
     title: Optional[str] = None
     description: Optional[str] = None
     start_date: Optional[datetime] = None
@@ -52,6 +54,20 @@ class EventUpdate(BaseModel):
 
 
 router = APIRouter(prefix="/events", tags=["Eventos"])
+
+
+def _sync_games_status_for_event(session: SessionDep, event: Event) -> None:
+    games = session.exec(select(Game).where(Game.event_id == event.id)).all()
+
+    for g in games:
+        game_dt = datetime.combine(g.game_date, g.game_time)
+
+        if event.start_date <= game_dt <= event.end_date:
+            g.status = "scheduled"
+        else:
+            g.status = "invalid"
+
+        session.add(g)
 
 
 def _check_place_availability(
@@ -73,7 +89,10 @@ def _check_place_availability(
         )
 
     if place_id is None:
-        return
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Bad Request: Especifique um local para o evento.",
+        )
 
     stmt = select(Event).where(Event.place_id == place_id)
 
@@ -109,6 +128,8 @@ def obter_evento(
 
     return EventRead(
         id=event.id,
+        place_id=event.place_id,
+        place_name=event.place.name if event.place else None,
         title=event.title,
         description=event.description,
         start_date=event.start_date,
@@ -166,9 +187,7 @@ def atualizar_event(
         raise HTTPException(status_code=404, detail="Evento não encontrado.")
 
     new_place_id = (
-        event_data.place_id
-        if event_data.place_id is not None
-        else event.place_id
+        event_data.place_id if event_data.place_id is not None else event.place_id
     )
     new_start_date = (
         event_data.start_date if event_data.start_date is not None else event.start_date
@@ -192,6 +211,10 @@ def atualizar_event(
     session.add(event)
     session.commit()
     session.refresh(event)
+
+    _sync_games_status_for_event(session=session, event=event)
+    session.commit()
+    
     return event
 
 

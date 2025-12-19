@@ -9,7 +9,7 @@ export default function CoverField({
     value,
     onChange,
     label = "Adicionar capa do evento",
-    inputId, // opcional, se não vier eu gero um id único
+    inputId,
 }) {
     const [fileName, setFileName] = useState("");
     const [imageSrc, setImageSrc] = useState(null);
@@ -19,11 +19,9 @@ export default function CoverField({
 
     const imgRef = useRef(null);
 
-    // id único por instância do componente
     const generatedId = useId();
     const finalInputId = inputId || generatedId;
 
-    // Mantém o componente sincronizado com o value vindo de fora (edição, reset, etc.)
     useEffect(() => {
         if (value) {
             setCroppedImageUrl(value);
@@ -113,7 +111,6 @@ export default function CoverField({
         if (completedCrop?.width && completedCrop?.height) {
             generateCroppedImg(completedCrop);
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [completedCrop]);
 
     return (

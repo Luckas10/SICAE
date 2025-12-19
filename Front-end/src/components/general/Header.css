@@ -48,7 +48,6 @@
     background-color: white;
 }
 
-/* ====== RESPONSIVIDADE ====== */
 @media (max-width: 900px) {
     .header {
         flex-direction: column;
@@ -84,7 +83,6 @@
     }
 }
 
-/* ====== some o nome do usuário em telas extremamente pequenas ====== */
 @media (max-width: 400px) {
     .header .user-info p {
         display: none;

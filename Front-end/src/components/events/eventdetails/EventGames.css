@@ -1,8 +1,9 @@
 .event-games {
     width: 100%;
     margin-top: 2rem;
-    
+
 }
+
 .event-game {
     width: 100%;
     margin-top: 2rem;
@@ -13,6 +14,11 @@
 .event-games h2 {
     font-size: 1.4rem;
     margin-bottom: 1rem;
+}
+
+.event-game-notes {
+    margin: 0;
+    padding: 0.5rem 0;
 }
 
 .event-games-form {
@@ -62,7 +68,7 @@
 }
 
 .event-game-card {
-    background: #f9fafb;
+    background: #fff;
     border: 1px solid #e5e7eb;
     border-radius: 12px;
     padding: 12px 14px;
@@ -103,8 +109,9 @@
 
 .event-game-actions {
     display: flex;
-    gap: 8px;
+    gap: 0.5rem;
     justify-content: flex-end;
+    padding: 0.5rem 0;
 }
 
 .event-game-actions button {
@@ -186,28 +193,26 @@
     text-align: center;
     margin-top: 1rem;
 }
-.event-game-teams{
+
+.event-game-teams {
     width: 100%;
     justify-content: space-between;
     display: flex;
 
 }
-.event-game-teams .time{
+
+.event-game-teams .time {
     width: 40%;
     padding: 10px;
-    background-color:#185c2a;
+    background-color: #185c2a;
     color: white;
     border-radius: 10px;
 }
-.event-game-teams .event-game-x{
+
+.event-game-teams .event-game-x {
     font-size: xx-large;
 }
 
-.event-game-actions {
-    display: flex;
-    gap: 10px;
-    margin-top: 10px;
-}
 .event-game-info {
     background: #fafafa;
     padding: 12px 15px;
@@ -221,7 +226,8 @@
 .event-game-info p {
     margin: 4px 0;
 }
-.edit-mode{
+
+.edit-mode {
     max-width: 1000px !important;
     width: 100%;
     height: 100%;
@@ -244,11 +250,11 @@
     background-color: white;
 }
 
-.edit-mode label{
+.edit-mode label {
 
     font-weight: bolder;
     color: #185c2a;
-    
+
 }
 
 
@@ -267,7 +273,7 @@
 }
 
 .btn-edit {
-   
+
     color: white;
 }
 
@@ -286,12 +292,33 @@
     color: white;
 }
 
+.event-game-card.is-invalid {
+    border-color: #dc2626;
+    background: #fff5f5;
+}
+
+.event-game-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.game-badge-invalid {
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 999px;
+    background: #dc2626;
+    color: #fff !important;
+}
+
 
 @keyframes fadeIn {
     from {
         opacity: 0;
         transform: translateY(-5px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);

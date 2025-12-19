@@ -323,12 +323,7 @@ input[type="file"] {
     }
 }
 
-/* =========================================================
-   PLACE DETAILS — Layout e design no padrão do EventDetails
-   (sem reutilizar classes do Events.css)
-========================================================= */
 
-/* Page shell (mesma lógica do events-page) */
 .place-details-page {
     display: block;
     padding-left: 15%;
@@ -341,7 +336,6 @@ input[type="file"] {
     color: inherit;
 }
 
-/* Central wrapper (mesma lógica do events-content) */
 .place-details-content {
     display: flex;
     flex-direction: column;
@@ -350,7 +344,6 @@ input[type="file"] {
     padding: 0 2%;
 }
 
-/* Main card (mesma lógica do event-details) */
 .place-details {
     width: 100%;
     max-width: 960px;
@@ -361,7 +354,6 @@ input[type="file"] {
     box-sizing: border-box;
 }
 
-/* Header (mesma lógica do event-details-header) */
 .place-details-header {
     display: flex;
     flex-direction: column;
@@ -383,7 +375,6 @@ input[type="file"] {
     margin: 0;
 }
 
-/* Cover (mesma lógica do event-details-cover) */
 .place-details-cover {
     margin: 18px 0 24px;
     border-radius: 14px;
@@ -403,14 +394,12 @@ input[type="file"] {
     transform: scale(1.01);
 }
 
-/* Body (mesma lógica do event-details-body) */
 .place-details-body {
     display: flex;
     flex-direction: column;
     gap: 24px;
 }
 
-/* Meta (mesma lógica do event-meta / event-meta-item) */
 .place-meta {
     display: flex;
     flex-wrap: wrap;
@@ -442,7 +431,6 @@ input[type="file"] {
     font-weight: 600;
 }
 
-/* Description (mesma lógica do event-details-info) */
 .place-details-info h2 {
     font-size: 18px;
     margin: 0 0 8px;
@@ -457,7 +445,6 @@ input[type="file"] {
     margin: 0;
 }
 
-/* Actions (mesma lógica do event-actions e botões) */
 .place-actions {
     display: flex;
     justify-content: flex-end;
@@ -502,7 +489,6 @@ input[type="file"] {
     transform: none;
 }
 
-/* Loading */
 .place-details-loading {
     padding: 40px;
     text-align: center;
@@ -510,9 +496,6 @@ input[type="file"] {
     font-weight: 600;
 }
 
-/* =========================================================
-   DARK MODE — equivalente ao que você aplica no EventDetails
-========================================================= */
 :root[data-theme="dark"] .place-details {
     background-color: transparent;
 }
@@ -560,9 +543,6 @@ input[type="file"] {
     color: #e5e7eb;
 }
 
-/* =========================================================
-   RESPONSIVO — mesma lógica do EventDetails (sem sidebar no mobile)
-========================================================= */
 @media (max-width: 600px) {
     .place-details-page {
         padding-left: 0;

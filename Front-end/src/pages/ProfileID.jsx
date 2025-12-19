@@ -35,7 +35,6 @@ export default function ProfileID() {
 
     const profileInfoItems = profileUser
         ? [
-            { label: "Email", value: profileUser.email },
             { label: "Matrícula", value: profileUser.matricula || "—" },
             {
                 label: "Comentários feitos",

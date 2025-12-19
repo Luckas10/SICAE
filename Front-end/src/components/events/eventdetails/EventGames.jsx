@@ -63,11 +63,30 @@ export default function EventGames({ eventId }) {
                             time = `${h}:${m}`;
                         }
 
+                        let endTime = "—";
+                        if (typeof game.game_end_time === "string") {
+                            endTime = game.game_end_time.substring(0, 5);
+                        } else if (typeof game.game_end_time === "object" && game.game_end_time !== null) {
+                            const h = String(game.game_end_time.hour).padStart(2, "0");
+                            const m = String(game.game_end_time.minute).padStart(2, "0");
+                            endTime = `${h}:${m}`;
+                        }
+                        
                         return (
-                            <div key={game.id} className="event-game-card">
+                            <div
+                                key={game.id}
+                                className={`event-game-card ${game.status === "invalid" ? "is-invalid" : ""}`}
+                            >
                                 <div className="event-game-header">
                                     <span className="event-game-date">{date}</span>
-                                    <span className="event-game-time">{time}</span>
+
+                                    <div className="event-game-right">
+                                        <span className="event-game-time">{time} – {endTime}</span>
+
+                                        {game.status === "invalid" && (
+                                            <span className="game-badge-invalid">Fora do horário do evento</span>
+                                        )}
+                                    </div>
                                 </div>
 
                                 <div className="event-game-teams">
@@ -76,17 +95,13 @@ export default function EventGames({ eventId }) {
                                     <div className="time"><strong>{game.team2}</strong></div>
                                 </div>
 
-                                <p className="event-game-location">
-                                    Local: <strong>{game.location || "—"}</strong>
-                                </p>
-
                                 {game.notes && (
                                     <p className="event-game-notes">
                                         Observações: {game.notes}
                                     </p>
                                 )}
 
-                                
+
                                 <div className="event-game-actions">
                                     <button
                                         className="btn-details"

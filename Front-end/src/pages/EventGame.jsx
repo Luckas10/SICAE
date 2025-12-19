@@ -12,10 +12,11 @@ export default function EventGame() {
     const [team2, setTeam2] = useState("");
     const [date, setDate] = useState("");
     const [time, setTime] = useState("");
-    const [location, setLocation] = useState("");
     const [notes, setNotes] = useState("");
+    const [endTime, setEndTime] = useState("");
 
-    const { id } = useParams();            // <-- ID do evento
+
+    const { id } = useParams();
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
@@ -23,22 +24,26 @@ export default function EventGame() {
 
         try {
             await api.post("/games", {
-                event_id: Number(id),   // <-- Agora está certo!
+                event_id: Number(id),
                 team1,
                 team2,
                 game_date: date,
                 game_time: time,
-                location,
+                game_end_time: endTime,
                 notes,
             });
 
+
             Swal.fire("Jogo criado!", "", "success");
 
-            // Redireciona de volta para a página do evento
             navigate(`/events/${id}`);
         } catch (error) {
-            Swal.fire("Erro", "Não foi possível criar o jogo", "error");
+            const msg =
+                error?.response?.data?.detail ||
+                "Não foi possível criar o jogo";
+            Swal.fire("Erro", msg, "error");
         }
+
     };
 
     return (
@@ -92,12 +97,12 @@ export default function EventGame() {
                                 onChange={(e) => setTime(e.target.value)}
                             />
 
-                            <label htmlFor="place">Local</label>
+                            <label htmlFor="endTime">Horário final</label>
                             <input
-                                type="text"
-                                id="place"
-                                value={location}
-                                onChange={(e) => setLocation(e.target.value)}
+                                type="time"
+                                id="endTime"
+                                value={endTime}
+                                onChange={(e) => setEndTime(e.target.value)}
                             />
 
                             <label htmlFor="notes">Observações</label>
@@ -116,7 +121,7 @@ export default function EventGame() {
                                     type="button"
                                     id="event-button-cancel"
                                     onClick={() => navigate(`/events/${id}`)}
-                                    
+
                                 >
                                     Cancelar
                                 </button>

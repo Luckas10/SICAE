@@ -58,12 +58,6 @@ export function UserProvider({ children }) {
         );
     };
 
-    const updateEmail = (email) => {
-        setUser((prev) =>
-            prev ? { ...prev, email } : { email }
-        );
-    };
-
     const updateTheme = (newTheme) => {
         setTheme(newTheme);
     };
@@ -89,7 +83,6 @@ export function UserProvider({ children }) {
                 refreshUser: fetchCurrentUser,
                 updateAvatar,
                 updateName,
-                updateEmail,
 
                 theme,
                 updateTheme,

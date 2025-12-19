@@ -16,6 +16,8 @@ export default function Events() {
     const { user, loadingUser } = useUser();
 
     const [events, setEvents] = useState([]);
+    const [places, setPlaces] = useState({});
+
     const [activeCategory, setActiveCategory] = useState("all");
     const [showInitiation, setShowInitiation] = useState(false);
 
@@ -44,6 +46,41 @@ export default function Events() {
         fetchEvents();
     }, []);
 
+    useEffect(() => {
+        async function fetchPlaces() {
+            try {
+                const uniquePlaceIds = [
+                    ...new Set(events.map(e => e.place_id).filter(Boolean))
+                ];
+
+                const missingPlaceIds = uniquePlaceIds.filter(
+                    id => !places[id]
+                );
+
+                if (missingPlaceIds.length === 0) return;
+
+                const requests = missingPlaceIds.map(id =>
+                    api.get(`/places/${id}`)
+                );
+
+                const responses = await Promise.all(requests);
+
+                const newPlaces = {};
+                responses.forEach(res => {
+                    newPlaces[res.data.id] = res.data;
+                });
+
+                setPlaces(prev => ({ ...prev, ...newPlaces }));
+            } catch (err) {
+                console.error("Erro ao buscar locais:", err);
+            }
+        }
+
+        if (events.length > 0) {
+            fetchPlaces();
+        }
+    }, [events, places]);
+
     const filteredEvents = events.filter((ev) => {
         if (activeCategory !== "all" && ev.category !== activeCategory) return false;
         if (showInitiation && !ev.is_initiation) return false;
@@ -62,6 +99,7 @@ export default function Events() {
                         onChangeCategory={setActiveCategory}
                     />
                 </div>
+
                 <div className="events-toolbar">
                     <button
                         type="button"
@@ -84,7 +122,11 @@ export default function Events() {
 
                 <div className="cards">
                     {filteredEvents.map((ev) => (
-                        <EventCard key={ev.id} event={ev} />
+                        <EventCard
+                            key={ev.id}
+                            event={ev}
+                            placeName={places[ev.place_id]?.name || "Carregando local..."}
+                        />
                     ))}
                 </div>
             </main>

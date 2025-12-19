@@ -39,7 +39,6 @@ export default function AddNews() {
         const reader = new FileReader();
         reader.onload = () => {
             setImageSrc(reader.result);
-            // resetar estados de crop
             setCrop(undefined);
             setCompletedCrop(null);
             setCroppedImageUrl(null);
@@ -47,13 +46,12 @@ export default function AddNews() {
         reader.readAsDataURL(file);
     };
 
-    // Define o crop inicial assim que a imagem realmente carrega no DOM
     const onImageLoad = (e) => {
         const { width, height } = e.currentTarget;
 
         const initial = centerCrop(
             makeAspectCrop(
-                { unit: "%", width: 90 }, // ocupa 90% da largura
+                { unit: "%", width: 90 },
                 16 / 9,
                 width,
                 height
@@ -66,13 +64,11 @@ export default function AddNews() {
         setCompletedCrop(initial);
     };
 
-    // Gera a imagem cortada com base em um crop específico
     const generateCroppedImg = (cropToUse) => {
         if (!imgRef.current || !cropToUse?.width || !cropToUse?.height) return;
 
         const image = imgRef.current;
 
-        // Escala de naturalWidth / width renderizado
         const scaleX = image.naturalWidth / image.width;
         const scaleY = image.naturalHeight / image.height;
 
@@ -81,7 +77,6 @@ export default function AddNews() {
         let cropWidth = cropToUse.width;
         let cropHeight = cropToUse.height;
 
-        // Se o crop veio em %, converte para pixels
         if (cropToUse.unit === "%") {
             cropX = (cropToUse.x / 100) * image.width;
             cropY = (cropToUse.y / 100) * image.height;
@@ -111,8 +106,6 @@ export default function AddNews() {
         setCroppedImageUrl(base64);
     };
 
-    // Sempre que o usuário termina um crop (ou o inicial é setado),
-    // gera a imagem cortada automaticamente — mesmo que ele não mexa no retângulo.
     useEffect(() => {
         if (completedCrop?.width && completedCrop?.height) {
             generateCroppedImg(completedCrop);

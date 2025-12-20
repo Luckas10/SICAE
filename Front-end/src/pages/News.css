@@ -64,6 +64,7 @@ body {
 
 .news-page .buscar-content #buscar {
     width: 80%;
+    min-width: 100px;
     margin-left: 5%;
     position: relative;
     height: 40px;
@@ -188,6 +189,7 @@ body {
 }
 
 .addNews-content {
+    margin-top: calc(9.5vh);
     width: 60%;
     margin-inline: auto;
     margin-top: 3%;
@@ -437,15 +439,14 @@ input[type="file"] {
     .news-nav .add-button {
         font-size: 8pt;
         width: 20%;
+        margin: 2%;
     }
 
     .news-nav .buscar-content input {
         width: 60%;
     }
 
-    .news-page .main-content .top-news-card {
-        width: 100%;
-    }
+    
 
     .news-page .main-content {
         display: flex;
@@ -746,7 +747,7 @@ input[type="file"] {
     transform: none;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 530px) {
 
     .news-button-secondary,
     .news-button-danger {
@@ -756,7 +757,7 @@ input[type="file"] {
 }
 
 
-@media (max-width: 768px) {
+@media (max-width: 650px) {
     .news-details {
         padding: 1.5rem 0 3rem;
     }
@@ -773,6 +774,10 @@ input[type="file"] {
     .news-details-cover {
         max-height: 280px;
     }
+    .news-page .main-content .top-news-card {
+        width: 100%;
+        margin-bottom: 5%;
+    }
 }
 
 @media (max-width: 900px) {
@@ -780,9 +785,7 @@ input[type="file"] {
         width: 30%;
 
     }
-}
-
-.news-page {
+    .news-page {
     display: block;
 
     padding-top: calc(9.5vh + 8vh);
@@ -797,6 +800,14 @@ input[type="file"] {
     width: 90%;
     padding-left: 2%;
 }
+.addnews-page {
+        padding-top: 15%;
+        
+
+}
+}
+
+
 
 @media (max-width: 530px) {
     .news-page .add-button {
@@ -818,8 +829,12 @@ input[type="file"] {
     }
 
     .addnews-page {
+        padding-top: 20%;
         padding-left: 2%;
         width: 100%;
+    }
+    .addNews-content{
+        margin-top: 20%;
     }
 
 

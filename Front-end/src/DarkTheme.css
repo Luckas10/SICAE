@@ -365,7 +365,7 @@
 }
 
 :root[data-theme="dark"] .addNews-content .filter-buttons button,
-.addNews-content .button-secondary {
+.addNews-content .news-forms-button .button-secondary {
     background-color: transparent;
     color: #ffffff;
 }

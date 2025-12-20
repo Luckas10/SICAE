@@ -613,11 +613,17 @@ p.timeAgoInfo {
     .event-card {
         width: 48%;
     }
+    
 }
 
 @media (max-width: 600px) {
     .local-card {
         width: 100%;
+    }
+    .event-actions{
+       
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 

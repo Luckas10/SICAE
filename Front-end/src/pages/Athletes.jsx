@@ -59,7 +59,7 @@ export default function Athletes() {
                         <button
                             type="button"
                             className="add-button"
-                            onClick={() => navigate("/news/add")}
+                            onClick={() => navigate("/athletes/manage")}
                         >
                             + Gerenciar atletas
                         </button>

@@ -332,6 +332,9 @@ input[type="file"] {
         flex: 1 1 100%;
         max-width: 100%;
     }
+    .places-content .cards .place-card{
+        width: 100%;
+    }
 }
 
 
@@ -506,9 +509,7 @@ input[type="file"] {
     color: #0D4F1D;
     font-weight: 600;
 }
-.places-content .cards .place-card{
-        width: 100%;
-    }
+
 
 :root[data-theme="dark"] .place-details {
     background-color: transparent;

@@ -37,11 +37,14 @@ export default function LoginRegisterContainer({
         const moveSlider = (e) => {
             const index = Number(e.currentTarget.dataset.value);
 
-            images.forEach((img) => img.classList.remove("show"));
             const currentImage = root.querySelector(`.img-${index}`);
             if (currentImage) currentImage.classList.add("show");
 
-            if (textGrp) textGrp.style.transform = `translateY(${-(index - 1) * 2.2}rem)`;
+            const texts = root.querySelectorAll(".text-item");
+
+            texts.forEach((t) => t.classList.remove("active"));
+            texts[index - 1]?.classList.add("active");
+
 
             bullets.forEach((b) => b.classList.remove("active"));
             e.currentTarget.classList.add("active");
@@ -238,16 +241,14 @@ export default function LoginRegisterContainer({
                     <div className="carousel">
                         <div className="images-wrapper">
                             <img src="/img/LogoSVG.svg" className="image img-1 show" alt="" />
-                            <img src="/img/image2.png" className="image img-2" alt="" />
-                            <img src="/img/image3.png" className="image img-3" alt="" />
                         </div>
 
                         <div className="text-slider">
                             <div className="text-wrap">
                                 <div className="text-group">
-                                    <h2>Seja mais produtivo</h2>
-                                    <h2>Estude com jogos e dinâmicas</h2>
-                                    <h2>Chame seus amigos para competir</h2>
+                                    <h2 className="text-item active">Fique por dentro dos esportes do IFRN!</h2>
+                                    <h2 className="text-item">Participe, opine e divirta-se</h2>
+                                    <h2 className="text-item">O que acontece no IFRN, você acompanha aqui</h2>
                                 </div>
                             </div>
 

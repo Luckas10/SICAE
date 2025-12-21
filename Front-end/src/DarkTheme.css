@@ -54,9 +54,13 @@
 
 :root[data-theme="dark"] .event-card {
     background-color: #333333;
-    color: rgb(255, 255, 255);
+    color: rgb(255, 255, 255);   
+}
+
+:root[data-theme="dark"] .event-card:hover {
     box-shadow: 0 4px 18px rgba(0, 0, 0, 0.7);
 }
+
 
 :root[data-theme="dark"] .event-card h5 {
     color: #ffffff;

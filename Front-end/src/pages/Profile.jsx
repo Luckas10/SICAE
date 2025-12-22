@@ -24,7 +24,7 @@ export default function Profile() {
     const profileInfoItems = [
         {
             label: "Matrícula",
-            value: "20221101110019",
+            value: loadingUser ? "Carregando..." : (user?.matricula ?? "—"),
         },
         {
             label: "Comentários feitos",
@@ -32,13 +32,14 @@ export default function Profile() {
         },
         {
             label: "Eventos participados",
-            value: "777",
+            value: loadingUser ? "Carregando..." : (user?.total_events ?? 0),
         },
         {
             label: "Status",
             value: role,
         },
     ];
+
 
     return (
         <>

@@ -84,7 +84,7 @@ export default function Places() {
             setPlaces((prev) => [...prev, created]);
             setIsPlaceModalOpen(false);
 
-            await Swal.fire({
+            Swal.fire({
                 icon: "success",
                 title: "Local cadastrado com sucesso!",
                 timer: 2000,

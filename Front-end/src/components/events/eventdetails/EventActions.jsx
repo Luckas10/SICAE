@@ -36,7 +36,7 @@ export default function EventActions({
                         className="event-button-secondary"
                         onClick={onEdit}
                     >
-                        Editar Evento
+                        Editar evento
                     </button>
 
                     <button

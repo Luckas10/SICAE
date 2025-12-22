@@ -83,7 +83,7 @@
 }
 
 .button-secondary {
-    min-width: 140px;
+    min-width: 100px;
     height: 40px;
     border-radius: 999px;
     border: none;

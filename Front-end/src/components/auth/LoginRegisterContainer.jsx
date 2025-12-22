@@ -166,8 +166,8 @@ export default function LoginRegisterContainer({
                                 <input type="submit" value="Entrar" className="sign-btn" />
 
                                 <p className="text">
-                                    Esqueceu sua senha?
-                                    <a href="#help">Chame ajuda</a> para recuperá-la.
+                                    Não quer criar uma conta?
+                                    <a href="/\">Entre como visitante</a> para ver as notícias
                                 </p>
                             </div>
                         </form>

@@ -4,7 +4,7 @@ from pydantic import BaseModel
 from typing import List
 
 from database import SessionDep
-from models import Place, User
+from models import Place, Event, Role, User
 from routers.auth import get_current_user
 
 
@@ -80,17 +80,30 @@ def atualizar_place(
     return place
 
 
-@router.delete("/{id}", status_code=status.HTTP_200_OK)
+@router.delete("/{id}", status_code=status.HTTP_204_NO_CONTENT)
 def deletar_place(
     id: int,
     session: SessionDep,
     current_user: User = Depends(get_current_user),
 ):
-    place = session.exec(select(Place).where(Place.id == id)).first()
+    if current_user.role != Role.servidor:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Apenas Servidor pode excluir locais.",
+        )
 
+    place = session.get(Place, id)
     if not place:
-        raise HTTPException(status_code=404, detail="Local não encontrado.")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Local não encontrado.",
+        )
+
+    events = session.exec(select(Event).where(Event.place_id == place.id)).all()
+    for event in events:
+        session.delete(event)
 
     session.delete(place)
+
     session.commit()
-    return {"message": "Local excluído com sucesso."}
+    return

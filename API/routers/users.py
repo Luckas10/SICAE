@@ -5,7 +5,7 @@ from typing import List, Optional
 from passlib.context import CryptContext
 
 from database import SessionDep
-from models import User, Role, EventComment, NewsComment
+from models import User, Role, EventComment, NewsComment, EventRegistration
 from routers.auth import get_current_user
 
 bcrypt_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
@@ -29,6 +29,7 @@ class PublicUserProfile(BaseModel):
     total_comments: int
     event_comments: int
     news_comments: int
+    total_events: int
 
 
 class UserCreate(BaseModel):
@@ -66,6 +67,10 @@ def perfil_publico_user(session: SessionDep, id: int):
             detail="Usuário não encontrado.",
         )
 
+    total_events = session.exec(
+        select(func.count(EventRegistration.id)).where(EventRegistration.user_id == user.id)
+    ).one()
+
     event_comments = session.exec(
         select(func.count(EventComment.id)).where(EventComment.author_id == user.id)
     ).one()
@@ -83,6 +88,7 @@ def perfil_publico_user(session: SessionDep, id: int):
         "total_comments": event_comments + news_comments,
         "event_comments": event_comments,
         "news_comments": news_comments,
+        "total_events": total_events,
     }
 
 
@@ -188,6 +194,10 @@ def get_me(
         select(func.count(NewsComment.id)).where(NewsComment.author_id == current_user.id)
     ).one()
 
+    total_events = session.exec(
+        select(func.count(EventRegistration.id)).where(EventRegistration.user_id == current_user.id)
+    ).one()
+    
     return {
         "id": current_user.id,
         "full_name": current_user.full_name,
@@ -197,6 +207,7 @@ def get_me(
         "total_comments": event_comments + news_comments,
         "event_comments": event_comments,
         "news_comments": news_comments,
+        "total_events": total_events,
     }
 
 

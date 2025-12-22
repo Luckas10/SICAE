@@ -19,6 +19,7 @@ import EditEvent from "./pages/editEvent.jsx";
 import GameDetails from "./pages/GameDetails.jsx";
 import Places from "./pages/Places.jsx";
 import PlaceDetails from "./pages/PlaceDetails.jsx";
+import EditPlace from "./pages/editPlace.jsx";
 
 import ProtectedRoute from "./routes/ProtectedRoute.jsx";
 import ProtectedRole from "./routes/ProtectedRole.jsx";
@@ -62,6 +63,10 @@ export default function App() {
 
         <Route element={<ProtectedRole allowedRoles={["Servidor"]} redirectTo="/athletes" />}>
           <Route path="/athletes/manage" element={<ManageAthletes />} />
+        </Route>
+
+        <Route element={<ProtectedRole allowedRoles={["Servidor"]} redirectTo="/events" />}>
+          <Route path="/places/edit/:id" element={<EditPlace />} />
         </Route>
 
         <Route element={<ProtectedRoute />}>

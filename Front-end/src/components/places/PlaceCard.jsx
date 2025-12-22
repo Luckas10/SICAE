@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import newsFallback from "../../assets/news1.jpg";
+import newsFallback from "/img/building.webp";
 
 export default function PlaceCard({ place, createdAtLabel }) {
     return (

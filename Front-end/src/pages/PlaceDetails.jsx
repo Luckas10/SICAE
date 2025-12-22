@@ -88,11 +88,9 @@ export default function PlaceDetails() {
                             )}
                         </div>
 
-                        {place.image_path && (
-                            <div className="place-details-cover">
-                                <img src={place.image_path} alt={place.name} />
-                            </div>
-                        )}
+                        <div className="place-details-cover">
+                            <img src={place.image_path || "/img/building.webp"} alt={place.name} />
+                        </div>
 
                         <div className="place-details-body">
                             <div className="place-meta">

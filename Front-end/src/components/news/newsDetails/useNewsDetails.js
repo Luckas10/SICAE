@@ -19,6 +19,7 @@ export default function useNewsDetails(id) {
                 Swal.fire({
                     icon: "error",
                     title: "Erro ao carregar notícia",
+                    customClass: { popup: "error-alert" },
                 });
             } finally {
                 setLoading(false);
@@ -48,6 +49,7 @@ export default function useNewsDetails(id) {
             await Swal.fire({
                 icon: "success",
                 title: "Notícia excluída",
+                customClass: {popup: "success-alert"},
             });
 
             navigate("/news");

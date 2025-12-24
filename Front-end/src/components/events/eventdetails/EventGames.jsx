@@ -26,7 +26,7 @@ export default function EventGames({ eventId }) {
                 title: "Erro",
                 text: "Não foi possível carregar os jogos deste evento.",
                 icon: "error",
-                customClass: { popup: "games-alert" },
+                customClass: { popup: "error-alert" },
             });
         } finally {
             setLoading(false);

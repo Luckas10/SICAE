@@ -55,6 +55,7 @@ export default function Places() {
                 icon: "warning",
                 title: "Nome obrigatório",
                 text: "Informe um nome para o local.",
+                customClass: { popup: "logout-alert" },
             });
             return;
         }
@@ -66,6 +67,7 @@ export default function Places() {
                 icon: "warning",
                 title: "Capacidade inválida",
                 text: "Informe um número válido para a capacidade.",
+                customClass: { popup: "logout-alert" },
             });
             return;
         }
@@ -87,10 +89,11 @@ export default function Places() {
             Swal.fire({
                 icon: "success",
                 title: "Local cadastrado com sucesso!",
-                timer: 2000,
+                timer: 3200,
                 showConfirmButton: false,
                 toast: true,
                 position: "top-end",
+                customClass: { popup: "success-alert" },
             });
         } catch (error) {
             console.error("Erro ao cadastrar local:", error);
@@ -103,6 +106,7 @@ export default function Places() {
                 icon: "error",
                 title: "Erro ao cadastrar local",
                 text: Array.isArray(msg) ? msg.join("\n") : msg,
+                customClass: { popup: "error-alert" },
             });
         }
     };

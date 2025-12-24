@@ -762,6 +762,10 @@ input[type="file"] {
     transform: none;
 }
 
+.addnews-page .input-icon input{
+    padding-left: 2rem;
+}
+
 @media (max-width: 530px) {
 
     .news-button-secondary,

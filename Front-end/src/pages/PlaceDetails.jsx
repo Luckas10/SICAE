@@ -48,6 +48,7 @@ export default function PlaceDetails() {
                 icon: "warning",
                 title: "Sem permissão",
                 text: "Apenas Servidor pode excluir locais.",
+                customClass: { popup: "logout-alert" },
             });
             return;
         }
@@ -60,6 +61,7 @@ export default function PlaceDetails() {
             confirmButtonText: "Sim, excluir",
             cancelButtonText: "Cancelar",
             reverseButtons: true,
+            customClass: { popup: "logout-alert" },
         });
 
         if (!confirm.isConfirmed) return;
@@ -77,7 +79,7 @@ export default function PlaceDetails() {
                 toast: true,
                 position: "top-end",
                 showConfirmButton: false,
-                timer: 2500,
+                timer: 3200,
                 timerProgressBar: true,
                 customClass: { popup: "success-alert" },
             });

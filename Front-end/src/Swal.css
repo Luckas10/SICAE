@@ -2,7 +2,7 @@
     background: #ffffff;
     border-radius: 18px;
     border: 1px solid #aa0e1a;
-    box-shadow: 0 2px 45px rgba(116, 10, 10, 0.5);
+    box-shadow: 0 2px 10px rgba(116, 10, 10, 0.5);
     padding: 1.8rem 2.4rem;
     font-family: "Inter", sans-serif;
     opacity: 0.98;
@@ -137,12 +137,12 @@ body.swal2-height-auto {
     background: linear-gradient(135deg, #df1411, #ff3e3e);
     border: none;
     color: #ffffff;
-    box-shadow: 0 0px 450px rgba(166, 10, 10, 0.55);
+    box-shadow: 0 0px 45px rgba(166, 10, 10, 0.55);
 }
 
 .error-alert {
     border: 1px solid #aa0e1a !important;
-    box-shadow: 0 2px 450px rgba(170, 14, 26, 0.3);
+    box-shadow: 0 2px 45px rgba(170, 14, 26, 0.3);
 }
 
 .error-alert .swal2-title,
@@ -224,7 +224,7 @@ body.swal2-height-auto {
 :root[data-theme="dark"] .swal2-popup {
     background: linear-gradient(to top, #032504 0, #023404 50%);
     border: 1px solid rgba(227, 181, 46, 0.3);
-    box-shadow: 0 2px 450px rgba(227, 181, 46, 0.3);
+    box-shadow: 0 2px 10px rgba(227, 181, 46, 0.3);
 }
 
 :root[data-theme="dark"] .swal2-title {

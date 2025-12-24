@@ -26,6 +26,7 @@ export default function Settings() {
             showCancelButton: true,
             confirmButtonText: "Sim, sair",
             cancelButtonText: "Cancelar",
+            customClass: { popup: "logout-alert" },
         });
 
         if (result.isConfirmed) {

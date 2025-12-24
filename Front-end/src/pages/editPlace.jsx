@@ -62,6 +62,7 @@ export default function EditPlace() {
                 icon: "warning",
                 title: "Sem permissão",
                 text: "Apenas Servidor pode editar locais.",
+                customClass: { popup: "logout-alert" },
             });
             return;
         }
@@ -71,6 +72,7 @@ export default function EditPlace() {
                 icon: "warning",
                 title: "Nome obrigatório",
                 text: "Informe um nome para o local.",
+                customClass: { popup: "logout-alert" },
             });
             return;
         }
@@ -81,6 +83,7 @@ export default function EditPlace() {
                 icon: "warning",
                 title: "Capacidade inválida",
                 text: "Informe um número válido para a capacidade.",
+                customClass: { popup: "logout-alert" },
             });
             return;
         }
@@ -103,7 +106,7 @@ export default function EditPlace() {
                 toast: true,
                 position: "top-end",
                 showConfirmButton: false,
-                timer: 2500,
+                timer: 3200,
                 timerProgressBar: true,
                 customClass: { popup: "success-alert" },
             });

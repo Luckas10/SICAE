@@ -43,7 +43,8 @@ export default function ManageAthletes() {
                 toast: true,
                 position: "top-end",
                 showConfirmButton: false,
-                timer: 2000,
+                timer: 3200,
+                customClass: { popup: "success-alert" },
             });
 
             loadUsers();
@@ -53,6 +54,7 @@ export default function ManageAthletes() {
             Swal.fire({
                 icon: "error",
                 title: "Erro ao atualizar cargo",
+                customClass: { popup: "error-alert" },
             });
         }
     };

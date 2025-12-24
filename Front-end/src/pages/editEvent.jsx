@@ -99,6 +99,7 @@ export default function EditEvent() {
                 Swal.fire({
                     icon: "error",
                     title: "Erro ao carregar evento",
+                    customClass: { popup: "error-alert" },
                 });
             }
         }
@@ -126,6 +127,7 @@ export default function EditEvent() {
                 icon: "warning",
                 title: "Nome obrigatório",
                 text: "Informe um nome para o local.",
+                customClass: { popup: "logout-alert" },
             });
             return;
         }
@@ -137,6 +139,7 @@ export default function EditEvent() {
                 icon: "warning",
                 title: "Capacidade inválida",
                 text: "Informe um número válido para a capacidade.",
+                customClass: { popup: "logout-alert" },
             });
             return;
         }
@@ -159,10 +162,11 @@ export default function EditEvent() {
             await Swal.fire({
                 icon: "success",
                 title: "Local cadastrado com sucesso!",
-                timer: 2000,
+                timer: 3200,
                 showConfirmButton: false,
                 toast: true,
                 position: "top-end",
+                customClass: { popup: "success-alert" },
             });
         } catch (error) {
             console.error("Erro ao cadastrar local:", error);
@@ -175,6 +179,7 @@ export default function EditEvent() {
                 icon: "error",
                 title: "Erro ao cadastrar local",
                 text: Array.isArray(msg) ? msg.join("\n") : msg,
+                customClass: { popup: "error-alert" },
             });
         }
     };
@@ -187,6 +192,7 @@ export default function EditEvent() {
                 icon: "warning",
                 title: "Data de início obrigatória",
                 text: "Informe a data de início do evento.",
+                customClass: { popup: "logout-alert" },
             });
             return;
         }
@@ -196,6 +202,7 @@ export default function EditEvent() {
                 icon: "warning",
                 title: "Data de término obrigatória",
                 text: "Informe a data de término do evento.",
+                customClass: { popup: "logout-alert" },
             });
             return;
         }
@@ -205,6 +212,7 @@ export default function EditEvent() {
                 icon: "warning",
                 title: "Hora de início obrigatória",
                 text: "Informe o horário de início do evento.",
+                customClass: { popup: "logout-alert" },
             });
             return;
         }
@@ -214,6 +222,7 @@ export default function EditEvent() {
                 icon: "warning",
                 title: "Hora de término obrigatória",
                 text: "Informe o horário de término do evento.",
+                customClass: { popup: "logout-alert" },
             });
             return;
         }
@@ -229,6 +238,7 @@ export default function EditEvent() {
                 icon: "warning",
                 title: "Intervalo de datas/horas inválido",
                 text: "A data/hora de término deve ser igual ou posterior à data/hora de início.",
+                customClass: { popup: "logout-alert" },
             });
             return;
         }
@@ -253,7 +263,7 @@ export default function EditEvent() {
                 toast: true,
                 position: "top-end",
                 showConfirmButton: false,
-                timer: 3000,
+                timer: 3200,
                 timerProgressBar: true,
                 customClass: {
                     popup: "success-alert",

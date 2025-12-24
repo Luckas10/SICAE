@@ -5,7 +5,6 @@ import "./EventGames.css";
 import Header from "../../general/Header";
 import Sidebar from "../../general/Sidebar";
 import { useNavigate } from "react-router-dom";
-
 import { useUser } from "../../../context/UserContext";
 
 export default function SingleGame({ gameId, onUpdated, onDeleted }) {
@@ -27,32 +26,44 @@ export default function SingleGame({ gameId, onUpdated, onDeleted }) {
     });
 
     async function loadGame() {
+        setLoading(true);
         try {
             const { data } = await api.get(`/games/${gameId}`);
             setGame(data);
         } catch (err) {
             console.error("Erro ao carregar jogo:", err);
-            Swal.fire("Erro", "Não foi possível carregar o jogo.", "error");
+            await Swal.fire({
+                title: "Erro",
+                text: "Não foi possível carregar os jogos deste evento.",
+                icon: "error",
+                customClass: { popup: "error-alert" },
+            });
+            setGame(null);
         } finally {
             setLoading(false);
         }
     }
 
     useEffect(() => {
-        if (gameId) loadGame();
+        if (!gameId) {
+            setGame(null);
+            setLoading(false);
+            return;
+        }
+        loadGame();
     }, [gameId]);
 
     function startEdit() {
         if (!game) return;
 
         setForm({
-            team1: game.team1,
-            team2: game.team2,
-            game_date: game.game_date,
+            team1: game.team1 ?? "",
+            team2: game.team2 ?? "",
+            game_date: game.game_date ?? "",
             game_time: game.game_time?.substring(0, 5) || "",
             game_end_time: game.game_end_time?.substring(0, 5) || "",
             notes: game.notes || "",
-            event_id: game.event_id,
+            event_id: game.event_id ?? "",
         });
 
         setEditing(true);
@@ -60,18 +71,18 @@ export default function SingleGame({ gameId, onUpdated, onDeleted }) {
 
     function normalizeTimeToHHMMSS(t) {
         if (!t) return t;
-        return t.length === 5 ? `${t}:00` : t; // HH:MM -> HH:MM:SS
+        return t.length === 5 ? `${t}:00` : t;
     }
 
     async function handleUpdate() {
         try {
-            // Validação mínima no front (o backend também valida)
             if (!form.game_time || !form.game_end_time) {
-                Swal.fire("Atenção", "Informe o horário inicial e final.", "warning");
+                await Swal.fire("Atenção", "Informe o horário inicial e final.", "warning");
                 return;
             }
+
             if (form.game_end_time < form.game_time) {
-                Swal.fire(
+                await Swal.fire(
                     "Atenção",
                     "O horário final deve ser igual ou posterior ao horário inicial.",
                     "warning"
@@ -93,22 +104,18 @@ export default function SingleGame({ gameId, onUpdated, onDeleted }) {
 
             setGame(data);
             setEditing(false);
-
             if (onUpdated) onUpdated(data);
 
-            Swal.fire("Sucesso!", "Jogo atualizado!", "success");
+            await Swal.fire("Sucesso!", "Jogo atualizado!", "success");
         } catch (err) {
             console.error("Erro no PUT:", err.response?.data || err);
-
-            const msg =
-                err?.response?.data?.detail ||
-                "Não foi possível atualizar o jogo.";
-
-            Swal.fire("Erro", msg, "error");
+            const msg = err?.response?.data?.detail || "Não foi possível atualizar o jogo.";
+            await Swal.fire("Erro", msg, "error");
         }
     }
 
     function backEvent() {
+        if (!game?.event_id) return;
         navigate(`/events/${game.event_id}`);
     }
 
@@ -120,6 +127,7 @@ export default function SingleGame({ gameId, onUpdated, onDeleted }) {
             showCancelButton: true,
             confirmButtonText: "Excluir",
             cancelButtonText: "Cancelar",
+            customClass: { popup: "comment-alert" },
         });
 
         if (!res.isConfirmed) return;
@@ -129,16 +137,17 @@ export default function SingleGame({ gameId, onUpdated, onDeleted }) {
 
             if (onDeleted) onDeleted(game.id);
 
-            Swal.fire("Excluído!", "O jogo foi removido.", "success");
+            await Swal.fire("Excluído!", "O jogo foi removido.", "success");
         } catch (err) {
-            Swal.fire("Erro", "Não foi possível excluir o jogo.", "error");
+            console.error("Erro no DELETE:", err.response?.data || err);
+            await Swal.fire("Erro", "Não foi possível excluir o jogo.", "error");
         }
     }
 
     if (loading) return <p className="event-games-loading">Carregando jogo...</p>;
     if (!game) return <p className="event-games-empty">Jogo não encontrado.</p>;
 
-    const date = new Date(game.game_date).toLocaleDateString("pt-BR");
+    const date = game.game_date ? new Date(game.game_date).toLocaleDateString("pt-BR") : "—";
     const time = game.game_time?.substring(0, 5) || "—";
     const endTime = game.game_end_time?.substring(0, 5) || "—";
 
@@ -147,6 +156,7 @@ export default function SingleGame({ gameId, onUpdated, onDeleted }) {
             <Header />
             <main className="events-page">
                 <Sidebar />
+
                 <div className="event-game">
                     <h2>Detalhes do Jogo</h2>
 
@@ -154,7 +164,7 @@ export default function SingleGame({ gameId, onUpdated, onDeleted }) {
                         <p><strong>ID:</strong> {game.id}</p>
                         <p><strong>Evento:</strong> {game.event_id}</p>
                         <p><strong>Criado por:</strong> {game.creator_name || "—"}</p>
-                        <p><strong>Registro:</strong> {new Date(game.created_at).toLocaleString("pt-BR")}</p>
+                        <p><strong>Registro:</strong> {game.created_at ? new Date(game.created_at).toLocaleString("pt-BR") : "—"}</p>
                     </div>
 
                     {!editing ? (

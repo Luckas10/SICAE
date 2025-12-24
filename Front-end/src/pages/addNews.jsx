@@ -137,7 +137,7 @@ export default function AddNews() {
                 toast: true,
                 position: "top-end",
                 showConfirmButton: false,
-                timer: 3000,
+                timer: 3200,
                 timerProgressBar: true,
                 customClass: {
                     popup: "success-alert",

@@ -42,6 +42,7 @@ export default function EventDetails() {
                     icon: "error",
                     title: "Erro ao carregar evento",
                     text: "Não foi possível carregar os detalhes deste evento.",
+                    customClass: { popup: "error-alert" },
                 });
             } finally {
                 setLoading(false);

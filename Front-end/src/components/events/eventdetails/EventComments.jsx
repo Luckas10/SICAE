@@ -35,7 +35,7 @@ export default function EventsComments({ eventId, currentUser }) {
                 title: "Erro",
                 text: "Não foi possível carregar os comentários.",
                 icon: "error",
-                customClass: { popup: "comment-alert" },
+                customClass: { popup: "error-alert" },
             });
         } finally {
             setLoading(false);
@@ -70,7 +70,7 @@ export default function EventsComments({ eventId, currentUser }) {
                 title: "Erro",
                 text: "Não foi possível carregar os autores dos comentários.",
                 icon: "error",
-                customClass: { popup: "comment-alert" },
+                customClass: { popup: "error-alert" },
             });
         }
     }
@@ -125,7 +125,7 @@ export default function EventsComments({ eventId, currentUser }) {
                 title: "Erro",
                 text: "Não foi possível enviar o comentário.",
                 icon: "error",
-                customClass: { popup: "comment-alert" },
+                customClass: { popup: "error-alert" },
             });
         } finally {
             setSubmitting(false);
@@ -159,7 +159,7 @@ export default function EventsComments({ eventId, currentUser }) {
                 title: "Erro",
                 text: "Não foi possível editar o comentário.",
                 icon: "error",
-                customClass: { popup: "comment-alert" },
+                customClass: { popup: "error-alert" },
             });
         }
     };
@@ -186,7 +186,7 @@ export default function EventsComments({ eventId, currentUser }) {
                 title: "Erro",
                 text: "Não foi possível excluir o comentário.",
                 icon: "error",
-                customClass: { popup: "comment-alert" },
+                customClass: { popup: "error-alert" },
             });
         }
 

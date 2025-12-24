@@ -50,6 +50,7 @@ export default function EditNews() {
         Swal.fire({
           icon: "error",
           title: "Erro ao carregar a notícia!",
+          customClass: { popup: "error-alert" },
         });
       }
     }
@@ -148,7 +149,8 @@ export default function EditNews() {
         toast: true,
         position: "top-end",
         showConfirmButton: false,
-        timer: 2500,
+        timer: 3200,
+        customClass: { popup: "success-alert" },
       });
 
       navigate("/news");
@@ -156,6 +158,7 @@ export default function EditNews() {
       Swal.fire({
         icon: "error",
         title: "Erro ao atualizar notícia",
+        customClass: { popup: "error-alert" },
       });
     }
   };

@@ -167,7 +167,7 @@ export default function LoginRegisterContainer({
 
                                 <p className="text">
                                     Não quer criar uma conta?
-                                    <a href="/\">Entre como visitante</a> para ver as notícias
+                                    <a href="/">Entre como visitante</a> para ver as notícias
                                 </p>
                             </div>
                         </form>

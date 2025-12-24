@@ -20,9 +20,7 @@ export default function Sidebar() {
       showCancelButton: true,
       confirmButtonText: "Sim, sair",
       cancelButtonText: "Cancelar",
-      customClass: {
-        popup: "logout-alert",
-      },
+      customClass: { popup: "logout-alert" },
     });
 
     if (confirm.isConfirmed) {
@@ -32,11 +30,9 @@ export default function Sidebar() {
         icon: "success",
         title: "Sessão encerrada",
         text: "Você saiu da conta com sucesso.",
-        timer: 1800,
+        timer: 3200,
         showConfirmButton: false,
-        customClass: {
-          popup: "success-alert",
-        },
+        customClass: { popup: "success-alert" },
       });
 
       navigate("/auth");
